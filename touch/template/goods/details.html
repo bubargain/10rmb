@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>10BUCK-GOODS</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link type="text/css" href="css/group.css" rel="stylesheet">
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	
+</head>
+<body style="width:100%">
+
+	<div class="group_main" id="group_main">
+		<div class="group_head" nowrap>
+			<div  ><a href="index.php" class="head_back"></a></div>
+            <div >Goods</div> 
+			<div ><a href="index.php?_c=order&_a=index" class="search"></a></div>
+		</div>
+		<div class="groupinfo">
+			<div class="groupinfoimg"><img lowsrc="/images/group2_46.jpg" sro="{{$product_link}}"></div>
+			<div class="groupinfodiv">
+           	 
+                <div>
+                	<select id="selectshipping" name="selectshipping" class="selectbox">
+                    	{{if $noshipping}}<option value="true"> pay ${{$price}},get {{$totalfanli}}</option> {{/if}}
+                        <option value="false">pay ${{$price}},get product and ${{$fanli}} rebate</option>
+                    </select> 
+                </div>
+				<p class="groupinfop"  nowrap>
+                <!--<em class="{{if $params.liked}}on{{/if}}"> 收藏（{{$params.wishes}}）</em> -->
+               
+                <a href="index.php?_c=goods&_a=about&id={{$id}}" nowrap>APPLY BCODE</a>
+                </p>
+			</div>
+			<div class="groupinfodiv2">
+				<div class="infotitle"><img src="images/group2_58.jpg" width="24">How it works?</div>
+			
+            
+             
+                <div class="info_div">
+         
+                
+                    <table>
+                    	<tr>
+                       	 <td width="30%"><font style="border:thick">BCODE</font></td>
+                       	 <td>Apply the BCODE before your purchase and leave it in comment or address line of your order, merchant will know you are from 10BUCK.</td>
+                        </tr>
+                    	<tr>
+                       	 <td width="30%"><font style="border:thick">REBATE</font></td>
+                       	 <td>Merchant will confirm and release your bonus immidately after you make the order with Bcode.</td>
+                        </tr>
+                        <tr></tr>
+                        <tr>
+                       	 <td width="30%">NS</td>
+                       	 <td><div><FONT color="#FF0000">THE BEST PART!</FONT> No Shipping means merchant do not send you goods and return both principal and rebate to you .
+						 <br/> Assume the model as you return the goods get pay back, but keep the rebate. </div>                        
+                         </td>
+                        </tr>
+                    
+                    </table>
+                </div>
+			</div>
+			<div class="menu_bottom">
+				<a href="javascript:void(0)"><img src="images/group2_97.jpg"><br>LEGAL</a>
+				<a href="javascript:void(0)"><img src="images/group2_94.jpg"><br>BREEZILY</a>
+				<a href="javascript:void(0)"><img src="images/group2_88.jpg"><br>INSURED</a>
+				<a href="javascript:void(0)"><img src="images/group2_91.jpg"><br>EXCLUSIVE</a>
+			</div>
+		</div>
+	</div>
+	<p class="groupinfop groupbtn">
+        <!-- <em class="{{if $params.liked}}on{{/if}}">
+            <a href="javascript:void(0)">收藏（15）</a>
+        </em>
+        -->
+        <a href="index.php?_c=order&_a=confirm&id={{$params.goods_id}}">立即购买</a>
+    </p>
+
+    <script type="text/javascript">  
+		$("#group_main").bind('scrollstart', function () {
+			//$(".groupinfodiv p").addClass("groupbtn");
+			if(document.body.scrollTop>350){
+				$(".groupbtn").show();	
+			}else{
+				$(".groupbtn").hide();	
+			};
+		});  
+		//$("#group_main").bind("scrollstop", function () {
+			//$(".groupinfodiv p").removeClass("groupbtn");
+		//}); 
+		$(document).ready(function(e) {
+			$(".ui-loader").hide();
+			$(".menu_div a").click(function(){
+				$(".menu_div a").removeClass("menu_a");
+				$(this).addClass("menu_a");	
+			});
+			$(".menu").toggle(function(){
+				$(".menu_div").show();
+			},function(){
+				$(".menu_div").hide();	
+			});
+			$(".groupinfop a:last-child").click(function(){
+				$(this).css("opacity","0.7");	
+			});
+		});
+		
+	//添加喜欢
+	(function(){
+	$("#content").find('em').click(function(){
+		var _this = $(this), num = _this.find('span').eq(0);	
+		var goods_id = _this.find('span').eq(1).eq(0).html();
+		if(_this.hasClass('on')){//取消喜欢	
+			$.ajax({
+				type: 'GET',
+				url: 'index.php?_c=love&_a=wishes',
+				data: {goods_id: goods_id},
+				dataType: 'json',
+				success: function(data){
+					if(data.ret.status == 200){
+						alertMSG('已取消喜欢');
+						_this.removeClass('on');
+						num.html(data.ret.data);
+					}else{
+						alertMSG(data.ret.data);
+					}
+				},
+				error: function(xhr, type){
+				  alertMSG('网速不给力哦～');
+				}
+		  });
+		}else{//添加喜欢
+			$.ajax({
+				type: 'GET',
+				url: 'index.php?_c=love&_a=wishes',
+				data: {type:'love',goods_id: goods_id},
+				dataType: 'json',
+				success: function(data){
+					if(data.ret.status == 200){
+						alertMSG('已喜欢');
+						_this.addClass('on');
+						num.html(data.ret.data);
+					}else if(data.ret.status == 300){
+						window.location.href = data.ret.data;
+					}else{
+						alertMSG(data.ret.data);
+					}
+				},
+				error: function(xhr, type){
+				  alertMSG('网速不给力哦～');
+				}
+		  });
+		}
+	})
+})();
+    </script>  
+    </div>
+<footer>
+	
+	<div></div>
+	<p>Copyright 2014 by 10buck.com <img src="{{$_hmtPixel}}" width="0" height="0" /></p>
+</footer>
+</body>
+</html>
+</body>
+</html>

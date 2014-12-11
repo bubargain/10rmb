@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{{$title}}</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link href="/css/buck.css" rel="stylesheet" />
+
+<script type="text/javascript" src ='/js/j.js'></script>
+</head>
+
+<body>
+<div class="group_main">
+    <div class="group_head">
+        <section ></section>
+        <section><div class="cWhite">LOGIN/SIGNUP</div></section>
+        <section></section>
+    </div>
+
+	<section class="content">
+		<div class="order_list">
+            <form id="loginForm" action="index.php?_c=login&_a=passw" method="post">
+            <div class="login" id="login">
+                <dl>
+                    <dt>
+                    <input class="reg_input" type="text" id="temail" name="temail" value="{{if $email}}{{$email}}{{/if}}" class="cGray" />
+                    <p style="color:#666;font-size:14px">&nbsp;NOTICE: Your account will be used to receive Paypal payment.</p>
+                    <span class="cGray">Your Email</span><p>
+                    
+                    <input type="checkbox" id="useright" checked> 
+                     Agreed <a href="index.php?_c=help&_a=agreement" class="cBlue">"User Rights and Legal Agreement"</a>
+                    </p>
+                    </dt>
+                    <dd>
+                    <input type="hidden" name="style" value="{{$style}}" />
+                    <a id="sumitForm" name="sumitForm" href="javascript:;" class="cWhite set-btn1">NEXT</a>
+                    </dd>
+                </dl>
+            </div>
+            </form>
+            <div>
+            	<p></p>
+            </div>
+        </div>
+	</section>
+	<script type="text/javascript">
+    (function(){
+        
+        $(".login").delegate('input','blur',function(){
+            var _this = $(this);
+            if(_this.val()=='') _this.next().show();
+        }).find('span').click(function(){
+            $(this).hide().prev().focus();
+        })
+        
+        var element = $(".login").find('input').eq(0);
+        
+        element.val() ? element.next().hide():element.next().show();
+        
+        $('#sumitForm').click(function(){
+             if(!$('#useright').attr('checked')){
+                alertMSG('You need to obey the agreement to login');	
+            }else{
+                $('#loginForm').submit();
+            }
+        });
+    })();
+    </script>
+    
+    <footer>
+      
+        <div></div>
+        <p>Copyright 2014 by 10buck.com <img src="{{$_hmtPixel}}" width="0" height="0" /></p>
+    </footer>
+</div>
+</body>
+</html>

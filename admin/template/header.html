@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{{$title}}</title>
+<link href="/css/bootstrap.docs.css" rel="stylesheet">
+<link href="http://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="http://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+<LINK href="/css/style.css" rel="stylesheet">
+
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="application/javascript" src="/js/main.js"></script>
+<script type="text/javascript">
+//导航栏效果
+$(function(){
+	var nav = $('#nav').children();
+	for (var i=0;i<nav.length;i++){
+		if (nav[i].className=="menu"){
+			nav[i].onmouseover = function(){fnNav(this,"block")};
+			nav[i].onmouseout = function(){fnNav(this,"none")};
+		}
+	}
+	function fnNav(obj,flag){
+		$(obj).find("dl")[0].style.display = flag;
+	}
+});
+</script>
+</head>
+<body data-spy="scroll" data-target=".bs-docs-sidebar" >
+
+<div class="navbar navbar-inverse navbar-fixed-top" >
+      <div class="navbar-inner">
+        <div class="container">
+          
+          <div class="nav-collapse collapse">
+           		<ul class="nav">
+                	<li><a href="/index.php" >首页</a></li>
+                    <li><a href="?_c=store&_a=merchant" >商家信息</a></li>
+                    <li><a href="#" >&nbsp;</a></li>
+                    <li><a href="#" >&nbsp;</a></li>
+                	<li><a href="?_c=login&_a=logout" >退出</a></li>
+                </ul>
+          </div>
+        
+          
+        </div>
+       
+      </div>
+        
+</div>
+<header id="overview" class="jumbotron subhead">
+  <div class="container">
+    <h1>{{$storeTitle}}</h1>
+    <p class="lead">{{$storeIntro}}</p>
+  </div>
+</header>
+
+<div class="container" style="min-height:650px">
+    <div class="row">
+	<div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav ">
+          <li><a href="?_c=store&_a=newEvent"><i class="icon-chevron-right"></i> 发布返利</a></li>
+          <li><a href="?_c=event"><i class="icon-chevron-right"></i> 活动管理</a></li>
+          <li><a href="?_c=order"><i class="icon-chevron-right"></i> 交易记录</a></li>
+          <li><a href="?_c=store&_a=asset"><i class="icon-chevron-right"></i> 资金管理</a></li>
+
+        </ul>
+      </div>

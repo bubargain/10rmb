@@ -1,0 +1,28 @@
+<div class="group_main">
+<header class="group_head">
+	<section><a href="javascript:history.go(-1);" class="head_back"></a></section>
+	<section><div class="cWhite"> ORDER ID</div></section>
+	<section></section>
+</header>
+<section class="main">
+	<section class="content">
+		<div class="order">
+			<form  action="index.php?_c=order&_a=ordersn" method="post" >
+			<div class="order-tit login">
+				<div>INPUT YOUR ORDER ID:</div>
+                <input type="text" name="order_sn" class="reg_input" />
+                <div>&nbsp; <input type="hidden" name="id" value="{{$id}}" /></div>
+                
+			</div>
+           
+			<div class="order-pro">
+			 Order id (or order_sn) exsits in "my order" section of the website where you made the order.  
+			</div>
+            <div class="order-pro">
+                <input type="submit" class="set-btn1 cWhite" >SUBMIT</a>
+            </div>
+            </form>
+		</div>
+	</section>
+</section>
+</div>

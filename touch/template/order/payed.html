@@ -1,0 +1,54 @@
+<div class="group_main">
+<header class="group_head">
+	<section><a href="index.php?_c=order&_a=index" class="head_back"></a></section>
+	<section>
+		<div class="cWhite">USED</div>
+	</section>
+	<section></section>
+</header>
+<section class="main">
+	<section class="content">
+		<div class="order-menu cWhite">
+			<ul>
+				<li ><a href="index.php?_c=order&_a=orderList&status=unpay">unused</a></li>
+				<li class="on"><a href="index.php?_c=order&_a=orderList&status=payed">used</a></li>
+				<li><a href="index.php?_c=order&_a=orderList&status=shipped">confirmed</a></li>			
+				<li><a href="index.php?_c=order&_a=orderList&status=closed">canceled</a></li>
+			</ul>
+		</div>
+		{{if $params}}
+        <div class="order_list">
+            {{foreach from = $params item = item}}
+            <div class="order">
+                <a href="#">
+                <div class="order-pro">
+                    <section><img src="{{$item.product_image}}"></section>
+                    <section>
+                        <div>
+                        <p>{{$item.event_name}}</p>
+                        <p class="cGray "> ORDER SN: {{if $item.order_sn}} {{$item.order_sn}} {{else}} N/A{{/if}}</p>
+                        
+                        </div>
+                        <div><p class="cBlue">Pay:${{$item.price}}</p><span class="cBlue">Rebate:${{$item.totalfanli}}</span></div>
+                    </section>
+                </div>
+                </a>
+                <div class="order-tit">
+                    <section class="fl cGray">BCODE: <font class='cGreen'>{{$item.bcode}}</font>
+                    
+                    </section>
+                     <section class="fr cWhite"><a href="index.php?_c=order&_a=ordersn&id={{$item.id}}" class="btn">INPUT ORDER NUMBER</a></section>
+                </div>
+            </div>
+            {{/foreach}}
+        </div>
+        {{else}}
+        <div class="order-no"></div>
+        {{/if}}
+	</section>
+</section>
+<script>
+	
+</script>
+
+</div>

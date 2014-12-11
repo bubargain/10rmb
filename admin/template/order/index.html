@@ -1,0 +1,113 @@
+ <div class="span9">
+ 
+ 	 <ul class="breadcrumb">
+                <li><a href="#">首页</a> <span class="divider">/</span></li>
+                <li><a href="#">交易记录</a> <span class="divider">/</span></li>
+                
+     </ul>
+     
+         <form class="form-inline" method="post" action="?_c=order">
+             <select id="sevent" name="sevent">
+             		<option value="">请选择要查询的活动</option>
+             	   	{{foreach from=$events item=event}}
+     					<option value="{{$event.event_id}}">{{$event.event_name}}</option>
+     				{{/foreach}}
+             </select>
+             <input type="submit" class="btn btn-small btn-warning" value+"搜索"/>
+   		 </form>
+     
+ 	<table width="100%" border="0" cellspacing="0" cellpadding="5" id="content">
+  	<tr>
+  	  
+      <th align="center" width="7%" class="pushItem">订单id</th>
+      <th align="center"   class="pushItem">领劵时间</th>
+        
+       <th align="center" class="pushItem">返利码</th>
+ 	 
+      <th align="center" width="6%" class="pushItem">需要发货</th>
+      <th align="center"  class="pushItem">返利总额</th>
+      <th align="center" width="10%" class="pushItem">状态</th>
+      <th align="center" width="8%" class="pushItem">订单号</th>
+      <th align="center"   class="pushItem">更新时间</th>
+      <th align="center" width="10%" class="pushItem">操作</th>
+       <th align="center" width="10%" class="pushItem">操作</th>
+      
+  	</tr>
+   
+     {{foreach from=$eventInfo item=trade}}
+     		  <tr>  
+              <td align="center" class="pushItem">{{$trade.id}}</td>
+              <td align="center" class="pushItem">{{$trade.ctime|date_format:"%Y/%m/%d %H:%M"}}</td>
+
+              <td align="center" class="pushItem"> {{$trade.vcode}}</td>
+              <td align="center" class="pushItem">{{if $trade.noshipping}}否 {{else}}是 {{/if}}</td>
+              <td align="center" class="pushItem">{{$trade.totalfanli}}美元</td>
+              <td align="center" class="pushItem">
+              	{{if $trade.status==0 }}	 已领劵
+              	{{else if $trade.status==1}} 已付款，请48小时内确认
+                {{else if $trade.status==3}} 返利已完成
+                {{else}} 其他状态
+                {{/if}} 
+              </td>
+              <td align="center" class="pushItem">{{$trade.order_sn}}</td>
+              <td align="center" class="pushItem">{{$trade.utime|date_format:"%Y/%m/%d %H:%M"}}</td>
+              <td align="center" class="pushItem">
+              {{if $trade.status < 2}}	
+            	  <a href="#"  y-action="upStatus" y-data="status={{$trade.status}}&tradeid={{$trade.id}}" class="btn btn-info btn-small">确认返利</a>
+              {{/if}}
+               </td>
+              <td align="center" class="pushItem"> 
+               {{if $trade.status==1 }}	
+            	   <a href="#myModal" role="button" class="btn btn-small" data-toggle="modal"> 提起纠纷</a>
+               {{/if}}
+             
+              </td>
+            
+              
+             </tr>
+     {{/foreach}}
+  
+    
+    
+    </table>
+ </div>
+ 
+ <!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">没有找到订单？</h3>
+    </div>
+    <div class="modal-body">
+    <p>如果您确认没有收到订单，可以要求用户提供订单号<br/>但是恶意提纠纷会受到惩罚哦~</p>
+    </div>
+    <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+    <button class="btn btn-primary">Save changes</button>
+    </div>
+</div>
+ 
+ <!-- ajax : modify event staus -->
+ <script>
+
+ 	(function(){
+		$("#content").delegate("div,a", "click", function(){
+			_this = $(this);	
+			switch(_this.attr("y-action")) {		
+				case 'upStatus': 
+					upStatus(_this);
+					break;
+				default:
+				;
+			}
+		});
+		
+		function upStatus(_this) {
+			var url = "index.php?_c=order&_a=status&" + _this.attr("y-data");
+			$.getJSON(url, function(data) {			
+				window.location.href="http://shop.10buck.com/index.php?_c=order&sevent={{$event_id}}";
+			});
+		}
+	})();
+ </script>
+ </script>

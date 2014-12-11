@@ -1,0 +1,101 @@
+
+
+      <div class="span9">
+      		    <ul class="breadcrumb">
+                <li><a href="#">首页</a> <span class="divider">/</span></li>
+                <li><a href="#">发布返利</a> <span class="divider">/</span></li>
+                
+                </ul>
+      		
+      		<form class="form-horizontal" method="post" action="?_c=store&_a=lock">
+           
+            <div class="control-group">
+                <label class="control-label" for="inputUsername">活动名称：</label>
+                <div class="controls">
+                    <input type="text" id="event_name" name="event_name" />
+                </div>
+                
+            </div>
+             <div class="control-group">
+                <label class="control-label" for="product_link">产品链接：</label>
+                <div class="controls">
+                    <input type="text" id="product_link" name="product_link" placeholder="Http://"/>
+                </div>
+                
+            </div>
+             <div class="control-group">
+                <label class="control-label" for="sale_price">产品单价：</label>
+                <div class="controls">
+                	<div class="input-append">
+                    <input type="text" id="sale_price" name="sale_price" placeholder="必须与用户实际付款价一致" />
+                    <span class="add-on">美元</span>
+                    </div>
+                </div>
+                
+            </div>
+             <div class="control-group">
+                <label class="control-label" for="amount">活动数量：</label>
+                <div class="controls">
+               		<div class="input-append">
+                    <input type="text" id="amount" name="amount"  placeholder="建议50或100"/>
+                     <span class="add-on">个</span>
+                    </div>
+                </div>
+                
+            </div>
+             <div class="control-group">
+                <label class="control-label" for="fanli">返利金额：</label>
+                <div class="controls">
+                    <div class="input-append">
+                   	 <input type="text" id="fanli" name="fanli"  placeholder="返利金额影响您的产品曝光度和销售速度"/>
+                    <span class="add-on">美元</span>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="control-group">
+                
+                <div class="controls">
+                	<div class="form-inline">
+                        <label class="checkbox" >
+                            <input type="checkbox" name="directReturn" checked="checked">
+                                支持免邮返利,闪电出单
+                        </label>
+                         <a href="#myModal" role="button"  data-toggle="modal">这是什么</a>
+                     </div>
+                </div>
+                
+            </div>
+			 <div class="control-group">
+             			<div class="controls">
+                         <input type="submit" class="btn btn-primary btn-large" value="下一步" />
+                         </div>
+             </div>
+                
+      </div>
+      
+      		</form>
+      		<!-- Modal ,explain what is 免邮返利 -->
+                <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">什么是免邮返利?</h3>
+                </div>
+                <div class="modal-body">
+                <p>提供免邮返利意味着消费者可以选择是否接收您的货品<br/>
+                	如果消费者选择免邮，
+					那么您不需要实际发货，只需要返还用户实际支付金额加返利金额。
+                    <br/>举例来说，<br/>如果您有一件商品售价10美金，返利1美金：<br/>
+                     那么用户未选择免邮，您需要实际发货并支付1美金的返利。 <br/>
+                     如果用户选择免邮，您需要返还用户11美金，但不用发货。
+                    </p>
+                </div>
+                <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">明白啦</button>
+               
+                </div>
+            </div>
+      </div>
+      
+
+      

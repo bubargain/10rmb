@@ -1,0 +1,47 @@
+<header class="group_head">
+	<section><a href="index.php?_c=order&_a=index" class="head_back"></a></section>
+	<section>
+		<div class="cWhite">FINISHED</div>
+	</section>
+	<section></section>
+</header>
+<section class="main">
+	<section class="content">
+		<div class="order-menu cWhite">
+			<ul>
+				<li ><a href="index.php?_c=order&_a=orderList&status=unpay">unused</a></li>
+				<li><a href="index.php?_c=order&_a=orderList&status=payed">used</a></li>
+				<li><a href="index.php?_c=order&_a=orderList&status=shipped">confirmed</a></li>
+				<li class="on"><a href="index.php?_c=order&_a=orderList&status=finished">finished</a></li>
+				<li><a href="index.php?_c=order&_a=orderList&status=closed">canceled</a></li>
+			</ul>
+		</div>
+        {{if $params}}
+        <div class="order_list">
+            {{foreach from = $params item = item}}
+            <div class="order">
+                <a href="#">
+                <div class="order-pro">
+                    <section><img src="{{$item.goods_image}}"></section>
+                    <section>
+                        <div>
+                            <p>{{$item.goods_name}}</p>
+                            <span>￥{{$item.order_amount}}</span></div>
+                        <div>
+                            <p class="cGray">x{{$item.quantity}}</p>
+                        </div>
+                    </section>
+                </div>
+                </a>
+                <div class="order-tit">
+                    <section class="fl cWhite"><a href="index.php?_c=transfer&_a=info&order_id={{$item.order_id}}&shipping_name={{$item.shipping_name}}&shipping_code={{$item.shipping_code}}" class="btn">查看物流</a></section>
+                    <section class="fr cWhite"><a href="index.php?_c=order&_a=confirm&id={{$item.goods_id}}" class="btn">再次购买</a></section>
+                </div>
+            </div>
+            {{/foreach}}
+        </div>
+        {{else}}
+        <div class="order-no"></div>
+        {{/if}}
+	</section>
+</section>

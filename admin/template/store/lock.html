@@ -1,0 +1,78 @@
+ <div class="span9">
+      		    <ul class="breadcrumb">
+                <li><a href="#">首页</a> <span class="divider">/</span></li>
+                <li><a href="#">发布返利</a> <span class="divider">/</span></li>
+                <li><a href="#">资金锁定</a> <span class="divider">/</span></li>
+                </ul>
+                
+          <form class="form-horizontal" method="post" action="?_c=event&_a=addevent">
+          		<div class="control-group">
+                	<label class="control-label" for="inputUsername">活动需锁定资金：</label>
+                	<div class="controls">
+	                    <label class="control-label" id="inputUsername" name="requireMoney">{{$lock_amount}}美金</label>
+                	</div>
+                
+            	</div>
+                <div class="control-group">
+                	<label class="control-label" for="inputUsername">您的账户余额：</label>
+                	<div class="controls form_inline">
+                    <label class="control-label" id="AccountMoney" name="user_name" >{{$user_amount}}人民币</label>
+                     <label class="control-label">（约{{$user_amount_usd|string_format:"%.2f"}}美金）</label>
+                	</div>
+                
+            	</div>
+                <input type="hidden" id="lock_amount" name="lock_amount" value="{{$lock_amount}}"/>
+                <input type="hidden" id="user_amount_usd" name="user_amount_usd" value="{$user_amount_usd}}"/>
+                <div class="control-group">
+                    <div class="controls">
+                     <a href="?_c=store&_a=addmoney" class="btn btn-warning">充值</a>
+                     <div id="alertMNE"><label ><font color="#FF0000">资金不足，请先充值</font></label></div>
+                    </div>
+                    
+                 </div>
+                <div class="control-group">
+                	<p>&nbsp;&nbsp;* 具体需要的资金根据实际情况来定，您可以随时停止一个活动，并解锁剩余资金</p>
+                
+            	</div>
+                <input type="hidden" name="event_name" value="{{$event_name}}"/>
+                <input type="hidden" name="product_link" value="{{$product_link}}"/>
+                <input type="hidden" name="price" value="{{$price}}"/>
+                <input type="hidden" name="amount" value="{{$amount}}"/>
+                <input type="hidden" name="fanli" value="{{$fanli}}"/>
+                <input type="hidden" name="noshipping" value="{{$noshipping}}"/>
+                 <div class="control-group">
+                     <div class="form-inline controls">
+                         <a href="?_c=store&_a=newEvent" class="btn btn-large">上一步</a>
+    
+                         <input type="submit" id="tsubmit" onclick="verifyMoney();"  value="提交审核" class="btn btn-large btn-primary"/>
+                     </div>
+                 </div>
+          </form>      
+          <script>
+		  		$(function() {
+					
+					if( $('#lock_amount').val() > $('#user_amount_usd').val() )
+					{
+					
+						$('#alertMNE').show();
+						$('#tsubmit').attr('disabled',true); 
+						$('#tsubmit').removeClass('btn-primary');
+					}
+					else
+					{
+						
+						$('#alertMNE').hide();
+						$('#tsubmit').attr('disabled',false);
+						$('#tsubmit').addClass('btn-primary');
+					}
+				});
+				
+		  
+		  		<!-- 验证资金是否足够 -->
+          		function verifyMoney()
+				{
+					
+				}
+          </script>
+                
+ </div>

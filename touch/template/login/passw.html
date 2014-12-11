@@ -1,0 +1,57 @@
+<div class="group_main">
+<div class="group_head">
+        <section><a href="index.php?_c=login" class="head_back"></a></section>
+        <section><div class="cWhite">{{if $type=="reg"}} REGISTER {{else}} LOGIN {{/if}}</div></section>
+        <section><a id="forgetPass" href="javascript:;" class="search btn cWhite    ">forget</a></section>
+</div>
+<section class="main">
+	<section class="content">
+		<div class="order_list">
+            <form id="loginForm" action="index.php?_c=login" method="post">
+            <div class="login">
+                <dl>
+                    <dt>
+                        <input class="reg_input" type="password" id="pass" name="pass" class="cGray " />
+                        <input type="hidden" name="email" />
+                        <span class="cGray">PASSWORD</span>
+                        <p>{{if $type == 'reg'}}Set up your password {{/if}}</p>
+                    </dt>
+                    <dd>
+                        <input type="hidden" id="phone" name="user_name" value="{{$user_name}}" />
+                        <input type="hidden" name="type" value="{{$type}}"/>
+                        <a class="cWhite set-btn1" id="sumitForm" name="sumitForm" href="javascript:;" class="cWhite order-btn">LOGIN</a>
+                    </dd>
+                </dl>
+            </div>
+            </form>
+        </div>
+	</section>
+</section>
+</div>
+<script type="text/javascript">
+(function(){
+	$(".login").delegate('input','blur',function(){
+		var _this = $(this);
+		if(_this.val()=='') _this.next().show();
+	}).find('span').click(function(){
+		$(this).hide().prev().focus();
+	})
+	
+	var element = $(".login").find('input').eq(0);
+	
+	element.val() ? element.next().hide():element.next().show();
+	
+	$('#forgetPass').click(function(){
+		window.location.href = 'index.php?_c=login&_a=index&style=forgetPass&phone='+$('#phone').val();
+	});				
+})();
+(function(){
+	$('#sumitForm').click(function(){
+		if( $('#pass').val() == '' || $('#pass').val() == null ){
+			alertMSG('请输入密码');	
+		}else{
+			$('#loginForm').submit();
+		}
+	});
+})();
+</script>

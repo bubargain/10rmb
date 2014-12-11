@@ -1,0 +1,33 @@
+
+ <div class="span6">
+      		    <ul class="breadcrumb">
+	                <li><a href="#">商家信息</a> <span class="divider">/</span></li>    
+                </ul>
+                
+       
+          		    <table class="table table-bordered table-hover">
+    					<tr>
+                        	<td>姓名：</td>
+                            <td>{{$nick_name}}</td>
+                        </tr>
+                        <tr>
+                        	<td>电话号码：</td>
+                            <td>{{$phone}}</td>
+                        </tr>
+                        <tr>
+                        	<td>邮箱：</td>
+                            <td>{{$email}}</td>
+                        </tr>
+                        <tr>
+                        	<td>账号等级：</td>
+                            <td>{{$level}}级</td>
+                        </tr>
+                        <tr>
+                        	<td>创建时间：</td>
+                            <td>{{$ctime|date_format:"%Y-%m-%d"}}</td>
+                        </tr>
+   				   </table>
+                
+                 
+                
+ </div>
