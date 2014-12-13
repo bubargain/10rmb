@@ -30,21 +30,59 @@ class SearchSrv extends BaseSrv {
 		if(!$params['user_id'])
 			throw new \Exception ('User not login',10021);
 		$user_id=$params['user_id'];
-		$userEvent = \app\dao\UserEventDao::getSlaveInstance()->findAll(
-			array('user_id'=> $user_id)
-		);
 		
+		//小于1的user event
+		$sql = "select * from ym_user_event where status in (0,100) and user_id = $user_id";
 		
+		$userEvent = \app\dao\UserEventDao::getSlaveInstance()->getPdo()->getRows($sql);
+		
+	
+	
+		
+		if(self::checkDailyNewVisit($userEvent))
 		//每天第一次访问，新建列表
 		//上次访问超过24小时
-		if(!$userEvent || strtotime("now") - $userEvent[0]['ctime'] > 24*60*60 )
+		//if(!$userEvent || strtotime("now") - $userEvent[0]['ctime'] > 24*60*60 )
 		{
+			
 			$this->newUserEvent($user_id,$amount);
 			$userEvent = \app\dao\UserEventDao::getSlaveInstance()->findAll(
 				array('user_id'=> $user_id)
 			);//重新查询
 		}
+		else{//检查过期
+			
+			$uevent = new \app\service\EventSrv();
+			$userEvent=$uevent->updateStatus($userEvent);
+		}
 		return $userEvent;
+	}
+	
+
+	
+	
+	
+	/**
+	 * 
+	 * check whether it is the first time visit everyday
+	 * @param unknown_type $userEvent
+	 */
+	private function checkDailyNewVisit($userEvent)
+	{
+		if(!$userEvent)
+			return true;
+		$maxetime =0;
+		
+		foreach ($userEvent as $event) {   //查询最晚一次的创建时间
+			if ($event['etime'] >$maxetime)
+				$maxetime = $event['etime'];
+		}
+		if($maxetime +24*60*60 < strtotime("now")) //最后一次更新超过24小时
+		{
+			return true;
+		}
+		else
+			return false;
 	}
 	
 	
@@ -86,8 +124,9 @@ class SearchSrv extends BaseSrv {
 						'fanli' =>  $fanli,
 						'profit' => $profit,
 						'totalfanli'=> $totalfanli,
-						'utime' => $event['ctime'],
-						'ctime' => $time,
+						'utime' => $time,
+						'ctime' => $event['ctime'],
+						'etime' => $time,
 						'status'=>100,
 						'livetime' => $event['livetime'],
 						'noshipping' => $event['noshipping'],

@@ -65,6 +65,24 @@ footer {
 	border-bottom:1px solid #C9C9C9;
 	height:100px;
 }
+.alertMsg {
+	width:380px;
+	height:120px;
+	padding:10px;
+	line-height:1.5em;
+	background:rgba(3,3,3,0.8);
+	font-size:30px;
+	border:3px solid #000;
+	position:fixed;
+	color:#FFF;
+	-webkit-border-radius:10px;
+	z-index:100;
+	-webkit-box-pack:center;
+	-webkit-box-align:center;
+	left:35%;
+	top:50%;
+	margin:-53px 0 0 -103px;
+}
 .order .order-pro section:first-child {
 	min-width:100px;
 	overflow:hidden;
@@ -236,6 +254,14 @@ input{-webkit-appearance:none}
 }
 .reg_input {
     width: 95%;
+    height: 60px;
+    border: 1px solid #E4E4E4;
+	margin-left:5px;
+	margin-top:15px;
+    font-size: 24px;
+    border-radius: 4px; }
+.money_input {
+    width: 80%;
     height: 60px;
     border: 1px solid #E4E4E4;
 	margin-left:5px;

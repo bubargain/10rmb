@@ -132,11 +132,14 @@ class LoginController extends BaseController {
 	
 	/*
 	*check user level
-	* 0 unauthoried , 1 normal 
+	* 0 unauthoried , 1 normal ,100 admin
 	*/
 	private function checkLevel($user_id) {
 		$user =\app\dao\UserInfoDao::getSlaveInstance () -> find($user_id);
-		return $user['level'];
+		if ($user['level'] == 1)
+			return true;
+		else 
+			return false;
 	}
 	private function referer($request) {
 		$refer = 'index.php';

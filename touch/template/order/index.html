@@ -9,19 +9,16 @@
 		<div class="order_list">
             <dl class="myTit" >
                 <dt class="fl">Hi,{{$user_name}}!</dt>
-                <dd class="fr"><a id="logout" href="javascript:;" class="btn">Logout</a></dd>
+                <dd class="fr"><a href="index.php?_c=login&_a=logout" class="btn">Logout</a></dd>
             </dl>
             <ul class="myorder">
                 <li><a href="#">My Saving: <p class="fr" style="color:#0C6;display:inline">${{$saving}}&nbsp;&nbsp;</p></a></li>
                 <li>{{if $unpayCnt}}<span>{{$unpayCnt}}</span>{{/if}}<a href="index.php?_c=order&_a=orderList&status=unpay">My Bcodes</a><ins></ins></li>
                 
-                <!-- unusing functions -->
-                <!--<li>{{if $couponCnt}}<span>{{$couponCnt}}</span>{{/if}}<a href="index.php?_c=coupon&_a=index&state=valid">我的优惠券</a><ins></ins></li>
-                <li><a href="index.php?_c=address&_a=index">收货地址管理</a><ins></ins></li>
-                -->
+              
             </ul>
            	<br/><br/>
-            <a href="#" class="cWhite set-btn2">Cash It</a> 
+            <a href="index.php?_c=order&_a=cash" class="cWhite set-btn2">Cash It</a> 
           
          </div>
 	</section>

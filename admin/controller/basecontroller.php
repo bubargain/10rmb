@@ -36,6 +36,18 @@ class BaseController extends Controller {
 		header ( "Content-type: text/html; charset=utf-8" );
 	}
 	
+		public function checkLogin($url = '') {
+		if (! $this->has_login) {
+			$goto = TOUCH_BUCK . '/index.php?_c=login';
+			if ($url)
+				$goto .= '&refer=' . urlencode ( $url );
+			$this->redirect ( $goto );
+		}
+		else
+			 return $this->current_user['user_id']; 
+	}
+	
+	
 	// 错误信息的js弹窗
 	public function showError($msg, $url = '') {
 		echo "<script language=\"javascript\">";

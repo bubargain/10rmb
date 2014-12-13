@@ -1,0 +1,107 @@
+<div name="maindiv" class="span10">
+
+	
+		<div class="span10 text-center text-info"><h3>资金流水</h3>
+       <div style="float:right" > <a href="index.php?_c=pay&status=pay" class="btn btn-large btn-info">只看提现记录</a>  </div>
+       
+		</div>
+		
+      
+		<table id='content' class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>用户ID</th>
+					<th>用户名</th>
+                    <th>金额</th>
+                    <th>单位</th>	
+			
+					<th>申请时间</th>
+                    <th>状态</th>		
+					<th>之前金额</th>
+                    <th>操作</th>
+				</tr>
+			</thead>
+				{{foreach from=$tableCon item=oneRow }}
+					<tr>
+						<td id='orderId'>{{$oneRow.user_id}}&nbsp</td>
+						<td><a href="{{$oneRow.product_link}}">{{$oneRow.user_name}}&nbsp</a></td>
+						<td>{{$oneRow.amount}}&nbsp </td>
+                        <td>{{$oneRow.unit}}&nbsp </td>
+                
+						<td>{{$oneRow.ctime|date_format:"%m/%d %H:%M"}}&nbsp</td>
+						<td>{{if $oneRow.status =='6'}} 提现完成
+							{{else if $oneRow.status =='1' }} 充值
+                            {{else if $oneRow.status =='2' }} 冻结
+                             {{else if $oneRow.status =='3' }} 退款
+                             {{else if $oneRow.status =='4' }} 返利
+                               {{else if $oneRow.status =='5' }} 申请提现
+                             {{else}}  $oneRow.status {{/if}}
+                             </td>
+                       <td>{{$oneRow.formeramount}}&nbsp </td>
+						<td>
+                        {{if $oneRow.status == '5'}}
+							<a  href="index.php?_c=pay&_a=verify&id={{$oneRow.id}}"  class="btn btn-warning btn-small" >已转账</a>
+                        {{else if $oneRow.status == '6'}}
+                        	<label>{{$oneRow.sn}}</label>
+                        {{/if}}
+						</td>
+					</tr>
+				{{/foreach}}
+		
+		</table> 
+		<style type="text/css">
+		.carInfo {width:800px;height:56px;border-top:1px #e1e1e1 solid;overflow:hidden;margin:0 auto;}
+		.carInfo dt {float:left;padding:16px 0 0 3px;color:#323232;}
+		.carInfo i {padding-right:30px;}
+		.carInfo dd {float:right;padding-top:13px;}
+		</style>
+		<table>
+		<tr>
+      		<td align="center" colspan="8">{{$page}}</td>
+  		</tr>
+		</table>
+		
+</div>
+	
+
+
+
+<!-- 删除订单确认框 -->
+    <div id="deleteOrderModal" class="modal hide fade" aria-hidden="true">
+	    <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    <h3>PAYPAL转账</h3>
+	    </div>
+	    <div class="modal-body">
+	    <p>请确认是否已经付款?</p>
+	    </div>
+	    <div class="modal-footer">
+	    <a href="#" id="cancelOrder" class="btn btn-primary">确认</a>
+	    <a href="#" type="button" class="btn" data-dismiss="modal" aria-hidden="true">取消</a>
+	    <input type="hidden" id="cancel_order_info"/>
+	    </div>
+    </div>
+	
+<script src="/js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+ 	(function(){
+		$("#content").delegate("a", "click", function(){
+			_this = $(this);	
+			switch(_this.attr("y-action")) {		
+				case 'upStatus': 
+					upStatus(_this);
+					break;
+				default:
+				;
+			}
+		});
+		 
+		function upStatus(_this) {
+			var url = "index.php?_c=orders&_a=userconfirm&" + _this.attr("y-data");
+			$.getJSON(url, function(data) {			
+				window.location.href="http://admin.10buck.com/index.php?_c=orders&_a=user";
+			});
+		}
+	})();
+ </script>

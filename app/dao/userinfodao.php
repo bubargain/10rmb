@@ -37,6 +37,19 @@ class UserInfoDao extends YmallDao {
 			return '';
 		}
 	}
+	
+	public function findALL($where,$limit=20)
+	{
+		if($where)
+			$sql = "select * from {$this->getTableName()} where {$this->getPkeyWhere($where)}  order by user_id desc ";
+		else 
+			$sql = "select * from {$this->getTableName()} order by user_id desc ";
+		if($limit != 0)
+		{
+			$sql = $sql."limit $limit";
+		}
+		return $this->_pdo->getRows($sql);
+	}
 	/**
 	 * 降低统计数值
 	 *

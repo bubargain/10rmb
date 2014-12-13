@@ -24,6 +24,74 @@ class EventSrv extends BaseSrv {
 	}
 	
 	
+	
+	/**
+	 * 
+	 * check whether some status has expired
+	 * @param unknown_type $userEvent
+	 */
+	public function updateStatus($userEvent)
+	{
+		$_time = strtotime("now");
+		
+		try{
+			\app\dao\EventDao::getMasterInstance()->beginTransaction();
+			for($i=0;$i<count($userEvent);$i++)
+			{
+				//活动已经结束,用户未领劵
+				if($userEvent[$i]['status']==100 && $userEvent[$i]['ctime'] + $userEvent[$i]['livetime'] < $_time)
+				{
+					
+					self::deleteEvent($userEvent[$i]['event_id']);
+					unset($userEvent[$i]);
+				}
+				//用户已经领劵，但是超过24小时未付款
+				else if ($userEvent[$i]['status']==0 && $userEvent[$i]['utime'] + 24*60*60 < $_time )
+				{
+					\app\dao\UserEventDao::getMasterInstance()->edit($userEvent[$i]['id'],
+						array('status'=>99)
+					);
+					$userEvent[$i]['status']=99;
+					unset($userEvent[$i]);
+				}
+				
+				
+			}
+			\app\dao\EventDao::getMasterInstance()->commit();
+		}catch(\Exception $e){
+			\app\dao\EventDao::getMasterInstance()->rollBack();
+			throw $e;
+		}
+		
+	
+		return $userEvent;
+		
+	}
+	
+	/**
+	 * 
+	 * Event is expired
+	 * @param unknown_type $id
+	 */
+	private function deleteEvent($id)
+	{
+		$_time = strtotime("now");
+		//商家活动表中活动停止
+		$_pdo=\app\dao\EventDao::getMasterInstance()->getPdo();
+		$sql = 'update ym_event set status=3 where event_id='.$id;
+		$_pdo->exec($sql);  
+		
+		//用户还未申请bcode的，终止申请
+		$sql= 'delete from ym_user_event where status=100 and event_id='.$id;
+		$_pdo->exec($sql);  
+		//已经申请bcode但24小时还未使用的，停止使用
+		$sql= "update ym_user_event set status=4 where etime + 24*60*60 < ".$_time." and status=0 and event_id=".$id; 
+		$_pdo->exec($sql); 
+		
+		
+	}
+	
+	
 	/**
 	 * user confirm paid by bcode
 	 * $user_id : bcode owner id
@@ -101,7 +169,7 @@ class EventSrv extends BaseSrv {
 		 {
 		 	\app\dao\EventDao::getMasterInstance()->rollBack();
 		 	throw new \Exception ($e->getMessage());
-		 	//return false;
+		 	return false;
 		 }
 		  
 	}
@@ -124,6 +192,7 @@ class EventSrv extends BaseSrv {
 		$user= \app\dao\UserInfoDao::getSlaveInstance()->find(  array('user_id' => $user_id));
 		$rate = \app\dao\SettingDao::getSlaveInstance()->find( array('ukey' => 'exchange_rate'));
 		$amountLeft= $user['rmb'] - $amount * (float)$rate['uvalue'] ;
+	
 		if($amountLeft < 0 ){
 			throw new \Exception ("冻结金额异常",'100098');
 		}
@@ -144,7 +213,7 @@ class EventSrv extends BaseSrv {
 		\app\dao\EventDao::getMasterInstance()->add(
 			array(
 				'event_name' => $post['event_name'],
-				'user_id' => $post['user_id'],
+				'mer_id' => $post['user_id'],
 				'product_link'=> $post['product_link'],
 				'price' => $post['price'],
 		
@@ -201,6 +270,7 @@ class EventSrv extends BaseSrv {
             $list = \app\dao\UserEventDao::getSlaveInstance()->findAll(
              array('user_id'=>$buyer_id,'B.status'=>$status)
              );
+             $list= self::updateStatus($list); //检查和更新状态信息
        
         return $list;
     }

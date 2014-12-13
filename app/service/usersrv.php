@@ -280,6 +280,7 @@ class UserSrv extends BaseSrv {
             unset($userinfo['password'] );		
             $userinfo['user_name'] = $info['user_name'];    
             $userinfo['token']=$info['token'];
+            $userinfo['level']=10;
            
             UserInfoDao::getMasterInstance()->add($userinfo);
 

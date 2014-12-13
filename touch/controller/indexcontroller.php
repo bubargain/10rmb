@@ -14,27 +14,8 @@ class indexcontroller extends BaseController {
 		
 		 $user_id=$this->checkLogin ();
 		
-		//cache index  
-		/*$cache = CacheManager::getInstance ();
-		
-		$key = 'touch_index_page';
-		
-		$ret = $cache->get ( $key );
-		
-		if (! $ret) {
-		
-			// memcache 赋值
-			//$ret ['focuseMap_imageLink'] = self::getImageLinks ( 'focusMap', 4 );
-	 
-		
-		
-			//$ret ['getTextLinks'] = self::getTextLinks ( 'giveHer' );
-			//$ret ['giveHer_imageLink'] = self::getImageLinks ( 'giveHer' );
-			//$ret ['giveHim_textLink'] = self::getTextLinks ( 'giveHim' );
-			//$ret ['giveHim_imageLink'] = self::getImageLinks ( 'giveHim' );
-		//	$cache->set ( $key, $ret, 1, 5 * 60 );
-		//}*/
 		$ret ['top_goods'] = self::SelectGoods ( $user_id,10 );
+		
 		$response->title = 'TEN BUCK';
 		$response->cdn_buck = CDN_BUCK;
 		$response->currency_rate = EUROTORMB;
@@ -188,56 +169,48 @@ class indexcontroller extends BaseController {
 			$to = $this->current_user['user_name'];
 			$title="10BUCK Payment Notification";
 			$headers="contact@10buck.com";
-			$txt="
-				Dear ".$info['user_name'].", \n
-\n
-your bcode is : ".$info['bcode']."
-<a href='".$info['product_link']."'> click to purchase </a> \n
-
-If you have any question, please don't hesitate to tell us.\n
-\n
-Best Regards,\n\n
-10BUCK TEAM
-			";
-			
+			$mailtmp=\app\dao\SettingDao::getSlaveInstance()->find(array('ukey'=>'mail_tmp'));
+			$txt = $mailtmp['uvalue'];
 			try{
-			require_once( ROOT_PATH. '/app/common/mail/class.phpmailer.php');
-			$mail= new \PHPMailer;
-			$mail->isSMTP();                                      // Set mailer to use SMTP
-			$mail->Host = BUCK_MAIL_SMTP;  // Specify main and backup SMTP servers
-			$mail->SMTPAuth = true;                               // Enable SMTP authentication
-			$mail->Username = BUCK_MAIL_HOST;                 // SMTP username
-			$mail->Password = BUCK_MAIL_PASS;                           // SMTP password
-			$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-			$mail->Port = 465;                                    // TCP port to connect to
-			
-			$mail->From = 'contact@10buck.com';
-			$mail->FromName = '10buck';
-			//$mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
-			$mail->addAddress($to);               // Name is optional
-			//$mail->addReplyTo('info@example.com', 'Information');
-			//$mail->addCC('cc@example.com');
-			//$mail->addBCC('bcc@example.com');
-			
-			//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
-			//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-			$mail->isHTML(true);                                  // Set email format to HTML
-			
-			$mail->Subject = $title;
-			$mail->Body    = "hello";
-			//$mail->Body    = $txt;
-			$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-			
-			if(!$mail->send()) {
-			    echo 'Message could not be sent.';
-			    echo 'Mailer Error: ' . $mail->ErrorInfo;
-			} else {
-			    echo 'Message has been sent';
+				require_once( ROOT_PATH. '/app/common/mail/class.phpmailer.php');
+				$mail= new \PHPMailer;
+				$mail->isSMTP();                                      // Set mailer to use SMTP
+				$mail->Host = BUCK_MAIL_SMTP;  // Specify main and backup SMTP servers
+				$mail->SMTPAuth = true;                               // Enable SMTP authentication
+				$mail->Username = BUCK_MAIL_HOST;                 // SMTP username
+				$mail->Password = BUCK_MAIL_PASS;                           // SMTP password
+				$mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+				$mail->Port = 465;                                    // TCP port to connect to
+				
+				$mail->From = BUCK_MAIL_HOST;
+				$mail->FromName = '10buck';
+				//$mail->addAddress('joe@example.net', 'Joe User');     // Add a recipient
+				$mail->addAddress($to);               // Name is optional
+				//$mail->addReplyTo('info@example.com', 'Information');
+				//$mail->addCC('cc@example.com');
+				//$mail->addBCC('bcc@example.com'); 
+				
+				//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+				//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+				$mail->isHTML(true);                                  // Set email format to HTML
+				
+				$mail->Subject = $title;
+				$txt= sprintf($txt,$to,$info['bcode'],$info['product_link'],$info['product_link']);;
+				
+				$mail->Body    = sprintf($txt,$info['bcode'],$info['product_link']);
+				//$mail->Body    = $txt;
+				$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+				
+				if(!$mail->send()) {
+				    $this->showError( 'Message could not be sent.');
+				    
+				} else {
+				   $this->showMsg( 'Message has been sent','index.php');
 			}
 			}catch(\Exception $e)
 			{
 				var_dump($e->getMessage());
-				//$this->showError($e->getMessage());
+				$this->showError($e->getMessage());
 			}
 			
 		}

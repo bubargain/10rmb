@@ -22,13 +22,8 @@ class OrderController extends BaseController {
 		if($event_id) //显示某个活动的所有交易情况
 		{
 			
-			
-			$eventInfo = \app\dao\UserEventDao::getSlaveInstance()->findAll(
-				array(
-					"event_id" => $event_id
-				),
-				1000
-			);
+			$sql="select * from ym_user_event where event_id = $event_id order by id";
+			$eventInfo = \app\dao\UserEventDao::getSlaveInstance()->getPdo()->getRows($sql);
 			
 			$response->eventInfo = $eventInfo;
 		}

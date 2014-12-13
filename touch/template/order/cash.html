@@ -1,0 +1,52 @@
+<div class="group_main">
+<div class="group_head">
+        <section><a href="index.php?_c=login" class="head_back"></a></section>
+        <section><div class="cWhite"> CASH</div></section>
+        <section></section>
+</div>
+<section class="main">
+	<section class="content">
+		<div class="order_list">
+            <form id="loginForm" action="index.php?_c=order&_a=cash" method="post">
+            <div class="login">
+                <dl>
+                    <dt>
+                  	   
+                       <div > <input class="money_input" type="text" id="applyamount" name="applyamount" class="cGray " />
+                       
+                       <font style="width:39%">USD</font>
+                       </div>
+                        <input type="hidden" id="amount" name="amount" value="{{$amount}}" />
+                      
+                        <p style="margin-left:10%">Money will be sent to <font color="red">{{$user_name}}</font> by Paypal.
+                        <br/> Release may take few hours.
+                        </p>
+                    </dt>
+                    <dd>
+                       
+                 
+                        <a class="cWhite set-btn1" id="sumitForm" name="sumitForm" href="javascript:;" class="cWhite order-btn">SUBMIT</a>
+                    </dd>
+                </dl>
+            </div>
+            </form>
+        </div>
+	</section>
+</section>
+</div>
+<script type="text/javascript">
+(function(){
+	$('#sumitForm').click(function(){
+		
+		if($('#applyamount').val() < 10 ){
+			alert('MININUM 10 USD');	
+		}else if($('#applyamount').val() > $('#amount').val())
+		{
+			alert("You don't have such amount");	
+		}
+		else{
+			$('#loginForm').submit();
+		}
+	});
+})();
+</script>

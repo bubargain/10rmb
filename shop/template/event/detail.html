@@ -1,0 +1,111 @@
+<div class="span10">
+
+	
+		
+	
+<div class="container">
+   
+   	<div class="page-header" >
+            <div class="alert">
+            	审核责任重大！请仔细核对商品的价格和运费策略，并添加首图图片链接（尽量小图300*400为佳）
+            </div>
+    </div>
+	<form id="subform" class="form-horizontal" method="post" action="?_c=event&_a=detail">
+
+    <div class="control-group">
+		<label class="control-label" for="inputPhone">事件名称</label>
+        <div class="controls">
+        <input type="text" class="input-xxlarge" id="inputName" name="inputName" value="{{$event.event_name}}">
+        </div>
+    </div>
+    <div class="control-group">
+		<label class="control-label" for="inputEmail">活动链接</label>
+        <div class="controls">
+        <input type="email" class="input-xxlarge" id="inputLink" name="inputLink" value="{{$event.product_link}}">
+        </div>
+    </div>
+    <div class="control-group">
+		<label class="control-label" for="inputEmail">活动平台</label>
+        <div class="controls">
+        <select name="store">
+        	<option value="amazon">Amazon</option>
+        	<option value="ebay">Ebay</option>
+        	<option value="aliexpress">Aliexpress</option>
+        	<option value="other">Other</option>
+        </select>
+        </div>
+    </div>
+    <div class="control-group">
+		<label class="control-label" for="inputEmail">补充图片链接</label>
+        <div class="controls">
+        <input type="email" onchange="viewPic()" class="input-xxlarge" id="inputPic" name="inputPic" value="{{$event.pic_link}}">
+         <img id="picBrief" src="{{$event.pic_link}}"/>
+        </div>
+       
+    </div>
+    
+    <div class="control-group">
+            <label class="control-label" for="inputPic">价格</label>
+            <div class="controls">
+            <label>{{$event.price}} </label>
+            <label>加邮费后价格，需稳定不因区域而改变</label>
+            </div>
+            
+     </div>
+     <div class="control-group">
+		<label class="control-label" for="inputEmail">返利</label>
+        <div class="controls">
+        <label>{{$event.fanli}} </label>
+        </div>
+    </div> 
+    <div class="control-group">
+		<label class="control-label" for="inputEmail">是否免邮</label>
+        <div class="controls">
+        <label>{{if $event.noshipping}} 是 {{else}}否{{/if}}</label>
+        </div>
+    </div> 
+     <div class="control-group">
+		<label class="control-label" for="inputEmail">卖家留言</label>
+        <div class="controls">
+        <input type="email" class="input-xxlarge" id="inputComment" name="inputComment" value="{{$event.comment}}">
+        </div>
+    </div> 
+  
+   
+    	<input type="hidden"  id="iverify" name="iverify" />
+   	   <input type="hidden"  id="eid" name="eid" value="{{$event.event_id}}" />
+       
+        <div class="controls">
+       		 <a  onclick="cverify(1);"  class="btn btn-large btn-info">通过</a>
+       	 	 <a  onclick="cverify(0);"   class="btn btn-large btn-warning">不通过</a>
+        </div>
+       
+ 
+	</form>
+   
+</div>	
+	
+
+		
+</div>
+
+<script src="/js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+<script language="javascript">
+
+	function cverify(status)
+	{
+		if(status == 1){
+			
+			$("#iverify").val(1);
+		}
+		else
+		{
+			$("#iverify").val(0);
+		}
+         $("#subform").submit();
+	}
+	
+	function viewPic(){
+		$("#picBrief").attr('src',$("#inputPic").val());
+	}
+ </script>

@@ -7,11 +7,12 @@ class EventController extends BaseController {
 	
 	public function index($request,$response)
 	{
+		$user_id=$this->checkLogin();
 		$response->storeTitle ="活动列表";
 		$response->storeIntro ="管理你进行中的活动";
 		$user_id = $this->current_user['user_id'];
 		$events = \app\dao\EventDao::getSlaveInstance()->findAll (
-			array("user_id" => $user_id)
+			array("mer_id" => $user_id)
 		);
 		$response->events = $events;
 
@@ -21,12 +22,7 @@ class EventController extends BaseController {
 	//新建一个活动
 	public function addevent($request,$response)
 	{
-		$user_id = $this->current_user['user_id'];
-		if(!$user_id) //未登录，跳转到首页 ，强验证
-		{
-			header ( "Location:".ROOT_PATH );
-			exit();
-		}
+		$user_id = $this->checkLogin();
 		try{
 			
 			$event['event_name'] = $request->event_name;
@@ -37,10 +33,11 @@ class EventController extends BaseController {
 			$event['noshipping'] = (int)$request->noshipping;  //是否支持免邮
 			$event['user_id']=$user_id;
 		
-	
+		
 			//添加	
 			$nevent= new \app\service\EventSrv();
 			$status=$nevent->addEvent($event);
+			
 			if($status== true)
 			{
 				//$this->showError("您的活动已提交审核，请移步活动管理查看审核状态");
@@ -51,6 +48,7 @@ class EventController extends BaseController {
 			}
 		}catch(\Exception $e)
 		{
+			var_dump($e);die();
 			$this->showError("提交信息，添加失败：".$e->getMessage());
 		}
 
@@ -70,7 +68,7 @@ class EventController extends BaseController {
 			$checkV= \app\dao\EventDao::getMasterInstance()->find (
 				array(
 					'event_id'=>$event_id,
-					'user_id' => $user_id 
+					'mer_id' => $user_id 
 				)
 			);
 			if(!$checkV)   //没有修改权利

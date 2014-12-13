@@ -1,0 +1,103 @@
+<div name="maindiv" class="span10">
+
+	
+		<div class="span10 text-center text-info"><h3>活动列表</h3></div>
+	
+		
+		<table id='content' class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>活动ID</th>
+					<th>活动名</th>
+                    <th>价格</th>
+                    <th>返利</th>	
+					<th>是否免邮</th>
+                    <th>数量</th>
+                    <th>已领</th>
+					<th>申请时间</th>
+                    <th>状态</th>		
+					<th>操作</th>
+				</tr>
+			</thead>
+				{{foreach from=$tableCon item=oneRow }}
+					<tr>
+						<td id='orderId'>{{$oneRow.event_id}}&nbsp</td>
+						<td><a href="{{$oneRow.product_link}}">{{$oneRow.event_name}}&nbsp</a></td>
+						<td>{{$oneRow.price}}&nbsp </td>
+                        <td>{{$oneRow.fanli}}&nbsp </td>
+                        <td>{{$oneRow.noshipping}}&nbsp </td>
+						<td>{{$oneRow.amount}}&nbsp </td>
+                        <td>{{$oneRow.applied}}&nbsp </td>
+						<td>{{$oneRow.ctime|date_format:"%m/%d %H:%M"}}&nbsp</td>
+						<td>{{if $oneRow.status =='0'}} 待审
+							{{else if $oneRow.status =='1' }} 启动
+                            {{else if $oneRow.status =='2' }} 用户终止
+                             {{else if $oneRow.status =='3' }} 完成
+                             {{else if $oneRow.status =='4' }} 审核不过
+                             {{else}}  $oneRow.status {{/if}}
+                             </td>
+						<td>
+                        {{if $oneRow.status == '0'}}
+							<a  href="index.php?_c=event&_a=detail&id={{$oneRow.event_id}}"  class="btn btn-info btn-small" >查看</a>
+                        {{/if}}
+						</td>
+					</tr>
+				{{/foreach}}
+		
+		</table> 
+		<style type="text/css">
+		.carInfo {width:800px;height:56px;border-top:1px #e1e1e1 solid;overflow:hidden;margin:0 auto;}
+		.carInfo dt {float:left;padding:16px 0 0 3px;color:#323232;}
+		.carInfo i {padding-right:30px;}
+		.carInfo dd {float:right;padding-top:13px;}
+		</style>
+		<table>
+		<tr>
+      		<td align="center" colspan="8">{{$page}}</td>
+  		</tr>
+		</table>
+		
+</div>
+	
+
+
+
+<!-- 删除订单确认框 -->
+    <div id="deleteOrderModal" class="modal hide fade" aria-hidden="true">
+	    <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    <h3>删除订单</h3>
+	    </div>
+	    <div class="modal-body">
+	    <p>删除后订单状态将变为“已取消”，是否删除？</p>
+	    </div>
+	    <div class="modal-footer">
+	    <a href="#" id="cancelOrder" class="btn btn-primary">确认</a>
+	    <a href="#" type="button" class="btn" data-dismiss="modal" aria-hidden="true">取消</a>
+	    <input type="hidden" id="cancel_order_info"/>
+	    </div>
+    </div>
+	
+<script src="/js/jquery.form.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+ 	(function(){
+		$("#content").delegate("a", "click", function(){
+			_this = $(this);	
+			switch(_this.attr("y-action")) {		
+				case 'upStatus': 
+					upStatus(_this);
+					break;
+				default:
+				;
+			}
+		});
+		 
+		function upStatus(_this) {
+			var url = "index.php?_c=orders&_a=userconfirm&" + _this.attr("y-data");
+			$.getJSON(url, function(data) {			
+				window.location.href="http://admin.10buck.com/index.php?_c=orders&_a=user";
+			});
+		}
+	})();
+ </script>

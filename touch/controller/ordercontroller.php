@@ -9,8 +9,29 @@ class orderController extends BaseController {
 	public function __construct($request, $response) {
 		parent::__construct ( $request, $response );
 	}
-	public function order($request, $response) {
-		$this->layoutSmarty ( 'order' );
+	public function cash($request, $response) {
+		$user_id= $this->checkLogin();
+		if(!$this->isPost())
+		{
+			$response->user_name = $this->current_user['user_name'];
+			$info = \app\dao\UserInfoDao::getSlaveInstance()->find($user_id);	
+			$response->amount = $info['usd'];
+			$this->layoutSmarty ( 'cash' );
+		}
+		else {
+			\app\dao\UserCurrencyDao::getMasterInstance()->add(
+				array(
+					'user_id'=> $user_id,
+					'amount' => $request->applyamount,
+					'unit'  => 'usd',
+					'ctime' => strtotime('now'),
+					'status' => 5
+				)
+			);
+			
+			$this->showMsg("Request submit Successfully","index.php?_c=order");
+		}
+		
 	}
 	
 	// 用户中心
@@ -24,6 +45,8 @@ class orderController extends BaseController {
 	
 		$this->layoutSmarty ( 'index' );
 	}
+	
+
 	
 	// 订单确认
 	public function confirm($request, $response) {

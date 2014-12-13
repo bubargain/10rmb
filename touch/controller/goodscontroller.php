@@ -21,7 +21,7 @@ class goodscontroller extends BaseController {
 			
 			$user_id = $this->current_user['user_id'];
 	
-			$sql = "select A.product_link,B.price,B.fanli,B.totalfanli,B.id,B.noshipping from ym_event A left join ym_user_event B on A.event_id = B.event_id 
+			$sql = "select A.pic_link,A.product_link,B.price,B.fanli,B.totalfanli,B.id,B.noshipping from ym_event A left join ym_user_event B on A.event_id = B.event_id 
 			where A.event_id = $event_id and A.status =1 and B.user_id = $user_id
 			";
 			$info = \app\dao\EventDao::getSlaveInstance()->getPdo()->getRow($sql);
@@ -34,7 +34,7 @@ class goodscontroller extends BaseController {
 		}
 
 		
-		
+		$response->pic_link=$info['pic_link'];
 		$response->product_link = $info['product_link'];
 		$response->id = $info['id'];
 		$response->price = $info['price'];

@@ -1,0 +1,60 @@
+<div class="span10">
+
+	
+		
+	
+<div class="container">
+   
+   	<div class="page-header" >
+            <div class="alert">
+            	请确保paypla支付订单号正确以供日后查询
+            </div>
+    </div>
+	<form id="subform" class="form-horizontal" method="post" action="?_c=pay&_a=verify">
+	 <div class="control-group">
+		<label class="control-label" for="inputPhone">支付金额</label>
+        <div class="controls">
+        <label>{{$info.amount}}{{$info.unit}}</label>
+        </div>
+    </div>
+     <div class="control-group">
+		<label class="control-label" for="inputPhone">支付账号</label>
+        <div class="controls">
+        <label>{{$info.user_name}}</label>
+        </div>
+    </div>
+     <div class="control-group">
+		<label class="control-label" for="inputPhone">PAYPAL 订单号</label>
+        <div class="controls">
+        <input type="text" class="input-xxlarge" id="inputPPsn" name="inputPPsn" value="{{$event.event_name}}">
+        </div>
+    </div>
+
+    
+     <div class="control-group">
+		<label class="control-label" for="inputEmail">备注</label>
+        <div class="controls">
+        <input type="text" class="input-xxlarge" id="inputComment" name="inputComment" value="{{$event.comment}}">
+        </div>
+    </div> 
+  
+   
+
+   	   <input type="hidden"  id="id" name="id" value="{{$info.id}}" />
+       
+        <div class="controls">
+       		 <input  type="submit"  class="btn btn-large btn-info"  value="确定" />
+       	 
+        </div>
+       
+ 
+	</form>
+   
+</div>	
+	
+
+		
+</div>
+
+
+
