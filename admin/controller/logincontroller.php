@@ -135,7 +135,7 @@ class LoginController extends BaseController {
 	* 0 unauthoried , 1 normal ,100 admin
 	*/
 	private function checkLevel($user_id) {
-		$user =\app\dao\UserInfoDao::getSlaveInstance () -> find($user_id);
+		$user =\app\dao\UserAdminDao::getSlaveInstance () -> find($user_id);
 		if ($user['level'] == 1)
 			return true;
 		else 
