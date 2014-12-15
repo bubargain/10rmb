@@ -219,18 +219,16 @@ class OrderSrv extends BaseSrv {
     	
         $orderDao = OrderDao::getMasterInstance();
         $order = $orderDao->find(array('order_sn'=>$info['order_sn']));
-	 	
+	 
         if( !$order || !in_array( $order['order_status'], array( self::UNPAY_ORDER, self::CLOSED_ORDER ) ) ) //开放关闭订单可以支付
-            throw new \Exception('订单不存在或状态不正确', 5001);
+           return false;
 
-		if($order['order_status']==0)  //只允许从代付款转为付款一次
-		{
-	        try{
+	     try{
 	            $orderDao->beginTransaction();//开启事务
 	            $_time = time();
 				
 	           //订单状态修改 
-	            $orderDao->edit($order['order_id'], array(
+	           $orderDao->edit($order['order_id'], array(
 	                'order_status'=>self::PAYED_ORDER,
 	                'order_time'=>$_time,
 	                'pay_time'=>$_time,
@@ -244,7 +242,7 @@ class OrderSrv extends BaseSrv {
 	            
 	            //用户账户金额更新
 	            UserInfoDao::getMasterInstance()->increment($order['buyer_id'], 'rmb', $info['total_fee']);
-	
+
 	            UserCurrencyDao::getMasterInstance()->add(
 	            	array(
 	            	 'user_id'=> $order['buyer_id'],
@@ -255,18 +253,19 @@ class OrderSrv extends BaseSrv {
 	            	 'sn' =>$info['order_sn']
 	            	)
 	            );
-	                        
+	            
 	           
 	
 	           
 			  \sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', "order hanlded");
 	           $orderDao->commit();//提交事务
+	           return true;
 	
 	        }catch (\Exception $e) {
 	            OrderDao::getMasterInstance()->rollBack();
-	           var_dump( $e->getMessage());
+	         	return false;
 	        }
-		}
+		
        
     }
 

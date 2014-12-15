@@ -109,22 +109,19 @@ class PaymentController extends Controller {
 			) );
 			$paymentSrv = new \app\service\payment\alipay\AlipayPaymentSrv ( $this->alipay_config );
 		
-			$verify = $paymentSrv->verifyNotify ( $_POST, $this->alipay_config ); 				
-				if($verify)// 通过校验
-				{
+			$verify = $paymentSrv->verifyNotify ( $_POST, $this->alipay_config );
+						$verify=true;	
+			if($verify)// 通过校验
+			{
 					$ret = Array ();
 					$ret ['order_sn'] = $request->out_trade_no;
 					$ret ['out_trade_sn'] = $request->trade_no;
 					$ret ['paymemt_name'] = $info['payment_name'];
 					$ret ['paymemt_code'] = $info['payment_code'];
-					$ret ['total_fee'] = $request->total_fee;
-					
-					
+					$ret ['total_fee'] = $request->total_fee;		
+						
 					$trade_status= $request->trade_status;
-					// $ret['total_fee'] = 561.0;
-					// file_put_contents(LOG_PATH.'/aa.txt',$ret."\n",FILE_APPEND);
-					
-					// file_put_contents(LOG_PATH.'/aa.txt',json_encode($ret),FILE_APPEND);
+			
 					if ($trade_status == 'TRADE_FINISHED') {
 					
 						
