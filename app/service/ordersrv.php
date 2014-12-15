@@ -223,57 +223,59 @@ class OrderSrv extends BaseSrv {
         if( !$order || !in_array( $order['order_status'], array( self::UNPAY_ORDER, self::CLOSED_ORDER ) ) ) //开放关闭订单可以支付
             throw new \Exception('订单不存在或状态不正确', 5001);
 
-
-        try{
-            $orderDao->beginTransaction();//开启事务
-            $_time = time();
-
-           //订单状态修改 
-            $orderDao->edit($order['order_id'], array(
-                'order_status'=>self::PAYED_ORDER,
-                'order_time'=>$_time,
-                'pay_time'=>$_time,
-                'payment_name'=>$info['payment_name'],
-                'payment_code'=>$info['payment_code'],
-                'out_trade_sn'=>$info['out_trade_sn'],
-            ));
-
-            
-            
-            
-            //用户账户金额更新
-            UserInfoDao::getMasterInstance()->increment($order['buyer_id'], 'rmb', $info['total_fee']);
-
-            UserCurrencyDao::getMasterInstance()->add(
-            	array(
-            	 'user_id'=> $order['buyer_id'], 'amount'=>$info['total_fee'] ,
-            	 'unit'=> 'rmb' ,
-            	 'ctime'=> $_time ,
-            	 'status'=>1,
-            	 'sn' =>$order['order_id']
-            	)
-            );
-                        
-           
-
-            //生成log
-            \app\dao\OrderlogDao::getMasterInstance()->add(
-                array(
-                    'order_id'=>$order['order_id'],
-                    'operator'=>'第三方支付：' . $info['payment_name'],
-                    'order_status'=>self::getStatus($order['order_status']),
-                    'changed_status'=>self::getStatus(self::PAYED_ORDER),
-                    'remark'=>'第三方支付：' . $info['payment_name'] . '支付',
-                    'log_time'=>$_time,
-                )
-            );
-
-           $orderDao->commit();//提交事务
-
-        }catch (\Exception $e) {
-            OrderDao::getMasterInstance()->rollBack();
-            echo $e;
-        }
+		if($order['order_status']==0)  //只允许从代付款转为付款一次
+		{
+	        try{
+	            $orderDao->beginTransaction();//开启事务
+	            $_time = time();
+	
+	           //订单状态修改 
+	            $orderDao->edit($order['order_id'], array(
+	                'order_status'=>self::PAYED_ORDER,
+	                'order_time'=>$_time,
+	                'pay_time'=>$_time,
+	                'payment_name'=>$info['payment_name'],
+	                'payment_code'=>$info['payment_code'],
+	                'out_trade_sn'=>$info['out_trade_sn'],
+	            ));
+	
+	            
+	            
+	            
+	            //用户账户金额更新
+	            UserInfoDao::getMasterInstance()->increment($order['buyer_id'], 'rmb', $info['total_fee']);
+	
+	            UserCurrencyDao::getMasterInstance()->add(
+	            	array(
+	            	 'user_id'=> $order['buyer_id'], 'amount'=>$info['total_fee'] ,
+	            	 'unit'=> 'rmb' ,
+	            	 'ctime'=> $_time ,
+	            	 'status'=>1,
+	            	 'sn' =>$order['order_id']
+	            	)
+	            );
+	                        
+	           
+	
+	            //生成log
+	            \app\dao\OrderlogDao::getMasterInstance()->add(
+	                array(
+	                    'order_id'=>$order['order_id'],
+	                    'operator'=>'第三方支付：' . $info['payment_name'],
+	                    'order_status'=>self::getStatus($order['order_status']),
+	                    'changed_status'=>self::getStatus(self::PAYED_ORDER),
+	                    'remark'=>'第三方支付：' . $info['payment_name'] . '支付',
+	                    'log_time'=>$_time,
+	                )
+	            );
+	
+	           $orderDao->commit();//提交事务
+	
+	        }catch (\Exception $e) {
+	            OrderDao::getMasterInstance()->rollBack();
+	            echo $e;
+	        }
+		}
        
     }
 

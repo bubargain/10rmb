@@ -28,98 +28,38 @@ class AlipayPaymentSrv extends BasePaymentSrv {
 	
 	
 	/**
-	 * 验证支付结果,参照 支付宝 无线支付接口
+	 * 验证支付结果,参照 支付宝网页支付
 	 */
 	public function verifyNotify($_POST, $alipay_config) {
-		
-		// file_put_contents(LOG_PATH.'/aa.txt',json_encode($_POST));
-		
-		// $notify_data = 'notify_data=' . $POST['notify_data'];
-		// $notify_data = null;
-		// $alipayNotify = new \AlipayNotify($alipay_config);
-		// $verify_result = $alipayNotify->verifyNotify();
-		// file_put_contents(LOG_PATH.'/aa.txt',"\nSTART\n",FILE_APPEND);
-		// file_put_contents(LOG_PATH.'/aa.txt',json_encode($_POST),FILE_APPEND);
-		// die();
-		// if($verify_result) {//验证成功
-		// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		// 请在这里加上商户的业务逻辑程序代
-		
-		// ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
-		
-		// 解密（如果是RSA签名需要解密，如果是MD5签名则下面一行清注释掉）
-		//$notify_data = rsaDecrypt ( $_POST ['notify_data'], $alipay_config ['private_key_path'] );
-		
-		// file_put_contents(LOG_PATH.'/aa.txt',$notify_data."\n",FILE_APPEND);
-		// var_dump($notify_data);die();
-		// 获取支付宝的通知返回参数，可参考技术文档中服务器异步通知参数列表
-		
-		// 解析notify_data
-		// 注意：该功能PHP5环境及以上支持，需开通curl、SSL等PHP配置环境。建议本地调试时使用PHP开发软件
-		$doc = new \DOMDocument ();
-		$doc->loadXML ( $notify_data );
-		
-		\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', 'verifyNotify|______|' . $notify_data . "\n\n" );
-		
-		if (! empty ( $doc->getElementsByTagName ( "notify" )->item ( 0 )->nodeValue )) {
-			// 商户订单号
-			$out_trade_no = $doc->getElementsByTagName ( "out_trade_no" )->item ( 0 )->nodeValue;
-			// 支付宝交易号
-			$trade_no = $doc->getElementsByTagName ( "trade_no" )->item ( 0 )->nodeValue;
-			// 交易状态
-			$trade_status = $doc->getElementsByTagName ( "trade_status" )->item ( 0 )->nodeValue;
-			
-			$ret = Array ();
-			$ret ['order_sn'] = $out_trade_no;
-			$ret ['out_trade_sn'] = $trade_no;
-			$ret ['paymemt_name'] = $this->_config ['paymemt_name'];
-			$ret ['paymemt_code'] = $this->_config ['paymemt_code'];
-			$ret ['total_fee'] = $doc->getElementsByTagName ( "total_fee" )->item ( 0 )->nodeValue;
-			// $ret['total_fee'] = 561.0;
-			// file_put_contents(LOG_PATH.'/aa.txt',$ret."\n",FILE_APPEND);
-			
-			// file_put_contents(LOG_PATH.'/aa.txt',json_encode($ret),FILE_APPEND);
-			if ($trade_status == 'TRADE_FINISHED') {
-				// 判断该笔订单是否在商户网站中已经做过处理
-				// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-				// 如果有做过处理，不执行商户的业务程序
-				
-				// 注意：
-				// 该种交易状态只在两种情况下出现
-				// 1、开通了普通即时到账，买家付款成功后。
-				// 2、开通了高级即时到账，从该笔交易成功时间算起，过了签约时的可退款时限（如：三个月以内可退款、一年以内可退款等）后。
-				
-				// 调试用，写文本函数记录程序运行情况是否正常
-				// logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-				
-				// file_put_contents(LOG_PATH.'/aa.txt',$ret,FILE_APPEND);
-				
-				$orderSrc = new \app\service\OrderSrv (); // 更改状态
-				$orderSrc->pay ( $ret );
-				// file_put_contents(LOG_PATH.'/aa.txt',"END\n",FILE_APPEND);
-				return "success"; // 请不要修改或删除
-			} else if ($trade_status == 'TRADE_SUCCESS') {
-				// 判断该笔订单是否在商户网站中已经做过处理
-				// 如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
-				// 如果有做过处理，不执行商户的业务程序
-				
-				// 注意：
-				// 该种交易状态只在一种情况下出现——开通了高级即时到账，买家付款成功后。
-				$orderSrc = new \app\service\OrderSrv (); // 更改状态
-				$orderSrc->pay ( $ret );
-				// 调试用，写文本函数记录程序运行情况是否正常
-				// logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-				
-				return "success"; // 请不要修改或删除
-			}
-		} 
-
+		if(empty($_POST)) {//判断POST来的数组是否为空
+			return false;
+		}
 		else {
-			// 验证失败
-			return "fail";
+			//生成签名结果
+			$isSign = $this->getSignVeryfy($_POST, $_POST["sign"]);
+			//获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
+			$responseTxt = 'true';
+			if (! empty($_POST["notify_id"])) {$responseTxt = $this->getResponse($_POST["notify_id"]);}
 			
-			// 调试用，写文本函数记录程序运行情况是否正常
-			// logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
+			//写日志记录
+			//if ($isSign) {
+			//	$isSignStr = 'true';
+			//}
+			//else {
+			//	$isSignStr = 'false';
+			//}
+			//$log_text = "responseTxt=".$responseTxt."\n notify_url_log:isSign=".$isSignStr.",";
+			//$log_text = $log_text.createLinkString($_POST);
+			//logResult($log_text);
+			
+			//验证
+			//$responsetTxt的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
+			//isSign的结果不是true，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关
+			if (preg_match("/true$/i",$responseTxt) && $isSign) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 		/*
 		 * $buffer = decrypt($POST['notify_data']); $xml =
@@ -135,16 +75,26 @@ class AlipayPaymentSrv extends BasePaymentSrv {
 		 */
 	}
 	
-	/**
-	 * 将验证结果反馈给网关
-	 */
-	public function verifyResult($alipay_config) {
-		$alipayNotify = new \AlipayNotify ( $alipay_config );
-		$verify_result = $alipayNotify->verifyReturn ();
-		if ($verify_result) {
-			echo 'success';
-		} else {
-			echo 'fail';
+   /**
+     * 针对return_url验证消息是否是支付宝发出的合法消息
+     * @return 验证结果
+     */
+	function verifyReturn($_GET, $alipay_config){
+		if(empty($_GET)) {//判断POST来的数组是否为空
+			return false;
+		}
+		else {
+			//生成签名结果
+			$isSign = $this->getSignVeryfy($_GET, $_GET["sign"]);
+			//获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
+			$responseTxt = 'true';
+			if (! empty($_GET["notify_id"])) {$responseTxt = $this->getResponse($_GET["notify_id"]);}
+			
+			if (preg_match("/true$/i",$responseTxt) && $isSign) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 	public function getPayForm($order, $alipay_config) {
@@ -223,4 +173,57 @@ class AlipayPaymentSrv extends BasePaymentSrv {
 		// echo $call_back_url;die();
 		return $html_text;
 	}
+/**
+     * 获取返回时的签名验证结果
+     * @param $para_temp 通知返回来的参数数组
+     * @param $sign 返回的签名结果
+     * @return 签名验证结果
+     */
+	function getSignVeryfy($para_temp, $sign) {
+		//除去待签名参数数组中的空值和签名参数
+		$para_filter = paraFilter($para_temp);
+		
+		//对待签名参数数组排序
+		$para_sort = argSort($para_filter);
+		
+		//把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
+		$prestr = createLinkstring($para_sort);
+		
+		$isSgin = false;
+		switch (strtoupper(trim($this->alipay_config['sign_type']))) {
+			case "MD5" :
+				$isSgin = md5Verify($prestr, $sign, $this->alipay_config['key']);
+				break;
+			default :
+				$isSgin = false;
+		}
+		
+		return $isSgin;
+	}
+
+    /**
+     * 获取远程服务器ATN结果,验证返回URL
+     * @param $notify_id 通知校验ID
+     * @return 服务器ATN结果
+     * 验证结果集：
+     * invalid命令参数不对 出现这个错误，请检测返回处理中partner和key是否为空 
+     * true 返回正确信息
+     * false 请检查防火墙或者是服务器阻止端口问题以及验证时间是否超过一分钟
+     */
+	function getResponse($notify_id) {
+		$transport = strtolower(trim($this->alipay_config['transport']));
+		$partner = trim($this->alipay_config['partner']);
+		$veryfy_url = '';
+		if($transport == 'https') {
+			$veryfy_url = $this->https_verify_url;
+		}
+		else {
+			$veryfy_url = $this->http_verify_url;
+		}
+		$veryfy_url = $veryfy_url."partner=" . $partner . "&notify_id=" . $notify_id;
+		$responseTxt = getHttpResponseGET($veryfy_url, $this->alipay_config['cacert']);
+		
+		return $responseTxt;
+	}
+}
 }
