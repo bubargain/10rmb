@@ -17,20 +17,20 @@ class PaymentController extends Controller {
 		
 		// 安全检验码，以数字和字母组成的32位字符
 		// 如果签名方式设置为“MD5”时，请设置该参数
-		$this->alipay_config ['key'] = '1312145';
+		$this->alipay_config ['key'] = 'yqq6zyvp9wi0s1xn3socm3g93ewlnw25';
 		
 		// 商户的私钥（后缀是.pen）文件相对路径
 		// 如果签名方式设置为“0001”时，请设置该参数
-		$this->alipay_config ['private_key_path'] = ROOT_PATH . '/app/service/payment/alipay/ali-key/rsa_private_key.pem';
+		//$this->alipay_config ['private_key_path'] = ROOT_PATH . '/app/service/payment/alipay/ali-key/rsa_private_key.pem';
 		
 		// 支付宝公钥（后缀是.pen）文件相对路径
 		// 如果签名方式设置为“0001”时，请设置该参数
-		$this->alipay_config ['ali_public_key_path'] = ROOT_PATH . '/app/service/payment/alipay/ali-key/alipay_public_key.pem';
+		//$this->alipay_config ['ali_public_key_path'] = ROOT_PATH . '/app/service/payment/alipay/ali-key/alipay_public_key.pem';
 		
 		// ↑↑↑↑↑↑↑↑↑↑请在这里配置您的基本信息↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 		
 		// 签名方式 不需修改
-		$this->alipay_config ['sign_type'] = "0001";
+		$this->alipay_config ['sign_type'] = "MD5";
 		
 		// $alipay_config['sign_type'] ="RSA";
 		
@@ -109,6 +109,8 @@ class PaymentController extends Controller {
 			try {
 				$verify = $paymentSrv->verifyNotify ( $_POST, $this->alipay_config ); 
 				
+				\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log',var_dump($_POST));
+				
 				if($verify)// 通过校验
 				{
 					$ret = Array ();
@@ -162,7 +164,7 @@ class PaymentController extends Controller {
 
             $response->title = '成功购买';
             $response->order = $order;
-            $this->layoutSmarty ( 'success' );
+            $this->showError ( '充值成功'，'index.php?_c=store&_a=asset' );
         } catch ( \Exception $e ) {
             $this->showError($e->getMessage ());
         }
