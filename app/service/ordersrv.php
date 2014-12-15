@@ -228,7 +228,7 @@ class OrderSrv extends BaseSrv {
 	        try{
 	            $orderDao->beginTransaction();//开启事务
 	            $_time = time();
-	
+				
 	           //订单状态修改 
 	            $orderDao->edit($order['order_id'], array(
 	                'order_status'=>self::PAYED_ORDER,
@@ -243,11 +243,12 @@ class OrderSrv extends BaseSrv {
 	            
 	            
 	            //用户账户金额更新
-	            UserInfoDao::getMasterInstance()->increment($order['user_id'], 'rmb', $info['total_fee']);
+	            UserInfoDao::getMasterInstance()->increment($order['buyer_id'], 'rmb', $info['total_fee']);
 	
 	            UserCurrencyDao::getMasterInstance()->add(
 	            	array(
-	            	 'user_id'=> $order['user_id'], 'amount'=>$info['total_fee'] ,
+	            	 'user_id'=> $order['buyer_id'],
+	            	 'amount'=>$info['total_fee'] ,
 	            	 'unit'=> 'rmb' ,
 	            	 'ctime'=> $_time ,
 	            	 'status'=>1,
@@ -263,7 +264,7 @@ class OrderSrv extends BaseSrv {
 	
 	        }catch (\Exception $e) {
 	            OrderDao::getMasterInstance()->rollBack();
-	           \sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', $e->getMessage());
+	           var_dump( $e->getMessage());
 	        }
 		}
        
