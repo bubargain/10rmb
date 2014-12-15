@@ -1,13 +1,14 @@
 <?php
 
-namespace touch\controller;
+namespace admin\controller;
 
 use \app\service\OrderSrv;
 use \app\dao\PaymentDao;
+use sprite\mvc\controller;
 /*
  * product related behavior @author : daniel
  */
-class paymentController extends BaseController {
+class PaymentController extends Controller {
 	private $alipay_config = Array ();
 	public function __construct($request, $response) {
 		parent::__construct ( $request, $response );
@@ -96,6 +97,7 @@ class paymentController extends BaseController {
 	 *        	$response
 	 */
 	public function webnotify($request, $response) {
+	
 		try {
 			\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', 'start|______|' . $_SERVER ['HTTP_HOST'] . $_SERVER ['REQUEST_URI'] . '|______|' . serialize ( $_POST ) . '|______|E_HTTP_CLIENT_IP=' . getenv ( 'HTTP_CLIENT_IP' ) . ',E_HTTP_X_FORWARDED_FOR=' . getenv ( 'HTTP_X_FORWARDED_FOR' ) . ',E_REMOTE_ADDR=' . getenv ( 'REMOTE_ADDR' ) . ',S_REMOTE_ADDR=' . $_SERVER ['REMOTE_ADDR'] . "\n\n" );
 			
@@ -115,7 +117,10 @@ class paymentController extends BaseController {
 			$this->renderString ( $e->getMessage () );
 		}
 	}
+	
 	public function webcallback($request, $response) {
+		
+		
         try {
             $orderSrv = new OrderSrv();
             $order = $orderSrv->info($request->out_trade_no, 'order_sn');

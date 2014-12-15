@@ -36,7 +36,7 @@ class BaseController extends Controller {
 		header ( "Content-type: text/html; charset=utf-8" );
 	}
 	
-		public function checkLogin($url = '') {
+	public function checkLogin($url = '') {
 		if (! $this->has_login) {
 			$goto = TOUCH_BUCK . '/index.php?_c=login';
 			if ($url)

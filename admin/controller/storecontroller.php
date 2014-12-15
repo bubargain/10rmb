@@ -180,8 +180,7 @@ class StoreController extends BaseController {
 			$paymentSrv = new $payment ( $info );
 			$order = \app\dao\OrderDao::getSlaveInstance()->find($orderid);
 			self::config();
-		
-		
+	
 			$form = $paymentSrv->getPayForm ( $order, $this->alipay_config );
 			// 统计埋点
 			/*self::userLog ( array (
