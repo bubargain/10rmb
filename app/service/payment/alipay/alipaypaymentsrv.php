@@ -226,4 +226,3 @@ class AlipayPaymentSrv extends BasePaymentSrv {
 		return $responseTxt;
 	}
 }
-}
