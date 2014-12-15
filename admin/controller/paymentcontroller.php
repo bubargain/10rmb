@@ -54,6 +54,8 @@ class PaymentController extends Controller {
 	 *        	$response
 	 */
 	public function payForm($request, $response) {
+		
+		
 		try {
 			$order = \app\dao\OrderDao::getSlaveInstance ()->find ( $request->id );
 			
@@ -97,7 +99,7 @@ class PaymentController extends Controller {
 	 *        	$response
 	 */
 	public function webnotify($request, $response) {
-	
+		
 		try {
 			\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', 'start|______|' . $_SERVER ['HTTP_HOST'] . $_SERVER ['REQUEST_URI'] . '|______|' . serialize ( $_POST ) . '|______|E_HTTP_CLIENT_IP=' . getenv ( 'HTTP_CLIENT_IP' ) . ',E_HTTP_X_FORWARDED_FOR=' . getenv ( 'HTTP_X_FORWARDED_FOR' ) . ',E_REMOTE_ADDR=' . getenv ( 'REMOTE_ADDR' ) . ',S_REMOTE_ADDR=' . $_SERVER ['REMOTE_ADDR'] . "\n\n" );
 			
@@ -147,6 +149,7 @@ class PaymentController extends Controller {
 				\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', 'end|______|' . $ret . "\n\n" );
                
 			} catch ( \Exception $e ) {
+				\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', $e->getMessage());
 				echo "false";
 			}
 		} catch ( \Exception $e ) {
@@ -164,7 +167,7 @@ class PaymentController extends Controller {
 
             $response->title = '成功购买';
             $response->order = $order;
-            $this->showError ( '充值成功'，'index.php?_c=store&_a=asset' );
+            $this->showError ( '充值成功','index.php?_c=store&_a=asset' );
         } catch ( \Exception $e ) {
             $this->showError($e->getMessage ());
         }
