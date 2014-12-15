@@ -159,9 +159,9 @@ class PaymentController extends Controller {
 
             $response->title = '成功购买';
             $response->order = $order;
-            $this->showError ( '充值成功','index.php?_c=store&_a=asset' );
+            $this->showMsg ( '充值成功','index.php?_c=store&_a=asset' );
         } catch ( \Exception $e ) {
-            $this->showError($e->getMessage ());
+            $this->showMsg($e->getMessage ());
         }
 	}
 	public function userLog($info) {
@@ -172,5 +172,16 @@ class PaymentController extends Controller {
 			$info ['uuid'] = isset ( $this->current_user ['clientid'] ) ? $this->current_user ['clientid'] : '';
 		}
 		parent::userLog ( $info );
+	}
+	public function showMsg($msg, $url = '') {
+		echo "<script type=\"text/javascript\">";
+		echo "alert('" . $msg . "');";
+		if (! empty ( $url )) {
+			echo "window.location.href='" . $url . "';";
+		} else {
+			echo "history.back();";
+		}
+		echo "</script>";
+		exit ();
 	}
 }
