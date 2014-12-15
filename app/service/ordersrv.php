@@ -219,7 +219,7 @@ class OrderSrv extends BaseSrv {
     	
         $orderDao = OrderDao::getMasterInstance();
         $order = $orderDao->find(array('order_sn'=>$info['order_sn']));
-
+	 	
         if( !$order || !in_array( $order['order_status'], array( self::UNPAY_ORDER, self::CLOSED_ORDER ) ) ) //开放关闭订单可以支付
             throw new \Exception('订单不存在或状态不正确', 5001);
 
@@ -243,37 +243,27 @@ class OrderSrv extends BaseSrv {
 	            
 	            
 	            //用户账户金额更新
-	            UserInfoDao::getMasterInstance()->increment($order['buyer_id'], 'rmb', $info['total_fee']);
+	            UserInfoDao::getMasterInstance()->increment($order['user_id'], 'rmb', $info['total_fee']);
 	
 	            UserCurrencyDao::getMasterInstance()->add(
 	            	array(
-	            	 'user_id'=> $order['buyer_id'], 'amount'=>$info['total_fee'] ,
+	            	 'user_id'=> $order['user_id'], 'amount'=>$info['total_fee'] ,
 	            	 'unit'=> 'rmb' ,
 	            	 'ctime'=> $_time ,
 	            	 'status'=>1,
-	            	 'sn' =>$order['order_id']
+	            	 'sn' =>$info['order_sn']
 	            	)
 	            );
 	                        
 	           
 	
-	            //生成log
-	            \app\dao\OrderlogDao::getMasterInstance()->add(
-	                array(
-	                    'order_id'=>$order['order_id'],
-	                    'operator'=>'第三方支付：' . $info['payment_name'],
-	                    'order_status'=>self::getStatus($order['order_status']),
-	                    'changed_status'=>self::getStatus(self::PAYED_ORDER),
-	                    'remark'=>'第三方支付：' . $info['payment_name'] . '支付',
-	                    'log_time'=>$_time,
-	                )
-	            );
+	           
 			  \sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', "order hanlded");
 	           $orderDao->commit();//提交事务
 	
 	        }catch (\Exception $e) {
 	            OrderDao::getMasterInstance()->rollBack();
-	           \sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', $e->getMessgage());
+	           \sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', $e->getMessage());
 	        }
 		}
        

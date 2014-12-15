@@ -107,20 +107,18 @@ class PaymentController extends Controller {
 					'payment_code' => 'alipay',
 					'enabled' => 1 
 			) );
-			$paymentSrv = new \app\service\payment\alipay\AlipayPaymentSrv ( $info );
-			try {
-				$verify = $paymentSrv->verifyNotify ( $_POST, $this->alipay_config ); 
-				
-				\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log',var_dump($_POST));
-				
+			$paymentSrv = new \app\service\payment\alipay\AlipayPaymentSrv ( $this->alipay_config );
+		
+				$verify = $paymentSrv->verifyNotify ( $_POST, $this->alipay_config ); 				
 				if($verify)// 通过校验
 				{
 					$ret = Array ();
 					$ret ['order_sn'] = $request->out_trade_no;
 					$ret ['out_trade_sn'] = $request->trade_no;
 					$ret ['paymemt_name'] = $info['payment_name'];
-					$ret ['paymemt_code'] = $info['payname_code'];
+					$ret ['paymemt_code'] = $info['payment_code'];
 					$ret ['total_fee'] = $request->total_fee;
+					
 					\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', $ret ."\n");
 					$trade_status= $request->trade_status;
 					// $ret['total_fee'] = 561.0;
@@ -148,10 +146,7 @@ class PaymentController extends Controller {
 				}
 				\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', 'end|______|' . $ret . "\n\n" );
                
-			} catch ( \Exception $e ) {
-				\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', $e->getMessage());
-				echo "false";
-			}
+			
 		} catch ( \Exception $e ) {
 			echo "false";
 		}
@@ -159,7 +154,7 @@ class PaymentController extends Controller {
 	
 	public function webcallback($request, $response) {
 		\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', 'url_return_start|______|' . $_SERVER ['HTTP_HOST'] . $_SERVER ['REQUEST_URI'] . '|______|' . serialize ( $_POST ) . '|______|E_HTTP_CLIENT_IP=' . getenv ( 'HTTP_CLIENT_IP' ) . ',E_HTTP_X_FORWARDED_FOR=' . getenv ( 'HTTP_X_FORWARDED_FOR' ) . ',E_REMOTE_ADDR=' . getenv ( 'REMOTE_ADDR' ) . ',S_REMOTE_ADDR=' . $_SERVER ['REMOTE_ADDR'] . "\n\n" );
-		$paymentSrv = new \app\service\payment\alipay\AlipayPaymentSrv ( array() );
+		$paymentSrv = new \app\service\payment\alipay\AlipayPaymentSrv ( $this->alipay_config );
         try {
         	$verify = $paymentSrv->verifyReturn ( $_GET, $this->alipay_config ); 
             //$orderSrv = new OrderSrv();

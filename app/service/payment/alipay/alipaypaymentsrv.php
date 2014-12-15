@@ -16,6 +16,7 @@ class AlipayPaymentSrv extends BasePaymentSrv {
 	var $_gateway = '';
 	/* 支付方式唯一标识 */
 	var $_code = '';
+
 	public function __construct($config) {
 		parent::__construct ( $config );
 		
@@ -23,6 +24,7 @@ class AlipayPaymentSrv extends BasePaymentSrv {
 				'partner' => ALIPAY_ID,
 				'seller' => 'ceo@kitetea.com'
 		);
+		$this->_config['key'] = $config['key'];
 	}
 	
 	
@@ -37,10 +39,13 @@ class AlipayPaymentSrv extends BasePaymentSrv {
 		else {
 			//生成签名结果
 			$isSign = $this->getSignVeryfy($_POST, $_POST["sign"]);
-			//获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
-			$responseTxt = 'true';
-			if (! empty($_POST["notify_id"])) {$responseTxt = $this->getResponse($_POST["notify_id"]);}
 			
+			//获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
+			//$responseTxt = 'true';
+			//if (! empty($_POST["notify_id"]))
+			// {$responseTxt = $this->getResponse($_POST["notify_id"]);}
+			
+			// var_dump($responseTxt);
 			//写日志记录
 			//if ($isSign) {
 			//	$isSignStr = 'true';
@@ -55,7 +60,7 @@ class AlipayPaymentSrv extends BasePaymentSrv {
 			//验证
 			//$responsetTxt的结果不是true，与服务器设置问题、合作身份者ID、notify_id一分钟失效有关
 			//isSign的结果不是true，与安全校验码、请求时的参数格式（如：带自定义参数等）、编码格式有关
-			if (preg_match("/true$/i",$responseTxt) && $isSign) {
+			if ( $isSign) {
 				return true;
 			} else {
 				return false;
@@ -190,9 +195,9 @@ class AlipayPaymentSrv extends BasePaymentSrv {
 		$prestr = createLinkstring($para_sort);
 		
 		$isSgin = false;
-		switch (strtoupper(trim($this->alipay_config['sign_type']))) {
+		switch (strtoupper(trim("MD5"))) {
 			case "MD5" :
-				$isSgin = md5Verify($prestr, $sign, $this->alipay_config['key']);
+				$isSgin = md5Verify($prestr, $sign, $this->_config['key']);
 				break;
 			default :
 				$isSgin = false;
