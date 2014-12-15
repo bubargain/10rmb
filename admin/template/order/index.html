@@ -45,8 +45,9 @@
               <td align="center" class="pushItem">
               	{{if $trade.status==0 }}	 已领劵
               	{{else if $trade.status==1}} 已付款，请48小时内确认
-                {{else if $trade.status==3}} 返利已完成
-                {{else}} 其他状态
+                {{else if $trade.status==3}} 纠纷处理
+                {{else if $trade.status==4}} 返利已完成
+                {{else}} $trade.status
                 {{/if}} 
               </td>
               <td align="center" class="pushItem">{{$trade.order_sn}}</td>
@@ -105,7 +106,7 @@
 		function upStatus(_this) {
 			var url = "index.php?_c=order&_a=status&" + _this.attr("y-data");
 			$.getJSON(url, function(data) {			
-				window.location.href="http://shop.10buck.com/index.php?_c=order&sevent={{$event_id}}";
+				window.location.href="/index.php?_c=order&sevent={{$event_id}}";
 			});
 		}
 	})();

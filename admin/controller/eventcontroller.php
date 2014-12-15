@@ -48,7 +48,6 @@ class EventController extends BaseController {
 			}
 		}catch(\Exception $e)
 		{
-			var_dump($e);die();
 			$this->showError("提交信息，添加失败：".$e->getMessage());
 		}
 

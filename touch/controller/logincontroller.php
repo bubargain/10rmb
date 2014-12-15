@@ -31,7 +31,7 @@ class logincontroller extends BaseController {
 					if($type== "reg") //registe new user
 					{					
 							
-						$info=$user->addUser($usr);
+						$info=$user->addUser($usr,0);
 						
 					}
 					else {       //check login

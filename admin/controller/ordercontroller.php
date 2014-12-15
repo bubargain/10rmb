@@ -19,6 +19,14 @@ class OrderController extends BaseController {
 		$response->events = $event->searchEventList( $this->current_user['user_id']);
 		$event_id = $request->sevent;
 		$response->event_id = $event_id;
+		if($event_id )
+		{
+			$tmp=\app\dao\EventDao::getSlaveInstance()->find(
+				array('mer_id'=>$this->current_user['user_id'] , 'event_id'=>$event_id)
+			);
+			if(!$tmp)
+			$this->showError('没有权限');
+		}
 		if($event_id) //显示某个活动的所有交易情况
 		{
 			
@@ -26,9 +34,11 @@ class OrderController extends BaseController {
 			$eventInfo = \app\dao\UserEventDao::getSlaveInstance()->getPdo()->getRows($sql);
 			
 			$response->eventInfo = $eventInfo;
+			
 		}
-	
 		$this->layoutSmarty();
+	
+		
 	}
 	
 	//确认交易
@@ -38,7 +48,10 @@ class OrderController extends BaseController {
 			
 			$trade_id = $request->tradeid;
 			if(!$trade_id  )
-				self::renderjson(array('ret'=>'no trade_id'));
+			{
+				$this->showError(' trade_id 不正确');
+				return false;
+			}
 			$trade_status = \app\dao\UserEventDao::getMasterInstance()->find(array('id' => $trade_id));
 			$status= $request->status;
 			if($trade_status['status'] != $status || ($status != 0 && $status!=1) )
@@ -48,7 +61,7 @@ class OrderController extends BaseController {
 			
 			$pdo = \app\dao\EventDao::getSlaveInstance ()->getpdo ();
 			$sql = "select B.user_id from ym_event A left join ym_user_event B on A.event_id = B.event_id where B.id ="
-				.$trade_id." and A.user_id= ".$user_id;
+				.$trade_id." and A.mer_id= ".$user_id;
 			$res= $pdo->getOne ( $sql );
 			
 			$buyer_id = $res;
@@ -66,7 +79,7 @@ class OrderController extends BaseController {
 					  
 					 
 					 \app\dao\UserEventDao::getMasterInstance()->edit($trade_id,array(
-							'status' => 3));  //标记交易已完成
+							'status' => 4));  //标记交易已完成
 					  self::fanli($buyer_id, $trade_id);
 					
 					\app\dao\UserEventDao::getMasterInstance()->commit();	

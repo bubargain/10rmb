@@ -259,7 +259,7 @@ class UserSrv extends BaseSrv {
         return array('user_id'=>$info['user_id'],'user_name'=>$info['user_name']);
 	}
 
-    public function addUser($info) {
+    public function addUser($info,$level=0) {
     	
     	
         //self::checkPhoneNum($info['user_name']);
@@ -280,7 +280,7 @@ class UserSrv extends BaseSrv {
             unset($userinfo['password'] );		
             $userinfo['user_name'] = $info['user_name'];    
             $userinfo['token']=$info['token'];
-            $userinfo['level']=10;
+            $userinfo['level']=$level;
            
             UserInfoDao::getMasterInstance()->add($userinfo);
 

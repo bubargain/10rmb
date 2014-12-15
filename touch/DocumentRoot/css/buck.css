@@ -56,7 +56,7 @@ footer {
 	border-bottom:none;
 }
 .order_list{
-	min-height:700px;
+	min-height:300px;
 }
 .order .order-pro {
 	padding:16px;
@@ -250,7 +250,7 @@ input{-webkit-appearance:none}
 }
 .order-no {
 	background:url(/img/order_no.png) center no-repeat;
-	height:700px;
+	height:400px;
 }
 .reg_input {
     width: 95%;

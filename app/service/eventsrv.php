@@ -18,7 +18,7 @@ class EventSrv extends BaseSrv {
 	public function searchEventList($merchant_id)
 	{
 		
-		$sql = "select event_id, event_name from ym_event where status < 4 order by event_id desc";
+		$sql = "select event_id, event_name from ym_event where status < 4 and mer_id = $merchant_id order by event_id desc";
         $list = \app\dao\UserEventDao::getSlaveInstance()->getpdo()->getRows($sql);
         return $list;
 	}

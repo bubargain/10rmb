@@ -102,9 +102,9 @@ class LoginController extends BaseController {
 					
 					$userBehavior =new UserSrv();
 	                $user['invite_by'] = $invite['user_id'];
-	                $nuser = $userBehavior->addUser($user);
+	                $nuser = $userBehavior->addUser($user,10);
 					
-					throw new \Exception ( '您已成功提交注册信息，我们会尽快审核您的信息，请注意查收邮箱', 4001 );
+					throw new \Exception ( '您已成功提交注册信息，请加入我们的官方QQ群：211856816  协助我们完成审核', 4001 );
 				}
 			} catch ( \Exception $e ) {
 				$response->warn = $e->getMessage ();
@@ -136,7 +136,7 @@ class LoginController extends BaseController {
 	*/
 	private function checkLevel($user_id) {
 		$user =\app\dao\AdminDao::getSlaveInstance () -> find($user_id);
-		if ($user['level'] > 1)
+		if ($user['level'] >= 1)
 			return true;
 		else 
 			return false;

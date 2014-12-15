@@ -60,16 +60,16 @@ class OrdersController extends BaseController {
 					'ctime'=>strtotime('now')
 					)
 				);
-				return true;
+				self::renderjson(array('ret'=>'true'));
 			}else{
-				return false;
+				self::renderjson(array('ret'=>'false'));
 			}
 		}
 		else{
 			\app\dao\UserInfoDao::getMasterInstance()->edit($user_id,
 				array('level'=>99)
 			);
-			return true;
+			self::renderjson(array('ret'=>'true'));
 		}
 	}
 	
