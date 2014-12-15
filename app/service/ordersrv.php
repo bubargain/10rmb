@@ -268,12 +268,12 @@ class OrderSrv extends BaseSrv {
 	                    'log_time'=>$_time,
 	                )
 	            );
-	
+			  \sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', "order hanlded");
 	           $orderDao->commit();//提交事务
 	
 	        }catch (\Exception $e) {
 	            OrderDao::getMasterInstance()->rollBack();
-	            echo $e;
+	           \sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', $e->getMessgage());
 	        }
 		}
        

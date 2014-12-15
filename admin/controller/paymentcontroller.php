@@ -117,6 +117,7 @@ class PaymentController extends Controller {
 					$ret ['paymemt_name'] = $info['payment_name'];
 					$ret ['paymemt_code'] = $info['payname_code'];
 					$ret ['total_fee'] = $request->total_fee;
+					\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', $ret ."\n");
 					$trade_status= $request->trade_status;
 					// $ret['total_fee'] = 561.0;
 					// file_put_contents(LOG_PATH.'/aa.txt',$ret."\n",FILE_APPEND);
@@ -152,6 +153,7 @@ class PaymentController extends Controller {
 	}
 	
 	public function webcallback($request, $response) {
+		\sprite\lib\Log::customLog ( 'notify_' . date ( 'Ymd' ) . '.log', 'url_return_start|______|' . $_SERVER ['HTTP_HOST'] . $_SERVER ['REQUEST_URI'] . '|______|' . serialize ( $_POST ) . '|______|E_HTTP_CLIENT_IP=' . getenv ( 'HTTP_CLIENT_IP' ) . ',E_HTTP_X_FORWARDED_FOR=' . getenv ( 'HTTP_X_FORWARDED_FOR' ) . ',E_REMOTE_ADDR=' . getenv ( 'REMOTE_ADDR' ) . ',S_REMOTE_ADDR=' . $_SERVER ['REMOTE_ADDR'] . "\n\n" );
 		$paymentSrv = new \app\service\payment\alipay\AlipayPaymentSrv ( array() );
         try {
         	$verify = $paymentSrv->verifyReturn ( $_GET, $this->alipay_config ); 
