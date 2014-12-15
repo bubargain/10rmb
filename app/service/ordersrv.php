@@ -5,6 +5,8 @@
  */
 
 namespace app\service;
+use app\dao\UserCurrencyDao;
+
 use \app\dao\OrderDao;
 use \app\dao\OrderGoodsDao;
 use \app\dao\OrderExtmDao;
@@ -209,23 +211,24 @@ class OrderSrv extends BaseSrv {
 
     /**
      * @param $info
-     * @desc 支付订单
+     * @desc 充值订单
      */
     public function pay($info) {
-        //订单支付
-      
+        //user currency充值
+     
+    	
         $orderDao = OrderDao::getMasterInstance();
         $order = $orderDao->find(array('order_sn'=>$info['order_sn']));
 
         if( !$order || !in_array( $order['order_status'], array( self::UNPAY_ORDER, self::CLOSED_ORDER ) ) ) //开放关闭订单可以支付
             throw new \Exception('订单不存在或状态不正确', 5001);
 
-        if($info['total_fee'] != $order['order_amount'])
-            throw new \Exception('订单支付金额不正确', 5001);
 
         try{
             $orderDao->beginTransaction();//开启事务
             $_time = time();
+
+           //订单状态修改 
             $orderDao->edit($order['order_id'], array(
                 'order_status'=>self::PAYED_ORDER,
                 'order_time'=>$_time,
@@ -235,17 +238,23 @@ class OrderSrv extends BaseSrv {
                 'out_trade_sn'=>$info['out_trade_sn'],
             ));
 
-            $order_goods = OrderGoodsDao::getSlaveInstance()->findByField('order_id', $order['order_id']);
-            foreach($order_goods as $goods) {//increment($id, $filed, $num)
-                GoodsStatisticsDao::getMasterInstance()->increment($goods['goods_id'], 'sales', $goods['quantity']);
-            }
-            //用户订单统计数据更新
-            UserInfoDao::getMasterInstance()->increment($order['buyer_id'], 'sales', 1);
+            
+            
+            
+            //用户账户金额更新
+            UserInfoDao::getMasterInstance()->increment($order['buyer_id'], 'rmb', $info['total_fee']);
 
-            if($order['discount_type'] == 1 && $order['discount_itemid'] > 0) { //优惠券调整
-                UserCouponDao::getMasterInstance()->edit($order['discount_itemid'],
-                    array('state'=>3, 'utime'=>$_time));
-            }
+            UserCurrencyDao::getMasterInstance()->add(
+            	array(
+            	 'user_id'=> $order['buyer_id'], 'amount'=>$info['total_fee'] ,
+            	 'unit'=> 'rmb' ,
+            	 'ctime'=> $_time ,
+            	 'status'=>1,
+            	 'sn' =>$order['order_id']
+            	)
+            );
+                        
+           
 
             //生成log
             \app\dao\OrderlogDao::getMasterInstance()->add(
@@ -265,6 +274,7 @@ class OrderSrv extends BaseSrv {
             OrderDao::getMasterInstance()->rollBack();
             echo $e;
         }
+       
     }
 
     /**

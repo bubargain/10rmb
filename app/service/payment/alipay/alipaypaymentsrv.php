@@ -48,7 +48,7 @@ class AlipayPaymentSrv extends BasePaymentSrv {
 		// ——请根据您的业务逻辑来编写程序（以下代码仅作参考）——
 		
 		// 解密（如果是RSA签名需要解密，如果是MD5签名则下面一行清注释掉）
-		$notify_data = rsaDecrypt ( $_POST ['notify_data'], $alipay_config ['private_key_path'] );
+		//$notify_data = rsaDecrypt ( $_POST ['notify_data'], $alipay_config ['private_key_path'] );
 		
 		// file_put_contents(LOG_PATH.'/aa.txt',$notify_data."\n",FILE_APPEND);
 		// var_dump($notify_data);die();
