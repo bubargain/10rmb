@@ -132,7 +132,8 @@ class SearchSrv extends BaseSrv {
 						'noshipping' => $event['noshipping'],
 						'store' => $event['store'],
 						'event_name' => $event['event_name'],
-						'product_link' => $event['product_link']
+						'product_link' => $event['product_link'],
+						'pic_link' => $event['pic_link']
 					)
 				);
 			}

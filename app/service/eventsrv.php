@@ -266,7 +266,6 @@ class EventSrv extends BaseSrv {
         $ret = array();
         $ret['list'] = array();
 
-        
             $list = \app\dao\UserEventDao::getSlaveInstance()->findAll(
              array('user_id'=>$buyer_id,'B.status'=>$status)
              );
