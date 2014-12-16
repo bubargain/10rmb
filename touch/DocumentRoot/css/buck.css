@@ -420,24 +420,25 @@ input{-webkit-appearance:none}
 .order-menu li {
 	float:left;
 	text-align:center;
-	width:20%;
-	background:url(/img/m.png) 25px -883px no-repeat;
+	width:25%;
+	background:url(/img/m.png) 35px -883px no-repeat;
 }
 .order-menu li.on {
 	background-color:#5E6D80;
 }
+.order-menu li:nth-child(2) {
+	background-position:35px -1384px;
+}
 .order-menu li:nth-child(3) {
-	background-position:25px -1005px;
+	background-position:35px -1005px;
 }
 .order-menu li:nth-child(5) {
-	background-position:25px -1136px;
+	background-position:35px -1136px;
 }
 .order-menu li:nth-child(4) {
-	background-position:25px -1256px;
+	background-position:35px -1256px;
 }
-.order-menu li:nth-child(2) {
-	background-position:25px -1384px;
-}
+
 .order-menu li a {
 	display:block;	
 	padding-top:47px;

@@ -32,9 +32,10 @@
 						<td>{{if $oneRow.status =='0'}} 待审
 							{{else if $oneRow.status =='1' }} 启动
                             {{else if $oneRow.status =='2' }} 用户终止
-                             {{else if $oneRow.status =='3' }} 完成
+                             {{else if $oneRow.status =='3' }} 待结算
                              {{else if $oneRow.status =='4' }} 审核不过
-                             {{else}}  $oneRow.status {{/if}}
+                               {{else if $oneRow.status =='5' }} 已结算
+                             {{else}}  {{$oneRow.status}} {{/if}}
                              </td>
 						<td>
                         {{if $oneRow.status == '0'}}

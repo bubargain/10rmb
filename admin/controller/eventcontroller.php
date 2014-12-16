@@ -18,6 +18,56 @@ class EventController extends BaseController {
 
 		$this->layoutSmarty('index');
 	}
+	//商家申请结算活动余额
+	public function refund($request,$response)
+	{
+		$user_id = $this->checkLogin();
+		$event_id = $request->event;
+		
+		if($event_id )
+		{
+			//check ctime and status
+			$eventInfo=\app\dao\EventDao::getSlaveInstance()->find(
+			array('event_id'=>$event_id,'status'=>3));
+			if($eventInfo)
+			{
+				$targtime = $eventInfo['ctime'] + 3*24*60*60;
+				$_time = strtotime('now');
+				$sql = "select count(*) as num from ym_user_event where event_id = $event_id and status in (1,3)";
+				$ret = \app\dao\UserEventDao::getSlaveInstance()->getPdo()->getRow($sql);
+				$num = $ret['num'];
+				if($num > 0 )
+				{
+					$this->showError("有".$num."个用户已确认付款，但是您未确认交易,请处理后再申请");
+				}
+				else if($targtime > $_time) //活动结束超过3天
+				{
+					$this->showError("用户在活动结束1天内仍有可能领劵，还需等待". ($_time-$targtime)."秒哦");
+				}
+				else{
+					try{
+						$refund= new \app\service\EventSrv();
+						$status=$refund->refund($event_id);
+						//mail 状态
+						
+						if($status = true)
+							$this->showError("结算成功");
+						else
+							$this->showError("结算成功");
+					}catch(\Exception $e)
+					{
+						$this->showError($e->getMessage());
+					}
+				}
+			}
+			else {
+				$this->showError("该活动还不能结算");
+			}
+			
+		}else{
+			$this->showError("活动状态异常，请联系管理员");
+		}
+	}
 	
 	//新建一个活动
 	public function addevent($request,$response)

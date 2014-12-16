@@ -211,7 +211,7 @@ class orderController extends BaseController {
 				break;
 			// 已发货订单
 			case 'shipped' :
-				$status = 2;
+				$status = 4;
 				$html = 'shipped';
 				break;
 			// 已完成

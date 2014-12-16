@@ -114,7 +114,6 @@ class indexcontroller extends BaseController {
 			if (! $row ['url'])
 				$list [$k] ['url'] = 'index.php?_c=goods&_a=detail&id=' . $row ['goods_id'];
 		}
-		
 		return $list;
 	}
 	

@@ -45,9 +45,11 @@
               <td align="center" class="pushItem">
               	{{if $trade.status==0 }}	 已领劵
               	{{else if $trade.status==1}} 已付款，请48小时内确认
+                 {{else if $trade.status==2}} 商家已确认
                 {{else if $trade.status==3}} 纠纷处理
-                {{else if $trade.status==4}} 返利已完成
-                {{else}} $trade.status
+                {{else if $trade.status==4}} 关闭
+                 {{else if $trade.status==99}} 取消
+                {{else}} {{$trade.status}}
                 {{/if}} 
               </td>
               <td align="center" class="pushItem">{{$trade.order_sn}}</td>

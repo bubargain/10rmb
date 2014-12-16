@@ -34,6 +34,10 @@ class EventController extends BaseController {
 		$response->_tag = $request->status;
 		$this->layoutSmarty();
 	}
+
+	
+	
+	
 	
 	public function detail ($request,$response)
 	{
@@ -41,9 +45,11 @@ class EventController extends BaseController {
 		if(!$this->isPost())
 		{
 			$event_id = $request->id;
-			$response->event = \app\dao\EventDao::getSlaveInstance()->find($event_id);
+			$eventinfo = \app\dao\EventDao::getSlaveInstance()->find($event_id);
+			$response->event=$eventinfo;
 			$this->layoutSmarty();
 		}else{
+			
 			$event_id = $request->eid;
 			
 			$name= $request->inputName;
@@ -52,14 +58,20 @@ class EventController extends BaseController {
 			$store=$request->store;
 			$comment = $request->inputComment;
 			if($request->iverify == 1 )
+			{
 				$status= 1;
+				if(!$link || !pic)
+				{
+					$this->showError("links can't be empty");
+				}
+			}
 			else 
 				$status=4;
+				
 			if($event_id == null)
 				$this->showError("lost id");
 			
-			if(!$link || !pic)
-				$this->showError("links can't be empty");
+			
 		
 			\app\dao\EventDao::getMasterInstance()->edit($event_id,
 				array(
@@ -71,6 +83,16 @@ class EventController extends BaseController {
 					'store' =>$store
 				)
 			);
+			if($status==4) //退还冻结金额
+			{
+				try{
+					$refundsrv = new \app\service\EventSrv();
+					$refundsrv->refund($event_id);	
+				}catch (\Exception $e)
+				{
+					$this->showError($e->getMessage());
+				}
+			}
 			$this->success("index.php?_c=event","success");
 			
 		}

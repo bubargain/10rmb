@@ -12,9 +12,10 @@
       <th width="30%" class="pushItem">活动名称</th>
  	  <th width="10%" class="pushItem">产品链接</th>
       <th align="center" width="8%" class="pushItem">价格(USD)</th>
+       <th align="center" width="5%" class="pushItem">总数</th>
       <th align="center" width="8%" class="pushItem">返利(USD)</th>
-      <th align="center" width="5%" class="pushItem">总数</th>
-      <th align="center" width="8%" class="pushItem">已发放</th>
+       <th align="center" width="8%" class="pushItem">已发放</th>
+     
       <th align="center" width="8%" class="pushItem">支持免邮</th>
       <th align="center" width="8%" class="pushItem">状态</th>
       <th align="center" class="pushItem">更新时间</th>
@@ -38,8 +39,16 @@
             	<a href="#" y-action="batchUpStatus" y-data="status=2&eventid={{$event.event_id}}" class="btn btn-small btn-danger">已中止</a>
             {{else if $event.status == 1 }}
             	<a href="#" y-action="batchUpStatus" y-data="status=1&eventid={{$event.event_id}}" class="btn btn-small btn-success">已启动</a>
-            {{else }}
-            	等待/终止
+            {{else if $event.status == 0}}
+            	等待审核
+            {{else if $event.status == 3}}
+        
+            	<a href="index.php?_c=event&_a=refund&event={{$event.event_id}}" class="btn btn-small btn-warning" title="用户有24小时领劵付款期,请活动结束24小时后再申请">结算</a>
+            {{else if $event.status == 4}}
+            	<div title="{{$event.comment}}" >未通过</div>
+              {{else if $event.status == 5}}
+            	<div title="{{$event.comment}}" >已结算</div>   
+             {{else}} {{$event.status}}
             {{/if}}
             </div>
             </td>

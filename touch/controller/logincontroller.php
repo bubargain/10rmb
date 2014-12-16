@@ -201,7 +201,7 @@ class logincontroller extends BaseController {
 		setcookie ( 'order_detail', '', time () - 3600 );
 		setcookie ( 'login_backUrl', '', time () - 3600 );
 		//
-		header ( 'Location: index.php?_c=index' );
+		header ( 'Location: '.TOUCH_BUCK.'/index.php?_c=index' );
 	}
 	private function msCheckLogin($phone, $type, $code) {
 		try {

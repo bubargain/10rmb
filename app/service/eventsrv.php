@@ -22,7 +22,110 @@ class EventSrv extends BaseSrv {
         $list = \app\dao\UserEventDao::getSlaveInstance()->getpdo()->getRows($sql);
         return $list;
 	}
-	
+	/**
+	 * 商家活动结束（未通过），资金结算
+	 * status  4 审核未过  3已完成
+	 */
+	public function refund($event_id)
+	{
+		if(!$event_id)
+			return false;
+		$info = \app\dao\EventDao::getSlaveInstance()->find($event_id);
+		if($info['status'] == 3 || $info['status'] ==4 )
+		{
+			
+			try{
+				$dao= \app\dao\EventDao::getMasterInstance();
+				$dao->beginTransaction();
+				//查询总返利金额
+				$sql= "select * from ym_user_event where event_id = $event_id and status in (1,2,3,4)";
+				$orders= $dao->getPdo()->getRows($sql);
+				
+				$amount=0;
+				if($orders)
+				{
+					foreach($orders as $order)
+					{
+						if($order['status'] != 4)
+							throw new \Exception ('有用户订单处于待确认状态');
+						else 
+						{
+							$amount += $order['totalfanli'];
+						}
+					}
+				}
+				
+				$sql = "select uvalue from ym_setting where ukey='exchange_rate'";
+				$exchangerate =  $dao->getPdo()->getRow($sql);
+				
+				if(!$exchangerate)
+				 	throw new \Exception ('实时汇率信息获取不到');
+			
+			//查询冻结金额
+				
+				$sql= "select * from ym_event where event_id = $event_id";
+				$eventDetail = $dao->getPdo()->getRow($sql);
+				
+				$lockamount=0;
+				if($eventDetail['noshipping']==0)
+				{
+					$lockamount =  floatval($eventDetail['fanli'])* floatval($eventDetail['amount']);		
+				}
+				else {
+					$lockamount = (floatval($eventDetail['price']) + floatval($eventDetail['fanli']))* floatval($eventDetail['amount']);
+				}
+				
+				$refunAmount = ($lockamount- $amount)* (float)$exchangerate['uvalue']; //返还的金额
+				
+				//日志记录
+				 \app\dao\UserCurrencyDao::getMasterInstance()->add(
+					array(
+						'user_id'=> $eventDetail['mer_id'],
+						'amount'=>$refunAmount,
+						'unit'=>'rmb',
+						'ctime'=>strtotime('now'),
+						'status'=>3,
+						'sn' => 'buck'.$event_id
+					)
+				);
+				
+				
+				//修改event状态为5 已完成
+				\app\dao\EventDao::getMasterInstance()->edit($event_id,array('status'=>5));
+				
+				//返还剩余资金
+				$sql ="update ym_user_info set rmb = rmb + $refunAmount where user_id =".$eventDetail['mer_id'];
+			
+				
+				 $dao->getPdo()->exec($sql);
+
+				\app\dao\EventDao::getMasterInstance()->commit();
+				
+				
+			}catch(\Exception $e)
+			{
+				\app\dao\EventDao::getMasterInstance()->rollBack();
+				return false;
+			}
+			//邮件提醒
+			try{
+				$merchant = \app\dao\UserInfoDao::getSlaveInstance()->find(array('user_id'=>$eventDetail['mer_id']));
+				if($merchant['email'])
+				{
+						$mail = new \app\service\MailSrv();
+						$mail->sendMail($merchant['email'], "审核不通过，冻结资金已退还", "您的活动".$name." 未通过审核，冻结资金已返还<br/>10BUCK审核团队");
+				}
+			}catch(\Exception $e)
+			{
+					//
+			}
+			
+			return true;
+	}else 
+	{
+		return false;
+	}
+}
 	
 	
 	/**
