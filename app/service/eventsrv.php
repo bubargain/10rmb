@@ -428,8 +428,11 @@ class EventSrv extends BaseSrv {
             $list = \app\dao\UserEventDao::getSlaveInstance()->findAll(
              array('user_id'=>$buyer_id,'B.status'=>$status)
              );
-             $list= self::updateStatus($list); //检查和更新状态信息
-       
+             self::updateStatus($list); //检查和更新状态信息
+             
+       		$list = \app\dao\UserEventDao::getSlaveInstance()->findAll(
+             array('user_id'=>$buyer_id,'B.status'=>$status)
+             ); //更新后的订单信息
         return $list;
     }
     
