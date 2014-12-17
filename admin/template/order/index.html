@@ -5,7 +5,8 @@
                 <li><a href="#">交易记录</a> <span class="divider">/</span></li>
                 
      </ul>
-     
+     <table border="0" width="100%" >
+     <tr><td>
          <form class="form-inline" method="post" action="?_c=order">
              <select id="sevent" name="sevent">
              		<option value="">请选择要查询的活动</option>
@@ -15,11 +16,18 @@
              </select>
              <input type="submit" class="btn btn-small btn-warning" value+"搜索"/>
    		 </form>
-     
+        </td><td> 
+          <form class="form-inline" method="post" action="?_c=order">
+             <input type="text" id="bcode" name="bcode" placeholder="按bcode查询"/>
+   
+             <input type="submit" class="btn btn-small " value+"查询"/>
+   		 </form>
+         </td></tr>
+     </table>
  	<table width="100%" border="0" cellspacing="0" cellpadding="5" id="content">
   	<tr>
   	  
-      <th align="center" width="7%" class="pushItem">订单id</th>
+      <th align="center" width="15%" class="pushItem">活动</th>
       <th align="center"   class="pushItem">领劵时间</th>
         
        <th align="center" class="pushItem">返利码</th>
@@ -36,10 +44,10 @@
    
      {{foreach from=$eventInfo item=trade}}
      		  <tr>  
-              <td align="center" class="pushItem">{{$trade.id}}</td>
+              <td align="center" class="pushItem">{{$trade.event_name}}</td>
               <td align="center" class="pushItem">{{$trade.ctime|date_format:"%Y/%m/%d %H:%M"}}</td>
 
-              <td align="center" class="pushItem"> {{$trade.vcode}}</td>
+              <td align="center" class="pushItem"> {{$trade.bcode}}</td>
               <td align="center" class="pushItem">{{if $trade.noshipping}}否 {{else}}是 {{/if}}</td>
               <td align="center" class="pushItem">{{$trade.totalfanli}}美元</td>
               <td align="center" class="pushItem">
@@ -47,8 +55,9 @@
               	{{else if $trade.status==1}} 已付款，请48小时内确认
                  {{else if $trade.status==2}} 商家已确认
                 {{else if $trade.status==3}} 纠纷处理
-                {{else if $trade.status==4}} 关闭
+                {{else if $trade.status==4}} 交易完成
                  {{else if $trade.status==99}} 取消
+                  {{else if $trade.status==100}} 已分配
                 {{else}} {{$trade.status}}
                 {{/if}} 
               </td>

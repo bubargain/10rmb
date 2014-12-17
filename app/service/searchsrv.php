@@ -74,7 +74,11 @@ class SearchSrv extends BaseSrv {
 		$maxetime =0;
 		
 		foreach ($userEvent as $event) {   //查询最晚一次的创建时间
-			if ($event['etime'] >$maxetime)
+			if($event['ctime']> strtotime('now')) //有创建于未来的订单，也就是新手任务
+			{
+				return false;
+			}
+			else if ($event['etime'] >$maxetime)
 				$maxetime = $event['etime'];
 		}
 		if($maxetime +24*60*60 < strtotime("now")) //最后一次更新超过24小时

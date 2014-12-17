@@ -9,19 +9,17 @@ class goodscontroller extends BaseController {
 			
 		
 		$event_id = $request->id;
-	//cache index  
+	   //cache index  
 		$cache = CacheManager::getInstance ();
 		
 		$key = 'touch_index_page'.$event_id;
 		
 		$info = $cache->get ( $key );
 		
-		if (! $info) {
-		
-			
+		if (! $info) {		
 			$user_id = $this->current_user['user_id'];	
 			$sql = "select A.pic_link,A.product_link,B.price,B.fanli,B.totalfanli,B.id,B.noshipping from ym_event A left join ym_user_event B on A.event_id = B.event_id 
-			where A.event_id = $event_id and A.status =1 and B.user_id = $user_id
+			where A.event_id = $event_id and A.status in (1,88) and B.user_id = $user_id
 			";
 			$info = \app\dao\EventDao::getSlaveInstance()->getPdo()->getRow($sql);
 			if(!$info)
@@ -50,7 +48,14 @@ class goodscontroller extends BaseController {
 	
 	/**
 	* show bcode
+	* 
 	*/
+	/**
+	 * 
+	 * update about : 如果申请已满，则不能再取
+	 * @param unknown_type $request
+	 * @param unknown_type $response
+	 */
 	
 	public function about($request,$response)
 	{
@@ -68,13 +73,19 @@ class goodscontroller extends BaseController {
 			$this->showError("you have no right to view this page","index.php");
 		else if(!$info['bcode'])  //generate new bcode
 		{
-			$_time = strtotime("now");
-			$info['bcode'] =  substr($_time,4);
-			\app\dao\UserEventDao::getMasterInstance()->edit($info['id'], 
-			array('bcode'=>$info['bcode'],'utime'=>$_time,'status'=>0));
-			$sql = "update ym_event set applied= applied+1 where event_id = ".$info['event_id'];
-			\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
-			
+			$bcode= \app\dao\EventDao::getSlaveInstance()->find($info['event_id']);
+			if($bcode and $bcode['applied'] < $bcode['amount'])
+			{
+				$_time = strtotime("now");
+				$info['bcode'] =  substr($_time,4);
+				\app\dao\UserEventDao::getMasterInstance()->edit($info['id'], 
+				array('bcode'=>$info['bcode'],'utime'=>$_time,'status'=>0));
+				$sql = "update ym_event set applied= applied+1 where event_id = ".$info['event_id'];
+				\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
+			}
+			else {
+				$this->showError('You are too late!All bcodes sent out');
+			}
 		}
 		$response->bcode= $info['bcode'];
 		$response->id = $info['id'];

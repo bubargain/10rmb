@@ -30,8 +30,17 @@ class logincontroller extends BaseController {
 					$user= new \app\service\UserSrv();
 					if($type== "reg") //registe new user
 					{					
-							
+						
 						$info=$user->addUser($usr,0);
+							
+						if($info)
+						{
+							 $event= new \app\service\EventSrv();
+							 $event->signPrivilegeEvent($info['user_id']);
+								
+						}
+						
+						
 						
 					}
 					else {       //check login

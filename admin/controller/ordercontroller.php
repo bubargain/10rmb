@@ -12,6 +12,7 @@ use app\common\util\SubPages;
 class OrderController extends BaseController {
 	// 订单列表,没有做翻页
 	public function index($request, $response) {
+		$user_id  = $this->checkLogin();
 		$response->title = '订单列表';
 		$response->storeTitle ="订单列表";
 		$response->storeIntro ="查看您的返利劵使用情况";
@@ -25,17 +26,19 @@ class OrderController extends BaseController {
 				array('mer_id'=>$this->current_user['user_id'] , 'event_id'=>$event_id)
 			);
 			if(!$tmp)
-			$this->showError('没有权限');
-		}
-		if($event_id) //显示某个活动的所有交易情况
-		{
-			
-			$sql="select * from ym_user_event where event_id = $event_id order by id";
-			$eventInfo = \app\dao\UserEventDao::getSlaveInstance()->getPdo()->getRows($sql);
-			
+				$this->showError('没有权限');
+			$sql="select * from ym_user_event where event_id = $event_id and status < 100 order by id";
+			$eventInfo = \app\dao\UserEventDao::getSlaveInstance()->getPdo()->getRows($sql);	
 			$response->eventInfo = $eventInfo;
-			
 		}
+		else if($request->bcode)
+		{
+			$sql= "select * from ym_event A left join ym_user_event B on  A.event_id = B.event_id where A.mer_id=".$user_id." and B.bcode=".$request->bcode;
+			$eventInfo = \app\dao\UserEventDao::getSlaveInstance()->getPdo()->getRows($sql);	
+			$response->eventInfo = $eventInfo;
+		}
+
+		
 		$this->layoutSmarty();
 	
 		
@@ -108,7 +111,7 @@ class OrderController extends BaseController {
 		
 		$info = \app\dao\UserEventDao::getSlaveInstance()->find(array('id'=>$trade_id));
 		
-		$fanliAmount =(float)$info['totalfanli']- (float)$info['profit'];
+		$fanliAmount =(float)$info['totalfanli'];
 		$user =\app\dao\UserInfoDao::getSlaveInstance()->find(array('user_id'=>$user_id));
 	    \app\dao\UserCurrencyDao::getMasterInstance()->add(array(
 			'amount'=> $fanliAmount,

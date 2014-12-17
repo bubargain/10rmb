@@ -18,10 +18,63 @@ class EventSrv extends BaseSrv {
 	public function searchEventList($merchant_id)
 	{
 		
-		$sql = "select event_id, event_name from ym_event where status < 4 and mer_id = $merchant_id order by event_id desc";
+		$sql = "select event_id, event_name from ym_event where status in (1,2,3,88) and mer_id = $merchant_id order by event_id desc";
         $list = \app\dao\UserEventDao::getSlaveInstance()->getpdo()->getRows($sql);
         return $list;
 	}
+	
+	/**
+	 * 
+	 * 为新用户分配新手任务
+	 * @param  $user_id
+	 */
+	public function signPrivilegeEvent($user_id){
+		$events= \app\dao\EventDao::getSlaveInstance()->findAll(array('status'=>88));
+		$time= strtotime('now');
+		//var_dump($events);
+		if($events)
+		{
+			try{
+				
+				\app\dao\UserEventDao::getMasterInstance()->beginTransaction();
+				foreach($events as $event)
+				{			
+					// var_dump($event);
+						//新手任务10buck不抽佣
+						\app\dao\UserEventDao::getMasterInstance()->add(
+							array(
+								'event_id' => $event['event_id'],
+								'user_id' => $user_id,
+								'price' =>  $event['price'],
+								'fanli' =>  $event['fanli'],
+								'profit' => 0,
+								'totalfanli'=> $ $event['fanli'],
+								'utime' => $time,
+								'ctime' => $event['ctime'],
+								'etime' => $time,
+								'status'=>100,
+								'livetime' => $event['livetime'],
+								'noshipping' => $event['noshipping'],
+								'store' => $event['store'],
+								'event_name' => $event['event_name'],
+								'product_link' => $event['product_link'],
+								'pic_link' => $event['pic_link']
+							)
+							);
+						$sql= "update ym_event set applied = applied +1 where event_id =".$event['event_id'];
+				}
+				\app\dao\UserEventDao::getMasterInstance()->commit();
+				//die();
+			}catch(\Excetpion $e)
+			{
+				\app\dao\UserEventDao::getMasterInstance()->rollBack();
+				throw $e;
+			}
+		}
+		return true;
+	}
+	
+	
 	/**
 	 * 商家活动结束（未通过），资金结算
 	 * status  4 审核未过  3已完成
@@ -154,6 +207,10 @@ class EventSrv extends BaseSrv {
 					\app\dao\UserEventDao::getMasterInstance()->edit($userEvent[$i]['id'],
 						array('status'=>99)
 					);
+					
+					//商家applied数减1
+					$sql = "update ym_event set applied= applied -1 where event_id = ".$userEvent[$i]['event_id'];
+					\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
 					$userEvent[$i]['status']=99;
 					unset($userEvent[$i]);
 				}
