@@ -46,16 +46,22 @@ class SearchSrv extends BaseSrv {
 		{
 			
 			$this->newUserEvent($user_id,$amount);
-			$userEvent = \app\dao\UserEventDao::getSlaveInstance()->findAll(
-				array('user_id'=> $user_id)
-			);//重新查询
+		
 		}
 		else{//检查过期
 			
 			$uevent = new \app\service\EventSrv();
-			$userEvent=$uevent->updateStatus($userEvent);
+			$uevent->updateStatus($userEvent);
+
 		}
-		return $userEvent;
+		$userEvent = \app\dao\UserEventDao::getSlaveInstance()->findAll(
+				array('user_id'=> $user_id,'B.status'=>100)
+			);//重新查询
+	
+		if($userEvent)
+			return $userEvent;
+		else 
+			return false;
 	}
 	
 
@@ -114,32 +120,38 @@ class SearchSrv extends BaseSrv {
 			$_pdo->exec($sql2);
 			foreach($event_ids as $event)
 			{
-				$fanli = round( (float)$event['fanli'] * PROFITRATE , 2);  // 扣除佣金后的返利
-				$profit = (float)$event['fanli'] - $fanli; //平台佣金
-				if($event['noshipping'])
-					$totalfanli = $fanli + $event['price'];
-				else 
-					$totalfanli = $fanli;
-				\app\dao\UserEventDao::getMasterInstance()->add(
-					array(
-						'event_id' => $event['event_id'],
-						'user_id' => $user_id,
-						'price' =>  $event['price'],
-						'fanli' =>  $fanli,
-						'profit' => $profit,
-						'totalfanli'=> $totalfanli,
-						'utime' => $time,
-						'ctime' => $event['ctime'],
-						'etime' => $time,
-						'status'=>100,
-						'livetime' => $event['livetime'],
-						'noshipping' => $event['noshipping'],
-						'store' => $event['store'],
-						'event_name' => $event['event_name'],
-						'product_link' => $event['product_link'],
-						'pic_link' => $event['pic_link']
-					)
+				$exist= \app\dao\UserEventDao::getSlaveInstance()->find(
+					array('user_id'=>$user_id,'event_id'=>$event_id)
 				);
+				if(!$exist) //同一活动不会被分配两次
+				{
+					$fanli = round( (float)$event['fanli'] * PROFITRATE , 2);  // 扣除佣金后的返利
+					$profit = (float)$event['fanli'] - $fanli; //平台佣金
+					if($event['noshipping'])
+						$totalfanli = $fanli + $event['price'];
+					else 
+						$totalfanli = $fanli;
+					\app\dao\UserEventDao::getMasterInstance()->add(
+						array(
+							'event_id' => $event['event_id'],
+							'user_id' => $user_id,
+							'price' =>  $event['price'],
+							'fanli' =>  $fanli,
+							'profit' => $profit,
+							'totalfanli'=> $totalfanli,
+							'utime' => $time,
+							'ctime' => $event['ctime'],
+							'etime' => $time,
+							'status'=>100,
+							'livetime' => $event['livetime'],
+							'noshipping' => $event['noshipping'],
+							'store' => $event['store'],
+							'event_name' => $event['event_name'],
+							'product_link' => $event['product_link'],
+							'pic_link' => $event['pic_link']
+						)
+					);
+				}
 			}
 			\app\dao\UserEventDao::getMasterInstance()->commit();
 		}catch(Exception $e)

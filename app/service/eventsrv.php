@@ -192,39 +192,38 @@ class EventSrv extends BaseSrv {
 		
 		try{
 			\app\dao\EventDao::getMasterInstance()->beginTransaction();
-			for($i=0;$i<count($userEvent);$i++)
+			foreach($userEvent as $event)
 			{
+			
 				//活动已经结束,用户未领劵
-				if($userEvent[$i]['status']==100 && $userEvent[$i]['ctime'] + $userEvent[$i]['livetime'] < $_time)
+				if($event['status']==100 && $event['ctime'] + $event['livetime'] < $_time)
 				{
 					
-					self::deleteEvent($userEvent[$i]['event_id']);
-					unset($userEvent[$i]);
+					self::deleteEvent($event['event_id']);
+			
+					continue;
 				}
 				//用户已经领劵，但是超过24小时未付款
-				else if ($userEvent[$i]['status']==0 && $userEvent[$i]['utime'] + 24*60*60 < $_time )
+				else if ($event['status']==0 && $event['utime'] + 6*60*60 < $_time )
 				{
-					\app\dao\UserEventDao::getMasterInstance()->edit($userEvent[$i]['id'],
+					\app\dao\UserEventDao::getMasterInstance()->edit($event['id'],
 						array('status'=>99)
 					);
 					
 					//商家applied数减1
-					$sql = "update ym_event set applied= applied -1 where event_id = ".$userEvent[$i]['event_id'];
+					$sql = "update ym_event set applied= applied -1 where event_id = ".$event['event_id'];
 					\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
-					$userEvent[$i]['status']=99;
-					unset($userEvent[$i]);
-				}
-				
+	
+				}			
 				
 			}
+	
 			\app\dao\EventDao::getMasterInstance()->commit();
+			return true;
 		}catch(\Exception $e){
 			\app\dao\EventDao::getMasterInstance()->rollBack();
 			throw $e;
 		}
-		
-	
-		return $userEvent;
 		
 	}
 	

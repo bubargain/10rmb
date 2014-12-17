@@ -59,40 +59,54 @@ class goodscontroller extends BaseController {
 	
 	public function about($request,$response)
 	{
-		
 		$user_id=$this->checkLogin();
-		if(!$request->id)
-			$this->showError('you are not allowed to view this page',"index.php");
-		$info = \app\dao\UserEventDao::getSlaveInstance()->find(
-			array(
-				'user_id'=>$user_id,
-				'id' => $request->id
-			)
-		);
-		if(!$info)
-			$this->showError("you have no right to view this page","index.php");
-		else if(!$info['bcode'])  //generate new bcode
+		if($this->isPost())
 		{
+			$info = \app\dao\UserEventDao::getSlaveInstance()->find(
+				array(
+					'user_id'=>$user_id,
+					'id' => $request->id
+				)
+			);
 			$bcode= \app\dao\EventDao::getSlaveInstance()->find($info['event_id']);
 			if($bcode and $bcode['applied'] < $bcode['amount'])
 			{
+				$noshipping = $request->selectshipping;
 				$_time = strtotime("now");
-				$info['bcode'] =  substr($_time,4);
+				$info['bcode'] =  $user_id.substr($_time,4);
 				\app\dao\UserEventDao::getMasterInstance()->edit($info['id'], 
-				array('bcode'=>$info['bcode'],'utime'=>$_time,'status'=>0));
+				array('bcode'=>$info['bcode'],'utime'=>$_time,'noshipping'=>$noshipping,'status'=>0));
 				$sql = "update ym_event set applied= applied+1 where event_id = ".$info['event_id'];
 				\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
+				$response->bcode= $info['bcode'];
+				$response->id = $info['id'];
+				$response->product_link = $info['product_link'];
+				$this->layoutSmarty ( 'about' );
 			}
 			else {
 				$this->showError('You are too late!All bcodes sent out');
 			}
 		}
-		$response->bcode= $info['bcode'];
-		$response->id = $info['id'];
-		$response->product_link = $info['product_link'];
+		else{
 		
+			if(!$request->id)
+				$this->showError('you are not allowed to view this page',"index.php");
+			$info = \app\dao\UserEventDao::getSlaveInstance()->find(
+				array(
+					'user_id'=>$user_id,
+					'id' => $request->id
+				)
+			);
+			if(!$info)
+				$this->showError("you have no right to view this page","index.php");
+		
+			$response->bcode= $info['bcode'];
+			$response->id = $info['id'];
+			$response->product_link = $info['product_link'];
+			
+			
+		}
 		$this->layoutSmarty ( 'about' );
-	
 	}
 	
 	/*

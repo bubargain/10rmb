@@ -23,18 +23,21 @@
 		<div class="groupinfo">
 			<div class="groupinfoimg"><img src="{{$pic_link}}"></div>
 			<div class="groupinfodiv">
-           	 
+           	 	<form method="post" action="index.php?_c=goods&_a=about" >
                 <div>
                 	<select id="selectshipping" name="selectshipping" class="selectbox">
                     	{{if $noshipping}}<option value="true"> pay ${{$price}},get {{$totalfanli}}</option> {{/if}}
                         <option value="false">pay ${{$price}},get product and ${{$fanli}} rebate</option>
                     </select> 
                 </div>
+                <input type="hidden" name="id" value="{{$id}}"/>
 				<p class="groupinfop"  nowrap>
                 <!--<em class="{{if $params.liked}}on{{/if}}"> 收藏（{{$params.wishes}}）</em> -->
                
-                <a href="index.php?_c=goods&_a=about&id={{$id}}" nowrap>APPLY BCODE</a>
+                <input type="submit"  value="APPLY BCODE"/>
+                
                 </p>
+                </form>
 			</div>
 			<div class="groupinfodiv2">
 				<div class="infotitle"><img src="images/group2_58.jpg" width="24">How it works?</div>

@@ -66,7 +66,7 @@ a:hover{text-decoration:none;outline:none}
 .groupinfodiv .groupprice{padding-bottom:10px}
 .groupbtn{position:fixed;top:0;width:100%;left:0;display:none}
 .groupinfop{border-top:1px #e6e6e6 solid;background:#fff}
-.groupinfop a{background:#ec6866;color:#fff;text-align:center;display:inline-block;width:35%;margin:15px 5%;line-height:40px;border-radius:5px}
+.groupinfop input{background:#ec6866;color:#fff;text-align:center;display:inline-block;width:35%;margin:15px 5%;line-height:40px;border-radius:5px}
 .groupinfop em{background:#ec6866;color:#fff;text-align:center;display:inline-block;width:35%;margin:15px 5%;line-height:40px;border-radius:5px}
 .groupinfop em .on{background:#FFF; border-color:#ec6866;color:#fff;text-align:center;display:inline-block;width:35%;margin:15px 5%;line-height:40px;border-radius:5px}
 .groupinfodiv2{background:#fff}
@@ -134,7 +134,10 @@ footer {
 	bottom:0;
 }
 .selectbox {font-size:18px;width:90%;height:25px}
-
+.order-no {
+	background:url(/img/order_no.png) center no-repeat;
+	height:400px;
+}
 footer ins {
 	margin:0 20px;
 }

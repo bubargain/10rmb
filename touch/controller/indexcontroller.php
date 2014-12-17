@@ -14,13 +14,14 @@ class indexcontroller extends BaseController {
 		
 		 $user_id=$this->checkLogin ();
 		
-		$ret ['top_goods'] = self::SelectGoods ( $user_id,10 );
+		$goods = self::SelectGoods ( $user_id,10 );
 		
 		$response->title = 'TEN BUCK';
 		$response->cdn_buck = CDN_BUCK;
 		$response->currency_rate = EUROTORMB;
 		//$response->focusMap_imageLink = $ret ['focuseMap_imageLink'];
-		$response->live_deals = $ret ['top_goods'];
+		$response->live_deals = $goods;
+		
 		
 		//$response->giveHer_textLink = $ret ['getTextLinks'];
 		//$response->giveHer_imageLink = $ret ['giveHer_imageLink'];

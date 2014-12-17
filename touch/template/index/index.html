@@ -56,7 +56,7 @@ src="img/default_img.png"></a></div>
         {{/if}}
 			
 		<div class="group_div" style="display:block;min-height:350px">
-          
+          {{if $live_deals}}
             <!-- start a new item -->
             {{foreach from=$live_deals item=item}}
             
@@ -98,10 +98,16 @@ src="img/default_img.png"></a></div>
             
           	
 			{{/foreach}}
-            </div>
-			
+          {{else}}
+          		 <div class="order-no"></div>
+          {{/if}}
+            </div >
+            
 		</div>
 		
+		<div style="text-align:center;font-size:14px">
+			<span>You have up to 10 tasks everyday</span>
+			</div>
     	<!--<a href="javascript:void(0)" class="home"></a>-->
 	</div>
     
