@@ -71,7 +71,7 @@ class goodscontroller extends BaseController {
 			$bcode= \app\dao\EventDao::getSlaveInstance()->find($info['event_id']);
 			if($bcode and $bcode['applied'] < $bcode['amount'])
 			{
-				if($bcode['bcode']==null)
+				if($info['bcode']==null)
 					$firsttimeapply = true;
 				
 				$noshipping = $request->selectshipping;
