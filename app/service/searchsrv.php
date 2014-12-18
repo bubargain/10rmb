@@ -121,7 +121,7 @@ class SearchSrv extends BaseSrv {
 			foreach($event_ids as $event)
 			{
 				$exist= \app\dao\UserEventDao::getSlaveInstance()->find(
-					array('user_id'=>$user_id,'event_id'=>$event_id)
+					array('user_id'=>$user_id,'event_id'=>$event['event_id'])
 				);
 				if(!$exist) //同一活动不会被分配两次
 				{

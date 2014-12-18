@@ -111,6 +111,7 @@ class EventSrv extends BaseSrv {
 						else 
 						{
 							$amount += $order['totalfanli'];
+							$amount += $order['profit'];
 						}
 					}
 				}
