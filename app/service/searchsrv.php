@@ -108,7 +108,7 @@ class SearchSrv extends BaseSrv {
 		try{
 		$time=strtotime("now");
 		//到期时间超过一个小时的正常活动
-		$sql= "select * from ym_event where status=1 order by RAND() limit 0,10"; 
+		$sql= "select * from ym_event where status=1 and applied < amount order by RAND() limit 0,10"; 
 		$_pdo = \app\dao\EventDao::getSlaveInstance ()->getpdo();
 		$event_ids = $_pdo->getRows($sql);
 	
@@ -125,24 +125,17 @@ class SearchSrv extends BaseSrv {
 				);
 				if(!$exist) //同一活动不会被分配两次
 				{
-					$fanli = round( (float)$event['fanli'] * PROFITRATE , 2);  // 扣除佣金后的返利
-					$profit = (float)$event['fanli'] - $fanli; //平台佣金
-					if($event['noshipping'])
-						$totalfanli = $fanli + $event['price'];
-					else 
-						$totalfanli = $fanli;
+					
 					\app\dao\UserEventDao::getMasterInstance()->add(
 						array(
 							'event_id' => $event['event_id'],
 							'user_id' => $user_id,
 							'price' =>  $event['price'],
-							'fanli' =>  $fanli,
-							'profit' => $profit,
-							'totalfanli'=> $totalfanli,
 							'utime' => $time,
 							'ctime' => $event['ctime'],
 							'etime' => $time,
 							'status'=>100,
+							'fanli'=>$event['fanli'],
 							'livetime' => $event['livetime'],
 							'noshipping' => $event['noshipping'],
 							'store' => $event['store'],

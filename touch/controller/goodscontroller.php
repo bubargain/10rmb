@@ -35,7 +35,7 @@ class goodscontroller extends BaseController {
 		$response->product_link = $info['product_link'];
 		$response->id = $info['id'];
 		$response->price = $info['price'];
-		$response->totalfanli =$info['totalfanli'];
+		$response->totalfanli =$info['price']+$info['fanli']*PROFITRATE;
 		$response->fanli = $info['fanli'];
 		$response->noshipping = $info['noshipping'];
 		$action_template = $this->_controller .'/details.html';
@@ -71,12 +71,36 @@ class goodscontroller extends BaseController {
 			$bcode= \app\dao\EventDao::getSlaveInstance()->find($info['event_id']);
 			if($bcode and $bcode['applied'] < $bcode['amount'])
 			{
+				
 				$noshipping = $request->selectshipping;
+				
 				$_time = strtotime("now");
 				$info['bcode'] =  $user_id.substr($_time,4);
+				
+				$fanli = round( (float)$bcode['fanli'] * PROFITRATE , 2);  // 扣除佣金后的返利
+				$profit = (float)$bcode['fanli'] - $fanli; //平台佣金
+				if($noshipping)
+						$totalfanli = $fanli + $bcode['price'];
+				else 
+						$totalfanli = $fanli;
+				
+				
 				\app\dao\UserEventDao::getMasterInstance()->edit($info['id'], 
-				array('bcode'=>$info['bcode'],'utime'=>$_time,'noshipping'=>$noshipping,'status'=>0));
+				array(
+				'fanli'=>$fanli,
+				'profit'=>$profit,
+				'totalfanli'=>$totalfanli,
+				'bcode'=>$info['bcode'],
+				'utime'=>$_time,
+				'noshipping'=>$noshipping,
+				'status'=>0)
+				
+				);
+				
+				
 				$sql = "update ym_event set applied= applied+1 where event_id = ".$info['event_id'];
+				
+				
 				\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
 				$response->bcode= $info['bcode'];
 				$response->id = $info['id'];

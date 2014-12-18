@@ -138,6 +138,10 @@ footer {
 	background:url(/img/order_no.png) center no-repeat;
 	height:400px;
 }
+.event-no {
+	background:url(/img/event_no.png) center no-repeat;
+	height:400px;
+}
 footer ins {
 	margin:0 20px;
 }

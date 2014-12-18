@@ -26,8 +26,8 @@
            	 	<form method="post" action="index.php?_c=goods&_a=about" >
                 <div>
                 	<select id="selectshipping" name="selectshipping" class="selectbox">
-                    	{{if $noshipping}}<option value="true"> pay ${{$price}},get {{$totalfanli}}</option> {{/if}}
-                        <option value="false">pay ${{$price}},get product and ${{$fanli}} rebate</option>
+                    	{{if $noshipping}}<option value="1"> pay ${{$price}},get {{$totalfanli}}</option> {{/if}}
+                        <option value="0">pay ${{$price}},get product and ${{$fanli}} rebate</option>
                     </select> 
                 </div>
                 <input type="hidden" name="id" value="{{$id}}"/>

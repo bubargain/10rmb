@@ -25,11 +25,10 @@
                     <section><img src="{{$item.pic_link}}"></section>
                     <section>
                         <div>
-                        <p>{{$item.event_name}}</p>
-                        <p class="cGray "> ORDER SN: {{if $item.order_sn}} {{$item.order_sn}} {{else}} N/A{{/if}}</p>
+                        <p>{{$item.event_name}} <br/> ORDER SN: {{if $item.order_sn}} {{$item.order_sn}} {{else}} N/A{{/if}}</p>
                         
                         </div>
-                       <span class="cBlue">Rebate:${{$item.totalfanli}}</span>
+                      <div><p class="cBlue"  nowrap>Pay:${{$item.price}}&nbsp;&nbsp;Rebate:${{$item.totalfanli}}</p></div>
                     </section>
                 </div>
                 </a>
