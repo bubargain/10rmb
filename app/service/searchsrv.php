@@ -126,6 +126,9 @@ class SearchSrv extends BaseSrv {
 				if(!$exist) //同一活动不会被分配两次
 				{
 					
+					$fanli = (float)$event['fanli'] * PROFITRATE;
+				
+					
 					\app\dao\UserEventDao::getMasterInstance()->add(
 						array(
 							'event_id' => $event['event_id'],
@@ -135,7 +138,8 @@ class SearchSrv extends BaseSrv {
 							'ctime' => $event['ctime'],
 							'etime' => $time,
 							'status'=>100,
-							'fanli'=>$event['fanli'],
+							'fanli'=>$fanli,
+							'profit'=>(float)$event['fanli'] - $fanli,
 							'livetime' => $event['livetime'],
 							'noshipping' => $event['noshipping'],
 							'store' => $event['store'],
