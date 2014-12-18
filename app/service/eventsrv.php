@@ -34,21 +34,28 @@ class EventSrv extends BaseSrv {
 		//var_dump($events);
 		if($events)
 		{
+			
 			try{
 				
 				\app\dao\UserEventDao::getMasterInstance()->beginTransaction();
 				foreach($events as $event)
 				{			
-					// var_dump($event);
-						//新手任务10buck不抽佣
+					
+						//新手任务10buck
+						$fanli = (float)$event['fanli'] * PROFITRATE;
+						if($event['noshipping'])
+							$totalfanli = $event['price'] + $fanli;
+						else 
+							$totalfanli = $fanli;
+							
 						\app\dao\UserEventDao::getMasterInstance()->add(
 							array(
 								'event_id' => $event['event_id'],
 								'user_id' => $user_id,
 								'price' =>  $event['price'],
-								'fanli' =>  $event['fanli'],
-								'profit' => 0,
-								'totalfanli'=> $ $event['fanli'],
+								'fanli' =>  $fanli,
+								'profit' => $event['fanli']-$fanli,
+								'totalfanli'=> $totalfanli,
 								'utime' => $time,
 								'ctime' => $event['ctime'],
 								'etime' => $time,

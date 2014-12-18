@@ -35,7 +35,7 @@ class goodscontroller extends BaseController {
 		$response->product_link = $info['product_link'];
 		$response->id = $info['id'];
 		$response->price = $info['price'];
-		$response->totalfanli =$info['price']+$info['fanli']*PROFITRATE;
+		$response->totalfanli =$info['price']+$info['fanli'];
 		$response->fanli = $info['fanli'];
 		$response->noshipping = $info['noshipping'];
 		$action_template = $this->_controller .'/details.html';
