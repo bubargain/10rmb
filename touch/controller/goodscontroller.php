@@ -71,6 +71,8 @@ class goodscontroller extends BaseController {
 			$bcode= \app\dao\EventDao::getSlaveInstance()->find($info['event_id']);
 			if($bcode and $bcode['applied'] < $bcode['amount'])
 			{
+				if($bcode['bcode']==null)
+					$firsttimeapply = true;
 				
 				$noshipping = $request->selectshipping;
 				
@@ -97,7 +99,8 @@ class goodscontroller extends BaseController {
 				
 				);
 				
-				
+				if($firsttimeapply)
+				//只有用户第一次申请的时候，活动申请总数+1
 				$sql = "update ym_event set applied= applied+1 where event_id = ".$info['event_id'];
 				
 				

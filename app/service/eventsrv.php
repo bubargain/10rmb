@@ -211,7 +211,7 @@ class EventSrv extends BaseSrv {
 					continue;
 				}
 				//用户已经领劵，但是超过24小时未付款
-				else if ($event['status']==0 && $event['utime'] + 6*60*60 < $_time )
+				else if ($event['status']==0 && $event['utime'] + 8*60*60 < $_time )
 				{
 					\app\dao\UserEventDao::getMasterInstance()->edit($event['id'],
 						array('status'=>99)
