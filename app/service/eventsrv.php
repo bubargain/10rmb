@@ -215,7 +215,7 @@ class EventSrv extends BaseSrv {
 				else if ($event['status']==0 && $event['utime'] + 8*60*60 < $_time )
 				{
 					\app\dao\UserEventDao::getMasterInstance()->edit($event['id'],
-						array('status'=>99)
+						array('status'=>99,'etime'=>strtotime('now'))
 					);
 					
 					//商家applied数减1
@@ -252,7 +252,7 @@ class EventSrv extends BaseSrv {
 		$sql= 'delete from ym_user_event where status=100 and event_id='.$id;
 		$_pdo->exec($sql);  
 		//已经申请bcode但24小时还未使用的，停止使用
-		$sql= "update ym_user_event set status=4 where etime + 24*60*60 < ".$_time." and status=0 and event_id=".$id; 
+		$sql= "update ym_user_event set status=4 ,etime=$_time where etime + 24*60*60 < ".$_time." and status=0 and event_id=".$id; 
 		$_pdo->exec($sql); 
 		
 		
@@ -279,7 +279,7 @@ class EventSrv extends BaseSrv {
 			throw new \Exception('cant change status ');
 		else{
 			return \app\dao\UserEventDao::getMasterInstance()->edit($id,
-				array('status'=>1)
+				array('status'=>1,'etime'=>strtotime('now'))
 			);
 		}
 		
