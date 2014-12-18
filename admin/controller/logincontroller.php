@@ -60,8 +60,10 @@ class LoginController extends BaseController {
 		//提交注册信息
 		if($this->isPost())
 		{
+	
 			
 			$user['user_name']=$request->inputPhone;
+		
 			$user['email']=$request->inputEmail;
 			$user['password']=md5($request->inputPassword);
 			$user['nick_name']=$request->inputName;
@@ -70,6 +72,10 @@ class LoginController extends BaseController {
 			
 			try
 			{
+				if($user['user_name'] || $this->checkPhoneNum($user['user_name']))
+				{
+					throw new \Exception ( '手机号验证失败 ', 400222 );
+				}
 				if($user['invite_code'] == Null or $user['invite_code'] == '') //无邀请码
 				{
 					throw new \Exception ( '目前我们只支持邀请注册，详情请联系客服 ', 4002 );
@@ -120,7 +126,12 @@ class LoginController extends BaseController {
 		}
 	}
 	
-	
+	private function checkPhoneNum($username)
+	{
+		//弱验证，是否为纯数字
+        if(!preg_match('/^1[0-9]{10}$/', $username))
+            throw new \Exception('Username you input is not phone number','21306');
+	}
 	
 	public function logout() {
 		setcookie ( 'admin_info', '', time () - 3600 );

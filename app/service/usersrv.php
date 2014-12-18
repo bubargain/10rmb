@@ -261,7 +261,7 @@ class UserSrv extends BaseSrv {
 
     public function addUser($info,$level=0) {
     	
-    	
+    
         //self::checkPhoneNum($info['user_name']);
        	 if( UserDao::getSlaveInstance()->find(array('user_name'=>$info['user_name'])) )
             throw new \Exception( $info['user_name'] .' is exist now', 10001);
@@ -277,7 +277,9 @@ class UserSrv extends BaseSrv {
             UserDao::getMasterInstance()->beginTransaction();
             $userinfo['user_id'] = UserDao::getMasterInstance()->add( array('user_name'=>$info['user_name'], 'password'=>$info['password'],'invite_by'=>$info['invite_by'],'invite_code'=>$invite_code ,'ctime'=>$_time) );
             $userinfo['ctime'] = $info['utime'] = $_time;
-            unset($userinfo['password'] );		
+            unset($userinfo['password'] );
+            if($info['email']) 		 $userinfo['email'] = $info['email']; 
+            if($info['nick_name']) 		 $userinfo['nick_name'] = $info['nick_name']; 
             $userinfo['user_name'] = $info['user_name'];    
             $userinfo['token']=$info['token'];
             $userinfo['level']=$level;
