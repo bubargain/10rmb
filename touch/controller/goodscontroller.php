@@ -100,11 +100,13 @@ class goodscontroller extends BaseController {
 				);
 				
 				if($firsttimeapply)
+				{
 				//只有用户第一次申请的时候，活动申请总数+1
 				$sql = "update ym_event set applied= applied+1 where event_id = ".$info['event_id'];
 				
 				
 				\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
+				}
 				$response->bcode= $info['bcode'];
 				$response->id = $info['id'];
 				$response->product_link = $info['product_link'];
