@@ -134,6 +134,15 @@ footer {
 	padding:0 10px;
 	color:#FFF;
 }
+.order .order-tit a.btnw {
+	display:inline-block;
+	background:#CCC;
+	height:50px;
+	line-height:50px;
+	-webkit-border-radius:10px;
+	padding:0 10px;
+	color:#000;
+}
 .order .order-tit section span{
 	float:right;
 }

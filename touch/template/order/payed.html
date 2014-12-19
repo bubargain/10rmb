@@ -33,10 +33,10 @@
                 </div>
                 </a>
                 <div class="order-tit">
-                    <section class="fl cGray">BCODE: <font class='cGreen'>{{$item.bcode}}</font>
-                    
+                    <section class="fl cGray">
+                    	<a href="index.php?_c=goods&_a=about&id={{$item.id}}" class="btnw">VIEW BCODE</a>               
                     </section>
-                     <section class="fr cWhite"><a href="index.php?_c=order&_a=ordersn&id={{$item.id}}" class="btn">INPUT ORDER NUMBER</a></section>
+                     <section class="fr cWhite"><a href="index.php?_c=order&_a=ordersn&id={{$item.id}}" class="btn">INPUT ORDER SN</a></section>
                 </div>
             </div>
             {{/foreach}}
