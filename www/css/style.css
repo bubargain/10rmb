@@ -49,6 +49,7 @@ body{
 }
 .left-grid{
 	float:left;
+	width:43%;
 }
 .avaalabled a{
 	display:block;
