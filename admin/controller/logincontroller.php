@@ -72,7 +72,7 @@ class LoginController extends BaseController {
 			
 			try
 			{
-				if($user['user_name'] || $this->checkPhoneNum($user['user_name']))
+				if(!$user['user_name'] || !$this->checkPhoneNum($user['user_name']))
 				{
 					throw new \Exception ( '手机号验证失败 ', 400222 );
 				}
@@ -130,7 +130,8 @@ class LoginController extends BaseController {
 	{
 		//弱验证，是否为纯数字
         if(!preg_match('/^1[0-9]{10}$/', $username))
-            throw new \Exception('Username you input is not phone number','21306');
+			return false;
+		return true;
 	}
 	
 	public function logout() {
