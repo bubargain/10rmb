@@ -112,13 +112,13 @@ class AlipayPaymentSrv extends BasePaymentSrv {
 			// 需http://格式的完整路径，不允许加?id=123这类自定义参数
 			// 页面跳转同步通知页面路径
 			// 需http://格式的完整路径，不允许加?id=123这类自定义参数
-			$return_url = $_SERVER ['ROOT_DOMAIN'] . "/api/payment/webcallback";
+			$return_url = $_SERVER ['ROOT_DOMAIN'] ;
 		} else {
 			// 服务器异步通知页面路径
 			$notify_url = TOUCH_OAK . "/api/payment/webnotify";
 			// 需http://格式的完整路径，不允许加?id=123这类自定义参数
 			// $call_back_url = 'touch.ymall.com'. "/api/payment/webcallback";
-			$return_url = TOUCH_OAK . "/api/payment/webcallback";
+			$return_url = TOUCH_OAK;
 		}
 		
 		// 卖家支付宝帐户
