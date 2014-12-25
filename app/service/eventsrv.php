@@ -369,7 +369,7 @@ class EventSrv extends BaseSrv {
 		 \app\dao\UserInfoDao::getMasterInstance()->edit( array('user_id'=> $user_id) , array('rmb'=>$amountLeft)); //减用户账户总额
 		
 		  \app\dao\UserCurrencyDao::getMasterInstance()->add(
-		 array('user_id'=>$user_id,'amount'=>$amount,'unit'=>$unit,'status'=>'2')
+		 array('user_id'=>$user_id,'amount'=>$amount,'unit'=>$unit,'status'=>'2','ctime'=>strtotime('now'))
 		);
 		
 		
