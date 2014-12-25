@@ -155,7 +155,7 @@ class StoreController extends BaseController {
 				'user_id' => $user_id
 			));
 			$response->money = $user['rmb'];
-			$sql= "select * from ym_user_currency where user_id = $user_id and status in (1,2,3,5,6) order by id desc limit 10";
+			$sql= "select * from ym_user_currency where user_id = $user_id and status in (1,2,3,5,6,7) order by id desc limit 10";
 			$res = \app\dao\UserCurrencyDao::getSlaveInstance()->getPdo()->getRows($sql);
 			$response->currencyFlow = $res;
 			

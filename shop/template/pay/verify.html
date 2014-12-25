@@ -43,9 +43,18 @@
         <input type="text" class="input-xxlarge" id="inputComment" name="inputComment" value="{{$event.comment}}">
         </div>
     </div> 
+    <div class="control-group">
+		<label class="control-label" for="inputEmail">是否提现</label>
+        <div class="controls">
+       	<select name="ispass">
+        	<option value="1">通过</option>
+            <option value="0">不通过</option>
+		</select>
+        </div>
+    </div> 
   
-   
-
+   	
+        
    	   <input type="hidden"  id="id" name="id" value="{{$info.id}}" />
        
         <div class="controls">

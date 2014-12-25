@@ -3,6 +3,9 @@ ym_user_event
 ym_event
 0 提交,未审核 1 启动 2 用户终止  3 完成 4 审核未通过 5已结算  88新手任务 100 删除 
 
+ym_user_currency
+1充值 2 冻结 3退款 4返利 5 提现 6 提现成功 7 提现驳回 
+
 新手任务
 status=0 ， ctime 未来， 有数量限制
 

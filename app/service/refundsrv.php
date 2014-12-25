@@ -16,7 +16,7 @@ use \app\dao\UserInfoDao;
 class RefundSrv extends BaseSrv {
 	
 	/**
-	 * 申请退款
+	 * 申请提现
 	 *
 	 *
 	 * @throws \Exception
@@ -50,6 +50,17 @@ class RefundSrv extends BaseSrv {
 						'comment'=>$comment
 					)
 				);
+		//邮件提醒
+		try{
+				
+			
+				$mail = new \app\service\MailSrv();
+				$mail->sendMail("contact@kitetea.com", "[10BUCK] someone want refund!", "有人申请提现哦，请尽快登录系统处理 <br/> 10BUCK Team");
+			
+			}catch(\Exception $e)
+			{
+					//
+			}
 			return true;
 		}
 	}

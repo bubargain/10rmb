@@ -35,7 +35,8 @@
                              {{else if $oneRow.status =='3' }} 退款
                              {{else if $oneRow.status =='4' }} 返利
                                {{else if $oneRow.status =='5' }} 申请提现
-                             {{else}}  $oneRow.status {{/if}}
+                                {{else if $oneRow.status =='7' }} 提现驳回
+                             {{else}}  {{$oneRow.status}} {{/if}}
                              </td>
                        <td>{{$oneRow.formeramount}}&nbsp </td>
 						<td>

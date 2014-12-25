@@ -49,60 +49,70 @@ class PayController extends BaseController{
 				$response->info = $ret;
 		}
 		else{
-	
-			if($request->id !=null && $request->inputPPsn != null)
+			if($request->ispass == 0 )
+			{
+				\app\dao\UserCurrencyDao::getMasterInstance()->edit($request->id,
+							array(
+								'status'=>7,
+								'comment' => $request->inputcomment
+							)
+				);
+				$this->showError("success","index.php?_c=pay");
+			}
+			else if($request->id !=null && $request->inputPPsn != null)
 			{
 				$id= $request->id;
 				$ppsn = $request->inputPPsn;
-				$comment = $request->comment;
-			//订单状态修改 
-			
-			try{
+				$comment = $request->inputcomment;
+				//订单状态修改 
 				
-				$order=\app\dao\UserCurrencyDao::getMasterInstance()->find($id);
-			
-				if($order['status']==5)
-				{
-					\app\dao\UserCurrencyDao::getMasterInstance()->beginTransaction();
-					\app\dao\UserCurrencyDao::getMasterInstance()->edit($id,
-						array(
-							'status'=>6,
-							'sn'=>$ppsn,
-							'comment' => $comment
-						)
-					);
-					if($order['unit']=='usd')
-						$unit = "usd";
-					else 
-						$unit = 'rmb';
-					$userInfo = \app\dao\UserInfoDao::getSlaveInstance()->find($order['user_id']);
+				try{
 					
+					$order=\app\dao\UserCurrencyDao::getMasterInstance()->find($id);
+				
+					if($order['status']==5)
+					{
+						\app\dao\UserCurrencyDao::getMasterInstance()->beginTransaction();
+						\app\dao\UserCurrencyDao::getMasterInstance()->edit($id,
+							array(
+								'status'=>6,
+								'sn'=>$ppsn,
+								'comment' => $comment
+							)
+						);
+						if($order['unit']=='usd')
+							$unit = "usd";
+						else 
+							$unit = 'rmb';
+						$userInfo = \app\dao\UserInfoDao::getSlaveInstance()->find($order['user_id']);
 						
-					
-					if($userInfo[$unit] < $order['amount'])
-						$this->showError("amount don't have enough money","index.php?_c=pay");
-					else {
-							//用户账户扣钱
-						$sql= "update ym_user_info set $unit = $unit - ".$order['amount']." where user_id = ".$order['user_id'];
+							
 						
-						\app\dao\UserInfoDao::getSlaveInstance()->getPdo()->exec($sql);
+						if($userInfo[$unit] < $order['amount'])
+							$this->showError("amount don't have enough money","index.php?_c=pay");
+						else {
+								//用户账户扣钱
+							$sql= "update ym_user_info set $unit = $unit - ".$order['amount']." where user_id = ".$order['user_id'];
+							
+							\app\dao\UserInfoDao::getSlaveInstance()->getPdo()->exec($sql);
+						}
+						
+						\app\dao\UserCurrencyDao::getMasterInstance()->commit();
+						$this->showError("success","index.php?_c=pay");
 					}
-					
+					else {
+						$this->showError("order status not right","index.php?_c=pay");
+					}
+				}catch(\Exception $e)
+				{
 					\app\dao\UserCurrencyDao::getMasterInstance()->commit();
-					$this->showError("success","index.php?_c=pay");
+					$this->showError($e->getMessgae(),"index.php?_c=pay");
 				}
-				else {
-					$this->showError("order status not right","index.php?_c=pay");
-				}
-			}catch(\Exception $e)
-			{
-				\app\dao\UserCurrencyDao::getMasterInstance()->commit();
-				$this->showError($e->getMessgae(),"index.php?_c=pay");
-			}
 				
 		
 			
 			}
+			
 		}
 		$this->layoutSmarty();
 	}
