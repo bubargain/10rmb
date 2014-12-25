@@ -68,7 +68,7 @@ class EventSrv extends BaseSrv {
 								'pic_link' => $event['pic_link']
 							)
 							);
-						$sql= "update ym_event set applied = applied +1 where event_id =".$event['event_id'];
+						//$sql= "update ym_event set applied = applied +1 where event_id =".$event['event_id'];
 				}
 				\app\dao\UserEventDao::getMasterInstance()->commit();
 				//die();
@@ -219,8 +219,9 @@ class EventSrv extends BaseSrv {
 					);
 					
 					//商家applied数减1
-					$sql = "update ym_event set applied= applied -1 where event_id = ".$event['event_id'];
-					\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
+					// 已改为mysql触发器操作
+					//$sql = "update ym_event set applied= applied -1 where event_id = ".$event['event_id'];
+					//\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
 	
 				}			
 				
