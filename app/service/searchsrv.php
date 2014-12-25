@@ -48,12 +48,12 @@ class SearchSrv extends BaseSrv {
 			$this->newUserEvent($user_id,$amount);
 		
 		}
-		else{//检查过期
+		/*else{//检查过期
 			
 			$uevent = new \app\service\EventSrv();
 			$uevent->updateStatus($userEvent);
 
-		}
+		}*/
 		$userEvent = \app\dao\UserEventDao::getSlaveInstance()->findAll(
 				array('user_id'=> $user_id,'B.status'=>100)
 			);//重新查询

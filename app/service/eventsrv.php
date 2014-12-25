@@ -196,7 +196,7 @@ class EventSrv extends BaseSrv {
 	 */
 	public function updateStatus($userEvent)
 	{
-		$_time = strtotime("now");
+		/*$_time = strtotime("now");
 		
 		try{
 			\app\dao\EventDao::getMasterInstance()->beginTransaction();
@@ -232,7 +232,9 @@ class EventSrv extends BaseSrv {
 		}catch(\Exception $e){
 			\app\dao\EventDao::getMasterInstance()->rollBack();
 			throw $e;
-		}
+		}*/
+		
+		return true;  //状态变更已经移至mysql 定时计划
 		
 	}
 	
