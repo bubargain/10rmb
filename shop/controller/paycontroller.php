@@ -54,7 +54,7 @@ class PayController extends BaseController{
 				\app\dao\UserCurrencyDao::getMasterInstance()->edit($request->id,
 							array(
 								'status'=>7,
-								'comment' => $request->inputcomment
+								'comment' => $request->inputComment
 							)
 				);
 				$this->showError("success","index.php?_c=pay");
@@ -63,7 +63,7 @@ class PayController extends BaseController{
 			{
 				$id= $request->id;
 				$ppsn = $request->inputPPsn;
-				$comment = $request->inputcomment;
+				$comment = $request->inputComment;
 				//订单状态修改 
 				
 				try{
