@@ -174,7 +174,7 @@ class EventSrv extends BaseSrv {
 				if($merchant['email'])
 				{
 						$mail = new \app\service\MailSrv();
-						$mail->sendMail($merchant['email'], "审核不通过，冻结资金已退还", "您的活动".$name." 未通过审核，冻结资金已返还<br/>10BUCK审核团队");
+						$mail->sendMail($merchant['email'], "[10BUCK] Sorry,Your event has been canceled", "your event".$name." didnt pass verify, freezed money has returned to your account <br/> 10BUCK Team");
 				}
 			}catch(\Exception $e)
 			{
