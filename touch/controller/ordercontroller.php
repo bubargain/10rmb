@@ -19,17 +19,16 @@ class orderController extends BaseController {
 			$this->layoutSmarty ( 'cash' );
 		}
 		else {
-			\app\dao\UserCurrencyDao::getMasterInstance()->add(
-				array(
-					'user_id'=> $user_id,
-					'amount' => $request->applyamount,
-					'unit'  => 'usd',
-					'ctime' => strtotime('now'),
-					'status' => 5
-				)
-			);
 			
-			$this->showMsg("Request submit Successfully","index.php?_c=order");
+			 
+			try{
+					$refund = new \app\service\RefundSrv();
+					$refund->apply($user_id,$request->applyamount,'usd');
+					$this->showMsg("Success","index.php?_c=order");
+			 }catch(\Exception $e)
+			 {
+			 	$this->showMsg($e->getMessage(),"index.php?_c=order");
+			 }
 		}
 		
 	}

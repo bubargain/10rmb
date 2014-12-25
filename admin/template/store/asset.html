@@ -22,11 +22,29 @@
                    
             	</div> -->
                 
-               <a href="?_c=store&_a=addmoney" class="btn btn-warning">充值</a>
+               <a href="?_c=store&_a=addmoney" class="btn btn-warning">充值</a>&nbsp;&nbsp;
+                <a href="?_c=store&_a=releasemoney" class="btn btn-info">提现</a>
                 <div class="control-group">
                 	<p>&nbsp;&nbsp;</p>
-                
+                	<p class="alert">资金流水-最近10笔</p>
             	</div>
+                
+                <table class="table table-hover">
+                	<tr>
+                    	<th>时间</th>
+                        <th>金额</th>
+                        <th>单位</th>
+                        <th>操作类型</th>
+                    </tr>
+                    {{foreach from=$currencyFlow item=item}}
+                    <tr>
+                        <td>{{$item.ctime|date_format:"%Y-%m-%d %H:%M"}}</td>
+                        <td>{{$item.amount}}</td>
+                        <td>{{$item.unit}}</td>
+                        <td>{{if $item.status == 1}}充值 {{else if $item.status== 2}}活动冻结 {{else if $item.status==3}}活动退款结 {{else if $item.status==5}}提现申请 {{else if $item.status==3}}提现成功 {{/if}}</td>
+                    </tr>
+                    {{/foreach}}
+                </table>
                 
                  
                 

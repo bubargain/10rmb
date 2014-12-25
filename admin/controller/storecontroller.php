@@ -146,13 +146,49 @@ class StoreController extends BaseController {
 	
 	public function asset($request,$response)
 	{
-		$response->storeTitle ="资金管理";
-		$response->storeIntro ="查看您的账户余额和活动冻结金额";
-		$user=\app\dao\UserInfoDao::getSlaveInstance()->find(array(
-			'user_id' => $this->current_user['user_id']
-		));
-		$response->money = $user['rmb'];
+		$user_id= $this->current_user['user_id'];
+		if($user_id)
+		{
+			$response->storeTitle ="资金管理";
+			$response->storeIntro ="查看您的账户余额和活动冻结金额";
+			$user=\app\dao\UserInfoDao::getSlaveInstance()->find(array(
+				'user_id' => $user_id
+			));
+			$response->money = $user['rmb'];
+			$sql= "select * from ym_user_currency where user_id = $user_id and status in (1,2,3,5,6) order by id desc limit 10";
+			$res = \app\dao\UserCurrencyDao::getSlaveInstance()->getPdo()->getRows($sql);
+			$response->currencyFlow = $res;
+			
+		
+		}
 		$this->layoutSmarty('asset');
+	}
+	
+	//提现申请
+	public function releasemoney($request,$response)
+	{
+		$user= $this->current_user['user_id'];
+		if($this->isPost() && $user)
+		{
+			if(!$request->channel || !$request->amount)
+			{
+				$this->showError("输入信息不全");
+			}
+			else{
+				try{
+				
+					$refund = new \app\service\RefundSrv();
+					$refund->apply($user, $request->amount, 'rmb',$request->channel);
+					$this->showError("申请已成功",'index.php?_c=store&_a=asset');
+				}catch(\Exception $e)
+				{
+					$this->showError($e->getMessage());
+				}
+			}
+			
+		}
+		
+		$this->layoutSmarty('releasemoney');
 	}
 	
 	//充值

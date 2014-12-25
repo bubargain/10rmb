@@ -74,7 +74,7 @@ class PayController extends BaseController{
 					if($order['unit']=='usd')
 						$unit = "usd";
 					else 
-						$unit = 'cmb';
+						$unit = 'rmb';
 					$userInfo = \app\dao\UserInfoDao::getSlaveInstance()->find($order['user_id']);
 					
 						
