@@ -356,7 +356,7 @@ class EventSrv extends BaseSrv {
 	}
 	
 	
-	private function freezeMoney($user_id,$amount,$unit='美元')
+	private function freezeMoney($user_id,$amount,$unit='usd')
 	{
 		
 		$user= \app\dao\UserInfoDao::getSlaveInstance()->find(  array('user_id' => $user_id));
