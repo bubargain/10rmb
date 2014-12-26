@@ -134,6 +134,11 @@ class LoginController extends BaseController {
 		return true;
 	}
 	
+	public function agreement($request,$response)
+	{
+		$this->renderSmarty ('agreement');	
+	}
+	
 	public function logout() {
 		setcookie ( 'admin_info', '', time () - 3600 );
 		header ( 'Location: index.php?_c=login' );

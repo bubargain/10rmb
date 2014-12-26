@@ -42,6 +42,8 @@ class LoginController extends BaseController {
             }
         }
 	}
+	
+	
 
 	public function logout() {
         setcookie('user_info', '', time () - 3600 );
