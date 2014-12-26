@@ -12,7 +12,7 @@ class MailSrv extends BaseSrv {
 			require_once( ROOT_PATH. '/app/common/mail/class.phpmailer.php');
 			$mail= new \PHPMailer;
 			$mail->isSMTP();
-			$mail->Charset='UTF-8';         
+			$mail->Charset="UTF-8";         
 			$mail->Encoding = "base64";//设置文本编码方式 
 			                             // Set mailer to use SMTP
 			$mail->Host = BUCK_MAIL_SMTP;  // Specify main and backup SMTP servers
@@ -33,7 +33,7 @@ class MailSrv extends BaseSrv {
 				//$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 				//$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 			$mail->isHTML(true);                                  // Set email format to HTML				
-			$mail->Subject =  "=?UTF-8?B?".base64_encode($title)."?=";	
+			$mail->Subject =  $title;	
 			$mail->Body    = $txt;
 			$mail->AltBody = 'none';
 				

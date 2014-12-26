@@ -174,7 +174,7 @@ class EventSrv extends BaseSrv {
 				if($merchant['email'])
 				{
 						$mail = new \app\service\MailSrv();
-						$mail->sendMail($merchant['email'], "[10BUCK] Sorry,Your event has been canceled", "your event".$name." didnt pass verify, freezed money has returned to your account <br/> 10BUCK Team");
+						$mail->sendMail($merchant['email'], "[10BUCK通知] 活动未通过审核", "您好！<br/>您的活动".$eventDetail['event_name']." 未通过审核，原因：".$eventDetail['comment']." <br/>冻结资金已经退还,请重新发布活动<br/>谢谢<br/><br/> 10BUCK 审核团队");
 				}
 			}catch(\Exception $e)
 			{
@@ -333,7 +333,7 @@ class EventSrv extends BaseSrv {
 			 self::freezeMoney($post['user_id'],$lockamount);
 			 self::recordEvent($post);
 			 \app\dao\EventDao::getMasterInstance()->commit();
-			 return true;
+			
 			 
 		 }catch(\Exception $e)
 		 {
@@ -341,7 +341,12 @@ class EventSrv extends BaseSrv {
 		 	throw new \Exception ($e->getMessage());
 		 	return false;
 		 }
-		  
+		 //邮件通知管理员
+		 try{
+		 $mail = new \app\service\MailSrv();
+		 $mail->sendMail("contact@kitetea.com", "[10BUCK通知] 有商家发起活动啦", "请尽快去审核哦 么么哒");
+		 }catch(\Exception $e){}	
+		 return true;
 	}
 	
 	

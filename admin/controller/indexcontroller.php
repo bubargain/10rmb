@@ -13,4 +13,5 @@ class IndexController extends BaseController {
 		$response->msg = $request->msg;
 		$this->layoutSmarty ( 'error' );
 	}
+	
 }

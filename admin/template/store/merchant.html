@@ -20,14 +20,31 @@
                         </tr>
                         <tr>
                         	<td>账号等级：</td>
-                            <td>{{$level}}级</td>
+                            <td>{{$level}}级  <a href="#myModal" role="button" class="btn btn-small btn-warning" data-toggle="modal">查看</a></td>
                         </tr>
+                            <!-- Button to trigger modal -->
+   
+  
                         <tr>
                         	<td>创建时间：</td>
                             <td>{{$ctime|date_format:"%Y-%m-%d"}}</td>
                         </tr>
    				   </table>
                 
-                 
+                    
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">权限说明</h3>
+    </div>
+    <div class="modal-body">
+    <p>提升等级可以获得优先曝光和更多的产品展示机会，降低冻结资金比例。</p><p>邀请5个真实卖家或流水累计1万人民币可升到下一个级别.</p>
+    </div>
+    <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">确定</button>
+   
+    </div>
+    </div>
                 
  </div>

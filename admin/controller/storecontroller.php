@@ -241,15 +241,19 @@ class StoreController extends BaseController {
 	public function merchant($request,$response)
 	{
 		$user_id =$this->current_user['user_id'];
+		
 		$userinfo = \app\dao\UserInfoDao::getSlaveInstance ()->find ( array (
 						'user_id' => $user_id
 				) );
-		
+		$userlevel = \app\dao\AdminDao::getSlaveInstance()->find(
+			array(
+			'user_id'=>$user_id
+			) );
 				
 		$response->nick_name = $userinfo['nick_name'];
 		$response->phone     = $userinfo['user_name'];
 		$response->email     = $userinfo['email'];
-		$response->level     = $userinfo['level'];
+		$response->level     = $userlevel['level'];
 		$response->ctime     = $userinfo['ctime'];
 		
 		

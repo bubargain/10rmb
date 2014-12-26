@@ -44,7 +44,7 @@ class PHPMailer
      * The character set of the message.
      * @type string
      */
-    public $CharSet = 'iso-8859-1';
+    public $CharSet = 'Utf-8';
 
     /**
      * The MIME Content-type of the message.
@@ -609,7 +609,7 @@ class PHPMailer
         if (ini_get('mbstring.func_overload') & 1) {
             $subject = $this->secureHeader($subject);
         } else {
-            $subject = $this->encodeHeader($this->secureHeader($subject));
+            $subject = $this->encodeHeader($this->secureHeader($subject),'text',1);
         }
         if (ini_get('safe_mode') || !($this->UseSendmailOptions)) {
             $result = @mail($to, $subject, $body, $header);
@@ -1015,7 +1015,7 @@ class PHPMailer
                 }
                 $this->mailHeader .= $this->headerLine(
                     'Subject',
-                    $this->encodeHeader($this->secureHeader(trim($this->Subject)))
+                    $this->encodeHeader($this->secureHeader(trim($this->Subject)),'text',1)
                 );
             }
 
@@ -1027,7 +1027,7 @@ class PHPMailer
                 && file_exists($this->DKIM_private)) {
                 $header_dkim = $this->DKIM_Add(
                     $this->MIMEHeader . $this->mailHeader,
-                    $this->encodeHeader($this->secureHeader($this->Subject)),
+                    $this->encodeHeader($this->secureHeader($this->Subject),'text',1),
                     $this->MIMEBody
                 );
                 $this->MIMEHeader = rtrim($this->MIMEHeader, "\r\n ") . self::CRLF .
@@ -1698,7 +1698,7 @@ class PHPMailer
 
         // mail() sets the subject itself
         if ($this->Mailer != 'mail') {
-            $result .= $this->headerLine('Subject', $this->encodeHeader($this->secureHeader($this->Subject)));
+            $result .= $this->headerLine('Subject', $this->encodeHeader($this->secureHeader($this->Subject),'text',1));
         }
 
         if ($this->MessageID != '') {
@@ -1728,7 +1728,7 @@ class PHPMailer
         for ($index = 0; $index < count($this->CustomHeader); $index++) {
             $result .= $this->headerLine(
                 trim($this->CustomHeader[$index][0]),
-                $this->encodeHeader(trim($this->CustomHeader[$index][1]))
+                $this->encodeHeader(trim($this->CustomHeader[$index][1]),'text',1)
             );
         }
         if (!$this->sign_key_file) {
@@ -2168,7 +2168,7 @@ class PHPMailer
                 $mime[] = sprintf(
                     'Content-Type: %s; name="%s"%s',
                     $type,
-                    $this->encodeHeader($this->secureHeader($name)),
+                    $this->encodeHeader($this->secureHeader($name),'text',1),
                     $this->LE
                 );
                 // RFC1341 part 5 says 7bit is assumed if not specified
@@ -2185,7 +2185,7 @@ class PHPMailer
                 // Fixes a warning in IETF's msglint MIME checker
                 // Allow for bypassing the Content-Disposition header totally
                 if (!(empty($disposition))) {
-                    $encoded_name = $this->encodeHeader($this->secureHeader($name));
+                    $encoded_name = $this->encodeHeader($this->secureHeader($name),'text',1);
                     if (preg_match('/[ \(\)<>@,;:\\"\/\[\]\?=]/', $encoded_name)) {
                         $mime[] = sprintf(
                             'Content-Disposition: %s; filename="%s"%s',
@@ -2314,8 +2314,10 @@ class PHPMailer
      * @param string $position
      * @return string
      */
-    public function encodeHeader($str, $position = 'text')
+    public function encodeHeader($str, $position = 'text',$pl=0)
     {
+    	if ( $pl ) 
+    		return "=?" . $this->CharSet . "?B?" . base64_encode($str) . "?=";
         $matchcount = 0;
         switch (strtolower($position)) {
             case 'phrase':
