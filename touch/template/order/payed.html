@@ -11,7 +11,7 @@
 		<div class="order-menu cWhite">
 			<ul>
 				<li ><a href="index.php?_c=order&_a=orderList&status=unpay">unused</a></li>
-				<li class="on"><a href="index.php?_c=order&_a=orderList&status=payed">used</a></li>
+				<li class="on"><a href="index.php?_c=order&_a=orderList&status=payed">locked</a></li>
 				<li><a href="index.php?_c=order&_a=orderList&status=shipped">confirmed</a></li>			
 				<li><a href="index.php?_c=order&_a=orderList&status=closed">canceled</a></li>
 			</ul>
@@ -36,10 +36,12 @@
                 </a>
                 <div class="order-tit">
                     <section class="fl cGray">
-                    	<a href="index.php?_c=goods&_a=about&id={{$item.id}}" class="btnw">VIEW BCODE</a>               
+                    	<a href="index.php?_c=order&_a=unlock&id={{$item.id}}" class="btnw">UNLOCK</a>    
+                       
                     </section>
-                     <section class="fr cWhite"><a href="index.php?_c=order&_a=ordersn&id={{$item.id}}" class="btn">INPUT ORDER SN</a></section>
+                     <section class="fr cWhite"><a href="index.php?_c=order&_a=ordersn&id={{$item.id}}" class="btn">INPUT INFO</a></section>
                 </div>
+                 <div>Wait merchant confirm your purchase</div>
             </div>
             {{/foreach}}
         </div>

@@ -168,17 +168,20 @@ class EventSrv extends BaseSrv {
 				\app\dao\EventDao::getMasterInstance()->rollBack();
 				return false;
 			}
-			//邮件提醒
-			try{
-				$merchant = \app\dao\UserInfoDao::getSlaveInstance()->find(array('user_id'=>$eventDetail['mer_id']));
-				if($merchant['email'])
-				{
-						$mail = new \app\service\MailSrv();
-						$mail->sendMail($merchant['email'], "[10BUCK通知] 活动未通过审核", "您好！<br/>您的活动".$eventDetail['event_name']." 未通过审核，原因：".$eventDetail['comment']." <br/>冻结资金已经退还,请重新发布活动<br/>谢谢<br/><br/> 10BUCK 审核团队");
-				}
-			}catch(\Exception $e)
+			//审核未通过，邮件提醒
+			if($info['status'] ==4)
 			{
-					//
+				try{
+					$merchant = \app\dao\UserInfoDao::getSlaveInstance()->find(array('user_id'=>$eventDetail['mer_id']));
+					if($merchant['email'])
+					{
+							$mail = new \app\service\MailSrv();
+							$mail->sendMail($merchant['email'], "[10BUCK通知] 活动未通过审核", "您好！<br/>您的活动".$eventDetail['event_name']." 未通过审核，原因：".$eventDetail['comment']." <br/>冻结资金已经退还,请重新发布活动<br/>谢谢<br/><br/> 10BUCK 审核团队");
+					}
+				}catch(\Exception $e)
+				{
+						//
+				}
 			}
 			
 			return true;

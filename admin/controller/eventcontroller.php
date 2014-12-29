@@ -61,7 +61,7 @@ class EventController extends BaseController {
 				}
 			}
 			else {
-				$this->showError("该活动还不能结算");
+				$this->showError("该活动还不能结算或者已经结算成功");
 			}
 			
 		}else{

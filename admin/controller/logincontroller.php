@@ -125,6 +125,80 @@ class LoginController extends BaseController {
 			$this->renderSmarty ();
 		}
 	}
+	//重置密码
+	public function repass($request,$response)
+	{
+		if($request->phone && $request->token && $this->checkPhoneNum($request->phone))
+		{
+		
+			$info = \app\dao\UserInfoDao::getSlaveInstance()->find(
+				array(
+					'user_name' => $request->phone,
+					'token' => $request->token
+				)
+			);
+			
+			if($info && $this->isPost())//form post, change password
+			{
+				
+				$pass = md5($request->inputPass1);
+				$token =md5($request->phone . time());
+				\app\dao\UserInfoDao::getSlaveInstance()->edit($info['user_id'],
+				array('token'=>$token)
+				);
+				\app\dao\UserDao::getSlaveInstance()->edit(
+					$info['user_id'], array('password'=>$pass)
+				);
+				$this->showError("重置已成功","index.php");die();
+			}
+			
+			if($info && $info['utime']+12*60*60 > strtotime('now'))//重置密码在有效期内
+			{
+				$response->token = $request->token;
+				$response->phone =$request->phone;
+				$this->renderSmarty();die();
+				
+			}
+		}
+		$this->showError("重置活动已失效",'index.php');
+	}
+	
+	
+	
+	//重置密码申请
+	public function reset($request,$response)
+	{
+		if($this->isPost()&& $request->inputEmail && $request->inputPhone)
+		{
+			$email = $request->inputEmail;
+			$phone = $request->inputPhone;
+			if($this->checkPhoneNum($phone))
+			{
+				$info = \app\dao\UserInfoDao::getSlaveInstance()->find(
+					array(
+					'user_name'=>$phone,
+					'email'=>$email
+					));
+				if($info)
+				{
+					\app\dao\UserInfoDao::getMasterInstance()->edit($info['user_id'],array('utime'=>strtotime('now')));
+					$mail = new \app\service\MailSrv();
+					$mail->sendMail($email, "10BUCK密码重置邮件", "请点击以下链接重置密码,有效期12小时：<br/><a href='http://shop.10buck.com/index.php?_c=login&_a=repass&phone=$phone&token=".$info['token']."'>http://shop.10buck.com/index.php?_c=login&_a=repass&phone=$phone&token=".$info['token']."</a>");
+					$this->showError("邮件已发送，请查收", 'index.php');
+				}
+				else{
+					$this->showError("抱歉，未找到您的账号信息，请确认输入正确", 'index.php');
+				}
+			}
+			else{
+				$this->showError("手机号输入不正确", 'index.php');
+			}
+		}
+		$this->renderSmarty();
+		
+	}
+	
+	
 	
 	private function checkPhoneNum($username)
 	{

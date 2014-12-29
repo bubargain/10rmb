@@ -45,7 +45,36 @@ class orderController extends BaseController {
 		$this->layoutSmarty ( 'index' );
 	}
 	
-
+	//解锁订单
+	public function unlock($request,$response)
+	{
+		$user_id=$this->checkLogin();
+		try{
+			$id =$request->id;
+			if(!$id)
+				$this->showError ("id is null" );
+			else{
+				$info= \app\dao\UserEventDao::getSlaveInstance()->find(
+					array(
+					'user_id' => $user_id,
+					'id' => $id
+					)
+				);
+				if($info) //校验通过
+				{
+					\app\dao\UserEventDao::getMasterInstance()->edit( $id,
+						array('status' => 0)
+					);
+					$this->showMsg("Your Bcode has been unlocked","index.php?_c=order&_a=orderList&status=unpay");
+				}
+			}
+			
+		}catch(\Exception $e)
+		{
+			$this->showError ( $e->getMessage() );
+		}
+	}
+	
 	
 	// 订单确认
 	public function confirm($request, $response) {
