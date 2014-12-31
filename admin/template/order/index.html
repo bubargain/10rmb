@@ -49,7 +49,7 @@
 
               <td align="center" class="pushItem"> {{$trade.bcode}}</td>
               <td align="center" class="pushItem">{{if $trade.noshipping}}否 {{else}}是 {{/if}}</td>
-              <td align="center" class="pushItem">{{$trade.totalfanli}}美元</td>
+              <td align="center" class="pushItem">{{$trade.totalfanli+$trade.profit}}美元</td>
               <td align="center" class="pushItem">
               	{{if $trade.status==0 }}	 已领劵
               	{{else if $trade.status==1}} {{if $trade.order_sn }} 已付款{{else}} 已锁定{{/if}}
