@@ -84,14 +84,14 @@ class StoreController extends BaseController {
 					$event['amount'] = $request->amount;
 					$event['fanli'] =$request->fanli;
 					$event['noshipping'] = $request->directReturn == ''? 0:1;  //是否支持免邮
-					
+					$event['duringtime']=$request->duringtime;
 				
 					$response->event_name = $event['event_name'];
 					$response->product_link =$event['product_link'];
 					$response->price   =$event['price'];
 					$response->amount  =$event['amount'];
 					$response->fanli   =$event['fanli'];
-				
+					$response->duringtime   =$event['duringtime'];
 			
 				
 					if($event['noshipping']==0)

@@ -82,6 +82,8 @@ class EventController extends BaseController {
 			$event['fanli'] =(float)$request->fanli;
 			$event['noshipping'] = (int)$request->noshipping;  //是否支持免邮
 			$event['user_id']=$user_id;
+			$event['duringtime'] =(int)$request->duringtime;
+			
 		
 		
 			//添加	

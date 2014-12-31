@@ -130,13 +130,13 @@ class EventSrv extends BaseSrv {
 				$lockamount=0;
 				if($eventDetail['noshipping']==0)
 				{
-					$lockamount =  floatval($eventDetail['fanli'])* floatval($eventDetail['amount']);		
+					$lockamount =  round(floatval($eventDetail['fanli'])* floatval($eventDetail['amount']),2);		
 				}
 				else {
-					$lockamount = (floatval($eventDetail['price']) + floatval($eventDetail['fanli']))* floatval($eventDetail['amount']);
+					$lockamount = round((floatval($eventDetail['price']) + floatval($eventDetail['fanli']))* floatval($eventDetail['amount']),2);
 				}
 				
-				$refunAmount = ($lockamount- $amount)* (float)$exchangerate['uvalue']; //返还的金额
+				$refunAmount = round(($lockamount- $amount)* (float)$exchangerate['uvalue'],2); //返还的金额
 				
 				//日志记录
 				 \app\dao\UserCurrencyDao::getMasterInstance()->add(
@@ -314,12 +314,13 @@ class EventSrv extends BaseSrv {
 		$lockamount=0;
 		if($post['noshipping']==0)
 		{
-			$lockamount =  floatval($post['fanli'])* floatval($post['amount']);
+			$lockamount =  round(floatval($post['fanli'])* floatval($post['amount']),2);
 						
 		}
 		else {
-			$lockamount = (floatval($post['price']) + floatval($post['fanli']))* floatval($post['amount']);
+			$lockamount = round((floatval($post['price']) + floatval($post['fanli']))* floatval($post['amount']),2);
 		}
+	
 		if( $lockamount==0 )
 			throw new \Exception("冻结金额异常,管理员将介入！",'100097');
 		 
@@ -394,7 +395,7 @@ class EventSrv extends BaseSrv {
 				'mer_id' => $post['user_id'],
 				'product_link'=> $post['product_link'],
 				'price' => $post['price'],
-		
+				'livetime'=>$post['duringtime']*86400,
 				'amount'=>$post['amount'],
 				'fanli'=>$post['fanli'],
 				'noshipping'=>$post['noshipping'],

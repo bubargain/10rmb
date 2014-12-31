@@ -5,16 +5,29 @@ class PayController extends BaseController{
 	
 	
 	public function index($request,$response){
+	
+		$user_name=$request->ip_user_name;
 		$this->checkLogin();
 		if($request->status =='pay')
 		{
 			$where = "where status in (5,6)" ;
 		}
 		
+		if($user_name)
+		{
+			$info = \app\dao\UserDao::getSlaveInstance()->find(array('user_name'=>$user_name));
+			$user_id= $info['user_id'];
+			if(!$user_id)
+				$this->showError("不存在");
+			else 
+				$where = " where user_id = $user_id ";
+		}
+		
 		$sql = "select count(*) as no from ym_user_currency ".$where ." order by id desc ";
+		
 		$ret = \app\dao\EventDao::getSlaveInstance()->getpdo()->getRow($sql);
 		$total=$ret['no'];
-
+		
         $page_size = 20;
 		// 当前页数
 		$curPageNum = $request->page ? intval ( $request->page ) : 1;
@@ -27,8 +40,14 @@ class PayController extends BaseController{
 	
 		
 		$response->page = $page->GetPageHtml();
-
+		
+		if($user_name)
+		{
+			$where = " where B.user_id = $user_id ";
+		}
 		$sql = "select A.*,B.user_name from ym_user_currency A left join ym_user B on A.user_id = B.user_id ".$where." order by A.id desc limit ".$limit;
+		
+		
 		$ret = \app\dao\EventDao::getSlaveInstance()->getPdo()->getRows($sql);
 		
 		$response->tableCon = $ret;

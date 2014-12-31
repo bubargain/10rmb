@@ -2,7 +2,14 @@
 
 	
 		<div class="span10 text-center text-info"><h3>资金流水</h3>
-       <div style="float:right" > <a href="index.php?_c=pay&status=pay" class="btn btn-large btn-info">只看提现记录</a>  </div>
+        
+        <div  class="input-append">
+        <form method="post" action="index.php?_c=pay">
+        <input type="text" name="ip_user_name" />
+       <input type="submit" class="btn"/>
+       </form>
+       </div>
+       <div style="float:right;display:block" > <a href="index.php?_c=pay&status=pay" class="btn btn-large btn-info">只看提现记录</a>  </div>
        
 		</div>
 		
