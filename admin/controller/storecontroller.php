@@ -249,12 +249,18 @@ class StoreController extends BaseController {
 			array(
 			'user_id'=>$user_id
 			) );
-				
+		//查询邀请商家数量
+		$sql = "select count(*) as num from ym_user where invite_by = $user_id";
+		$num =   \app\dao\UserInfoDao::getSlaveInstance ()->getPdo()->getRow($sql);
+		
+
+		
 		$response->nick_name = $userinfo['nick_name'];
 		$response->phone     = $userinfo['user_name'];
 		$response->email     = $userinfo['email'];
 		$response->level     = $userlevel['level'];
 		$response->ctime     = $userinfo['ctime'];
+		$response->invite    = $num['num'];
 		
 		
 		$response->storeTitle ="商家信息";
