@@ -88,7 +88,7 @@ class orderController extends BaseController {
 			$ret = $usersrv->confirmCodeUse($user_id,$id);
 			
 			if ($ret) {
-				$this->showError("SUCCEED!", "index.php?_c=order&_a=orderList&status=payed");
+				$this->showError("Input your purchase name or sn here after order placed!", "index.php?_c=order&_a=orderList&status=payed");
 			} else {
 				$this->showError('change status failed',"index.php?_c=order&_a=orderList&status=unpay");
 			}
