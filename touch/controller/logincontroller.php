@@ -111,7 +111,11 @@ class logincontroller extends BaseController {
 			$this->redirect("index.php?_c=order");
 		}
 		else if ($this->isPost ()) {
-		
+				$email = $request->temail;
+				if(!$this->checkEmail($email))
+				{
+					$this->showError("Email input error");
+				}
 				$info = \app\dao\UserDao::getSlaveInstance ()->find ( array (
 						'user_name' => $request->temail
 				) );
@@ -203,6 +207,14 @@ class logincontroller extends BaseController {
 			) );
 		}
 	}
+	
+	//check email input
+	private function checkEmail($email)
+	{
+	    $pregEmail = "/^([0-9A-Za-z\\-_\\.]+)@([0-9a-z]+\\.[a-z]{2,3}(\\.[a-z]{2})?)$/i";
+	    return preg_match($pregEmail,$email); 
+	}
+	
 	public function logout($request, $response) {
 		setcookie ( 'user_info_app', '', time () - 3600 );
 		// 删除地址跳转的cookie
