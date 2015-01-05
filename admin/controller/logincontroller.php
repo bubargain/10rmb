@@ -20,6 +20,7 @@ class LoginController extends BaseController {
 				$info = \app\dao\UserDao::getSlaveInstance ()->find ( array (
 						'user_name' => $request->user_name 
 				) );
+				
 				if (! $info || md5 ( $request->pwd ) != $info ['password']) {
 					throw new \Exception ( '账户或密码错误', 4001 );
 					//$this->showError ( '账户或密码错误' );
@@ -69,6 +70,8 @@ class LoginController extends BaseController {
 			$user['nick_name']=$request->inputName;
 			
 			$user['invite_code']=$request->inputInvite;
+			
+			
 			
 			try
 			{
@@ -141,7 +144,8 @@ class LoginController extends BaseController {
 			if($info && $this->isPost())//form post, change password
 			{
 				
-				$pass = md5($request->inputPass1);
+				$pass = md5($request->inputPassword);
+			
 				$token =md5($request->phone . time());
 				\app\dao\UserInfoDao::getSlaveInstance()->edit($info['user_id'],
 				array('token'=>$token)
