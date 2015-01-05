@@ -38,8 +38,9 @@ class XishuashuaController extends BaseController {
 							'utime' => $time,
 							'ctime' => $event['ctime'],
 							'etime' => $time,
-							'status'=>0,
+							'status'=>1,
 							'fanli'=>$fanli,
+							'bcode'=>substr(strtotime('now'),2),
 							'totalfanli'=>$fanli+$event['price'],
 							'profit'=>(float)$event['fanli'] - $fanli,
 							'livetime' => $event['livetime'],
@@ -50,6 +51,8 @@ class XishuashuaController extends BaseController {
 							'pic_link' => $event['pic_link']
 						)
 					);
+			$sql="update ym_event set applied = applied +1 where event_id=".$event['event_id'];
+			\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
 			header("Location: index.php?_c=xishuashua&searchContent=$event_id");
 		}
 		else
