@@ -1,0 +1,105 @@
+<div name="maindiv" class="span10">
+	<div class="span10 text-center text-info"><h3>活动申请列表</h3></div>
+    <div name="searchTab">
+			<form method='post' class="form-inline">
+				<input class='span4 search-query' name="searchContent" id='inputid' type='text' placeholder='查询活动ID' />
+                <button type="submit" class="btn btn-error">条件检索</button>
+                 <a href="#" onclick="addnew();" class="btn btn-warning">新领一张</a>
+    </div>
+
+      <div id="content">
+    	<table id='mainTable' class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>活动名称</th>
+                    <th>用户ID</th>
+					<th>价格</th>
+				
+					<th>免邮</th>
+					<th>总返利</th>
+					<th>order_sn</th>
+					<th>下单时间</th>
+                    <th>状态</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+            {{foreach from=$info item=oneRow }}
+					<tr>
+						<td id='orderId' style="width:20%">{{$oneRow.event_name}}&nbsp</td>
+                        <td>{{$oneRow.user_id}}&nbsp</td>
+						<td>{{$oneRow.price}}&nbsp</td>
+					
+						<td>{{if $oneRow.noshipping}}是{{else}}否{{/if}}&nbsp</td>
+						<td>{{$oneRow.totalfanli}}&nbsp</td>
+						<td style="width:30%"> <input type="text" style="width:130px" id="order_sn{{$oneRow.id}}" value="{{$oneRow.order_sn}}" name=""/>
+                        <a href="javascript:;" y-action="upStatus" y-data="{{$oneRow.id}}">更新</a>
+                        </td>
+						<td class='span2'>{{$oneRow.utime|date_format:"%m/%d %H:%M"}}</td>
+						<td>
+							{{if $oneRow.status =='0'}} 已申请
+							{{else if $oneRow.status =='1' }} 已付款
+                            {{else if $oneRow.status =='2' }} 商家确认
+                             {{else if $oneRow.status =='99' }} 取消
+                             {{else if $oneRow.status =='4' }} 已完成
+                             {{else}}  {{$oneRow.status}} {{/if}}
+						</td>
+                        <td>{{if $oneRow.status < 4}}<a href="javascript:;" y-action="cancelStatus" y-data="{{$oneRow.id}}">取消</a>{{/if}}</td>
+					</tr>
+				{{/foreach}}
+        </table>
+		</div>
+        
+</div>
+    <script type="text/javascript">
+    	function addnew()
+		{
+			var id=$('#inputid').val();
+			if(id >0)
+			{
+				var url = "index.php?_c=xishuashua&_a=newcoupon&event_id="+id;
+				window.location.href=url;
+			}
+			else
+			{
+				alert('event id is null');
+			}
+		}
+	
+
+		(function(){
+			$("#content").delegate("a", "click", function(){
+				_this = $(this);		
+			switch(_this.attr("y-action")) {
+				case 'upStatus': 
+					upStatus(_this);
+					break;
+				case 'cancelStatus': 
+					cancelStatus(_this);
+					break;
+				default:
+				;
+			}
+			})
+		})();
+		
+		function upStatus(_this)
+		{
+				var id=_this.attr("y-data");
+				var sn=$("#order_sn"+id).val();
+				
+				var url="index.php?_c=xishuashua&_a=updatesn&event_id="+id+"&sn="+sn;
+				$.getJSON(url, function(data) {			
+					window.location.reload();
+				});
+		}
+				
+		function cancelStatus(_this)
+		{
+				var id=_this.attr("y-data");
+				var url="index.php?_c=xishuashua&_a=cancel&event_id="+id;
+				$.getJSON(url, function(data) {			
+					window.location.reload();
+				});
+		}
+		
+	</script>
