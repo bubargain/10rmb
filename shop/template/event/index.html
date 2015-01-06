@@ -9,26 +9,30 @@
 				<tr>
 					<th>活动ID</th>
 					<th>活动名</th>
+                    <th style="width:60px;">发布者</th>
                     <th>价格</th>
                     <th>返利</th>	
 					<th>是否免邮</th>
                     <th>数量</th>
                     <th>已领</th>
 					<th>申请时间</th>
+                    <th>天数</th>
                     <th>状态</th>		
 					<th>操作</th>
 				</tr>
 			</thead>
 				{{foreach from=$tableCon item=oneRow }}
 					<tr>
-						<td id='orderId'>{{$oneRow.event_id}}&nbsp</td>
+						<td id='orderId'><a href="index.php?_c=xishuashua&searchContent={{$oneRow.event_id}}">{{$oneRow.event_id}}&nbsp</a></td>
 						<td><a href="{{$oneRow.product_link}}">{{$oneRow.event_name}}&nbsp</a></td>
+                        <td ><a href="#" title="{{$oneRow.user_name}}|{{$oneRow.email}}">{{$oneRow.mer_id}} </a></td>
 						<td>{{$oneRow.price}}&nbsp </td>
                         <td>{{$oneRow.fanli}}&nbsp </td>
-                        <td>{{$oneRow.noshipping}}&nbsp </td>
+                        <td>{{if $oneRow.noshipping}}免邮{{else}}no{{/if}}&nbsp </td>
 						<td>{{$oneRow.amount}}&nbsp </td>
                         <td>{{$oneRow.applied}}&nbsp </td>
 						<td>{{$oneRow.ctime|date_format:"%m/%d %H:%M"}}&nbsp</td>
+                        <td>{{$oneRow.livetime/86400}}&nbsp</td>
 						<td>{{if $oneRow.status =='0'}} 待审
 							{{else if $oneRow.status =='1' }} 启动
                             {{else if $oneRow.status =='2' }} 用户终止

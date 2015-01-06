@@ -27,7 +27,7 @@ class EventController extends BaseController {
 		
 		$response->page = $page->GetPageHtml();
 
-		$sql = "select * from ym_event order by event_id desc limit ".$limit;
+		$sql = "select A.*,B.user_name,B.email from ym_event A left join ym_user_info B on A.mer_id = B.user_id order by event_id desc limit ".$limit;
 		$ret = \app\dao\EventDao::getSlaveInstance()->getPdo()->getRows($sql);
 		
 		$response->tableCon = $ret;
