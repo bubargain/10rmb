@@ -31,18 +31,18 @@ class EventController extends BaseController {
 			array('event_id'=>$event_id,'status'=>3));
 			if($eventInfo)
 			{
-				$targtime = $eventInfo['ctime'] + 3*24*60*60;
+				$targtime = $eventInfo['ctime'] + $eventInfo['livetime']+12*60*60;
 				$_time = strtotime('now');
 				$sql = "select count(*) as num from ym_user_event where event_id = $event_id and status in (1,3)";
 				$ret = \app\dao\UserEventDao::getSlaveInstance()->getPdo()->getRow($sql);
 				$num = $ret['num'];
 				if($num > 0 )
 				{
-					$this->showError("有".$num."个用户已确认付款，但是您未确认交易,请处理后再申请");
+					$this->showError("有".$num."个用户锁定了返利劵但是未输入订单信息，请等其完成交易或12小时系统自动取消");
 				}
 				else if($targtime > $_time) //活动结束超过3天
 				{
-					$this->showError("用户在活动结束1天内仍有可能领劵，还需等待". ($_time-$targtime)."秒哦");
+					$this->showError("用户在活动结束12小时内仍有机会完成交易，还需等待". (int)($_time-$targtime/60)."分钟哦");
 				}
 				else{
 					try{
@@ -50,10 +50,8 @@ class EventController extends BaseController {
 						$status=$refund->refund($event_id);
 						//mail 状态
 						
-						if($status = true)
-							$this->showError("结算成功");
-						else
-							$this->showError("结算成功");
+						$this->showError("结算成功","index.php");
+						
 					}catch(\Exception $e)
 					{
 						$this->showError($e->getMessage());

@@ -138,6 +138,21 @@ class EventSrv extends BaseSrv {
 				
 				$refunAmount = round(($lockamount- $amount)* (float)$exchangerate['uvalue'],2); //返还的金额
 				
+				//邮件提示
+				try{
+					$mail = new \app\service\MailSrv();
+					$content = sprintf("您的活动%s已经结束，返利金额:%.2f美元,剩余返还资金:%.2f元。谢谢<br/><br/>10BUCK 项目组",$info['event_name'],$amount,$refunAmount);
+					$title = "[10BUCK]活动结算通知";
+					$tmp=\app\dao\UserInfoDao::getSlaveInstance()->find($info['mer_id']);
+					$mailto = $tmp['email'];
+					if($mailto)
+						$mail->sendMail($mailto, $title, $content);
+				}catch(\Exception $e){}
+				
+				
+				
+				
+				
 				//日志记录
 				 \app\dao\UserCurrencyDao::getMasterInstance()->add(
 					array(
@@ -149,6 +164,8 @@ class EventSrv extends BaseSrv {
 						'sn' => 'buck'.$event_id
 					)
 				);
+				
+				
 				
 				
 				//修改event状态为5 已完成
