@@ -37,7 +37,7 @@
                 
 						<td>{{$oneRow.ctime|date_format:"%m/%d %H:%M"}}&nbsp</td>
 						<td>{{if $oneRow.status =='6'}} 提现完成
-							{{else if $oneRow.status =='1' }} 充值
+							{{else if $oneRow.status =='1' }} <font color="red">充值</font>
                             {{else if $oneRow.status =='2' }} 冻结
                              {{else if $oneRow.status =='3' }} 退款
                              {{else if $oneRow.status =='4' }} 返利
