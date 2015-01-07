@@ -1,0 +1,68 @@
+<div name="maindiv" class="span10">
+	<div class="span10 text-center text-info"><h3>运单申请列表</h3></div>
+<div name="searchTab">使用请小心细致</div>
+
+      <div id="content">
+      	<table id='mainTable' class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>id</th>
+                    <th>用户id</th>
+					<th>销售渠道</th>
+					<th>国家</th>
+					<th>申请时间</th>
+					<th>活动ID</th>
+                    <th>单号</th>
+			
+				</tr>
+			</thead>
+            {{if $info}}
+            	{{foreach from=$info item=item}}
+                	<tr>
+                    	<td>{{$item.id}}</td>
+                        <td>{{$item.user_id}}</td>
+                        <td>{{$item.channel}}</td>
+                        <td>{{$item.country}}</td>
+                        <td>{{$item.ctime|date_format:"%m/%d %H:%M"}}</td>
+                        <td>{{$item.event_id}}</td>
+                        <td>
+                        	<input type="text" id="logsn{{$item.id}}" name="logsn{{$item.id}}" />
+                            <a href="javascript:;" y-action="updatesn" y-data="{{$item.id}}">更新</a>
+                        </td>
+                    </tr>
+                {{/foreach}}
+            {{/if}}
+        </table>
+      </div>
+      
+</div>
+ <script type="text/javascript">
+
+
+		(function(){
+			$("#content").delegate("a", "click", function(){
+				_this = $(this);		
+			switch(_this.attr("y-action")) {
+				case 'updatesn': 
+					updatesn(_this);
+					break;
+		
+				default:
+				;
+			}
+			})
+		})();
+		
+		function updatesn(_this)
+		{
+				var id=_this.attr("y-data");
+				var sn=$("#logsn"+id).val();
+				
+				var url="index.php?_c=logistic&_a=updatesn&id="+id+"&sn="+sn;
+				$.getJSON(url, function(data) {			
+					window.location.reload();
+				});
+		}
+				
+
+	</script>

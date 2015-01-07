@@ -52,49 +52,58 @@ class EventController extends BaseController {
 			
 			$event_id = $request->eid;
 			
-			$name= $request->inputName;
-			$link= $request->inputLink;
-			$pic = $request->inputPic;
-			$store=$request->store;
-			$comment = $request->inputComment;
-			if($request->iverify == 1 )
+			$eventinfo=\app\dao\EventDao::getSlaveInstance()->find($event_id);
+			if($eventinfo['status']==0)
 			{
-				$status= 1;
-				if(!$link || !pic)
+				$name= $request->inputName;
+				$link= $request->inputLink;
+				$pic = $request->inputPic;
+				$store=$request->store;
+				$comment = $request->inputComment;
+				if($request->iverify == 1 )
 				{
-					$this->showError("links can't be empty");
+					$status= 1;
+					if(!$link || !pic)
+					{
+						$this->showError("links can't be empty");
+					}
 				}
-			}
-			else 
-				$status=4;
+				else 
+					$status=4;
+					
+				if($event_id == null)
+					$this->showError("lost id");
 				
-			if($event_id == null)
-				$this->showError("lost id");
+				
 			
-			
-		
-			\app\dao\EventDao::getMasterInstance()->edit($event_id,
-				array(
-					'event_name'=>$name,
-					'product_link'=>$link,
-					'pic_link'=>$pic,
-					'comment'=>$comment,
-					'status' => $status,
-					'store' =>$store
-				)
-			);
-			if($status==4) //退还冻结金额
-			{
-				try{
-					$refundsrv = new \app\service\EventSrv();
-					$refundsrv->refund($event_id);	
-				}catch (\Exception $e)
+				\app\dao\EventDao::getMasterInstance()->edit($event_id,
+					array(
+						'event_name'=>$name,
+						'product_link'=>$link,
+						'pic_link'=>$pic,
+						'comment'=>$comment,
+						'status' => $status,
+						'store' =>$store
+					)
+				);
+				if($status==4) //退还冻结金额
 				{
-					$this->showError($e->getMessage());
+					try{
+						$refundsrv = new \app\service\EventSrv();
+						$refundsrv->refund($event_id);	
+					}catch (\Exception $e)
+					{
+						$this->showError($e->getMessage());
+					}
 				}
+				$this->success("index.php?_c=event","success");
+				
 			}
-			$this->success("index.php?_c=event","success");
-			
+			else
+			{
+				$this->showError("请勿重复提交");
+			}
+		
 		}
 		
 		

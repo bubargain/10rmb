@@ -2,28 +2,10 @@
  
  	 <ul class="breadcrumb">
                 <li><a href="#">首页</a> <span class="divider">/</span></li>
-                <li><a href="#">交易记录</a> <span class="divider">/</span></li>
+                <li><a href="#">交易查看</a> <span class="divider">/</span></li>
                 
      </ul>
-     <table border="0" width="100%" >
-     <tr><td>
-         <form class="form-inline" method="post" action="?_c=order">
-             <select id="sevent" name="sevent">
-             		<option value="">请选择要查询的活动</option>
-             	   	{{foreach from=$events item=event}}
-     					<option value="{{$event.event_id}}">{{$event.event_name}}</option>
-     				{{/foreach}}
-             </select>
-             <input type="submit" class="btn btn-small btn-warning" value+"搜索"/>
-   		 </form>
-        </td><td> 
-          <form class="form-inline" method="post" action="?_c=order">
-             <input type="text" id="bcode" name="bcode" placeholder="按bcode查询"/>
-   
-             <input type="submit" class="btn btn-small " value+"查询"/>
-   		 </form>
-         </td></tr>
-     </table>
+
  	<table width="100%" border="0" cellspacing="0" cellpadding="5" id="content">
   	<tr>
   	  
@@ -37,8 +19,7 @@
       <th align="center" width="10%" class="pushItem">状态</th>
       <th align="center" width="8%" class="pushItem">订单号/购买名称</th>
       <th align="center"   class="pushItem">更新时间</th>
-      <th align="center" width="10%" class="pushItem">操作</th>
-       <th align="center" width="10%" class="pushItem">操作</th>
+    
       
   	</tr>
    
@@ -63,21 +44,7 @@
               </td>
               <td align="center" class="pushItem">{{$trade.order_sn}}</td>
               <td align="center" class="pushItem">{{$trade.utime|date_format:"%Y/%m/%d %H:%M"}}</td>
-              <td align="center" class="pushItem">
-              {{if $trade.status < 2}}	
-            	  <a href="#"  y-action="upStatus" y-data="status={{$trade.status}}&tradeid={{$trade.id}}" class="btn btn-info btn-small">确认返利</a>
-              {{/if}}
-               </td>
-              <td align="center" class="pushItem"> 
-               {{if $trade.status==1 }}	
-            	   <a href="#myModal" role="button" class="btn btn-small" data-toggle="modal"> 提起纠纷</a>
-               {{else if $trade.status==4 }}
-               	{{if $trade.apply_logistic_sn == 0}}
-               		<a href="#applySn" role="button" y-action="applySnStatus" y-data="{{$trade.id}}" class="btn btn-small" data-toggle="modal"> 申请运单</a>
-                {{else}}运单已申请{{/if}}    
-               {{/if}}
-             
-              </td>
+        
             
               
              </tr>
@@ -121,7 +88,7 @@
             <option value="jp">日本</option>
             <option value="other">其他国家（告知客服）</option>
         </select> 
-        <p>运单号为货代公司提供，单号唯一使用，目前不收取费用！</p>
+        <p>运单号为货代公司提供，单号唯一使用，收费0.6元</p>
         <p class="alert">*当天申请运单，一般第二天发放</p>
         </div>
         <div class="modal-footer">
@@ -132,34 +99,3 @@
 </div>
  
  <!-- ajax : modify event staus -->
- <script>
-
- 	(function(){
-		$("#content").delegate("div,a", "click", function(){
-			_this = $(this);	
-			switch(_this.attr("y-action")) {		
-				case 'upStatus': 
-					upStatus(_this);
-					break;
-				case 'applySnStatus':
-					applySnStatus(_this);
-				default:
-				;
-			}
-		});
-		
-		function upStatus(_this) {
-			var url = "index.php?_c=order&_a=status&" + _this.attr("y-data");
-			$.getJSON(url, function(data) {			
-				window.location.href="/index.php?_c=order&sevent={{$event_id}}";
-			});
-		}
-		function applySnStatus(_this)
-		{
-			var id = _this.attr("y-data");
-			$('#hi_event_id').val(id);
-		}
-		
-		
-	})();
- </script>

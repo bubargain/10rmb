@@ -26,7 +26,7 @@ class OrderController extends BaseController {
 				array('mer_id'=>$this->current_user['user_id'] , 'event_id'=>$event_id)
 			);
 			if(!$tmp)
-				$this->showError('没有权限');
+				$this->showError('警告！该行为可导致您被封号，有问题请联系管理员');
 			$sql="select * from ym_user_event where event_id = $event_id and status < 100 order by id";
 			$eventInfo = \app\dao\UserEventDao::getSlaveInstance()->getPdo()->getRows($sql);	
 			$response->eventInfo = $eventInfo;

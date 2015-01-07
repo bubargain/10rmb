@@ -9,8 +9,6 @@ class IndexController extends BaseController {
 
         \sprite\lib\Debug::log('user', $this->current_user);
         $response->current_user = $this->current_user;
-
-
         $this->layoutSmarty();
 	}
 

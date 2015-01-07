@@ -1,0 +1,56 @@
+<div class="span9">
+      		    <ul class="breadcrumb">
+                <li><a href="index.php">首页</a> <span class="divider">/</span></li>
+                <li><a href="#">运单管理</a> <span class="divider">/</span></li>
+             
+                </ul>
+                
+                {{if !$hasSn}}
+                 <div class="alert alert-error alert-block" >
+              	  <h4>提示</h4>
+                  <p>你目前还没有申请过运单号！</p>
+               	   本平台只针对内部交易提供运单号，请移步“交易记录”为已完成的返利活动申请运单号。
+                </div>
+
+                {{else}}
+                 <div class="control-group">
+                	
+                	<p class="alert">您申请的运单信息<br/>运单号为第三方提供，如果有问题请联系客服</p>
+            	</div>
+               
+                <table class="table table-hover">
+                	<tr>
+                    	
+                        <th>活动</th>
+                        <th>运单号</th>
+                        <th>国家（缩写）</th>
+                     
+                        <th>申请时间</th>
+                        
+                    </tr>
+                    {{foreach from=$info item=item}}
+                    	<tr>
+                            <td>DDH{{$item.event_id}}</td>
+                            <td>{{if $item.logistic_sn}}{{$item.logistic_sn}} {{else}}申领中{{/if}}</td>
+                            <td>{{$item.country}}</td>
+                            <td>{{$item.ctime|date_format:"%Y-%m-%d %H:%M:%S"}}</td>
+                        </tr>
+                   	{{/foreach}}
+                </table>
+                
+                <!--分页类-->
+                	<style type="text/css">
+						.carInfo {width:800px;height:56px;border-top:1px #e1e1e1 solid;overflow:hidden;margin:0 auto;}
+						.carInfo dt {float:left;padding:16px 0 0 3px;color:#323232;}
+						.carInfo i {padding-right:30px;}
+						.carInfo dd {float:right;padding-top:13px;}
+						</style>
+						<table>
+						<tr>
+							<td align="center" colspan="8">{{$page}}</td>
+						</tr>
+						</table>
+                <p style="float:right">us: 美国，Fr:法国，uk：英国，ru:俄罗斯，ca:加拿大,other:其他</p>
+                {{/if}}
+                
+ </div>
