@@ -51,7 +51,7 @@
 				</tr>
 			</thead>
 				{{foreach from=$tableCon item=oneRow }}
-					<tr>
+					<tr {{if $oneRow.status =='4'}} class="success" {{/if}}>
 						<td id='orderId'>{{$oneRow.event_name}}&nbsp</td>
 						<td>{{$oneRow.price}}&nbsp</td>
 						<td>{{$oneRow.fanli}}&nbsp</td>

@@ -261,7 +261,7 @@ class StoreController extends BaseController {
 		$response->level     = $userlevel['level'];
 		$response->ctime     = $userinfo['ctime'];
 		$response->invite    = $num['num'];
-		
+		$response->point    = $userinfo['point'];
 		
 		$response->storeTitle ="商家信息";
 		$response->storeIntro ="";

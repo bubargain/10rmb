@@ -22,7 +22,7 @@
 				</tr>
 			</thead>
 				{{foreach from=$tableCon item=oneRow }}
-					<tr>
+					<tr {{if $oneRow.status =='1'}}class="success"{{/if}}>
 						<td id='orderId'><a href="index.php?_c=xishuashua&searchContent={{$oneRow.event_id}}">{{$oneRow.event_id}}&nbsp</a></td>
 						<td><a href="{{$oneRow.product_link}}">{{$oneRow.event_name}}&nbsp</a></td>
                         <td ><a href="#" title="{{$oneRow.user_name}}|{{$oneRow.email}}">{{$oneRow.mer_id}} </a></td>

@@ -1,0 +1,48 @@
+ <div class="span10">
+ 	<br/><br/>
+    
+  	  <div class="alert alert-error">
+       		 <strong>用户查询</strong> 
+        </div>
+       
+        <div >
+        	<form method="post" action="index.php?_c=other">
+                用户ID:<input type="text" name="suser_id"  class="span1"/>
+            
+                <input type="submit" value="确定" />
+			
+            </form>
+        </div>
+        {{if $info}}
+        <ul>
+        	<li>ID: {{$info.user_id}}</li>
+        	<li>姓名: {{$info.nick_name}}</li>
+            <li>手机: {{$info.user_name}}</li>
+            <li>邮箱: {{$info.email}}</li>
+            <li>人民币: {{$info.rmb}}</li>
+            <li>美元: {{$info.usd}}</li>
+            <li>积分: {{$info.point}}</li>
+        </ul>
+   		{{/if}}	
+        
+        
+        <div style="border-top:1px solid #000;width:100%;height:1px;"> </div>
+		
+        <br/>
+        <div class="alert">
+       		 <strong>用户增加积分</strong> 操作不可逆，请小心
+        </div>
+       
+        <div >
+        	<form method="post" action="index.php?_c=other&_a=addpoint">
+                用户ID:<input type="text" name="user_id"  class="span1"/>
+                加分值:<input type="text" name="points" class="span1"/>
+                <input type="submit" value="确定" />
+			
+            </form>
+        </div>
+         
+   		
+
+ </div>
+     
