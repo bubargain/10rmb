@@ -54,6 +54,7 @@ footer {
 	width:90%;
 	overflow:hidden;
 	border-bottom:none;
+	font-size:10px;
 }
 .order_list{
 	min-height:300px;
@@ -118,7 +119,7 @@ footer {
 	display:-webkit-box;
 	padding:10px 16px;
 	min-height:50px;
-	line-height:50px;
+	line-height:100%;
 	border-bottom:1px solid #C9C9C9;
 }
 .order .order-tit {

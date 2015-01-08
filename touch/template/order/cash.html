@@ -38,9 +38,10 @@
 (function(){
 	$('#sumitForm').click(function(){
 		
-		if($('#applyamount').val() < 10 ){
-			alert('MININUM 10 USD');	
-		}else if($('#applyamount').val() > $('#amount').val())
+		//if($('#applyamount').val() < 10 ){
+		//	alert('MININUM 10 USD');	
+		//}else 
+		if($('#applyamount').val() > $('#amount').val())
 		{
 			alert("You don't have such amount");	
 		}
