@@ -40,9 +40,9 @@ class EventController extends BaseController {
 				{
 					$this->showError("有".$num."个用户锁定了返利劵但是未输入订单信息，请等其完成交易或12小时系统自动取消");
 				}
-				else if($targtime > $_time) //活动结束超过3天
+				else if($targtime > $_time) //活动结束超过12小时
 				{
-					$this->showError("用户在活动结束12小时内仍有机会完成交易，还需等待". (int)($_time-$targtime/60)."分钟哦");
+					$this->showError("活动结束12小时后可结算，还需等待". (int)(($targtime-$_time)/60)."分钟哦");
 				}
 				else{
 					try{
