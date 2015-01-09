@@ -49,9 +49,8 @@ class EventController extends BaseController {
 						$refund= new \app\service\EventSrv();
 						$status=$refund->refund($event_id);
 						//mail 状态
-						
-						$this->showError("结算成功","index.php");
-						
+						$this->showError("结算成功","index.php");		
+										
 					}catch(\Exception $e)
 					{
 						$this->showError($e->getMessage());

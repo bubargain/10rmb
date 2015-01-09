@@ -69,7 +69,8 @@ class orderController extends BaseController {
 					\app\dao\UserEventDao::getMasterInstance()->edit( $id,
 						array('status' => 0)
 					);
-					$this->showMsg("Your Bcode has been unlocked","index.php?_c=order&_a=orderList&status=unpay");
+					header("Location:index.php?_c=order&_a=orderList&status=unpay");
+					//$this->showMsg("Your Bcode has been unlocked","index.php?_c=order&_a=orderList&status=unpay");
 				}
 			}
 			
@@ -92,14 +93,16 @@ class orderController extends BaseController {
 			$ret = $usersrv->confirmCodeUse($user_id,$id);
 			
 			if ($ret) {
-				$this->showError("Input your purchase name or sn here after order placed!", "index.php?_c=order&_a=orderList&status=payed");
+				header("Location:index.php?_c=order&_a=orderList&status=payed");
+				//$this->showMessage("Input your purchase name or sn here after order placed!", "index.php?_c=order&_a=orderList&status=payed");
 			} else {
-				$this->showError('change status failed',"index.php?_c=order&_a=orderList&status=unpay");
+				header("Location:index.php?_c=order&_a=orderList&status=unpay");
+				//$this->showError('change status failed',"index.php?_c=order&_a=orderList&status=unpay");
 			}
 		
 		} catch ( \Exception $e ) {
 			//$message = ($e->getCode () == 50002) ? '太火爆，卖完了！' : $e->getMessage ();
-			$this->showError ( $e->getMessage() );
+			$this->showMessage ( $e->getMessage() ,"index.php?_c=order&_a=orderList");
 		}
 	}
 	
