@@ -67,8 +67,11 @@ class orderController extends BaseController {
 				if($info) //校验通过
 				{
 					\app\dao\UserEventDao::getMasterInstance()->edit( $id,
-						array('status' => 0)
+						array('status' => 0,'utime'=>strtotime('now'))
 					);
+					$event_id = $info['event_id'];
+					$sql = "update ym_event set applied=applied-1 where event_id =$event_id";
+					\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
 					header("Location:index.php?_c=order&_a=orderList&status=unpay");
 					//$this->showMsg("Your Bcode has been unlocked","index.php?_c=order&_a=orderList&status=unpay");
 				}
