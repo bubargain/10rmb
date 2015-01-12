@@ -74,7 +74,10 @@
                {{else if $trade.status==4 }}
                	{{if $trade.apply_logistic_sn == 0}}
                		<a href="#applySn" role="button" y-action="applySnStatus" y-data="{{$trade.id}}" class="btn btn-small" data-toggle="modal"> 申请运单</a>
-                {{else}}运单已申请{{/if}}    
+                {{else}}
+                	<a href="#orderModal" role="button" y-action="orderStatus" y-data="{{$trade.id}}" data-toggle="modal">查看运单</a>
+                
+                {{/if}}    
                {{/if}}
              
               </td>
@@ -102,6 +105,22 @@
    
     </div>
 </div>
+
+ <!-- Modal -->
+<div id="orderModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="orderModalLabel">您的运单号</h3>
+    </div>
+   	<div class="modal-body">
+    <p id="orderSn"></p>
+    </div>
+    <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+   
+    </div>
+</div>
+
 
  <!-- Modal -->
 <div id="applySn" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -390,6 +409,8 @@
 					break;
 				case 'applySnStatus':
 					applySnStatus(_this);
+				case 'orderStatus':
+					orderStatus(_this);
 				default:
 				;
 			}
@@ -406,6 +427,14 @@
 			var id = _this.attr("y-data");
 			$('#hi_event_id').val(id);
 		}
+		function orderStatus(_this)
+		{
+			var url = "index.php?_c=api&_a=wuliusn&id=" + _this.attr("y-data");
+			$.getJSON(url, function(data) {			
+				$("#orderSn").html(data.sn);
+			});
+		}
+			
 		
 		
 	})();

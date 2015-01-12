@@ -12,7 +12,7 @@
                 <dd class="fr"><a href="index.php?_c=login&_a=logout" class="btn">Logout</a></dd>
             </dl>
             <ul class="myorder">
-                <li><a href="#">My Saving: <p class="fr" style="color:#0C6;display:inline">${{$saving}}&nbsp;&nbsp;</p></a></li>
+                <li><a href="#">My Saving: <p class="fr" style="color:#0C6;display:inline">${{$saving|string_format:"%.1f"}}&nbsp;&nbsp;</p></a></li>
                 <li>{{if $unpayCnt}}<span>{{$unpayCnt}}</span>{{/if}}<a href="index.php?_c=order&_a=orderList&status=unpay">My Bcodes</a><ins></ins></li>
                 
               

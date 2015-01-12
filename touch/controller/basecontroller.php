@@ -38,14 +38,18 @@ class BaseController extends Controller {
 		self::showMsg ( $msg, $url );
 	}
 	public function showMsg($msg, $url = '') {
+		echo '<!doctype html><html><head><meta charset="utf-8"><body>';
+
 		echo "<script type=\"text/javascript\">";
-		echo "alert('" . $msg . "');";
+		
 		if (! empty ( $url )) {
-			echo "window.location.href='" . $url . "';";
+			$link = "window.location.href='" . $url . "'";
 		} else {
-			echo "history.back();";
+			$link = "history.back()";
 		}
-		echo "</script>";
+		echo "alert('" . $msg . "');";
+		
+		echo "</script></body></html>";
 		exit ();
 	}
 	public function showMessage($txt, $url) {

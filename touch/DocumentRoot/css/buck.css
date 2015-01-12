@@ -66,7 +66,7 @@ footer {
 	height:100px;
 }
 .alertMsg {
-	width:380px;
+	width:75%;
 	height:120px;
 	padding:10px;
 	line-height:1.5em;
@@ -82,6 +82,9 @@ footer {
 	left:35%;
 	top:50%;
 	margin:-53px 0 0 -103px;
+}
+.hide {
+	display:none;
 }
 .order .order-pro section:first-child {
 	min-width:100px;

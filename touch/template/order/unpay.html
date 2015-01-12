@@ -15,10 +15,10 @@
 			</ul>
 		</div>
 		{{if $params}}
-        <div class="order_list">
+        <div class="order_list content">
             {{foreach from = $params item = item}}
             <div class="order">
-                <a href="#}">
+                <a href="#">
                 <div class="order-pro">
                     <section><img src="{{$item.pic_link}}"></section>
                    
@@ -33,7 +33,9 @@
                 <div class="order-tit">
                     <section class="fl cGray"><a href="index.php?_c=goods&_a=about&id={{$item.id}}" class="btnw">VIEW BCODE</a>
                      <br/>BCODE will expired in 8 hours.</section>
-                    <section class="fr cWhite"><a href="index.php?_c=order&_a=confirm&id={{$item.id}}" class="btn">LOCK</a></section>
+                    <section class="fr cWhite"><a href="index.php?_c=order&_a=confirm&id={{$item.id}}"  class="btn">LOCK</a></section>-->
+                    
+                
                      
                 </div>
             </div>
@@ -45,3 +47,14 @@
 	</section>
 </section>
 </div>
+<script>
+
+function upStatus(id){
+	
+	var url = "index.php?_c=order&_a=confirm&id=" + id;
+			$.getJSON(url, function(data) {			
+				window.location.reload();
+			});
+}
+
+</script>

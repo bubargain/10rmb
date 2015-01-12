@@ -1424,7 +1424,7 @@ function alertMSG(txt,time,fn){
 	var element = $("#alertMsg").css('display','-webkit-box;').html(txt).show(),time = time || 1000;
 	setTimeout(function(){
 		element.hide();
-		fn && fn();
+		//fn && fn();
 	},time);
 	
 }
