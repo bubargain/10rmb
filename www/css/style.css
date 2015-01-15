@@ -12,7 +12,7 @@ blockquote,q{quotes:none;}
 blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
 table{border-collapse:collapse;border-spacing:0;}
 /* start editing from here */
-.header{font-size;18px;color:#FFF;margin-top:10px}
+.header{font-size;18px;color:#FFF;margin-top:20px;display:inline;margin-left:20px}
 .header a{font-size;18px;color:#FFF}
 a{text-decoration:none;}
 .txt-rt{text-align:right;}/* text align right */
@@ -30,13 +30,20 @@ nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
 img{max-width:100%;}
 /*end reset*/
 body{
-	background:url(http://7s1rnv.com1.z0.glb.clouddn.com/10buckbk.jpg) repeat-x;
+	
 }
 /*----start-wrap----*/
 .wrap{
-	width:80%;
+	width:100%;
 	margin:0 auto;
+	align:center;
 
+}
+.content2{
+		width:80%;
+		align:center;
+		margin-right:auto;
+		margin-left:auto;
 }
 .logo{
 	text-align:center;
@@ -66,25 +73,31 @@ body{
 	padding-bottom: 20px;
 	text-transform: uppercase;
 }
+.content{
+	width:100%;
+	background:url(http://7s1rnv.com1.z0.glb.clouddn.com/10buckbk.jpg) repeat-x;
+}
 .grids {
 	margin: 0 auto;
 	width: 71%;
 	padding: 7% 0 0 0;
+	
 }
 /*----boxs----*/
 .boxs{
 		margin: 95px 0 60px 0;
 		font-size:22px;
+		display:block;
 }
 .box h3,.box p{
 	font-family: 'Fauna One', serif;
-
 	text-align:center;
 	color:#383e48;
 }
 .box h3{
 	font-size:1.5em;
 	padding-bottom: 12px;
+
 }
 .box p{
 	font-size:0.875em;
@@ -324,6 +337,9 @@ body{
 /*----responsive-design-----*/
 @media only screen and (max-width: 1366px) and (min-width: 1280px) {
 	.wrap{
+		width:100%;
+	}
+	.content2{
 		width:95%;
 	}
 	.box-sites {
@@ -342,6 +358,9 @@ body{
 }
 @media only screen and (max-width: 1280px) and (min-width: 1024px) {
 	.wrap{
+		width:100%;
+	}
+	.content2{
 		width:95%;
 	}
 	.grids {
@@ -364,6 +383,9 @@ body{
 }
 @media only screen and (max-width: 1024px) and (min-width: 768px) {
 	.wrap{
+		width:100%;
+	}
+	.content2{
 		width:95%;
 	}
 	.grids {
@@ -379,6 +401,9 @@ body{
 }
 @media only screen and (max-width: 768px) and (min-width: 640px) {
 	.wrap{
+		width:100%;
+	}
+	.content2{
 		width:95%;
 	}
 	.grids {
