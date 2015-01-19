@@ -34,6 +34,28 @@ class indexcontroller extends BaseController {
 		$smarty->render(strtolower($action_template));
 		
 	}
+	
+	/***
+	* 真实购买返利页
+	*/
+	
+	public function newlaunch($request,$response){
+		
+		//获取数据
+		$event = new \app\service\SearchSrv();
+		$newEvent = $event->newEvents(1,12);
+			
+		$response->newEvent = $newEvent;
+		$action_template = $this->_controller .'/newlaunch.html';
+		$smarty =  new \sprite\mvc\SmartyView($this->_response);
+		$smarty->render(strtolower($action_template));
+	}
+	
+	
+	
+	
+	
+	
 	public function about($request, $response) {
 		$response->title = 'CONTACT';
 		$this->layoutSmarty ( 'about' );

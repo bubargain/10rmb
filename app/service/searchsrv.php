@@ -18,6 +18,21 @@ namespace app\service;
 
 class SearchSrv extends BaseSrv {
 	
+	/*
+	 * 查询最新的真实返利活动
+	 * 不含精准推荐引擎，按时间排序
+	 */
+	public function newEvents($start,$count=12){
+		$limit= ($start-1)*$count .','.$count;
+		$sql="select price,event_id,fanli,pic_link from ym_event where status=0 order by event_id desc  limit $limit ";
+		$list = \app\dao\EventDao::getSlaveInstance ()->getpdo()->getRows($sql);
+		return $list;
+	}
+	
+	
+	
+	
+	//查询免邮模式的每日任务列表
 	public function search ($params, $amount)
 	{
 		/*$limit= ($page-1)*skip .','.$skip;
