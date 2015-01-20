@@ -2,20 +2,44 @@
 namespace admin\controller;
 
 use sprite\mvc\controller;
+use app\common\util\SubPages;
 
 class EventController extends BaseController {
 	
 	public function index($request,$response)
 	{
 		$user_id=$this->checkLogin();
+		
+		
+		
+		
+		
+		
 		$response->storeTitle ="活动列表";
 		$response->storeIntro ="管理你进行中的活动";
 		$user_id = $this->current_user['user_id'];
-		$events = \app\dao\EventDao::getSlaveInstance()->findAll (
-			array("mer_id" => $user_id)
-		);
-		$response->events = $events;
+		
+		//翻页类
+		$sql="select count(*) as no from ym_event where mer_id=$user_id";
+        $ret= \app\dao\EventDao::getSlaveInstance()->getPdo()->getRow($sql);
+        $total=$ret['no'];
 
+        $page_size = 15;
+		// 当前页数
+		$curPageNum = $request->page ? intval ( $request->page ) : 1;
+		// url
+		$url = preg_replace ( '/([?|&]page=\d+)/', '', $_SERVER ['REQUEST_URI'] );
+		// 分页对象
+
+		$page = new SubPages( $url, $page_size, $total, $curPageNum );
+		$limit = $page->GetLimit() ;
+		$response->page = $page->GetPageHtml();
+		
+		
+		$sql = "select * from ym_event where mer_id=$user_id order by ctime desc limit ".$limit;
+		$info = \app\dao\EventDao::getSlaveInstance()->getPdo()->getRows($sql);
+		$response->events =$info;
+		
 		$this->layoutSmarty('index');
 	}
 	//商家申请结算活动余额

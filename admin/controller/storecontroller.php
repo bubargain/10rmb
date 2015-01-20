@@ -3,6 +3,7 @@
 namespace admin\controller;
 
 use sprite\mvc\controller;
+use app\common\util\SubPages;
 use \stdClass;
 use \app\dao\PaymentDao;
 
@@ -155,7 +156,25 @@ class StoreController extends BaseController {
 				'user_id' => $user_id
 			));
 			$response->money = $user['rmb'];
-			$sql= "select * from ym_user_currency where user_id = $user_id and status in (1,2,3,5,6,7) order by id desc limit 10";
+			
+			//翻页类
+		$sql="select count(*) as no from ym_user_currency where user_id=$user_id and status in (1,2,3,5,6,7,100)";
+        $ret= \app\dao\EventDao::getSlaveInstance()->getPdo()->getRow($sql);
+        $total=$ret['no'];
+
+        $page_size = 15;
+		// 当前页数
+		$curPageNum = $request->page ? intval ( $request->page ) : 1;
+		// url
+		$url = preg_replace ( '/([?|&]page=\d+)/', '', $_SERVER ['REQUEST_URI'] );
+		// 分页对象
+
+		$page = new SubPages( $url, $page_size, $total, $curPageNum );
+		$limit = $page->GetLimit() ;
+		$response->page = $page->GetPageHtml();
+		
+	
+			$sql= "select * from ym_user_currency where user_id = $user_id and status in (1,2,3,5,6,7) order by id desc limit ".$limit;
 			$res = \app\dao\UserCurrencyDao::getSlaveInstance()->getPdo()->getRows($sql);
 			$response->currencyFlow = $res;
 			
