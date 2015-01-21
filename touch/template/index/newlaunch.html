@@ -26,28 +26,17 @@
                 </div>
               
               <div class="index_content" id="listcontent">
+              
+              		{{foreach from=$newEvent item=item}}
                 	<div class="list_item">
-                        <a href="javascript:void(0)"><img src="http://img0.bdstatic.com/img/image/shouye/mxlyf1211.jpg">
-                        	<p><em>-25%</em></p>
-                            <span>only 10 left</span>
+                        <a href="javascript:void(0)"><img src="{{$item.pic_link}}">
+                        	{{if $item.hot}}<p><em>HOT</em></p>-->{{/if}}
+                           {{if $item.numleft <5 }} <span>only {{$item.numleft}} left</span> {{/if}}
                         </a>
                         <div><a href="javascript:void(0)" class="like"></a>$ 52<span>Rebate:<br>$ 1.5</span></div>
                     </div>
-                    <div class="list_item">
-                        <a href="javascript:void(0)"><img src="http://img0.bdstatic.com/img/image/shouye/mxlyf1211.jpg">
-                        	<p><em>-25%</em></p>
-                            <span>only 10 left</span>
-                        </a>
-                        <div><a href="javascript:void(0)" class="like"></a>$ 52<span>Rebate:<br>$ 1.5</span></div>
-                    </div>
-                    <div class="list_item">
-                        <a href="javascript:void(0)"><img src="http://img0.bdstatic.com/img/image/shouye/mxlyf1211.jpg">
-                        	<p><em>-25%</em></p>
-                            <span>only 10 left</span>
-                        </a>
-                        <div><a href="javascript:void(0)" class="like"></a>$ 52<span>Rebate:<br>$ 1.5</span></div>
-                    </div>
-          
+                    {{/foreach}}
+         
                </div>
                 
                 <div id="pullUp">
@@ -128,7 +117,7 @@
 		setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
 			
 			var page= parseInt($('#page').val())+1;
-			var url = "index.php?_c=api&_a=newevents&count=2&page=" + page;
+			var url = "index.php?_c=api&_a=newevents&page=" + page;
 			$.getJSON(url, function(data) {			
 				for (i=0; i<data.count; i++) {
 					var html='<div class="list_item"><a href="javascript:void(0)"><img src="'+data.events[i]["pic_link"]+'"><p><em>-25%</em></p><span>only 10 left</span></a><div><a href="javascript:void(0)" class="like"></a>$ 52<span>Rebate:<br><em>$ 1.5</em></span></div></div>';

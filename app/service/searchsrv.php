@@ -24,7 +24,7 @@ class SearchSrv extends BaseSrv {
 	 */
 	public function newEvents($start,$count=12){
 		$limit= ($start-1)*$count .','.$count;
-		$sql="select price,event_id,fanli,pic_link,amount-applied as numleft from ym_event where status in (0,1) and applied <= amount order by event_id desc  limit $limit ";
+		$sql="select hot,price,event_id,fanli,pic_link,amount-applied as numleft from ym_event where status in (0,1) and applied <= amount order by event_id desc  limit $limit ";
 		$list = \app\dao\EventDao::getSlaveInstance ()->getpdo()->getRows($sql);
 		return $list;
 	}
