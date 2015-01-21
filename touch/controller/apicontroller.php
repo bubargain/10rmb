@@ -27,4 +27,14 @@ class apiController extends Controller{
 		}
 	
 	}
+	
+	
+	/*
+	 * add wish for event
+	 */
+	public function wish($request,$response){
+		 	
+	}
+	
+	
 }
