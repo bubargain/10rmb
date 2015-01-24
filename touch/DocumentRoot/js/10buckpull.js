@@ -62,7 +62,8 @@
 		setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
 			
 			var page= parseInt($('#page').val())+1;
-			var url = "index.php?_c=api&_a=newevents&page=" + page;
+			var cate = parseInt($('#cate').val());
+			var url = "index.php?_c=api&_a=newevents&cate="+cate+"&page=" + page;
 			$.getJSON(url, function(data) {			
 				for (i=0; i<data.count; i++) {
 					var html='<div class="list_item"><a href="javascript:void(0)"><img src="'+data.events[i]["pic_link"]+'"><p><em>-25%</em></p><span>only 10 left</span></a><div><a href="javascript:void(0)" class="like"></a>$ 52<span>Rebate:<br><em>$ 1.5</em></span></div></div>';
@@ -108,7 +109,7 @@
 					pullDownEl.querySelector('.pullDownLabel').innerHTML = 'reload';
 				} else if (pullUpEl.className.match('loading')) {
 					pullUpEl.className = '';
-					pullUpEl.querySelector('.pullUpLabel').innerHTML = '上拉加载更多...';
+					pullUpEl.querySelector('.pullUpLabel').innerHTML = 'View More...';
 				}
 			},
 			onScrollMove: function () {
@@ -133,11 +134,11 @@
 			onScrollEnd: function () {
 				if (pullDownEl.className.match('flip')) {
 					pullDownEl.className = 'loading';
-					pullDownEl.querySelector('.pullDownLabel').innerHTML = 'loading';				
+					pullDownEl.querySelector('.pullDownLabel').innerHTML = 'loading...';				
 					pullDownAction();	// Execute custom function (ajax call?)
 				} else if (pullUpEl.className.match('flip')) {
 					pullUpEl.className = 'loading';
-					pullUpEl.querySelector('.pullUpLabel').innerHTML = '<img src="../images/loading.gif" />';				
+					pullUpEl.querySelector('.pullUpLabel').innerHTML = 'loading...';				
 					pullUpAction();	// Execute custom function (ajax call?)
 				}
 			}

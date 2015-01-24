@@ -25,12 +25,19 @@
 			<div class="groupinfodiv">
            	 	<form method="post" action="index.php?_c=goods&_a=about" >
                 <div>
-                	<select id="selectshipping" name="selectshipping" class="selectbox">
+                	<!--<select id="selectshipping" name="selectshipping" class="selectbox">
                     	{{if $noshipping}}<option value="1"> pay ${{$price}},get {{$totalfanli}}</option> {{/if}}
                         <option value="0">pay ${{$price}},get product and ${{$fanli}} rebate</option>
-                    </select> 
+                    </select> -->
+                   {{if $noshipping}}
+                    Finish the task, get <font color="red">${{$fanli}} +${{$price}}</font> back
+                   {{else}}
+                   	Trial it, get <font color="#009966">${{$fanli}} </font>back
+                   {{/if}}
                 </div>
                 <input type="hidden" name="id" value="{{$id}}"/>
+                <input type="hidden" name="noshipping" value="{{$noshipping}}"/>
+                <input type="hidden" name="event_id" value="{{$event_id}}"/>
 				<p class="groupinfop"  nowrap>
                 <!--<em class="{{if $params.liked}}on{{/if}}"> 收藏（{{$params.wishes}}）</em> -->
                
@@ -40,31 +47,47 @@
                 </form>
 			</div>
 			<div class="groupinfodiv2">
-				<div class="infotitle"><img src="images/group2_58.jpg" width="24">How it works?</div>
+				<div class="infotitle"><img src="images/group2_58.jpg" width="24">How to trial</div>
 			
             
              
                 <div class="info_div">
          
-                
+                <font style="font-family:Verdana, Geneva, sans-serif; font-size:12px"
                     <table>
                     	<tr>
-                       	 <td width="30%"><font style="border:thick">BCODE</font></td>
-                       	 <td>Apply Bcode successfully means you get right to participate the rebate event.<br/></td>
-                        </tr>
-                    	<tr>
-                       	 <td width="30%"><font style="border:thick">REBATE</font></td>
-                       	 <td>Merchant will release your bonus immidately after you place the order and leave order sn/real name in 10BUCK.<br/></td>
-                        </tr>
-                        <tr></tr>
-                        <tr>
-                       	 <td width="30%">NS</td>
-                       	 <td><div><FONT color="#FF0000">THE BEST PART!</FONT> No Shipping means merchant do not send you goods and return both principal and rebate to you .
-						 <br/> Assume the model as you return the goods get pay back, but keep the rebate. </div>                        
+                       	 
+                       	 <td>You just need to place the order as usually. After you give feedback ,
+                          merchants will release you bonus as promised.
+                       	<br/> <font color="#FF0000">Remember </font>to input receiver name in our system after you finish the order.
+                         
                          </td>
                         </tr>
+                    	
                     
-                    </table>
+                    </table></font>
+                </div>
+			</div>
+            <div class="groupinfodiv2">
+				<div class="infotitle"><img src="images/group2_58.jpg" width="24">Why we do this</div>
+			
+            
+             
+                <div class="info_div">
+         
+                <font style="font-family:Verdana, Geneva, sans-serif; font-size:12px"
+                    <table>
+                    	<tr>
+                       	 
+                       	 <td>
+                         Items on 10BUCK are normally new launch products, sellers
+                         are willing to offer some for trial to get first-hand feedback immidiatelly.<br/>
+                         Therefore,your comments may decide the future of this product.
+                         </td>
+                        </tr>
+                    	
+                    
+                    </table></font>
                 </div>
 			</div>
 			<div class="menu_bottom">
@@ -161,11 +184,11 @@
 })();
     </script>  
     </div>
-<footer>
+<!--<footer>
 	
 	<div></div>
-	<p>Copyright 2014 by 10buck.com <img src="{{$_hmtPixel}}" width="0" height="0" /></p>
-</footer>
+	<!--<p>Copyright 2014 by 10buck.com <img src="{{$_hmtPixel}}" width="0" height="0" /></p>
+</footer> -->
 </body>
 </html>
 </body>

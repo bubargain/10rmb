@@ -22,9 +22,9 @@ class SearchSrv extends BaseSrv {
 	 * 查询最新的真实返利活动
 	 * 不含精准推荐引擎，按时间排序
 	 */
-	public function newEvents($start,$count=12){
+	public function newEvents($start,$count=12,$cate=1){
 		$limit= ($start-1)*$count .','.$count;
-		$sql="select hot,price,event_id,fanli,pic_link,amount-applied as numleft from ym_event where status in (0,1) and applied <= amount order by event_id desc  limit $limit ";
+		$sql="select hot,price,event_id,fanli,pic_link,amount-applied as numleft from ym_event where cate=$cate and status =1 and noshipping =0 and applied <= amount order by event_id desc  limit $limit ";
 		$list = \app\dao\EventDao::getSlaveInstance ()->getpdo()->getRows($sql);
 		return $list;
 	}
@@ -47,7 +47,7 @@ class SearchSrv extends BaseSrv {
 		$user_id=$params['user_id'];
 		
 		//小于1的user event
-		$sql = "select * from ym_user_event where status in (0,100) and user_id = $user_id";
+		$sql = "select * from ym_user_event where status in (0,100) and noshipping = 1 and user_id = $user_id";
 		
 		$userEvent = \app\dao\UserEventDao::getSlaveInstance()->getPdo()->getRows($sql);
 		
@@ -123,7 +123,7 @@ class SearchSrv extends BaseSrv {
 		try{
 		$time=strtotime("now");
 		//到期时间超过一个小时的正常活动
-		$sql= "select * from ym_event where status=1 and applied < amount order by RAND() limit 0,10"; 
+		$sql= "select * from ym_event where status=1 and noshipping = 1 and applied < amount order by RAND() limit 0,10"; 
 		$_pdo = \app\dao\EventDao::getSlaveInstance ()->getpdo();
 		$event_ids = $_pdo->getRows($sql);
 	

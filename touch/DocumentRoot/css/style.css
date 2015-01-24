@@ -15,6 +15,7 @@ a{text-decoration:none;outline:none;-webkit-user-select: none;-webkit-tap-highli
 a:hover{text-decoration:none;outline:none}
 .l{float:left}
 .r{float:right}
+.emptycontent{background:url(../img/empty.png) no-repeat center;height:403px;}
 .group_main{max-width: 640px;margin: 0 auto;overflow: hidden}
 .group_top{background:#282c33}
 .group_head h1 {line-height: 50px;text-align: center;color:#fff;font-size:24px}
@@ -28,9 +29,10 @@ a:hover{text-decoration:none;outline:none}
 .menu_left li{padding-left:7%;border-bottom:2px #3e4651 solid}
 .menu_left a{color:#d4d5e3;display:block;padding:6px 0 6px 40px;line-height:27px;width:26px;height:23px;background-size:26px 23px}
 .menu_left .menu_save{background:url(../images/menu_03.png) no-repeat left}
+.menu_left .menu_favor{background:url(../images/menu_11.png) no-repeat left}
 .menu_left .menu_earn{background:url(../images/menu_07.png) no-repeat left}
-.menu_left .menu_logout{background:url(../images/menu_11.png) no-repeat left}
-.swiper-container{height:55px;border-top-left-radius:8px;border-top-right-radius:8px;background:#16191e;line-height:55px;text-align:center;font-size:22px; text-transform:uppercase;padding:0 10px}
+.menu_left .menu_logout{background:url(../images/menu_04.png) no-repeat left}
+.swiper-container{height:55px;border-top-left-radius:8px;border-top-right-radius:8px;background:#16191e;line-height:55px;text-align:center;font-size:18px; text-transform:uppercase;padding:0 10px}
 .swiper-slide{width:1000px}
 .swiper-container a{float:left;padding:0 12px 0 11px;border-right:1px #030404 solid;color:#717375}
 .swiper-container .menu_topa{color:#fff;background:#282c33;border:1px #2d3139 solid;}
@@ -61,6 +63,7 @@ a:hover{text-decoration:none;outline:none}
 #listcontent .list_item a span{background:url(../images/list_10.png) no-repeat;width:95px;height:27px;position:absolute;right:0;bottom:5px;background-size:100px 27px;text-align:right;font-size:15px;line-height:27px;padding-right:5px;font-family:New Cicle}
 #listcontent .list_item div{text-align:center;position:relative;font-size:18px;color:#000;padding:8px 0;font-family:New Cicle}
 #listcontent .list_item div .like{position:absolute;left:3%;background:url(../images/list_14.png);width:24px;height:21px;background-size:24px 21px;top:7px}
+#listcontent .list_item div .unlike{position:absolute;left:3%;background:url(../images/list_13.png);width:24px;height:21px;background-size:24px 21px;top:7px}
 #listcontent .list_item div span{position:absolute;right:3%;font-size:10px;line-height:12px;top:3px}
 #listcontent .list_item div span em{color:#3d9423;font-size:12px}
 #scroller{position: relative;top:0px}

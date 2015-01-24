@@ -8,12 +8,12 @@
 	<section class="content">
 		<div class="order_list">
             <dl class="myTit" >
-                <dt class="fl">Hi,{{$user_name}}!</dt>
-                <dd class="fr"><a href="index.php?_c=login&_a=logout" class="btn">Logout</a></dd>
+                <dt class="fl" style="margin-left:10px">Hi,{{$user_name}}!</dt>
+               <!-- <dd class="fr"><a href="index.php?_c=login&_a=logout" class="btn">Logout</a></dd> -->
             </dl>
             <ul class="myorder">
                 <li><a href="#">My Saving: <p class="fr" style="color:#0C6;display:inline">${{$saving|string_format:"%.1f"}}&nbsp;&nbsp;</p></a></li>
-                <li>{{if $unpayCnt}}<span>{{$unpayCnt}}</span>{{/if}}<a href="index.php?_c=order&_a=orderList&status=unpay">My Bcodes</a><ins></ins></li>
+                <li>{{if $unpayCnt}}<span>{{$unpayCnt}}</span>{{/if}}<a href="index.php?_c=order&_a=orderList&status=unpay">My Orders</a><ins></ins></li>
                 
               
             </ul>

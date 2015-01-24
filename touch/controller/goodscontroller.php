@@ -17,15 +17,28 @@ class goodscontroller extends BaseController {
 		$info = $cache->get ( $key );
 		
 		if (! $info) {		
+			
 			$user_id = $this->current_user['user_id'];	
-			$sql = "select A.pic_link,A.product_link,B.price,B.fanli,B.totalfanli,B.id,B.noshipping from ym_event A left join ym_user_event B on A.event_id = B.event_id 
-			where A.event_id = $event_id and A.status in (1,88) and B.user_id = $user_id
-			";
+		
+			$sql= "select * from ym_event where event_id = $event_id and status=1";
 			$info = \app\dao\EventDao::getSlaveInstance()->getPdo()->getRow($sql);
+			
 			if(!$info)
 			{
-				$this->showError("Event doest exit or expire");
+				$this->showError("obz~ product sold out!","index.php");
 			}
+			if($info['noshipping']==1)//刷单模式，需要验证用户已分配该任务
+			{
+					$sql = "select A.pic_link,A.product_link,B.price,B.fanli,B.totalfanli,B.id,B.noshipping from ym_event A left join ym_user_event B on A.event_id = B.event_id 
+					where A.event_id = $event_id and A.status in (1,88) and B.user_id = $user_id
+					";
+					$info = \app\dao\EventDao::getSlaveInstance()->getPdo()->getRow($sql);
+			}
+			if(!$info)
+			{
+				$this->showError("Event doest exit or expire","index.php");
+			}
+			
 			// memcache 赋值
 			$cache->set ( $key, $info, 1, 5 * 60 );
 		}
@@ -34,6 +47,7 @@ class goodscontroller extends BaseController {
 		$response->pic_link=$info['pic_link'];
 		$response->product_link = $info['product_link'];
 		$response->id = $info['id'];
+		$response->event_id = $info['event_id'];
 		$response->price = $info['price'];
 		$response->totalfanli =$info['price']+$info['fanli'];
 		$response->fanli = $info['fanli'];
@@ -59,61 +73,133 @@ class goodscontroller extends BaseController {
 	
 	public function about($request,$response)
 	{
+		
 		$user_id=$this->checkLogin();
 		if($this->isPost())
 		{
-			$info = \app\dao\UserEventDao::getSlaveInstance()->find(
-				array(
-					'user_id'=>$user_id,
-					'id' => $request->id
-				)
-			);
-			$bcode= \app\dao\EventDao::getSlaveInstance()->find($info['event_id']);
-			if($bcode and $bcode['applied'] < $bcode['amount'])
+			if(intval($request->noshipping)) //刷单模式
 			{
-				if($info['bcode']==null)
-					$firsttimeapply = true;
-				
-				$noshipping = $request->selectshipping;
-				
-				$_time = strtotime("now");
-				$info['bcode'] =  $user_id.substr($_time,4);
-				
-				$fanli = round( (float)$bcode['fanli'] * PROFITRATE , 2);  // 扣除佣金后的返利
-				$profit = (float)$bcode['fanli'] - $fanli; //平台佣金
-				if($noshipping)
-						$totalfanli = $fanli + $bcode['price'];
-				else 
-						$totalfanli = $fanli;
-				
-				
-				\app\dao\UserEventDao::getMasterInstance()->edit($info['id'], 
-				array(
-				'fanli'=>$fanli,
-				'profit'=>$profit,
-				'totalfanli'=>$totalfanli,
-				'bcode'=>$info['bcode'],
-				'utime'=>$_time,
-				'noshipping'=>$noshipping,
-				'status'=>0)
-				
+				$info = \app\dao\UserEventDao::getSlaveInstance()->find(
+					array(
+						'user_id'=>$user_id,
+						'id' => $request->id
+					)
 				);
-				
-				/*if($firsttimeapply)
+			
+				$bcode= \app\dao\EventDao::getSlaveInstance()->find($info['event_id']);
+				if($bcode and $bcode['applied'] < $bcode['amount'])
 				{
-				//只有用户第一次申请的时候，活动申请总数+1
-				$sql = "update ym_event set applied= applied+1 where event_id = ".$info['event_id'];
-				
-				
-				\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
-				}*/
-				$response->bcode= $info['bcode'];
-				$response->id = $info['id'];
-				$response->product_link = $info['product_link'];
-				$this->layoutSmarty ( 'about' );
+					if($info['bcode']==null)
+						$firsttimeapply = true;
+					
+					//$noshipping = $request->selectshipping;
+					
+					$_time = strtotime("now");
+					$info['bcode'] =  $user_id.substr($_time,4);
+					
+					$fanli = round( (float)$bcode['fanli'] * PROFITRATE , 2);  // 扣除佣金后的返利
+					$profit = (float)$bcode['fanli'] - $fanli; //平台佣金
+					if($noshipping)
+							$totalfanli = $fanli + $bcode['price'];
+					else 
+							$totalfanli = $fanli;
+					
+					
+					\app\dao\UserEventDao::getMasterInstance()->edit($info['id'], 
+					array(
+					'fanli'=>$fanli,
+					'profit'=>$profit,
+					'totalfanli'=>$totalfanli,
+					'bcode'=>$info['bcode'],
+					'utime'=>$_time,
+					'noshipping'=>$info['noshipping'],
+					'status'=>0)
+					
+					);
+					
+					/*if($firsttimeapply)
+					{
+					//只有用户第一次申请的时候，活动申请总数+1
+					$sql = "update ym_event set applied= applied+1 where event_id = ".$info['event_id'];
+					
+					
+					\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
+					}*/
+					$response->bcode= $info['bcode'];
+					$response->id = $info['id'];
+					$response->product_link = $info['product_link'];
+					$this->layoutSmarty ( 'about' );
+				} //end 刷单模式
+				else  //真实返利模式，开放申请
+				{
+					$event_id =intval($request->event_id);
+					$info = \app\dao\EventDao::getSlaveInstance()->find($event_id);
+					
+				}
 			}
-			else {
-				$this->showError('You are too late!All bcodes sent out');
+			else { //真实返利模式
+				$event_id =intval($request->event_id);
+			
+				if($event_id) 
+				{
+					$info = \app\dao\UserEventDao::getSlaveInstance()->find(
+						array(
+							'user_id'=>$user_id,
+							'event_id' => $event_id
+						)
+					);
+					//var_dump($info);die();
+					if($info) //已经申请过
+					{
+						$response->bcode = $info['bcode'];
+						$response->id = $info['id'];
+						$response->product_link = $info['product_link'];
+						$this->layoutSmarty ( 'about' );
+					}
+					else{
+						
+				
+							$info = \app\dao\EventDao::getSlaveInstance()->find($event_id);
+							if(!$info['noshipping'] && $info['applied'] < $info['amount'])//可以申请	
+							{
+									$_time = strtotime("now");
+									$bcode =  $user_id.substr($_time,4);
+					
+									$fanli = round( (float)$info['fanli'] * PROFITRATE , 2);  // 扣除佣金后的返利
+									$profit = (float)$info['fanli'] - $fanli; //平台佣金
+									
+									$id=\app\dao\UserEventDao::getMasterInstance()->add( 
+									array(
+									'fanli'=>$fanli,
+									'profit'=>$profit,
+									'price' =>$info['price'],
+									'totalfanli'=>$fanli,
+									'bcode'=>$bcode,
+									'ctime'=>$info['ctime'],
+									'profit'=>$profit,
+									'event_name'=>$info['event_name'],
+									'bcode'=>$bcode,
+									'livetime'=>$info['livetime'],
+									'pic_link'=>$info['pic_link'],
+									'product_link'=>$info['product_link'],
+									'event_id'=>$info['event_id'],
+									'user_id' =>$user_id,
+									'utime'=>$_time,
+									'noshipping'=>$info['noshipping'],
+									'status'=>0)
+								
+									);
+									$response->bcode = $bcode ;
+									$response->id = $id;
+									$response->product_link = $info['product_link'];
+									$this->layoutSmarty ( 'about' );
+							
+							}
+					}
+				}
+				else{
+					$this->showError('You are too late!All bcodes sent out');
+				}
 			}
 		}
 		else{
@@ -135,7 +221,7 @@ class goodscontroller extends BaseController {
 			
 			
 		}
-		$this->layoutSmarty ( 'about' );
+		//$this->layoutSmarty ( 'about' );
 	}
 	
 	/*

@@ -9,12 +9,13 @@ class apiController extends Controller{
 	 * ajax 活动event数组
 	 */
 	public function newevents($request,$response){
-		$page=$request->page;
+		$page=intval($request->page);
 		if($page)
 		{
+			$cate = intval($request->cate);
 			$count = $request->count? $request->count : 12;
 			$event= new \app\service\SearchSrv();
-			$newEvents= $event->newEvents($page,$count);
+			$newEvents= $event->newEvents($page,$count,$cate);
 			$this->renderJson(array(
 				'count' =>count($newEvents),
 				'events'=>$newEvents

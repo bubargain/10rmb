@@ -15,33 +15,40 @@
     	<div class="group_top">
             <div class="group_head">
                 <h1>Trial New</h1>
-                <a href="javascript:void(0)" class="back"></a>
-                <a href="javascript:void(0)" class="search"></a>
+                <a href="index.php" class="back"></a>
+               <!-- <a href="javascript:void(0)" class="search"></a> -->
             </div>
         </div>
         <div id="wrapper" style="top:50px">
+             {{if $newEvent}}
             <div id="scroller">
                 <div id="pullDown">
                     <span class="pullDownIcon"></span><span class="pullDownLabel">reload</span>
                 </div>
               
               <div class="index_content" id="listcontent">
-              
+          
               		{{foreach from=$newEvent item=item}}
-                	<div class="list_item">
-                        <a href="javascript:void(0)"><img src="{{$item.pic_link}}">
-                        	{{if $item.hot}}<p><em>HOT</em></p>-->{{/if}}
-                           {{if $item.numleft <5 }} <span>only {{$item.numleft}} left</span> {{/if}}
+                	<div  class="list_item">
+                        <a href="index.php?_c=goods&_a=detail&id={{$item.event_id}}"><img src="{{$item.pic_link}}">
+                           {{if $item.hot}} <p><em>HOT</em></p> {{/if}}
+                           {{if $item.numleft < 5 }} <span>only {{$item.numleft}} left</span> {{/if}}
                         </a>
-                        <div><a href="javascript:void(0)" class="like"></a>$ 52<span>Rebate:<br>$ 1.5</span></div>
+                        <div>
+                        <!--<a href="#" id="item{{$item.event_id}}" onclick="javascript:changeLike({{$item.event_id}});" class="like"></a>-->
+                        <font color="#009933">${{$item.fanli}} </font><span>price<br>$ {{$item.price}}</span></div>
                     </div>
                     {{/foreach}}
+                    
          
                </div>
-                
+                <input type="hidden" id="cate" name="cate" value="{{$cate}}" />
                 <div id="pullUp">
                     <span class="pullUpIcon"></span><span class="pullUpLabel">View More...</span>
                 </div>
+             {{else}}
+                    	<div class="emptycontent" onClick="javescript:window.location.href='index.php';"></div>
+             {{/if}}
             </div>
         </div>
 	</div>
@@ -53,5 +60,19 @@
     <script type="application/javascript" src="js/jquery.wookmark.min.js"></script>
    <!--  <script type="text/javascript" src="js/10buckpull.js"></script> -->
 	<script type="text/javascript" src="js/10buckpull.js"></script>  
+    <script>
+    		function changeLike(id){
+				if($('#item'+id).hasClass('like'))
+				{
+					$('#item'+id).removeClass('like');
+					$('#item'+id).addClass('unlike');
+				}
+				else
+				{
+					$('#item'+id).removeClass('unlike');
+					$('#item'+id).addClass('like');
+				}
+			}
+    </script>
 </body>
 </html>

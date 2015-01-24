@@ -25,6 +25,18 @@
         </div>
     </div>
     <div class="control-group">
+		<label class="control-label" for="inputEmail">品类</label>
+        <div class="controls">
+        	{{if $event.cate==1}} woman
+            {{else if $event.cate==2}}man
+            {{else if $event.cate==3}} home
+            {{else if $event.cate==4}} kids
+            {{else if $event.cate==5}} electronic
+            {{else}} {{$event.cate}}
+            {{/if}}
+        </div>
+    </div>
+    <div class="control-group">
 		<label class="control-label" for="inputEmail">活动平台</label>
         <div class="controls">
         <select name="store">

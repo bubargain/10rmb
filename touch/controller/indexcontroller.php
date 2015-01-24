@@ -9,10 +9,10 @@ class indexcontroller extends BaseController {
 	public function __construct($request, $response) {
 		parent::__construct ( $request, $response );
 	}
-	public function index($request, $response) {
+	public function mianu($request, $response) {
 		
+		 $user_id=$this->checkLogin ();	
 		
-		 $user_id=$this->checkLogin ();
 		
 		$goods = self::SelectGoods ( $user_id,10 );
 		
@@ -22,14 +22,14 @@ class indexcontroller extends BaseController {
 		//$response->focusMap_imageLink = $ret ['focuseMap_imageLink'];
 		$response->live_deals = $goods;
 		
-		
+
 		//$response->giveHer_textLink = $ret ['getTextLinks'];
 		//$response->giveHer_imageLink = $ret ['giveHer_imageLink'];
 
         //$this->layoutSmarty ( 'index' );
 
 		
-		$action_template = $this->_controller .'/index.html';
+		$action_template = $this->_controller .'/mianu.html';
 		$smarty =  new \sprite\mvc\SmartyView($this->_response);
 		$smarty->render(strtolower($action_template));
 		
@@ -40,13 +40,33 @@ class indexcontroller extends BaseController {
 	*/
 	
 	public function newlaunch($request,$response){
-		
-		//获取数据
-		$event = new \app\service\SearchSrv();
-		$newEvent = $event->newEvents(1,12);
+		try{
 			
-		$response->newEvent = $newEvent;
-		$action_template = $this->_controller .'/newlaunch.html';
+			$cate = intval($request->cate);
+			//获取数据
+			if($cate>0)
+			{
+				$event = new \app\service\SearchSrv();
+				$newEvent = $event->newEvents(1,12,$cate);			
+			
+				$response->newEvent = $newEvent;	
+				$response->cate = $cate;		
+			}	
+				$action_template = $this->_controller .'/newlaunch.html';
+				$smarty =  new \sprite\mvc\SmartyView($this->_response);
+				$smarty->render(strtolower($action_template));
+			
+		}catch (\Exception $e)
+		{
+			echo $e->getMessage();
+		}
+		
+	}
+	
+	public function index($request,$response){
+		 $user_id=$this->checkLogin ();	
+		$response->username="Daniel";
+		$action_template = $this->_controller .'/index.html';
 		$smarty =  new \sprite\mvc\SmartyView($this->_response);
 		$smarty->render(strtolower($action_template));
 	}

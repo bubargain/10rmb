@@ -84,7 +84,8 @@ class StoreController extends BaseController {
 					$event['price'] = $request-> sale_price;
 					$event['amount'] = $request->amount;
 					$event['fanli'] =$request->fanli;
-					$event['noshipping'] = $request->directReturn == ''? 0:1;  //是否支持免邮
+					$event['noshipping'] = $request->noshipping;  //是否支持免邮
+					$event['cate'] = $request->cate;
 					$event['duringtime']=$request->duringtime;
 				
 					$response->event_name = $event['event_name'];
@@ -92,6 +93,7 @@ class StoreController extends BaseController {
 					$response->price   =$event['price'];
 					$response->amount  =$event['amount'];
 					$response->fanli   =$event['fanli'];
+					$response->cate =$event['cate'];
 					$response->duringtime   =$event['duringtime'];
 			
 				
