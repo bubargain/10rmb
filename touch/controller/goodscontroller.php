@@ -151,6 +151,11 @@ class goodscontroller extends BaseController {
 					//var_dump($info);die();
 					if($info) //已经申请过
 					{
+						if($info['status']==99)//超时重新申请，重置状态
+						{
+							$sql = "update ym_user_event set status=0 where id =".$info['id'];
+							\app\dao\EventDao::getMasterInstance()->getPdo()->exec($sql);
+						}
 						$response->bcode = $info['bcode'];
 						$response->id = $info['id'];
 						$response->product_link = $info['product_link'];
@@ -189,6 +194,8 @@ class goodscontroller extends BaseController {
 									'status'=>0)
 								
 									);
+									$sql = "update ym_event set applied=applied+1 where event_id=".$info['event_id']; //申请数加1
+									\app\dao\EventDao::getMasterInstance()->getPdo()->exec($sql);
 									$response->bcode = $bcode ;
 									$response->id = $id;
 									$response->product_link = $info['product_link'];
