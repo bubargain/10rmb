@@ -218,10 +218,10 @@ class goodscontroller extends BaseController {
 			$response->bcode= $info['bcode'];
 			$response->id = $info['id'];
 			$response->product_link = $info['product_link'];
-			
+			$this->layoutSmarty ( 'about' );
 			
 		}
-		//$this->layoutSmarty ( 'about' );
+		
 	}
 	
 	/*
