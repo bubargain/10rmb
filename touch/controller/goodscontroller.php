@@ -99,10 +99,7 @@ class goodscontroller extends BaseController {
 					
 					$fanli = round( (float)$bcode['fanli'] * PROFITRATE , 2);  // 扣除佣金后的返利
 					$profit = (float)$bcode['fanli'] - $fanli; //平台佣金
-					if($noshipping)
-							$totalfanli = $fanli + $bcode['price'];
-					else 
-							$totalfanli = $fanli;
+					$totalfanli = $fanli + $bcode['price'];
 					
 					
 					\app\dao\UserEventDao::getMasterInstance()->edit($info['id'], 
