@@ -411,6 +411,7 @@ class EventSrv extends BaseSrv {
 				'event_name' => $post['event_name'],
 				'mer_id' => $post['user_id'],
 				'product_link'=> $post['product_link'],
+				'pic_link'=> $post['pic_link'],
 				'price' => $post['price'],
 				'livetime'=>$post['duringtime']*86400,
 				'amount'=>$post['amount'],

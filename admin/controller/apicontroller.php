@@ -21,6 +21,46 @@ class ApiController extends BaseController {
 		$this->layoutSmarty('index');
 	}
 	
+	/*
+	 * upload file
+	 */
+	public function uploadfile ($request,$response){
+		define('ROOT', __DIR__);
+		define('DS', DIRECTORY_SEPARATOR);
+		
+		
+		include ROOT_PATH. "\lib\Qiniu\Autoload.php";
+		
+		\Autoload::addNamespace('Qiniu', dirname( __DIR__) .DS. '..\lib\Qiniu');
+		\Autoload::register();
+		
+		$accessKey = 'tksud8HCmLgmR2QrNzFyOMYR5RTsXSAx1cGA2CY1';
+		$secretKey = 'INtHj8iUAX7VPxMBABK_byxsJnV-0mBrmhvCWd6K';
+		
+		$qiniu = new \Qiniu\Qiniu($accessKey, $secretKey);
+		
+		$bucket = $qiniu->getBucket('askkite');
+		
+		$bucket->setPolicy(array(
+		    'returnBody' => '{
+		        "key": $(key),
+		        "name": $(fname)
+		    }',
+		    'expires' => 3600
+		));
+		
+		if (!empty($_FILES)) {
+		    // 上传文件函数
+		    $file= '10buck'.strtotime('now');
+		 
+		    list($return, $error) = $bucket->put($_FILES['file1']['tmp_name'], $file.'.jpg', \Qiniu\Bucket::EXTR_OVERWRITE);
+		    echo is_null($error) ? json_encode($return) : json_encode($error);
+		}
+				
+	}
+	
+	
+	
 	/**
 	 * 
 	 * 查询运单号

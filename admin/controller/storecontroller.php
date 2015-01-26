@@ -87,7 +87,8 @@ class StoreController extends BaseController {
 					$event['noshipping'] = $request->noshipping;  //是否支持免邮
 					$event['cate'] = $request->cate;
 					$event['duringtime']=$request->duringtime;
-				
+					$event['pic_link']=$request->pic_link;
+					
 					$response->event_name = $event['event_name'];
 					$response->product_link =$event['product_link'];
 					$response->price   =$event['price'];
@@ -95,7 +96,7 @@ class StoreController extends BaseController {
 					$response->fanli   =$event['fanli'];
 					$response->cate =$event['cate'];
 					$response->duringtime   =$event['duringtime'];
-			
+					$response->pic_link = $event['pic_link'];
 				
 					if($event['noshipping']==0)
 					{

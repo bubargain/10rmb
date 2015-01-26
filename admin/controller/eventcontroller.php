@@ -10,11 +10,6 @@ class EventController extends BaseController {
 	{
 		$user_id=$this->checkLogin();
 		
-		
-		
-		
-		
-		
 		$response->storeTitle ="活动列表";
 		$response->storeIntro ="管理你进行中的活动";
 		$user_id = $this->current_user['user_id'];
@@ -105,7 +100,7 @@ class EventController extends BaseController {
 			$event['user_id']=$user_id;
 			$event['cate'] =$request->cate;
 			$event['duringtime'] =(int)$request->duringtime;
-			
+			$event['pic_link'] = $request->pic_link;
 		
 		
 			//添加	
