@@ -66,7 +66,11 @@
 			var url = "index.php?_c=api&_a=newevents&cate="+cate+"&page=" + page;
 			$.getJSON(url, function(data) {			
 				for (i=0; i<data.count; i++) {
-					var html='<div class="list_item"><a href="'+data.events[i]["product_link"]+'"><img src="'+data.events[i]["pic_link"]+'">  </a> <div><font color="#009933">'+data.events[i]["fanli"]+'</font><span>price<br>$ '+data.events[i]["price"]+'</span></div></div>';
+					var hot='';
+					var gleft='';
+					if(data.events[i]['hot']) hot= '<p><em>HOT</em></p>';
+					if(data.events[i]['numleft']<5) gleft='<span>only '+data.events[i]['numleft']+' left</span> ';
+					var html='<div class="list_item"><a href="'+data.events[i]["product_link"]+'"><img src="'+data.events[i]["pic_link"]+'"> '+hot+gleft+' </a> <div><font color="#009933">'+data.events[i]["fanli"]+'</font><span>price<br>$ '+data.events[i]["price"]+'</span></div></div>';
 					$("#listcontent").append(html);
 				}
 				applyLayout();

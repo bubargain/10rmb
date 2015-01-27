@@ -14,13 +14,37 @@
 <script type="text/javascript" src ='/js/j.js'></script>
 </head>
 
-<body>
-<div class="group_main">
+<body class="guide">
+	<div class="group_cover">
+        <div><img src="images/guide_01.jpg"></div>
+        <h2>save or earn</h2>
+        <a href="#" class="tlogin"><img src="images/lo_03.jpg"></a>
+        <!--<div class="guide_a"><a href="javascript:void(0)"><img src="images/lo_06.jpg"></a><a href="javascript:void(0)"><img src="images/lo_08.jpg"></a></div>-->
+        <p>Taste Fresh Launchs Here.</p>
+        <div class="guide_bottom"></div>
+	</div>
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(e) {
+            $(".tlogin").click(function(){
+				$(".group_cover").fadeOut();	
+				$(".group_main").fadeIn();	
+			});
+        });
+    </script>
+
+
+<div class="group_main" style="display:none">
+	
+
+
     <div class="group_head">
         <section ></section>
         <section><div class="cWhite">LOGIN/SIGNUP</div></section>
         <section></section>
     </div>
+    
+    
 
 	<section class="content">
 		<div class="order_list">
@@ -32,13 +56,16 @@
                     <p style="color:#666;font-size:14px">&nbsp;NOTICE: Your account will be used to receive Paypal payment.</p>
                     <span class="cGray">Your Email</span><p>
                     
-                    <input type="checkbox" id="useright" checked> 
-                     Agreed <a href="index.php?_c=help&_a=agreement" class="cBlue">"User Rights and Legal Agreement"</a>
+                    
                     </p> 
                     </dt>
                     <dd>
                     <input type="hidden" name="style" value="{{$style}}" />
                     <a id="sumitForm" name="sumitForm" href="javascript:;" class="cWhite set-btn1">NEXT</a>
+                    </dd>
+                    <dd>
+                    	<input type="checkbox" id="useright" checked> 
+                    <a href="index.php?_c=help&_a=agreement" class="cBlue">"User Rights and Legal Agreement"</a>
                     </dd>
                 </dl>
             </div>
