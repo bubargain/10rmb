@@ -472,7 +472,6 @@ input{-webkit-appearance:none}
 	height:130px;
 }
 /*login page */
-#scroller{position: relative;top:0px}
 .guide{background:#282c33;}
 .guide h2{text-align:center; text-transform:uppercase;color:#6da2b2;font-size:34px;padding:5% 0 3% 0}
 .guide p{text-align:center;color:#eaeaea;margin:5% 0 0 0;font-size:16px}
@@ -481,7 +480,3 @@ input{-webkit-appearance:none}
 .tlogin{display:block;width:80%;margin:8% 0 4% 10%}
 .guide_a{padding-left:8%;overflow:hidden}
 .guide_a a{float:left;width:42%;margin:0 2%}
-#pullUp img{display:none}
-#pullUp.loading2 .pullUpIcon{display:none}
-#pullUp.loading2 .pullUpLabel{display:none}
-#pullUp.loading2 img{display:block}

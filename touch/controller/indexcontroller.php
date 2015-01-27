@@ -48,7 +48,17 @@ class indexcontroller extends BaseController {
 			{
 				$event = new \app\service\SearchSrv();
 				$newEvent = $event->newEvents(1,12,$cate);			
-			
+				for($i=0;$i<count($newEvent);$i++)
+				{
+					
+					if(preg_match('/qiniudn\.com/i', $newEvent[$i]['pic_link']))
+					{	
+					
+						$newEvent[$i]['pic_link'] = $newEvent[$i]['pic_link']."?imageView/2/w/160";  //图片转化成160宽
+					}
+				}
+				
+				
 				$response->newEvent = $newEvent;	
 				$response->cate = $cate;		
 			}	

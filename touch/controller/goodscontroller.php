@@ -42,9 +42,16 @@ class goodscontroller extends BaseController {
 			// memcache 赋值
 			$cache->set ( $key, $info, 1, 5 * 60 );
 		}
-
+	
+		if(preg_match('/qiniudn\.com/i', $info['pic_link']))
+		{	
+					
+			$response->pic_link = $info['pic_link']."?imageView/2/w/320";  //图片转化成320宽
+		}
 		
+		else{
 		$response->pic_link=$info['pic_link'];
+		}
 		$response->product_link = $info['product_link'];
 		$response->id = $info['id'];
 		$response->event_id = $info['event_id'];
