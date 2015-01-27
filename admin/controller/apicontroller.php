@@ -29,9 +29,9 @@ class ApiController extends BaseController {
 		define('DS', DIRECTORY_SEPARATOR);
 		
 		
-		include ROOT_PATH. "\lib\Qiniu\Autoload.php";
+		include ROOT_PATH. "/lib/Qiniu/Autoload.php";
 		
-		\Autoload::addNamespace('Qiniu', dirname( __DIR__) .DS. '..\lib\Qiniu');
+		\Autoload::addNamespace('Qiniu', dirname( __DIR__) .DS. '../lib/Qiniu');
 		\Autoload::register();
 		
 		$accessKey = 'tksud8HCmLgmR2QrNzFyOMYR5RTsXSAx1cGA2CY1';
