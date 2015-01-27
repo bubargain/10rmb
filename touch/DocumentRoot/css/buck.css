@@ -476,7 +476,7 @@ input{-webkit-appearance:none}
 .guide{background:#282c33;}
 .guide h2{text-align:center; text-transform:uppercase;color:#6da2b2;font-size:34px;padding:5% 0 3% 0}
 .guide p{text-align:center;color:#eaeaea;margin:5% 0 0 0;font-size:16px}
-.guide_bottom{background:url(../images/guide_13.jpg) no-repeat;width:140px;height:133px;bottom:0;right:0;background-size:140px 133px;float:right}
+.guide_bottom{background:url(../images/guide_13.png) no-repeat;position:absolute;width:140px;height:133px;bottom:0;right:0;background-size:140px 133px;float:right}
 .guide img{display:block;width:100%}
 .tlogin{display:block;width:80%;margin:8% 0 4% 10%}
 .guide_a{padding-left:8%;overflow:hidden}

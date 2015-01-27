@@ -17,6 +17,7 @@ a:hover{text-decoration:none;outline:none}
 .r{float:right}
 .emptycontent{background:url(../img/empty.png) no-repeat center;height:403px;}
 .group_main{max-width: 640px;margin: 0 auto;overflow: hidden}
+.group_cover{max-width: 640px;margin: 0 auto;overflow: hidden}
 .group_top{background:#282c33}
 .group_head h1 {line-height: 50px;text-align: center;color:#fff;font-size:24px}
 .group_head{position:relative;}
@@ -70,7 +71,7 @@ a:hover{text-decoration:none;outline:none}
 .guide{background:#282c33;}
 .guide h2{text-align:center; text-transform:uppercase;color:#6da2b2;font-size:34px;padding:5% 0 3% 0}
 .guide p{text-align:center;color:#eaeaea;margin:5% 0 0 0;font-size:16px}
-.guide_bottom{background:url(../images/guide_13.jpg) no-repeat;width:140px;height:133px;bottom:0;right:0;background-size:140px 133px;float:right}
+.guide_bottom{background:url(../images/guide_13.jpg) no-repeat;position:absolute;width:140px;height:133px;bottom:0;right:0;background-size:140px 133px;float:right}
 .guide img{display:block;width:100%}
 .login{display:block;width:80%;margin:8% 0 4% 10%}
 .guide_a{padding-left:8%;overflow:hidden}
