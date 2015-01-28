@@ -43,7 +43,7 @@
                         <td>{{$item.amount}}</td>
                         <td>{{$item.unit}}</td>
                         <td>{{if $item.status == 1}}充值 {{else if $item.status== 2}}活动冻结 {{else if $item.status==3}}活动退款 {{else if $item.status==7}}取现驳回 {{else if $item.status==5}}提现申请 {{else if $item.status==6}}提现成功 {{/if}}</td>
-                    	<td>{{$item.comment}}</td>
+                    	<td>{{$item.sn}}:{{$item.comment}}</td>
                     </tr>
                     {{/foreach}}
                 </table>
