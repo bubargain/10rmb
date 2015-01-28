@@ -6,7 +6,7 @@ class LogisticController extends BaseController {
 	public function index($request, $response)
 	{
 	
-		$sql = "select * from ym_logistic_sn where logistic_sn is NULL";
+		$sql = "select * from ym_logistic_sn where logistic_sn is NULL order by ctime desc";
 		$info = \app\dao\LogisticSnDao::getSlaveInstance()->getPdo()->getRows($sql);
 		if($info)
 			$response->info = $info;
