@@ -9,7 +9,7 @@ class logincontroller extends BaseController {
 		if ($this->has_login) {
 			// 自动登录
 			//$this->redirect ( $this->get_refer () );
-			$this->redirect("index.php?_c=order");
+			$this->redirect("index.php");
 		} else if ($this->isPost ()) {
 			try {
 				if(!$request->pass)
@@ -65,10 +65,13 @@ class logincontroller extends BaseController {
 							$this->redirect('index.php?_c=order');
 					//set cookie
 					}
+					else{
+						throw new \Exception("Password not right");
+					}
 				}
 				
 			} catch ( \Exception $e ) {
-				$this->showError ( $e->getMessage() );
+				$this->showError ( $e->getMessage() ,'index.php');
 				$this->redirect("index.php");
 			}
 		} else {

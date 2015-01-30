@@ -43,9 +43,9 @@ class BaseController extends Controller {
 		echo "<script type=\"text/javascript\">";
 		
 		if (! empty ( $url )) {
-			$link = "window.location.href='" . $url . "'";
+			echo "window.location.href='" . $url . "';";
 		} else {
-			$link = "history.back()";
+			echo "history.back();";
 		}
 		echo "alert('" . $msg . "');";
 		
