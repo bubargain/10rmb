@@ -1,6 +1,6 @@
 	// JavaScript Document
-	var swidth=$(document).width()/2-2;
-	$("#listcontent .list_item").width(swidth);
+	//var swidth=$(document).width()/2-2;
+	//$("#listcontent .list_item").width(swidth);
 	var $tiles = $('#listcontent'),
 		  $handler = $('.list_item', $tiles),
 		  $main = $('#listcontent'),
@@ -10,7 +10,7 @@
 			autoResize: true, // This will auto-update the layout when the browser window is resized.
 			container: $main, // Optional, used for some extra CSS styling
 			//offset: 20, // Optional, the distance between grid items
-			itemWidth: swidth // Optional, the width of a grid item
+			//itemWidth: swidth // Optional, the width of a grid item
 		  };
 	//var handler = $('#listcontent .list_item');
     //  handler.wookmark({
@@ -44,14 +44,14 @@
 	 * myScroll.refresh();		// 数据加载完成后，调用界面更新方法
 	 */
 	function pullDownAction () {
-		setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+		//setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
 			//var i;
 			//for (i=0; i<6; i++) {
 			//	var html='<div class="index_item"><a href="javascript:void(0)"><img src="images/indexc_02.jpg"><div><span>who believe in simplicitywho believe .</span>ENDS IN 2 DAYS</div></a></div>';
 			//	$(".index_content").append(html);
 			//}
 			myScroll.refresh();		//数据加载完成后，调用界面更新方法   Remember to refresh when contents are loaded (ie: on ajax completion)
-		}, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
+		//}, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
 	}
 	
 	/**
@@ -59,7 +59,7 @@
 	 * myScroll.refresh();		// 数据加载完成后，调用界面更新方法
 	 */
 	function pullUpAction () {
-		setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+		//setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
 			
 			var page= parseInt($('#page').val())+1;
 			var cate = parseInt($('#cate').val());
@@ -90,9 +90,9 @@
           //outerOffset: 10, // Optional, the distance to the containers border
          // itemWidth: swidth // Optional, the width of a grid item
      // });
-			applyLayout();
-			myScroll.refresh();		// 数据加载完成后，调用界面更新方法 Remember to refresh when contents are loaded (ie: on ajax completion)
-		}, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
+		//	applyLayout();
+		//	myScroll.refresh();		// 数据加载完成后，调用界面更新方法 Remember to refresh when contents are loaded (ie: on ajax completion)
+		//}, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
 	}
 	/**
 	 * 初始化iScroll控件
@@ -137,12 +137,12 @@
 			},
 			onScrollEnd: function () {
 				if (pullDownEl.className.match('flip')) {
-					pullDownEl.className = 'loading';
-					pullDownEl.querySelector('.pullDownLabel').innerHTML = 'loading...';				
+					pullDownEl.className = 'loading2';
+					pullDownEl.querySelector('.pullDownLabel').innerHTML = '';				
 					pullDownAction();	// Execute custom function (ajax call?)
 				} else if (pullUpEl.className.match('flip')) {
-					pullUpEl.className = 'loading';
-					pullUpEl.querySelector('.pullUpLabel').innerHTML = 'loading...';				
+					pullUpEl.className = 'loading2';
+					pullUpEl.querySelector('.pullUpLabel').innerHTML = '';				
 					pullUpAction();	// Execute custom function (ajax call?)
 				}
 			}
