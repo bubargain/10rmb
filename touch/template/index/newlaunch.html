@@ -62,6 +62,13 @@
    <!--  <script type="text/javascript" src="js/10buckpull.js"></script> -->
 	<script type="text/javascript" src="js/10buckpull.js"></script>  
     <script>
+		//页面加载完成，刷新一次
+		$(document).ready(
+			function(){ 
+				myScroll.refresh();	
+			});
+		
+		
     		function changeLike(id){
 				if($('#item'+id).hasClass('like'))
 				{
