@@ -33,7 +33,7 @@ class OrderController extends BaseController {
 		}
 		else if($request->bcode)
 		{
-			$sql= "select * from ym_event A left join ym_user_event B on  A.event_id = B.event_id where A.mer_id=".$user_id." and B.bcode=".$request->bcode;
+			$sql= "select * from ym_event A left join ym_user_event B on  A.event_id = B.event_id where A.mer_id=".$user_id." and B.order_sn='".$request->bcode."'";
 			$eventInfo = \app\dao\UserEventDao::getSlaveInstance()->getPdo()->getRows($sql);	
 			$response->eventInfo = $eventInfo;
 		}
