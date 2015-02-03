@@ -63,12 +63,17 @@
 	<script type="text/javascript" src="js/10buckpull.js"></script>  
     <script>
 		//页面加载完成，刷新一次
-		/*window.onload= function onload(){ 
-				myScroll.refresh();	
-			};
+		$(document).ready(function() {
+         	//applyLayout();
+			//myScroll.refresh();
+				
+        });
+		document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+		document.addEventListener('DOMContentLoaded', loaded, false); 		
+			
 		
-		*/
-    		function changeLike(id){
+		//like button
+    	/*	function changeLike(id){
 				if($('#item'+id).hasClass('like'))
 				{
 					$('#item'+id).removeClass('like');
@@ -79,7 +84,7 @@
 					$('#item'+id).removeClass('unlike');
 					$('#item'+id).addClass('like');
 				}
-			}
+			}*/
     </script>
 </body>
 </html>

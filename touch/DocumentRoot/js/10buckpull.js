@@ -50,6 +50,7 @@
 			//	var html='<div class="index_item"><a href="javascript:void(0)"><img src="images/indexc_02.jpg"><div><span>who believe in simplicitywho believe .</span>ENDS IN 2 DAYS</div></a></div>';
 			//	$(".index_content").append(html);
 			//}
+			console.log('down');
 			myScroll.refresh();		//数据加载完成后，调用界面更新方法   Remember to refresh when contents are loaded (ie: on ajax completion)
 		//}, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
 	}
@@ -60,7 +61,8 @@
 	 */
 	function pullUpAction () {
 		//setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
-			
+			console.log('up');
+
 			var page= parseInt($('#page').val())+1;
 			var cate = parseInt($('#cate').val());
 			var url = "index.php?_c=api&_a=newevents&cate="+cate+"&page=" + page;
@@ -98,14 +100,18 @@
 	 * 初始化iScroll控件
 	 */
 	function loaded() {
+		
+
 		pullDownEl = document.getElementById('pullDown');
 		pullDownOffset = pullDownEl.offsetHeight;
 		pullUpEl = document.getElementById('pullUp');	
 		pullUpOffset = pullUpEl.offsetHeight;
-		
+		//console.log(pullUpOffset+":"+pullDownOffset);
 		myScroll = new iScroll('wrapper', {
 			scrollbarClass: 'myScrollbar', /* 重要样式 */
 			useTransition: false, /* 此属性不知用意，本人从true改为false */
+			bounceLock:true,
+			checkDOMChanges:true,
 			topOffset: pullDownOffset,
 			onRefresh: function () {
 				if (pullDownEl.className.match('loading')) {
@@ -136,6 +142,7 @@
 				}
 			},
 			onScrollEnd: function () {
+				//console.log('im here');
 				if (pullDownEl.className.match('flip')) {
 					pullDownEl.className = 'loading2';
 					pullDownEl.querySelector('.pullDownLabel').innerHTML = '';				
@@ -150,7 +157,5 @@
 		
 		setTimeout(function () { document.getElementById('wrapper').style.left = '0'; }, 800);
 	}
-	//初始化绑定iScroll控件 
-	document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-	document.addEventListener('DOMContentLoaded', loaded, false); 
+
 
