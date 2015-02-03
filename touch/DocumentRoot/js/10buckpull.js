@@ -50,7 +50,7 @@
 			//	var html='<div class="index_item"><a href="javascript:void(0)"><img src="images/indexc_02.jpg"><div><span>who believe in simplicitywho believe .</span>ENDS IN 2 DAYS</div></a></div>';
 			//	$(".index_content").append(html);
 			//}
-			console.log('down');
+		//	console.log('down');
 			myScroll.refresh();		//数据加载完成后，调用界面更新方法   Remember to refresh when contents are loaded (ie: on ajax completion)
 		//}, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
 	}
@@ -61,7 +61,7 @@
 	 */
 	function pullUpAction () {
 		//setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
-			console.log('up');
+			//console.log('up');
 
 			var page= parseInt($('#page').val())+1;
 			var cate = parseInt($('#cate').val());
@@ -133,11 +133,11 @@
 					this.minScrollY = -pullDownOffset;
 				} else if (this.y < (this.maxScrollY - 5) && !pullUpEl.className.match('flip')) {
 					pullUpEl.className = 'flip';
-					pullUpEl.querySelector('.pullUpLabel').innerHTML = 'ok,it is done!';
+					pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
 					this.maxScrollY = this.maxScrollY;
 				} else if (this.y > (this.maxScrollY + 5) && pullUpEl.className.match('flip')) {
 					pullUpEl.className = '';
-					pullUpEl.querySelector('.pullUpLabel').innerHTML = 'reload';
+					pullUpEl.querySelector('.pullUpLabel').innerHTML = '';
 					this.maxScrollY = pullUpOffset;
 				}
 			},
