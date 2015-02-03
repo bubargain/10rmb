@@ -90,7 +90,7 @@
           //outerOffset: 10, // Optional, the distance to the containers border
          // itemWidth: swidth // Optional, the width of a grid item
      // });
-		//	applyLayout();
+			//applyLayout();
 		//	myScroll.refresh();		// 数据加载完成后，调用界面更新方法 Remember to refresh when contents are loaded (ie: on ajax completion)
 		//}, 1000);	// <-- Simulate network congestion, remove setTimeout from production!
 	}
