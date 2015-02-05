@@ -10,7 +10,8 @@ class CacheManager{
 	public static function getInstance($cfgName = 'default'){
 		if(!isset(self::$_map[$cfgName]))
             self::$_map[$cfgName]  = self::getNewConnect($cfgName);
-
+		
+		
 		return self::$_map[$cfgName];
 	}
 	
