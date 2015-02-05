@@ -1,19 +1,24 @@
 <?php
 namespace sprite\cache;
 
-use \Memcache;
+use \Memcached;
 use \sprite\lib\Debug;
 
 /**
  * 扩展了的pdo
  *
  */
-class Memcacheext extends \Memcache {
+class Memcacheext extends \Memcached {
     private $_hosts = array();
     public function addServers($list) {
         foreach($list as $row) {
             $this->_hosts[] = $row['host'];
             parent::addserver($row['host'], $row['port']);
+            if($row['username'])//设置OCS帐号密码进行鉴权
+            {
+            	parent::setSaslAuthData($row['username'], $row['pass']); 
+            }
+            
         }
     }
 
