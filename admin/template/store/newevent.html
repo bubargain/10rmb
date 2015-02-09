@@ -49,13 +49,13 @@
                 
             </div>
              <div class="control-group">
-                <label class="control-label" for="fanli">返利金额：</label>
+                <label class="control-label" for="fanli">返利比例：</label>
                 <div class="controls">
                     <div class="input-append">
                    	 <input type="text" id="fanli" name="fanli"  placeholder="10%以上，最低不低于0.8美金"/>
-                    <span class="add-on">美元</span>
+                    <span class="add-on">%</span>
                     </div>
-                     返利金额过低，审核会不通过
+                    
                 </div>
                 
             </div>
@@ -82,8 +82,9 @@
                 	<div class="form-inline">
                         <select name="noshipping" id="noshipping">
                         	<option value="0">购买返利</option>
-                            <option value="1">试用返利</option>
-                       
+                            {{if $isvip==1}}
+                            <option value="1">刷刷模式(VIP功能)</option>
+                       	{{/if}}
                            
                         </select>
                          <a href="#myModal" role="button"  data-toggle="modal">&nbsp;这是什么</a>
@@ -137,15 +138,17 @@
                 <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">什么是试用返利?</h3>
+                <h3 id="myModalLabel">什么是返利?</h3>
                 </div>
                 <div class="modal-body">
                 <p> 
-                	购买返利，只指消费者购买并试用评价你发布的商品后，获得您提供的返利。
-                	<br/><br/>
+                	购买返利，指消费者购买并试用评价你发布的商品后，您提供给消费者的现金返还，相当于定向发放的优惠劵。
+                	 {{if $isvip==1}}
+                    <br/><br/>
                 	试用返利意味着消费者在试用完您的商品并提供了评价后，会退还商品。<br/>
                 	在此模式下，你需要退还货品的价值（含邮费），
                    	且返利给消费者~
+                    {{/if}}
                     </p>
                 </div>
                 <div class="modal-footer">

@@ -417,6 +417,7 @@ class EventSrv extends BaseSrv {
 				'amount'=>$post['amount'],
 				'cate'=>$post['cate'],
 				'fanli'=>$post['fanli'],
+				'fanli_percentage'=> $post['fanli_percentage'],
 				'noshipping'=>$post['noshipping'],
 				'status'=>0,
 				'ctime'=>time()

@@ -4,15 +4,28 @@
 		<div class="span10 text-center text-info"><h3>资金流水</h3>
         
         <div  class="input-append">
-        <form method="post" action="index.php?_c=pay">
-        <input type="text" name="ip_user_name" />
-       <input type="submit" class="btn"/>
-       </form>
-       </div>
+       
+        <input type="text" id="ip_user_name" name="ip_user_name" />
+      	 <a href="#" type="submit" class="btn" onclick="searchbyusername();"> search</a>
+      	 </div>
        <div style="float:right;display:block" > <a href="index.php?_c=pay&status=pay" class="btn btn-large btn-info">只看提现记录</a>  </div>
        
 		</div>
-		
+		<script>
+        	function searchbyusername(){
+				var id = $('#ip_user_name').val();
+				
+				if(id != '')
+				{
+					var url = "index.php?_c=pay&ip_user_name="+id;
+					
+					window.location.href= url;
+				}
+				else{
+					alert('请输入用户名');
+				}
+			}
+        </script>
       
 		<table id='content' class="table table-hover table-bordered">
 			<thead>

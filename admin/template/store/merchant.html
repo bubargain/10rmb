@@ -22,6 +22,14 @@
                         	<td>账号等级：</td>
                             <td>{{$level}}级  <a href="#myModal" role="button" class="btn btn-small btn-warning" data-toggle="modal">查看</a></td>
                         </tr>
+                         <tr>
+                        	<td>VIP权限：</td>
+                            {{if $isvip ==1}}
+                            <td>开通 </td>
+                            {{else}}
+                             <td>未开通 <a href="#">了解详请，请咨询客服</a> </td>
+							{{/if}}
+                        </tr>
                         <tr>
                         	<td>邀请商家数：</td>
                             <td><font color="red">{{$invite}}</font>&nbsp;个</td>
@@ -36,6 +44,7 @@
                         	<td>创建时间：</td>
                             <td>{{$ctime|date_format:"%Y-%m-%d"}}</td>
                         </tr>
+                        
    				   </table>
                 
                     

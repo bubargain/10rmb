@@ -19,6 +19,7 @@
         	<li>姓名: {{$info.nick_name}}</li>
             <li>手机: {{$info.user_name}}</li>
             <li>邮箱: {{$info.email}}</li>
+            <li>VIP: {{if $info.isvip>0}}{{$info.isvip}}{{else}}否{{/if}}</li>
             <li>人民币: {{$info.rmb}}</li>
             <li>美元: {{$info.usd}}</li>
             <li>积分: {{$info.point}}</li>
@@ -39,6 +40,52 @@
                 加分值:<input type="text" name="points" class="span1"/>
                 <input type="submit" value="确定" />
 			
+            </form>
+        </div>
+        
+         <div style="border-top:1px solid #000;width:100%;height:1px;"> </div>
+		
+        <br/>
+        <div class="alert alert-info">
+       		 <strong>设置用户为VIP,开启特殊功能</strong> 
+        </div>
+       
+        <div >
+        	<form method="post" action="index.php?_c=other&_a=setvip">
+                用户ID:<input type="text" name="v_user_id"  class="span1"/>
+                <select id="isvip" name="v_isvip">
+                	<option value='1'>设为VIP</option>
+                    <option value='0'>取消VIP</option>
+                </select>
+                <input type="submit" value="确定" />	
+            </form>
+        </div>
+        
+          <div style="border-top:1px solid #000;width:100%;height:1px;"> </div>
+		
+        <br/>
+        <div class="alert alert-success">
+       		 <strong>补差价链接</strong>  金额调整，用户端会有记录，需非常严谨
+        </div>
+       
+        <div id="adjust_amount">
+        	<form method="post" action="index.php?_c=other&_a=adjustamount">
+                扣款ID:<input type="text" name="add_user_id"  class="span1"/>
+                <select id="isvip" name="add_curr">
+                	<option value='1'>USD</option>
+                    <option value='0'>RMB</option>
+                </select>账户
+                <br/>
+                补款ID:<input type="text" name="red_user_id"  class="span1"/>
+              
+               
+                <select id="isvip" name="red_curr">
+                	<option value='1'>USD</option>
+                    <option value='0'>RMB</option>
+                </select>账户
+                <br/>
+                  金额：<input type="text" name="add_amount" call="span1"/>美元<br/>
+                <input type="submit" value="确定" />	
             </form>
         </div>
          

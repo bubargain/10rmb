@@ -66,6 +66,9 @@ class StoreController extends BaseController {
 	
 	public function newevent($request,$response)
 	{
+		$user_id =$this->checkLogin();
+		$info = \app\dao\UserInfoDao::getSlaveInstance()->find(array('user_id'=>$user_id));
+		$response->isvip = $info['isvip']>0?1:0;
 		$response->storeTitle ="返利说明";
 		$response->storeIntro ="目前平台只支持跨境电商商品的销售返利,所有购买者均为海外自然用户APP购买";
 		$this->layoutSmarty('newevent');
@@ -81,19 +84,22 @@ class StoreController extends BaseController {
 				
 					$event['event_name'] = $request->event_name;
 					$event['product_link'] = $request->product_link;
-					$event['price'] = $request-> sale_price;
+					$event['price'] = floatval($request-> sale_price);
 					$event['amount'] = $request->amount;
-					$event['fanli'] =$request->fanli;
+					$event['fanli_percentage'] = floatval($request->fanli);
+					$event['fanli'] = round($event['price'] * $event['fanli_percentage'] /100,1);
 					$event['noshipping'] = $request->noshipping;  //是否支持免邮
 					$event['cate'] = $request->cate;
 					$event['duringtime']=$request->duringtime;
 					$event['pic_link']=$request->pic_link;
 					
+					//var_dump($event);die();
 					$response->event_name = $event['event_name'];
 					$response->product_link =$event['product_link'];
 					$response->price   =$event['price'];
 					$response->amount  =$event['amount'];
 					$response->fanli   =$event['fanli'];
+					$response->fanli_percentage   =$event['fanli_percentage'];
 					$response->cate =$event['cate'];
 					$response->duringtime   =$event['duringtime'];
 					$response->pic_link = $event['pic_link'];
@@ -177,7 +183,7 @@ class StoreController extends BaseController {
 		$response->page = $page->GetPageHtml();
 		
 	
-			$sql= "select * from ym_user_currency where user_id = $user_id and status in (1,2,3,5,6,7) order by id desc limit ".$limit;
+			$sql= "select * from ym_user_currency where user_id = $user_id and status in (1,2,3,5,6,7,100) order by id desc limit ".$limit;
 			$res = \app\dao\UserCurrencyDao::getSlaveInstance()->getPdo()->getRows($sql);
 			$response->currencyFlow = $res;
 			

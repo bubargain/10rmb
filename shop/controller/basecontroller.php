@@ -40,7 +40,27 @@ class BaseController extends Controller {
 		else
 			 return $this->current_user['user_id']; 
 	}
-	
+
+	//check if user is admin
+	public function checkAdmin($url=''){
+		if (! $this->has_login) {
+			$goto = TOUCH_BUCK . '/index.php?_c=login';
+			if ($url)
+				$goto .= '&refer=' . urlencode ( $url );
+			$this->redirect ( $goto );
+		}
+		else{
+			$user_id = $this->current_user['user_id'];
+			$info= \app\dao\AdminDao::getSlaveInstance()->find(array('user_id'=>$user_id));
+			if($info)
+				return $user_id ;
+			else
+				return 0;
+		}
+	}
+	public function showMsg($msg,$url = ''){
+		$this->showError($msg,$url);
+	}
 	
 	
 	// 错误信息的js弹窗

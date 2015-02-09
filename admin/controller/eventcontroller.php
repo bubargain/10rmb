@@ -96,6 +96,7 @@ class EventController extends BaseController {
 			$event['price'] = (float)$request-> price;
 			$event['amount'] = (int)$request->amount;
 			$event['fanli'] =(float)$request->fanli;
+			$event['fanli_percentage'] =(float)$request->fanli_percentage;
 			$event['noshipping'] = (int)$request->noshipping;  //是否支持免邮
 			$event['user_id']=$user_id;
 			$event['cate'] =$request->cate;
