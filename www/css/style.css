@@ -12,8 +12,8 @@ blockquote,q{quotes:none;}
 blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
 table{border-collapse:collapse;border-spacing:0;}
 /* start editing from here */
-.header{font-size;18px;color:#FFF;margin-top:20px;display:inline;margin-left:20px}
-.header a{font-size;18px;color:#FFF}
+.header{font-size;18px;color:#000;display:inline;margin-left:20px}
+.header a{font-size;18px;color:#fff;}
 a{text-decoration:none;}
 .txt-rt{text-align:right;}/* text align right */
 .txt-lt{text-align:left;}/* text align left */
@@ -56,6 +56,7 @@ body{
 }
 .left-grid{
 	float:left;
+	margin-bottom:25px;
 	width:43%;
 }
 .avaalabled a{
@@ -80,7 +81,7 @@ body{
 .grids {
 	margin: 0 auto;
 	width: 71%;
-	padding: 7% 0 0 0;
+	padding: 5% 0 0 0;
 	
 }
 /*----boxs----*/
