@@ -85,8 +85,10 @@ body{
 }
 /*----boxs----*/
 .boxs{
-		margin: 95px 0 60px 0;
+		margin: 95px 0 60px 200px;
 		font-size:22px;
+		width:75%;
+	
 		display:block;
 }
 .box h3,.box p{
@@ -172,6 +174,11 @@ body{
 	float:left;
 	width:27%;
 }
+.box2-info{
+	float:right;
+	width: 73%;
+	margin: 18% 0 0 0;
+}
 .box2-info h3{
 	font-family: 'Fauna One', serif;
 	color: #383e48;
@@ -181,14 +188,11 @@ body{
 .box2-info p{
 	font-family: 'Fauna One', serif;
 	color: #383e48;
+
 	font-size: 0.875em;
 	line-height: 1.8em;
 }
-.box2-info{
-	float:right;
-	width: 73%;
-	margin: 18% 0 0 0;
-}
+
 .box2 {
 	padding: 30px 0px;
 }
