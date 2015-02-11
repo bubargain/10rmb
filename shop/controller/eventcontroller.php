@@ -83,6 +83,7 @@ class EventController extends BaseController {
 						'pic_link'=>$pic,
 						'comment'=>$comment,
 						'status' => $status,
+						'utime'  => time(),
 						'store' =>$store
 					)
 				);

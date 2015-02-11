@@ -420,7 +420,8 @@ class EventSrv extends BaseSrv {
 				'fanli_percentage'=> $post['fanli_percentage'],
 				'noshipping'=>$post['noshipping'],
 				'status'=>0,
-				'ctime'=>time()
+				'ctime'=>time(),
+				'utime'=>time()
 			)
 		);
 	}

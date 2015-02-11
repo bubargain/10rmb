@@ -144,7 +144,8 @@ class EventController extends BaseController {
 				self::renderjson(array('ret'=>'false'));
 			
 			 \app\dao\EventDao::getMasterInstance()->edit($event_id,array(
-					'status' => $cstatus
+					'status' => $cstatus,
+			 		'utime' => time()
 				)
 			);
 			self::renderjson(array('ret'=>'true'));
