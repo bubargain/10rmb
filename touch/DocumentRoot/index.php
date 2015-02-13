@@ -27,7 +27,7 @@ $smarty->compile_dir = ROOT_PATH . "/../tmp/touch/templates_c";
 $smarty->registerClass( 'tpl', '\app\common\util\SmartyTpl' ); // 注册smarty
 
 /* 百度统计代码 */
-$_hmt = new _HMT("4576c0805ab6ecca633ca31b6e94b95b");
+$_hmt = new _HMT("0576fcf7fb3ccd52c85eeabe8c00887a");
 $_hmtPixel = $_hmt->trackPageView();
 $smarty->assign("_hmtPixel", $_hmtPixel);
 
