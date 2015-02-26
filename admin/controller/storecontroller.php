@@ -288,6 +288,7 @@ class StoreController extends BaseController {
 		$response->email     = $userinfo['email'];
 		$response->level     = $userlevel['level'];
 		$response->ctime     = $userinfo['ctime'];
+		$response->isvip     = $userinfo['isvip'];
 		$response->invite    = $num['num'];
 		$response->point    = $userinfo['point'];
 		
