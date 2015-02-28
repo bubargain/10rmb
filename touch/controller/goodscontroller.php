@@ -57,7 +57,7 @@ class goodscontroller extends BaseController {
 		$response->event_id = $info['event_id'];
 		$response->price = $info['price'];
 		$response->totalfanli =$info['price']+$info['fanli'];
-		$response->fanli = $info['fanli'];
+		$response->fanli = round($info['fanli']*PROFITRATE ,1);
 		$response->noshipping = $info['noshipping'];
 		$action_template = $this->_controller .'/details.html';
 		$smarty =  new \sprite\mvc\SmartyView($this->_response);

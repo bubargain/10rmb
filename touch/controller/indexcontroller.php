@@ -55,6 +55,7 @@ class indexcontroller extends BaseController {
 					{	
 					
 						$newEvent[$i]['pic_link'] = $newEvent[$i]['pic_link']."?imageView/2/w/160";  //图片转化成160宽
+						$newEvent[$i]['fanli'] = round($newEvent[$i]['fanli'] * PROFITRATE,1);
 					}
 				}
 				
