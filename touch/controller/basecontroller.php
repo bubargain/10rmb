@@ -41,13 +41,13 @@ class BaseController extends Controller {
 		echo '<!doctype html><html><head><meta charset="utf-8"><body>';
 
 		echo "<script type=\"text/javascript\">";
-		
+		echo "alert('" . $msg . "');";
 		if (! empty ( $url )) {
 			echo "window.location.href='" . $url . "';";
 		} else {
 			echo "history.back();";
 		}
-		echo "alert('" . $msg . "');";
+		
 		
 		echo "</script></body></html>";
 		exit ();
