@@ -44,7 +44,13 @@
 						<td>
                         {{if $oneRow.status == '0'}}
 							<a  href="index.php?_c=event&_a=detail&id={{$oneRow.event_id}}"  class="btn btn-info btn-small" >查看</a>
-                        {{/if}}
+                        {{else if $oneRow.status == '1'}}
+                        	{{if $oneRow.hot == '1'}}
+                        	<a  href="index.php?_c=event&_a=hot&id={{$oneRow.event_id}}&ishot=0"  class="btn btn-warning btn-small" >UNHOT</a>
+                            {{else}}
+                            <a  href="index.php?_c=event&_a=hot&id={{$oneRow.event_id}}&ishot=1"  class="btn  btn-small" >HOT</a>
+							{{/if}}	
+	                    {{/if}}
 						</td>
 					</tr>
 				{{/foreach}}

@@ -35,7 +35,21 @@ class EventController extends BaseController {
 		$this->layoutSmarty();
 	}
 
-	
+	/**
+	 * 
+	 * 设置商品为当日特惠
+	 */
+	public function hot($request,$response)
+	{
+		$id =intval($request->id);
+		$ishot = intval($request->ishot);
+		if($id )
+		{
+			$sql = "update ym_event set hot = $ishot where event_id = $id";
+			\app\dao\UserActionDao::getMasterInstance()->getPdo()->exec($sql);
+		}	
+		$this->showError("修改成功",'http://admin.10buck.com/index.php?_c=event');
+	}	
 	
 	
 	
