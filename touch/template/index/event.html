@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>10BUCK - SPECIAL DEALS</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link type="text/css" href="css/group.css" rel="stylesheet">
+ <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+</head>
+
+	<div class="group_main" id="group_main">
+
+		<div class="group_head">
+        <div style="margin-top:-8px" ><a href="javascript:history.go(-1);" class="head_back"></a></div>
+			<div>{{$title}}</div>
+		</div>
+		<!--<div class="group_title"><a href="javascript:void(0)" class="group_titlea">最高品质的关爱</a></div>-->
+		<div class="group_content">
+		
+			<div class="group_div" style="display:block">
+			{{if $live_deals}}
+            {{foreach from = $live_deals item = item}}
+				<div class="group_item">
+					<div class="group_itemimg"><a href="index.php?_c=goods&_a=detail&id={{$item.event_id}}"><img  src="{{$item.pic_link}}"></a></div>
+					<div class="group_iteminfo">
+						<a href="index.php?_c=goods&_a=detail&id={{$item.goods_id}}" class="group_itemdiv">
+							
+							
+							
+						
+							
+                            <p>REBATE : <font color="green"> ${{$item.fanli*0.8}} </font> <ee>FINAL PRICE: <font color="green">${{$item.price-$item.fanli*0.8}} </font></ee></p>
+                            
+                            <p>Only <font color="red"> {{$item.amount-$item.applied}} </font>left</p>
+                        
+						</a>
+					</div>
+     
+				</div>
+               
+			{{/foreach}}	
+            {{else}}
+            	<div class="group_banner"><img src="img/none.png"/> </div>
+            {{/if}}
+			</div>
+			
+		</div>
+		<!--<div class="group_banner"><img src="images/group2_73.jpg"></div>-->
+    	<!--<a href="javascript:void(0)" class="home"></a>-->
+	</div>
+    
+    
+
+<footer>
+	<p> MORE DEALS COME TOMORROW</p>
+</footer>
+</body>
+</html>

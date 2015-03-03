@@ -30,7 +30,7 @@ a:hover{text-decoration:none;outline:none}
 .menu_left .menu_save{background:url(../images/menu_03.png) no-repeat left}
 .menu_left .menu_earn{background:url(../images/menu_07.png) no-repeat left}
 .menu_left .menu_logout{background:url(../images/menu_11.png) no-repeat left}
-.swiper-container{height:55px;border-top-left-radius:8px;border-top-right-radius:8px;background:#16191e;line-height:55px;text-align:center;font-size:22px; text-transform:uppercase;padding:0 10px}
+.swiper-container{height:50px;border-top-left-radius:8px;border-top-right-radius:8px;background:#16191e;line-height:55px;text-align:center;font-size:18px; text-transform:uppercase;padding:0 10px}
 .swiper-slide{width:1000px}
 .swiper-container a{float:left;padding:0 12px 0 11px;border-right:1px #030404 solid;color:#717375}
 .swiper-container .menu_topa{color:#fff;background:#282c33;border:1px #2d3139 solid;}

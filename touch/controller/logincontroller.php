@@ -66,7 +66,7 @@ class logincontroller extends BaseController {
 					//set cookie
 					}
 					else{
-						throw new \Exception("Password not right");
+						throw new \Exception("User/Password don't match");
 					}
 				}
 				

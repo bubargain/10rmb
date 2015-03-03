@@ -43,6 +43,7 @@ class indexcontroller extends BaseController {
 		try{
 			
 			$cate = intval($request->cate);
+			$hot = intval($request->hot);
 			//获取数据
 			if($cate>0)
 			{
@@ -63,6 +64,10 @@ class indexcontroller extends BaseController {
 				$response->newEvent = $newEvent;	
 				$response->cate = $cate;		
 			}	
+			else if($hot >1){  //热门活动版块
+				
+				
+			}
 				$action_template = $this->_controller .'/newlaunch.html';
 				$smarty =  new \sprite\mvc\SmartyView($this->_response);
 				$smarty->render(strtolower($action_template));
@@ -82,7 +87,28 @@ class indexcontroller extends BaseController {
 		$smarty->render(strtolower($action_template));
 	}
 	
-	
+	/**
+	 * 
+	 * 每日活动专区
+	 */
+	public function event($request,$response){
+		$hot=intval($request->hot);
+		if($hot>0)
+		{
+			$sql = "select * from ym_event where hot=$hot and status =1 and noshipping =0 and applied <= amount order by utime";
+			$res = \app\dao\SearchAliaDao::getSlaveInstance()->getPdo()->getRows($sql);
+			if($res)
+			{
+				$response->live_deals=$res;
+			}
+		}
+		
+		$response->title= "TODAY'S SPECIAL";
+		$action_template = $this->_controller .'/event.html';
+		$smarty =  new \sprite\mvc\SmartyView($this->_response);
+		$smarty->render(strtolower($action_template));
+		
+	}
 	
 	
 	
