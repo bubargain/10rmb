@@ -17,7 +17,7 @@ a:hover{text-decoration:none;outline:none}
 .l{float:left}
 .r{float:right}
 .group_main{max-width: 640px;margin: 0 auto;overflow: hidden;width:100% }
-.group_head{position:relative;background:#000;font-size:22px;color:#fff;padding:20px 0 20px 20px;}
+.group_head{position:relative;background:#00b3ba;font-size:22px;color:#fff;padding:10px 0 20px 20px;}
 .group_head div{ text-align:center; }
 .group_head .rebutton {background-image:url(../images/group2_19.png);left:0;background-position: 1% 1%;}
 .group_head h1 {line-height: 47px;text-align: center;color:#fff;font-size:22px;-webkit-box-flex:1;text-overflow:ellipsis;}
@@ -26,7 +26,7 @@ a:hover{text-decoration:none;outline:none}
 .group_head .menu{background-image:url(../images/group_07.png);left:0;top:11px;display:block}
 .group_head .search{background-image:url(../images/group2_16.png);right:0}
 .group_content{padding:0 12px 15px 12px;}
-.group_title{text-align:center;font-size:16px;background:#333;line-height:44px}
+.group_title{text-align:center;font-size:16px;background:#72cbcd;line-height:44px}
 .group_title a{width:49%;display:inline-block;color:#fff}
 .member_title a{width:33%}
 .group_title .group_titlea{background:url(../images/group_03.png) no-repeat center bottom}

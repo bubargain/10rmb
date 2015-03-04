@@ -23,7 +23,7 @@ a:hover{text-decoration:none;outline:none;opacity: 0.5;}
 .r{float:right}
 .group_main{max-width: 640px;margin: 0 auto;overflow: hidden;width:100% }
 .group_cover{max-width: 640px;margin: 0 auto;overflow: hidden;width:100% }
-.group_head{position:relative;background:#000;font-size:22px;color:#fff;padding:20px 0 20px 20px;}
+.group_head{position:relative;background:#00b3ba;font-size:22px;color:#fff;padding:15px 0 20px 20px;}
 .group_head section{ text-align:center; }
 .group_head .rebutton {background-image:url(../images/group2_19.png);left:0;background-position: 1% 1%;}
 .group_head h1 {line-height: 47px;text-align: center;color:#fff;font-size:22px;-webkit-box-flex:1;text-overflow:ellipsis;}
@@ -31,7 +31,7 @@ a:hover{text-decoration:none;outline:none;opacity: 0.5;}
 .head_back{background-image:url(../images/group2_19.png);left:0;top:18px;display:block}
 .group_head section:last-child a.btn {
 	right:5px;
-	top:18px;
+	top:10px;
 	display:block;
 	font-size:16px;
 }
@@ -322,7 +322,7 @@ input{-webkit-appearance:none}
 }
 
 .set-btn1 {
-	background:#333;
+	background:#72cbcd;
 	height:60px;
 	line-height:60px;
 	font-size:30px;
