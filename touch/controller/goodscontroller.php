@@ -25,8 +25,10 @@ class goodscontroller extends BaseController {
 			
 			if(!$info)
 			{
+	
 				$this->showError("obz~ product sold out!","index.php");
 			}
+			$response->restamount = $info['amount'] - $info['applied'];
 			if($info['noshipping']==1)//刷单模式，需要验证用户已分配该任务
 			{
 					$sql = "select A.pic_link,A.product_link,B.price,B.fanli,B.totalfanli,B.id,B.noshipping from ym_event A left join ym_user_event B on A.event_id = B.event_id 
