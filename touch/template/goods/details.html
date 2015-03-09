@@ -40,7 +40,7 @@
                 <input type="hidden" name="event_id" value="{{$event_id}}"/>
 				<p class="groupinfop"  nowrap>
                 <!--<em class="{{if $params.liked}}on{{/if}}"> 收藏（{{$params.wishes}}）</em> -->
-               {{if $restamount}}
+               {{if $restamount > 0}}
                 <input type="submit"  value="APPLY BCODE"/>
                 {{else}}
                 	<em>Sold Out~</em>
