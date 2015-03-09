@@ -95,7 +95,7 @@ class indexcontroller extends BaseController {
 		$hot=intval($request->hot);
 		if($hot>0)
 		{
-			$sql = "select * from ym_event where hot=$hot and status =1 and noshipping =0 and applied <= amount order by utime";
+			$sql = "select * from ym_event where hot=$hot and status =1 and noshipping =0 and applied <= amount order by utime desc";
 			$res = \app\dao\SearchAliaDao::getSlaveInstance()->getPdo()->getRows($sql);
 			if($res)
 			{
