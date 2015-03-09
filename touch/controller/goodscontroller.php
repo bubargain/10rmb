@@ -16,6 +16,7 @@ class goodscontroller extends BaseController {
 		
 		$info = $cache->get ( $key );
 		
+		
 		if (! $info) {		
 			
 			$user_id = $this->current_user['user_id'];	
@@ -28,7 +29,8 @@ class goodscontroller extends BaseController {
 	
 				$this->showError("obz~ product sold out!","index.php");
 			}
-			$response->restamount = $info['amount'] - $info['applied'];
+			
+			
 			if($info['noshipping']==1)//刷单模式，需要验证用户已分配该任务
 			{
 					$sql = "select A.pic_link,A.product_link,B.price,B.fanli,B.totalfanli,B.id,B.noshipping from ym_event A left join ym_user_event B on A.event_id = B.event_id 
@@ -54,6 +56,7 @@ class goodscontroller extends BaseController {
 		else{
 		$response->pic_link=$info['pic_link'];
 		}
+		$response->restamount =$info['amount'] > $info['applied']?1:0;
 		$response->product_link = $info['product_link'];
 		$response->id = $info['id'];
 		$response->event_id = $info['event_id'];
