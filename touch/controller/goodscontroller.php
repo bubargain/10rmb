@@ -33,7 +33,7 @@ class goodscontroller extends BaseController {
 			
 			if($info['noshipping']==1)//刷单模式，需要验证用户已分配该任务
 			{
-					$sql = "select A.pic_link,A.product_link,B.price,B.fanli,B.totalfanli,B.id,B.noshipping from ym_event A left join ym_user_event B on A.event_id = B.event_id 
+					$sql = "select A.pic_link,A.amount,A.applied,A.product_link,B.price,B.fanli,B.totalfanli,B.id,B.noshipping from ym_event A left join ym_user_event B on A.event_id = B.event_id 
 					where A.event_id = $event_id and A.status in (1,88) and B.user_id = $user_id
 					";
 					$info = \app\dao\EventDao::getSlaveInstance()->getPdo()->getRow($sql);
