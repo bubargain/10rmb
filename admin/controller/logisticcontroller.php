@@ -75,6 +75,10 @@ class LogisticController extends BaseController {
 	    				'ctime'   => strtotime('now'),           //运单申请创建时间
 	    				'utime'   => strtotime('now')
 	    		));
+	    		//扣款
+	    		
+	    		
+	    		//
 	    		\app\dao\UserEventDao::getMasterInstance()->edit($coupon_id,
 	    			array('apply_logistic_sn'=>1)
 	    		); //标记已申请运单

@@ -31,9 +31,34 @@ class BaseController extends Controller {
 			$this->has_login = true;
 			$this->current_user = $info;
 		}
+		
+		/*
+		 * user access log record
+		 * 2015/03/08
+		 * Daniel Ma
+		 */
+		//$this->logRecord($userId,$_SERVER['REQUEST_URI']);
+	
+		
+		
         $this->current_user['uuid'] = $_COOKIE['YID'];//设定用户KEY
 		header ( "Content-type: text/html; charset=utf-8" );
 	}
+	
+	
+	/**
+	 * 
+	 * record user access record to db
+	 * @param int $userId
+	 * @param text $path :url
+	 */
+	private function logRecord($userId,$path)
+	{
+		//index.php?_c=goods&_a=index
+		
+	}
+	
+	
 	public function showError($msg, $url = '') {
 		self::showMsg ( $msg, $url );
 	}

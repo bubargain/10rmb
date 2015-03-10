@@ -32,11 +32,12 @@ a:hover{text-decoration:none;outline:none}
 .group_title .group_titlea{background:url(../images/group_03.png) no-repeat center bottom}
 .group_item{padding-top:15px}
 .group_item img,.groupinfoimg img,.info_content img,.designers img,.group_itemimg img,.group_banner img{display:block;width:100%}
-.group_iteminfo{background:#cad6e6 url(../images/group_16.png) no-repeat 95% center;line-height:20px}
+/*.group_iteminfo{background:#cad6e6 url(../images/group_16.png) no-repeat 95% center;line-height:20px} */
+.group_iteminfo{background:#cad6e6;line-height:20px} 
 .group_iteminfo h2,.groupinfodiv h2{color:#333;font-size:16px;font-weight:200}
 .group_iteminfo em{font-size:16px;color:#ec6866}
 .group_iteminfo span{font-size:16px;color:#0C6}
-.group_itemdiv{color:#666;background:#fff;padding:8px 0 5px 10px;width:85%;display:block}
+.group_itemdiv{color:#666;background:#fff;padding:8px 0 5px 10px;width:95%;display:block}
 .groupprice,.grouptime{font-size:10px;color:#999}
 .goodsfont{width:75%; overflow:hidden; white-space:nowrap; text-overflow:ellipsis}
 .home{position:fixed;bottom:6%;right:7%;z-index:999;width:80px;height:80px;background:url(../images/group_20.png);background-size:80px 80px}

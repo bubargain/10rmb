@@ -15,8 +15,8 @@
 	<div class="group_main" id="group_main">
 
 		<div class="group_head">
-        <div style="margin-top:-8px" ><a href="javascript:history.go(-1);" class="head_back"></a></div>
-			<div>{{$title}}</div>
+        <div style="margin-top:-4px" ><a href="javascript:history.go(-1);" class="head_back"></a></div>
+			<div style="margin-top:5px;margin-bottom:-5px">{{$title}}</div>
 		</div>
 		<!--<div class="group_title"><a href="javascript:void(0)" class="group_titlea">最高品质的关爱</a></div>-->
 		<div class="group_content">
@@ -26,19 +26,17 @@
             {{foreach from = $live_deals item = item}}
 				<div class="group_item">
 					<div class="group_itemimg"><a href="index.php?_c=goods&_a=detail&id={{$item.event_id}}"><img  src="{{$item.pic_link}}"></a></div>
-					<div class="group_iteminfo">
-						<a href="index.php?_c=goods&_a=detail&id={{$item.event_id}}" class="group_itemdiv">
+					
+						<div class="group_iteminfo" > 
+							<a href="index.php?_c=goods&_a=detail&id={{$item.event_id}}" class="group_itemdiv">
+				
+								<p>REBATE : <font color="green"> ${{$item.fanli*0.8}} </font> <ee>FINAL PRICE: <font color="green">${{$item.price-$item.fanli*0.8}} </font></ee></p>
+								
+								<p>Only <font color="red"> {{$item.amount-$item.applied}} </font>left</p>
 							
-							
-							
-						
-							
-                            <p>REBATE : <font color="green"> ${{$item.fanli*0.8}} </font> <ee>FINAL PRICE: <font color="green">${{$item.price-$item.fanli*0.8}} </font></ee></p>
-                            
-                            <p>Only <font color="red"> {{$item.amount-$item.applied}} </font>left</p>
-                        
-						</a>
-					</div>
+							</a>
+						</div>
+					
      
 				</div>
                
