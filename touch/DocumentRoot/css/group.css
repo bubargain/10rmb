@@ -6,7 +6,7 @@ body{font-size:12px;font-family:'Microsoft YaHei',Arial, Helvetica, sans-serif;-
 textarea{resize:none}
 iframe,img{border:0}
 ul,ol{list-style:none}
-ee{float:right;margin:0 10px}
+ee{float:right;margin:0 10px;font-size:12px}
 input,select,textarea{outline:0;-webkit-user-modify:read-write-plaintext-only}
 input{-webkit-appearance:none}
 strong,h1,h2{font-weight:400}

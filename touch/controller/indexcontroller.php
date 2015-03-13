@@ -102,8 +102,10 @@ class indexcontroller extends BaseController {
 				$response->live_deals=$res;
 			}
 		}
-		
-		$response->title= "TODAY'S SPECIAL";
+		if($hot ==1)
+			$response->title= "TODAY'S SPECIAL";
+		else if ($hot ==2 )
+			$response->title= "New Customer Rewards";
 		$action_template = $this->_controller .'/event.html';
 		$smarty =  new \sprite\mvc\SmartyView($this->_response);
 		$smarty->render(strtolower($action_template));
