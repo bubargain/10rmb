@@ -27,7 +27,7 @@ class goodscontroller extends BaseController {
 			if(!$info)
 			{
 	
-				$this->showError("obz~ product sold out!","index.php");
+				$this->showError("Sorry,product sold out!","index.php");
 			}
 			
 			
