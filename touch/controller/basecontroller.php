@@ -60,23 +60,36 @@ class BaseController extends Controller {
 	
 	
 	public function showError($msg, $url = '') {
-		self::showMsg ( $msg, $url );
-	}
-	public function showMsg($msg, $url = '') {
-		echo '<!doctype html><html><head><meta charset="utf-8"><body>';
-
-		echo "<script type=\"text/javascript\">";
-		echo "alert('" . $msg . "');";
-		if (! empty ( $url )) {
-			echo "window.location.href='" . $url . "';";
-		} else {
-			echo "history.back();";
-		}
+		//self::showMsg ( $msg, $url );
+		$url="index.php?_c=index&_a=notice&txt=$msg&url=".urlencode($url);
+		header("Location: $url"); 
+		exit();
+		//$action_template = 'index/notice.html';
+		//$smarty =  new SmartyView($this->_response);
 		
-		
-		echo "</script></body></html>";
-		exit ();
+		//$smarty->render(strtolower($action_template));
 	}
+	
+	public function showMsg($request, $response)
+	{
+		
+	}
+	
+//	public function showMsg($msg, $url = '') {
+//		echo '<!doctype html><html><head><meta charset="utf-8"><body>';
+//
+//		echo "<script type=\"text/javascript\">";
+//		echo "alert('" . $msg . "');";
+//		if (! empty ( $url )) {
+//			echo "window.location.href='" . $url . "';";
+//		} else {
+//			echo "history.back();";
+//		}
+//		
+//		
+//		echo "</script></body></html>";
+//		exit ();
+//	}
 	public function showMessage($txt, $url) {
 		$this->_response->txt = $txt;
 		$this->_response->url = $url;

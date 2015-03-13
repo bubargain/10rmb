@@ -234,6 +234,13 @@ class indexcontroller extends BaseController {
 		
 	}
 	
+	public function notice($request,$response){
+		$response->notice = $request->txt ?$request->txt :"10BUCK took a break!";
+		$response->url = urldecode($request->url);
+		$this->layoutSmarty('notice');
+	}
+	
+	
 	/**
 	 * 
 	 * send email notification to user

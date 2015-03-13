@@ -14,4 +14,11 @@ class HelpController extends BaseController {
 			$this->showError ( $e->getMessage () );
 		}
 	}
+	
+	public function forgetpass($request,$response){
+		$email = $request->em;
+		echo $email;
+	}
+	
+	
 }

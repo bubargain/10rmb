@@ -1,0 +1,30 @@
+
+<header class="group_head">
+
+	<section><a href="javascript:history.go(-1);" class="head_back"></a></section>
+	<section><div class="cWhite"> OOPS~</div></section>
+</header>
+
+<input type="hidden" id="url" name="url" value="{{$url}}"/>
+<section class="main">
+	<section class="content">
+		<dl class="about"> 
+			<dt>{{$notice}}
+            <p style="font-size:12px">The page will be return in secs...</p>
+            </dt>
+			
+            
+		</dl>
+	</section>
+</section>
+
+<script>
+	if($("#url").val()){
+		setTimeout("window.location.href='" + $("#url").val() + "';",4000);
+		
+	}
+	else{
+		setTimeout("history.back();",4000);
+	}
+	
+</script>
