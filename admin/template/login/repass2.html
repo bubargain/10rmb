@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Password Reset - 10BUCK</title>
+<link href="/css/bootstrap.docs.css" rel="stylesheet">
+<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<LINK href="/css/style.css" rel="stylesheet">
+<script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="application/javascript" src="/js/main.js"></script>
+<script type="text/javascript">
+//导航栏效果
+$(function(){
+	var nav = $('#nav').children();
+	for (var i=0;i<nav.length;i++){
+		if (nav[i].className=="menu"){
+			nav[i].onmouseover = function(){fnNav(this,"block")};
+			nav[i].onmouseout = function(){fnNav(this,"none")};
+		}
+	}
+	function fnNav(obj,flag){
+		$(obj).find("dl")[0].style.display = flag;
+	}
+});
+</script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" >
+	<div class="navbar-inner">
+        <div class="container">
+          
+          <div class="nav-collapse collapse">
+           
+          </div>
+        </div>
+        </div>
+</div>
+<header id="overview" class="jumbotron subhead">
+  <div class="container">
+    <h1>10BUCK&nbsp;</h1>
+    <p class="lead"> Your Trial, Our Treat</p>
+  </div>
+</header>
+
+<div class="container" style="min-height:650px">
+   <section>
+   	<div class="page-header">
+            <h1>RESET</h1>
+           
+    </div>
+	<form class="form-horizontal" method="post" action="?_c=login&_a=repass2">
+	<tr>
+  
+    <td>
+    <div class="control-group">
+		<label class="control-label" for="inputPhone">NEW PASSWORD：</label>
+        <div class="controls">
+        <input type="password" id="inputPassword" name="inputPassword" placeholder="set your password">
+        </div>
+    </div>
+    <div class="control-group">
+		<label class="control-label" for="inputPhone">PASSWORD AGAIN</label>
+        <div class="controls">
+        <input type="password" id="inputPassword2" name="inputPassword2" onchange="verfyPass();" placeholder="input again">
+         <div id="passNotSame" hidden="true">passwords not match</div>
+        </div>
+    </div>
+    	<input type="hidden" name="phone" value="{{$phone}}" />
+    	<input type="hidden" name="token" value="{{$token}}" />
+        <div class="control-group">
+        </div>
+       
+            <div class="controls">
+            <button id='regSub' type="submit"  class="btn btn-large btn-info">SUBMIT</button>
+            </div>
+        </div>
+    </td>
+    </tr>
+	</form>
+    </section>
+   <script>
+   
+   
+   		function verfyPass()
+		{
+			
+			if($("#inputPassword").val() !=  $("#inputPassword2").val())
+			{
+				
+				$("#passNotSame").show();
+				$("#regSub").hide();
+				
+			}
+			else
+			{
+				$("#passNotSame").hide();
+				$("#regSub").show();
+			}
+		}
+   </script>
+{{include file="../footer.html"}}

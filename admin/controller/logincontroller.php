@@ -167,6 +167,46 @@ class LoginController extends BaseController {
 		$this->showError("重置活动已失效",'index.php');
 	}
 	
+    //用户重置密码临时
+    //用户名为邮箱
+	public function repass2($request,$response)
+	{
+		if($request->phone && $request->token )
+		{
+		
+			$info = \app\dao\UserInfoDao::getSlaveInstance()->find(
+				array(
+					'user_name' => $request->phone	
+				)
+			);
+			
+			if($info && $this->isPost())//form post, change password
+			{
+				
+				$pass = md5($request->inputPassword);
+			
+				$token =md5($request->phone . time());
+				\app\dao\UserInfoDao::getSlaveInstance()->edit($info['user_id'],
+				array('token'=>$token)
+				);
+				\app\dao\UserDao::getSlaveInstance()->edit(
+					$info['user_id'], array('password'=>$pass)
+				);
+				$this->showError("Rest Succeed!","http://www.10buck.com");die();
+			}
+			
+			if($info && $info['utime']+12*60*60 > strtotime('now'))//重置密码在有效期内
+			{
+				$response->token = $request->token;
+				$response->phone =$request->phone;
+				
+				$this->renderSmarty('repass2');die();
+				
+			}
+		}
+		$this->showError("重置活动已失效",'index.php');
+	}
+	
 	
 	
 	//重置密码申请
