@@ -30,7 +30,7 @@
 						<div class="group_iteminfo" > 
 							<a href="index.php?_c=goods&_a=detail&id={{$item.event_id}}" class="group_itemdiv">
 				
-								<p style="font-size:16px">MONEY RETURN : <font color="green" > ${{$item.fanli*0.8}} </font> <ee>SALE PRICE: <font color="green">${{$item.price-$item.fanli*0.8}} </font></ee></p>
+								<p style="font-size:16px">MONEY RETURN : <font color="green" > ${{$item.fanli*0.8}} </font> <ee>SALE PRICE: <font color="green">${{$item.price}} </font></ee></p>
 								{{if $item.amount - $item.applied  < 10}}
 								<p><font color="red">Only  {{$item.amount-$item.applied}} left</font></p>
 								{{/if}}
