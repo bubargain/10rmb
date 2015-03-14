@@ -1,20 +1,20 @@
-<div class="group_main">
-<header class="group_head">
-	<section><a href="index.php?_c=order&_a=index" class="head_back"></a></section>
-	<section>
-		<div class="cWhite">ON PROCESS</div>
-	</section>
-	<section></section>
-</header>
+<div class="group_main" >
+<div class="group_head" nowrap>
+   		<section><a href="index.php?_c=order" class="head_back"></a></section>
+        <section><div class="cWhite">ON PROCESS</div></section>
+        <section></section>
+</div>
+            
 <section class="main">
 	<section class="content">
 		<div class="order-menu cWhite">
 			<ul>
 				<li ><a href="index.php?_c=order&_a=orderList&status=unpay">wishlist</a></li>
 				<li class="on"><a href="index.php?_c=order&_a=orderList&status=payed">on process</a></li>
-				<li><a href="index.php?_c=order&_a=orderList&status=shipped">confirmed</a></li>			
+				<li ><a href="index.php?_c=order&_a=orderList&status=shipped">confirmed</a></li>			
 				<li><a href="index.php?_c=order&_a=orderList&status=closed">canceled</a></li>
 			</ul>
+        	
 		</div>
 		{{if $params}}
         <div class="order_list">
@@ -25,7 +25,7 @@
                     <section><img src="{{$item.pic_link}}"></section>
                     <section>
                         <div>
-                        <p style="text-overflow:ellipsis;"><a style="text-decoration:underline" href="{{$item.product_link}}">product link</a></p>    
+                        <p style="text-overflow:ellipsis;"><a style="text-decoration:underline" href="{{$item.product_link}}">REVIEW PRODUCT</a></p>    
                         </div>
                        <div>
                        	<p style="font-size:9px" nowrap> SALE PRICE:${{$item.price}}&nbsp;&nbsp;</p> <p class="cBlue" style="font-size:9px" nowrap>REBATE:${{$item.totalfanli}}</p>

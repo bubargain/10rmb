@@ -420,14 +420,14 @@ input{-webkit-appearance:none}
 	-webkit-transform:rotate(-45deg);
 }
 .order-menu {
-	width:100%;
-	margin:20px auto 1px;
+	width:98%;
+	margin:10px auto 10px;
 	overflow:hidden;
 }
 .order-menu ul {
 	background:#14B9D6;
-	width:98%;
-	margin-left:1%;
+	width:95%;
+	margin-left:2%;
 	overflow:hidden;
 }
 .order-menu ul.on {
@@ -450,11 +450,9 @@ input{-webkit-appearance:none}
 .order-menu li:nth-child(3) {
 	background-position:35px -1005px;
 }
-.order-menu li:nth-child(5) {
-	background-position:35px -1136px;
-}
+
 .order-menu li:nth-child(4) {
-	background-position:35px -1256px;
+	background-position:30px -1256px;
 }
 
 .order-menu li a {
