@@ -36,6 +36,7 @@ a:hover{text-decoration:none;outline:none}
 .group_iteminfo{background:#cad6e6;line-height:20px} 
 .group_iteminfo h2,.groupinfodiv h2{color:#333;font-size:16px;font-weight:200}
 .group_iteminfo em{font-size:16px;color:#ec6866}
+
 .group_iteminfo span{font-size:16px;color:#0C6}
 .group_itemdiv{color:#666;background:#fff;padding:8px 0 5px 10px;width:95%;display:block}
 .groupprice,.grouptime{font-size:10px;color:#999}
@@ -62,6 +63,7 @@ a:hover{text-decoration:none;outline:none}
 .groupinfoimg img {width:100%;vertical-align:middle;}
 .groupinfodiv{background:#fff;margin:15px 0;overflow:hidden;font-size:16px;line-height:22px;padding-top:12px}
 .groupinfodiv div{clear:both;padding:0 2% 0 4%;overflow:hidden}
+.groupinfodiv div span{font-size:10px;float:right;}
 .groupinfodiv span{font-size:20px}
 .groupinfodiv div .r{color:#ec6866}
 .groupinfodiv .groupprice{padding-bottom:10px}

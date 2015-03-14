@@ -22,7 +22,7 @@ a:hover{text-decoration:none;outline:none;opacity: 0.5;}
 .l{float:left}
 .r{float:right}
 .group_main{max-width: 640px;margin: 0 auto;overflow: hidden;width:100% }
-.group_cover{max-width: 640px;margin: 0 auto;overflow: hidden;width:100% }
+.group_cover{max-width: 640px;margin: 0 auto;overflow: hidden;width:50% }
 .group_head{position:relative;background:#00b3ba;font-size:22px;color:#fff;padding:15px 0 20px 20px;}
 .group_head section{ text-align:center; }
 .group_head .rebutton {background-image:url(../images/group2_19.png);left:0;background-position: 1% 1%;}
@@ -64,7 +64,7 @@ footer {
 	padding:16px;
 	display:-webkit-box;
 	border-bottom:1px solid #C9C9C9;
-	height:100px;
+	
 }
 .alertMsg {
 	width:75%;
@@ -121,8 +121,8 @@ footer {
 }
 .order .order-tit,.order .order-form,.order .order-top,.order .order-btm {
 	display:-webkit-box;
-	padding:10px 16px;
-	min-height:50px;
+	padding:5px 5px;
+	min-height:45px;
 	line-height:100%;
 	border-bottom:1px solid #C9C9C9;
 }
@@ -133,19 +133,19 @@ footer {
 .order .order-tit a.btn {
 	display:inline-block;
 	background:#14B9D6;
-	height:50px;
-	line-height:50px;
+	height:45px;
+	line-height:45px;
 	-webkit-border-radius:10px;
 	padding:0 10px;
 	color:#FFF;
 }
-.order .order-tit a.btnw {
+.order  a.btnw {
 	display:inline-block;
 	background:#CCC;
-	height:50px;
-	line-height:50px;
+	height:40px;
+	line-height:40px;
 	-webkit-border-radius:10px;
-	padding:0 10px;
+	padding:0 10px 0 10px;
 	color:#000;
 }
 .order .order-tit section span{
@@ -375,7 +375,7 @@ input{-webkit-appearance:none}
 	margin-right:10px;
 }
 .myorder {
-	width:95%;
+	width:88%;
 	margin:0 auto;
 	border:1px solid #C9C9C9;
 }
@@ -421,7 +421,7 @@ input{-webkit-appearance:none}
 }
 .order-menu {
 	width:100%;
-	margin:20px auto 20px;
+	margin:20px auto 1px;
 	overflow:hidden;
 }
 .order-menu ul {
@@ -429,6 +429,11 @@ input{-webkit-appearance:none}
 	width:98%;
 	margin-left:1%;
 	overflow:hidden;
+}
+.order-menu ul.on {
+	background:#E0E0E0;
+	color:#666;
+	text-align:center;
 }
 .order-menu li {
 	float:left;

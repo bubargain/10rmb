@@ -17,11 +17,11 @@
 	<div class="group_main" id="group_main">
 		<div class="group_head" nowrap>
 			<div  ><a href="javascript:history.go(-1);" class="head_back"></a></div>
-            <div >Goods</div> 
+            <div >TRIAL PAGE</div> 
 			<div ><a href="index.php?_c=order&_a=index" class="search"></a></div>
 		</div>
 		<div class="groupinfo">
-			<div class="groupinfoimg"><a href="{{$product_link}}"><img src="{{$pic_link}}"></a></div>
+			<div class="groupinfoimg"><a href="#"><img src="{{$pic_link}}"></a></div>
 			<div class="groupinfodiv">
            	 	<form method="post" action="index.php?_c=goods&_a=about" >
                 <div>
@@ -30,18 +30,20 @@
                         <option value="0">pay ${{$price}},get product and ${{$fanli}} rebate</option>
                     </select> -->
                    {{if $noshipping}}
-                    Finish the task, get <font color="red">${{$fanli}} +${{$price}}</font> back
+                    GET <font color="red">${{$fanli}} +${{$price}}</font> BACK
                    {{else}}
-                   	Trial it, get <font color="#009966">${{$fanli}} </font>back
+                   	GET <font color="#009966">${{$fanli}} </font>BACK
                    {{/if}}
+                   <span><a style="text-decoration:underline" href="{{$product_link}}">PRODUCT DETAIL</a></span>
                 </div>
                 <input type="hidden" name="id" value="{{$id}}"/>
                 <input type="hidden" name="noshipping" value="{{$noshipping}}"/>
                 <input type="hidden" name="event_id" value="{{$event_id}}"/>
 				<p class="groupinfop"  nowrap>
+               
                 <!--<em class="{{if $params.liked}}on{{/if}}"> 收藏（{{$params.wishes}}）</em> -->
                {{if $restamount > 0}}
-                <input type="submit"  value="APPLY BCODE"/>
+                <input type="submit"  value="I WANT TRIAL"/>
                 {{else}}
                 	<em>Sold Out~</em>
                {{/if}} 

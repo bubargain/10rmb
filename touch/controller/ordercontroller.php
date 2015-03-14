@@ -89,23 +89,26 @@ class orderController extends BaseController {
 		$user_id=$this->checkLogin ( 'index.php?_c=order&_a=confirm&id=' . $request->id . '&reBack=1' );
 		try {
 			
-			$id =$request->id;
+			$id =intval($request->eid);
+			$buyer =addslashes($request->buyer);
+			$zipcode = $request->zipcode ? addslashes($request->zipcode):'0';
+			
 			$user_id= $user_id;
 			
 			$usersrv= new \app\service\EventSrv();
-			$ret = $usersrv->confirmCodeUse($user_id,$id);
+			$ret = $usersrv->confirmCodeUse($user_id,$id,$buyer,$zipcode);
 			
 			if ($ret) {
 				header("Location:index.php?_c=order&_a=orderList&status=payed");
 				//$this->showMessage("Input your purchase name or sn here after order placed!", "index.php?_c=order&_a=orderList&status=payed");
 			} else {
-				header("Location:index.php?_c=order&_a=orderList&status=unpay");
-				//$this->showError('change status failed',"index.php?_c=order&_a=orderList&status=unpay");
+				//header("Location:index.php?_c=order&_a=orderList&status=unpay");
+				$this->showError('Error happens, please try again later',"index.php?_c=order&_a=orderList&status=unpay");
 			}
 		
 		} catch ( \Exception $e ) {
 			//$message = ($e->getCode () == 50002) ? '太火爆，卖完了！' : $e->getMessage ();
-			$this->showMessage ( $e->getMessage() ,"index.php?_c=order&_a=orderList");
+			$this->showError($e->getMessage() ,"index.php?_c=order&_a=orderList");
 		}
 	}
 	

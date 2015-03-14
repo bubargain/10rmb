@@ -287,7 +287,7 @@ class EventSrv extends BaseSrv {
 	 * $user_id : bcode owner id
 	 * $id :  user event id
 	 */
-	public function confirmCodeUse($user_id,$id)
+	public function confirmCodeUse($user_id,$id,$buyer='',$zipcode='0')
 	{
 		
 		$info = \app\dao\UserEventDao::getMasterInstance()->find(
@@ -301,8 +301,9 @@ class EventSrv extends BaseSrv {
 		else if($info['status']!= 0)		
 			throw new \Exception('cant change status ');
 		else{
+			$order_sn = $buyer."|".$zipcode;
 			return \app\dao\UserEventDao::getMasterInstance()->edit($id,
-				array('status'=>1,'etime'=>strtotime('now'))
+				array('status'=>1,'etime'=>strtotime('now'),'order_sn'=>$order_sn)
 			);
 		}
 		

@@ -1,42 +1,46 @@
 <div class="group_main" >
 <div class="group_head" nowrap>
    		<section><a href="index.php?_c=order" class="head_back"></a></section>
-        <section><div class="cWhite">UNUSED</div></section>
+        <section><div class="cWhite">WISHLIST</div></section>
         <section></section>
 </div>
 <section class="main">
 	<section class="content">
 		<div class="order-menu cWhite">
 			<ul>
-				<li class="on"><a href="index.php?_c=order&_a=orderList&status=unpay">unused</a></li>
+				<li class="on"><a href="index.php?_c=order&_a=orderList&status=unpay">wishlist</a></li>
 				<li><a href="index.php?_c=order&_a=orderList&status=payed">locked</a></li>
 				<li><a href="index.php?_c=order&_a=orderList&status=shipped">confirmed</a></li>
 				<li><a href="index.php?_c=order&_a=orderList&status=closed">canceled</a></li>
 			</ul>
+            <ul class="on"	>
+         	   Products in wishlist will expired in 8 hours
+            </ul>
 		</div>
 		{{if $params}}
         <div class="order_list content">
             {{foreach from = $params item = item}}
             <div class="order">
-                <a href="#">
+              
                 <div class="order-pro">
                     <section><img src="{{$item.pic_link}}"></section>
                    
                     <section>
                         <div>
-                        	<p>{{$item.event_name}} <br/> </p>
+                        	<p>SALE PRICE:&nbsp;${{$item.price}} <br/> </p>
                         </div>
-                        <div><p class="cBlue"  nowrap>Pay:${{$item.price}}&nbsp;&nbsp;Rebate:${{$item.totalfanli}}</p></div>
+                        <div><p class="cBlue"  nowrap>REBATE:&nbsp;${{$item.totalfanli}}</p></div>
+                        <p class="fr cGray">
+                    	    <a href="javascript:applypro('{{$item.product_link}}',{{$item.event_id}});" class="btnw">APPLY NOW</a>
+                        </p>
                     </section>
-                </div>
-                </a>
-                <div class="order-tit">
-                    <section class="fl cGray"><a href="index.php?_c=goods&_a=about&id={{$item.id}}" class="btnw">VIEW BCODE</a>
-                     <br/>BCODE will expired in 8 hours.</section>
-                    <section class="fr cWhite"><a href="index.php?_c=order&_a=confirm&id={{$item.id}}"  class="btn">LOCK</a></section>
-                    
                 
-                     
+                </div>
+              
+                <div class="order-tit" id="order{{$item.event_id}}" style="display:none" >
+ 
+                   <!-- <section class="fr cWhite"><a href="index.php?_c=order&_a=confirm&id={{$item.id}}"  class="btn">GET REBATE</a></section> -->
+                   <section class="fr cWhite"><a href="javascript:getrebate({{$item.id}});"  class="btn">GET REBATE</a></section> 
                 </div>
             </div>
             {{/foreach}}
@@ -46,7 +50,87 @@
         {{/if}}
 	</section>
 </section>
+
+<!--弹出框 购买后返回提示-->
+<link rel="stylesheet" href="css/common.css"/>
+		<div id="dialogBg"></div>
+		<div id="dialog" class="animated">
+			<img class="dialogIco" width="50" height="50" src="img/ico.png" alt="" />
+			<div class="dialogTop">
+				<a href="javascript:;" class="claseDialogBtn">Close</a>
+			</div>
+			<div>
+				<ul id="n1" class="editInfos" >
+					<li><label>Press "GO" button below to puchase this product FIRST, then apply your rebate.</label></li>
+					<li>&nbsp;<br/></li>
+					<li><a href="#" id="golink" class="submitBtn" >GO</a></li>
+				</ul>
+               
+				<ul id="n2" class="editInfos">
+               	    <form action="index.php?_c=order&_a=confirm" method="post" id="editForm">
+                    <li>Input your order info <input type="hidden" id="eid" name="eid" value=""/></li>
+					<li><label><font color="#ff0000">* </font>Consignee Name：<input type="text" name="buyer" required value="" class="ipt" /></label></li>
+					<li><label><font color="#ff0000">* </font>Zipcode(option)：<input type="text" name="zipcode"  class="ipt" /></label></li>
+					
+					<li><input type="submit" value="CONFIRM" class="submitBtn" /></li>
+                    </form>
+				</ul>
+				
+			</div>
+		</div>
+      
+
 </div>
+
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+//弹框js
+var w,h,className;
+function getSrceenWH(){
+	w = $(window).width();
+	h = $(window).height();
+	$('#dialogBg').width(w).height(h);
+}
+
+
+window.onresize = function(){  
+	getSrceenWH();
+}  
+$(window).resize();  
+
+	//显示弹框
+	function applypro(link,id){
+	
+		$('#n2').hide();$('#n1').show();
+		$('#golink').attr('href',link);
+		$('#dialogBg').fadeIn(300);
+		$('#dialog').removeAttr('class').addClass('animated bounceIn').fadeIn();
+		$('#order'+id).fadeIn(300);
+	}
+	//填写订单姓名和zipcode
+	function getrebate(id){
+		$('#n2').show();$('#n1').hide();
+		$('#eid').val(id); 
+		$('#dialogBg').fadeIn(300);
+		$('#dialog').removeAttr('class').addClass('animated bounceIn').fadeIn();
+	}
+
+$(function(){
+	getSrceenWH();
+	
+
+	
+	//关闭弹窗
+	$('.claseDialogBtn').click(function(){
+		$('#golink').attr('href','#');
+		$('#dialogBg').fadeOut(300,function(){
+			$('#dialog').addClass('bounceOutUp').fadeOut();
+		});
+		
+	});
+});
+</script>
+
 <script>
 
 function upStatus(id){

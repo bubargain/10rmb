@@ -134,10 +134,11 @@ class goodscontroller extends BaseController {
 					
 					\app\dao\UserEventDao::getMasterInstance()->getPdo()->exec($sql);
 					}*/
-					$response->bcode= $info['bcode'];
-					$response->id = $info['id'];
-					$response->product_link = $info['product_link'];
-					$this->layoutSmarty ( 'about' );
+//					$response->bcode= $info['bcode'];
+//					$response->id = $info['id'];
+//					$response->product_link = $info['product_link'];
+//					$this->layoutSmarty ( 'about' );
+					header("location:index.php?_c=order&_a=orderList&status=unpay");
 				} //end 刷单模式
 				else  //真实返利模式，开放申请
 				{
@@ -165,10 +166,11 @@ class goodscontroller extends BaseController {
 							$sql = "update ym_user_event set status=0 where id =".$info['id'];
 							\app\dao\EventDao::getMasterInstance()->getPdo()->exec($sql);
 						}
-						$response->bcode = $info['bcode'];
-						$response->id = $info['id'];
-						$response->product_link = $info['product_link'];
-						$this->layoutSmarty ( 'about' );
+//						$response->bcode = $info['bcode'];
+//						$response->id = $info['id'];
+//						$response->product_link = $info['product_link'];
+//						$this->layoutSmarty ( 'about' );
+						header("location:index.php?_c=order&_a=orderList&status=unpay");
 					}
 					else{
 						
@@ -205,11 +207,11 @@ class goodscontroller extends BaseController {
 									);
 									$sql = "update ym_event set applied=applied+1 where event_id=".$info['event_id']; //申请数加1
 									\app\dao\EventDao::getMasterInstance()->getPdo()->exec($sql);
-									$response->bcode = $bcode ;
-									$response->id = $id;
-									$response->product_link = $info['product_link'];
-									$this->layoutSmarty ( 'about' );
-							
+//									$response->bcode = $bcode ;
+//									$response->id = $id;
+//									$response->product_link = $info['product_link'];
+//									$this->layoutSmarty ( 'about' );
+									header("location:index.php?_c=order&_a=orderList&status=unpay");
 							}
 					}
 				}
@@ -231,10 +233,16 @@ class goodscontroller extends BaseController {
 			if(!$info)
 				$this->showError("you have no right to view this page","index.php");
 		
-			$response->bcode= $info['bcode'];
-			$response->id = $info['id'];
-			$response->product_link = $info['product_link'];
-			$this->layoutSmarty ( 'about' );
+//			$response->bcode= $info['bcode'];
+//			$response->id = $info['id'];
+//			$response->product_link = $info['product_link'];
+//			$this->layoutSmarty ( 'about' );
+/**
+ * 修改流程，点击apply bcode直接进入订单管理页面
+ * @daniel ma
+ * @2015-03-14
+ */
+			header("location:index.php?_c=order&_a=orderList&status=unpay");
 			
 		}
 		
