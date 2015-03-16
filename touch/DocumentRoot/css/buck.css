@@ -22,7 +22,7 @@ a:hover{text-decoration:none;outline:none;opacity: 0.5;}
 .l{float:left}
 .r{float:right}
 .group_main{max-width: 640px;margin: 0 auto;overflow: hidden;width:100% }
-.group_cover{max-width: 640px;margin: 0 auto;overflow: hidden;width:50% }
+.group_cover{max-width: 640px;margin: 0 auto;overflow: hidden;width:100% }
 .group_head{position:relative;background:#00b3ba;font-size:22px;color:#fff;padding:15px 0 20px 20px;}
 .group_head section{ text-align:center; }
 .group_head .rebutton {background-image:url(../images/group2_19.png);left:0;background-position: 1% 1%;}
