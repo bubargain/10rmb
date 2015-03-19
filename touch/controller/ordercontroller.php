@@ -28,7 +28,7 @@ class orderController extends BaseController {
 						
 					$refund = new \app\service\RefundSrv();
 					$refund->apply($user_id,(int)($request->applyamount/0.1)/10,'usd');
-					$this->showError("apply succeed! We will handle it ASAP","index.php?_c=order");
+					$this->showError("Apply succeed! <br/>We will handle it ASAP","index.php?_c=order");
 			 }catch(\Exception $e)
 			 {
 			 	$this->showError($e->getMessage(),"index.php?_c=order");
