@@ -25,7 +25,11 @@ class orderController extends BaseController {
 				
 					if(!is_numeric($request->applyamount)) //验证输入是数字
 						throw new \Exception('Input is not a number');
-						
+					if((int)($request->applyamount/0.1)/10 <= 0)
+					{
+						throw new \Exception('Cash amount should be larger than 0.1');
+					}
+					
 					$refund = new \app\service\RefundSrv();
 					$refund->apply($user_id,(int)($request->applyamount/0.1)/10,'usd');
 					$this->showError("Apply succeed! <br/>We will handle it ASAP","index.php?_c=order");
