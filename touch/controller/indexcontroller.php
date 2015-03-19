@@ -93,10 +93,12 @@ class indexcontroller extends BaseController {
 	 * 每日活动专区
 	 */
 	public function event($request,$response){
+		$user_id=$this->checkLogin ();	
 		$hot=intval($request->hot);
 		if($hot>0)
 		{
-			$sql = "select * from ym_event where hot=$hot and status =1 and noshipping =0 and applied <= amount order by utime desc";
+			//$sql = "select * from ym_event where hot=$hot and status =1 and noshipping =0 and applied <= amount order by utime desc";
+			$sql = "select * from ym_event where hot=$hot and status = 1 and noshipping =0 and applied <= amount and event_id not in (select event_id from ym_user_event where user_id=$user_id) order by utime desc";
 			$res = \app\dao\SearchAliaDao::getSlaveInstance()->getPdo()->getRows($sql);
 			if($res)
 			{
