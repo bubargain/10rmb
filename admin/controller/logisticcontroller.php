@@ -64,8 +64,10 @@ class LogisticController extends BaseController {
     		}
     		else if(!$query) //第一提交
     		{
-    			$info = \app\dao\UserEventDao::getSlaveInstance()->find($coupon_id);
-    			\app\dao\LogisticSnDao::getSlaveInstance()->add(
+    			try{
+    			\app\dao\GoodsDao::getMasterInstance()->beginTransaction();
+    			$info = \app\dao\UserEventDao::getMasterInstance()->find($coupon_id);
+    			\app\dao\LogisticSnDao::getMasterInstance()->add(
 	    			array(
 	    				'id'      => $coupon_id,
 	    				'user_id' => $user_id,
@@ -76,12 +78,33 @@ class LogisticController extends BaseController {
 	    				'utime'   => strtotime('now')
 	    		));
 	    		//扣款
+	    		$fee= EXPRESS_ORDER_FEE;
+	    		$sql = "update ym_user_info set rmb = rmb - $fee where user_id = $user_id";
+	    		 \app\dao\UserEventDao::getMasterInstance()->getpdo()->exec($sql);
 	    		
+	    		//扣款日志
+	    		\app\dao\UserCurrencyDao::getMasterInstance()->add(
+	    			array(
+	    				'user_id' => $user_id,
+	    				'amount'  => $fee,
+	    				'unit'    => rmb,
+	    				'status'  => 8,  //运单申请
+	    				'ctime' => time()
+	    			)
+	    		);
 	    		
 	    		//
 	    		\app\dao\UserEventDao::getMasterInstance()->edit($coupon_id,
 	    			array('apply_logistic_sn'=>1)
 	    		); //标记已申请运单
+    			
+    			\app\dao\GoodsDao::getMasterInstance()->commit();
+    		 }
+    		  catch(Exception $e)
+       	 	 {
+        		\app\dao\GoodsDao::getMasterInstance()->rollBack();
+        		var_dump($e->message());
+       		 }
     		}
     		else {
     		
