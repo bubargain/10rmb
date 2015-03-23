@@ -167,7 +167,7 @@ class StoreController extends BaseController {
 			$response->money = $user['rmb'];
 			
 			//翻页类
-		$sql="select count(*) as no from ym_user_currency where user_id=$user_id and status in (1,2,3,5,6,7,100)";
+		$sql="select count(*) as no from ym_user_currency where user_id=$user_id ";
         $ret= \app\dao\EventDao::getSlaveInstance()->getPdo()->getRow($sql);
         $total=$ret['no'];
 
@@ -183,7 +183,7 @@ class StoreController extends BaseController {
 		$response->page = $page->GetPageHtml();
 		
 	
-			$sql= "select * from ym_user_currency where user_id = $user_id and status in (1,2,3,5,6,7,100) order by id desc limit ".$limit;
+			$sql= "select * from ym_user_currency where user_id = $user_id  order by id desc limit ".$limit;
 			$res = \app\dao\UserCurrencyDao::getSlaveInstance()->getPdo()->getRows($sql);
 			$response->currencyFlow = $res;
 			

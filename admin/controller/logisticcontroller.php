@@ -87,9 +87,9 @@ class LogisticController extends BaseController {
 	    			array(
 	    				'user_id' => $user_id,
 	    				'amount'  => $fee,
-	    				'unit'    => rmb,
+	    				'unit'    => "rmb",
 	    				'status'  => 8,  //运单申请
-	    				'ctime' => time()
+	    				'ctime' => strtotime('now')
 	    			)
 	    		);
 	    		
