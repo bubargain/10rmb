@@ -1,5 +1,5 @@
 	// JavaScript Document
-	//var swidth=$(document).width()/2-2;
+	var swidth=$(document).width()/2-2;
 	//$("#listcontent .list_item").width(swidth);
 	var $tiles = $('#listcontent'),
 		  $handler = $('.list_item', $tiles),
@@ -10,7 +10,8 @@
 			autoResize: true, // This will auto-update the layout when the browser window is resized.
 			container: $main, // Optional, used for some extra CSS styling
 			//offset: 20, // Optional, the distance between grid items
-			//itemWidth: swidth // Optional, the width of a grid item
+			itemWidth: swidth, // Optional, the width of a grid item
+			resizeDelay: 50 //这是延时效果 默认是50
 		  };
 	//var handler = $('#listcontent .list_item');
     //  handler.wookmark({
@@ -22,13 +23,17 @@
         //  itemWidth: swidth // Optional, the width of a grid item
       //});
 	  function applyLayout() {
-        $tiles.imagesLoaded(function() {
+       
           // Destroy the old handler
           if ($handler.wookmarkInstance) {
             $handler.wookmarkInstance.clear();
           }
-
-          // Create a new layout handler.
+		  /*
+		  if($handler)
+			   $handler.wookmarkClear();
+		*/
+       // Create a new layout handler.
+	   $tiles.imagesLoaded(function() {
           $handler = $('.list_item', $tiles);
           $handler.wookmark(options);
         });
