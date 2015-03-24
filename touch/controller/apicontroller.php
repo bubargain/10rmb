@@ -13,7 +13,7 @@ class apiController extends Controller{
 		if($page)
 		{
 			$cate = intval($request->cate);
-			$count = $request->count? $request->count : 12;
+			$count = $request->count? $request->count : 8;
 			$event= new \app\service\SearchSrv();
 			$newEvents= $event->newEvents($page,$count,$cate);
 			$this->renderJson(array(

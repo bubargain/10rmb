@@ -391,7 +391,7 @@ class EventSrv extends BaseSrv {
 		$amountLeft= $user['rmb'] - $amount * (float)$rate['uvalue'] ;
 	
 		if($amountLeft < 0 ){
-			throw new \Exception ("冻结金额异常",'100098');
+			throw new \Exception ("你的账户余额不足，请充值后重新发布活动",'100098');
 		}
 		 \app\dao\UserInfoDao::getMasterInstance()->edit( array('user_id'=> $user_id) , array('rmb'=>$amountLeft)); //减用户账户总额
 		

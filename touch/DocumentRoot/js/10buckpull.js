@@ -1,4 +1,5 @@
 	// JavaScript Document
+	
 	var swidth=$(document).width()/2-2;
 	//$("#listcontent .list_item").width(swidth);
 	var $tiles = $('#listcontent'),
@@ -154,6 +155,7 @@
 					pullDownAction();	// Execute custom function (ajax call?)
 				} else if (pullUpEl.className.match('flip')) {
 					pullUpEl.className = 'loading2';
+					//setTimeout( function () {pullUpEl.className = '';},3000);
 					pullUpEl.querySelector('.pullUpLabel').innerHTML = '';				
 					pullUpAction();	// Execute custom function (ajax call?)
 				}
