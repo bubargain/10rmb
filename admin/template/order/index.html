@@ -32,7 +32,7 @@
         
        
  	 
-      <th align="center" width="6%" class="pushItem">需要发货</th>
+      <th align="center" width="6%" class="pushItem">发货</th>
       <th align="center"  class="pushItem">返利总额</th>
       <th align="center" width="10%" class="pushItem">状态</th>
       <th align="center" width="15%" class="pushItem">订单号/收件人/邮编</th>
@@ -48,7 +48,7 @@
               <td align="center" class="pushItem">{{$trade.ctime|date_format:"%Y/%m/%d %H:%M"}}</td>
 
              
-              <td align="center" class="pushItem">{{if $trade.noshipping}}否 {{else}}是 {{/if}}</td>
+              <td align="center" class="pushItem">{{if $trade.noshipping}}免邮{{else}}正常发货{{/if}}</td>
               <td align="center" class="pushItem">{{$trade.totalfanli+$trade.profit}}美元</td>
               <td align="center" class="pushItem">
               	{{if $trade.status==0 }}	 已领劵

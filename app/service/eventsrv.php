@@ -130,7 +130,12 @@ class EventSrv extends BaseSrv {
 				$lockamount=0;
 				if($eventDetail['noshipping']==0)
 				{
-					$lockamount =  round(floatval($eventDetail['fanli'])* floatval($eventDetail['amount']),2);		
+						/***
+						*  试行真实返利商家不需要预充值
+						* 2015-03-27 
+						* daniel ma
+						*/					
+					//$lockamount =  round(floatval($eventDetail['fanli'])* floatval($eventDetail['amount']),2);		
 				}
 				else {
 					$lockamount = round((floatval($eventDetail['price']) + floatval($eventDetail['fanli']))* floatval($eventDetail['amount']),2);
@@ -332,14 +337,19 @@ class EventSrv extends BaseSrv {
 		$lockamount=0;
 		if($post['noshipping']==0)
 		{
-			$lockamount =  round(floatval($post['fanli'])* floatval($post['amount']),2);
+			/***
+						*  试行真实返利商家不需要预充值
+						* 2015-03-27 
+						* daniel ma
+			*/
+			//$lockamount =  round(floatval($post['fanli'])* floatval($post['amount']),2);
 						
 		}
 		else {
 			$lockamount = round((floatval($post['price']) + floatval($post['fanli']))* floatval($post['amount']),2);
 		}
 	
-		if( $lockamount==0 )
+		if( $post['noshipping']!=0 &&$lockamount==0 )
 			throw new \Exception("冻结金额异常,管理员将介入！",'100097');
 		 
 		/*

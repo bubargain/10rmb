@@ -57,10 +57,10 @@ class StoreController extends BaseController {
 		
 		$response->invite_code=$userinfo['invite_code'];
 		
-		$response->title = '10buck商家活动管理系统';
+		$response->title = '10buck全球新品发布汇 -商家后台';
 		$response->list = \app\dao\StoreDao::getSlaveInstance ()->getList ();
-		$response->storeTitle ="平台说明";
-		$response->storeIntro ="10Buck支持商家面向海外消费者发放定量的现金返还劵<br/>一旦用户使用该劵并成功交易，就会立刻获得现金返还";
+		$response->storeTitle ="全球新品发布汇";
+		$response->storeIntro ="10Buck支持商家向海外目标消费者发放定量的现金返还劵。<br/>一旦用户使用该劵并成功交易，就会获得现金返还。";
 		$this->layoutSmarty ( 'index' );
 	}
 	
@@ -69,8 +69,8 @@ class StoreController extends BaseController {
 		$user_id =$this->checkLogin();
 		$info = \app\dao\UserInfoDao::getSlaveInstance()->find(array('user_id'=>$user_id));
 		$response->isvip = $info['isvip']>0?1:0;
-		$response->storeTitle ="返利说明";
-		$response->storeIntro ="目前平台只支持跨境电商商品的销售返利,所有购买者均为海外自然用户APP购买";
+		$response->storeTitle ="活动说明";
+		$response->storeIntro ="10BUCK平台可以快速的让新品获得曝光和排名提升，帮助商家甄别爆款";
 		$this->layoutSmarty('newevent');
 	}
 	
@@ -106,8 +106,13 @@ class StoreController extends BaseController {
 				
 					if($event['noshipping']==0)
 					{
-						$lockamount =  floatval($event['fanli'])* floatval($event['amount']);
-						
+						/***
+						*  试行真实返利商家不需要预充值
+						* 2015-03-27 
+						* daniel ma
+						*/
+						 //$lockamount =  floatval($event['fanli'])* floatval($event['amount']);
+						$lockamount = 0;
 					}
 					else {
 						$lockamount = (floatval($event['price']) + floatval($event['fanli']))* floatval($event['amount']);
@@ -139,7 +144,7 @@ class StoreController extends BaseController {
 			{
 				$this->showError($e->getMessage());
 			}
-			$response->lock_amount = $lockamount;
+			$response->lock_amount = $lock_amount ? $lock_amount : 0;
 			$response->noshipping=$event['noshipping'];
 			$response->storeTitle ="资金锁定说明";
 			$response->storeIntro ="您的账户余额需高于本次活动可能需要的总返利金额<br/>注：如果支持免邮，则需要金额足以支付本利总和";
