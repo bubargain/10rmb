@@ -144,7 +144,7 @@ class StoreController extends BaseController {
 			{
 				$this->showError($e->getMessage());
 			}
-			$response->lock_amount = $lock_amount ? $lock_amount : 0;
+			$response->lock_amount = $lockamount ? $lockamount : 0;
 			$response->noshipping=$event['noshipping'];
 			$response->storeTitle ="资金锁定说明";
 			$response->storeIntro ="您的账户余额需高于本次活动可能需要的总返利金额<br/>注：如果支持免邮，则需要金额足以支付本利总和";
