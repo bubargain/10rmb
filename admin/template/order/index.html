@@ -72,7 +72,7 @@
                {{if $trade.status==1 }}	
             	   <a href="#myModal" role="button" class="btn btn-small" data-toggle="modal"> 提起纠纷</a>
                {{else if $trade.status==4 }}
-               	{{if $trade.apply_logistic_sn == 0}}
+               	{{if $trade.apply_logistic_sn == 0 and $trade.noshipping == 1}}
                		<a href="#applySn" role="button" y-action="applySnStatus" y-data="{{$trade.id}}" class="btn btn-small" data-toggle="modal"> 申请运单</a>
                 {{else}}
                 	<a href="#orderModal" role="button" y-action="orderStatus" y-data="{{$trade.id}}" data-toggle="modal">查看运单</a>
