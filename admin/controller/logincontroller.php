@@ -113,7 +113,7 @@ class LoginController extends BaseController {
 	                $user['invite_by'] = $invite['user_id'];
 	                $nuser = $userBehavior->addUser($user,10);
 					
-					throw new \Exception ( '您已成功提交注册信息，请加入我们的官方QQ群：211856816  协助我们完成审核', 4001 );
+					throw new \Exception ( '您已成功提交注册信息，请耐心等待或联系客服加快审核进度', 4001 );
 				}
 			} catch ( \Exception $e ) {
 				$response->warn = $e->getMessage ();
