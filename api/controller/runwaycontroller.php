@@ -27,37 +27,37 @@ class runwaycontroller extends Controller{
 			'items'=> array(
 						'1'=> array(
 								'goods_id' => 1213,
-								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
+								'img_link' => "http://ecx.images-amazon.com/images/I/81IySnoisEL._UX522_.jpg",
 								'brand_name' => 'louts voution',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'2'=> array(
 								'goods_id' => 1214,
-								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
+								'img_link' => "http://ecx.images-amazon.com/images/I/912OKw7dZvL._UY679_.jpg",
 								'brand_name' => 'plaza',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'3'=> array(
 								'goods_id' => 1215,
-								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
+								'img_link' => "http://ecx.images-amazon.com/images/I/81GxAX44DUL._UX522_.jpg",
 								'brand_name' => 'flora',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'4'=> array(
 								'goods_id' => 1234,
-								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
+								'img_link' => "http://ecx.images-amazon.com/images/I/81GrOC4-0-L._UX522_.jpg",
 								'brand_name' => 'zoe',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'5'=> array(
 								'goods_id' => 1213,
-								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
+								'img_link' => "http://ecx.images-amazon.com/images/I/71MTLdirNML._UX522_.jpg",
 								'brand_name' => 'louts voution',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'6'=> array(
 								'goods_id' => 1213,
-								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
+								'img_link' => "http://ecx.images-amazon.com/images/I/71w1V28oOZL._UX522_.jpg",
 								'brand_name' => 'louts voution',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
@@ -69,7 +69,7 @@ class runwaycontroller extends Controller{
 								),
 						'8'=> array(
 								'goods_id' => 1213,
-								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
+								'img_link' => "http://ecx.images-amazon.com/images/I/81l42-ZL5ZL._UX522_.jpg",
 								'brand_name' => 'louts voution',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
@@ -81,7 +81,7 @@ class runwaycontroller extends Controller{
 								),
 						'10'=> array(
 								'goods_id' => 1213,
-								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
+								'img_link' => "http://ecx.images-amazon.com/images/I/81GxAX44DUL._UX522_.jpg",
 								'brand_name' => 'louts voution',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
@@ -93,7 +93,7 @@ class runwaycontroller extends Controller{
 								),
 						'12'=> array(
 								'goods_id' => 1213,
-								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
+								'img_link' => "http://ecx.images-amazon.com/images/I/912OKw7dZvL._UY679_.jpg",
 								'brand_name' => 'louts voution',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								)

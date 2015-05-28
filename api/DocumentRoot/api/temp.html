@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr" class="client-nojs">
+<head>
+<title>2/statuses/public timeline - 微博API</title>
+<meta charset="UTF-8" />
+<meta name="generator" content="MediaWiki 1.18.2" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="search" type="application/opensearchdescription+xml" href="/wiki/opensearch_desc.php" title="微博API (zh-cn)" />
+<link rel="alternate" type="application/atom+xml" title="微博API的Atom" href="/wiki/index.php?title=%E7%89%B9%E6%AE%8A:%E6%9C%80%E8%BF%91%E6%9B%B4%E6%94%B9&amp;feed=atom" />
+<link rel="stylesheet" href="/wiki/load.php?debug=false&amp;lang=zh-cn&amp;modules=mediawiki.legacy.commonPrint%2Cshared%7Cskins.monobook&amp;only=styles&amp;skin=monobook&amp;*" />
+<link rel="stylesheet" href="http://img.t.sinajs.cn/t4/appstyle/open/css/pages/wiki/wiki_main_lumpsugar.css?version=1.1.2.396" media="screen" />
+<link rel="stylesheet" href="http://img.t.sinajs.cn/t4/appstyle/open/css/module/common/common.css?version=1.1.2.396" media="screen" />
+<link rel="stylesheet" href="http://img.t.sinajs.cn/t4/appstyle/open/css/module/common/usually.css?version=1.1.2.396" media="screen" />
+<link rel="stylesheet" href="http://img.t.sinajs.cn/t4/appstyle/open/css/module/layer/api_comment.css?version=1.1.2.396" media="screen" />
+<link rel="stylesheet" href="http://img.t.sinajs.cn/t4/appstyle/open/css/module/common/op_star.css?version=1.1.2.396" media="screen" />
+<link rel="stylesheet" href="http://img.t.sinajs.cn/t4/appstyle/open/css/module/layer/layer_tips.css?version=1.1.2.396" media="screen" />
+<!--[if lt IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE50Fixes.css?303" media="screen" /><![endif]-->
+<!--[if IE 5.5000]><link rel="stylesheet" href="/wiki/skins/monobook/IE55Fixes.css?303" media="screen" /><![endif]-->
+<!--[if IE 6]><link rel="stylesheet" href="/wiki/skins/monobook/IE60Fixes.css?303" media="screen" /><![endif]-->
+<!--[if IE 7]><link rel="stylesheet" href="/wiki/skins/monobook/IE70Fixes.css?303" media="screen" /><![endif]--><meta name="ResourceLoaderDynamicStyles" content="" />
+<style>a:lang(ar),a:lang(ckb),a:lang(fa),a:lang(kk-arab),a:lang(mzn),a:lang(ps),a:lang(ur){text-decoration:none}a.new,#quickbar a.new{color:#ba0000}
+
+/* cache key: wiki:resourceloader:filter:minify-css:4:c88e2bcd56513749bec09a7e29cb3ffa */
+</style>
+<script src="/wiki/load.php?debug=false&amp;lang=zh-cn&amp;modules=startup&amp;only=scripts&amp;skin=monobook&amp;*"></script>
+<script>if(window.mw){
+	mw.config.set({"wgCanonicalNamespace": "", "wgCanonicalSpecialPageName": false, "wgNamespaceNumber": 0, "wgPageName": "2/statuses/public_timeline", "wgTitle": "2/statuses/public timeline", "wgCurRevisionId": 14234, "wgArticleId": 823, "wgIsArticle": true, "wgAction": "view", "wgUserName": null, "wgUserGroups": ["*"], "wgCategories": [], "wgBreakFrames": false, "wgRestrictionEdit": [], "wgRestrictionMove": []});
+}
+</script><script>if(window.mw){
+	mw.loader.load(["mediawiki.page.startup"]);
+}
+</script>
+</head>
+<body class="mediawiki ltr sitedir-ltr B_wiki_main  skin-monobook">
+
+
+
+
+<!--主内容开始-->
+<div class="wiki_wrap">
+	<div class="wiki_con">
+    	<div class="con_box">
+        	<div class="header noprint">
+            	<p style="font-size:30px;">MODE 接口文档</p>
+            </div>
+            <div class="wiki_body">
+            	<div class="wiki_inner">
+					                	<div class="main_content clearfix">
+                		<div class="wiki_side noprint">
+                        
+                        </div>
+                    	<div class="wiki_bodyContent" id="bodyContent">
+						<div id="mw-js-message" class="js-messagebox" style="display:none"></div>
+			
+							<div lang="zh-cn" dir="ltr" class="mw-content-ltr"><h1 class="wiki_title"> <span class="mw-headline" id="statuses.2Fpublic_timeline">statuses/public_timeline</span></h1>
+<p>返回最新的公共微博
+</p>
+<h2 class="wiki_title"> <span class="mw-headline" id="URL">URL</span></h2>
+<p><span style="text-transform:lowercase;font-weight:600"><a rel="nofollow" class="external free" href="https://api.weibo.com/2/statuses/public_timeline.json">https://api.weibo.com/2/statuses/public_timeline.json</a></span>
+</p>
+<h2 class="wiki_title"> <span class="mw-headline" id=".E6.94.AF.E6.8C.81.E6.A0.BC.E5.BC.8F">支持格式</span></h2>
+<p><span style="text-transform:uppercase;font-weight:600">JSON</span>
+</p>
+<h2 class="wiki_title"> <span class="mw-headline" id="HTTP.E8.AF.B7.E6.B1.82.E6.96.B9.E5.BC.8F">HTTP请求方式</span></h2>
+<p><span style="text-transform:uppercase;font-weight:600">GET</span>
+</p>
+<h2 class="wiki_title"> <span class="mw-headline" id=".E6.98.AF.E5.90.A6.E9.9C.80.E8.A6.81.E7.99.BB.E5.BD.95">是否需要登录</span></h2>
+<p><span style="text-transform:lowercase;font-weight:600">是</span><br />
+关于登录授权，参见 <a href="/wiki/%E6%8E%88%E6%9D%83%E6%9C%BA%E5%88%B6%E8%AF%B4%E6%98%8E" title="授权机制说明">如何登录授权</a>
+</p>
+<h2 class="wiki_title"> <span class="mw-headline" id=".E8.AE.BF.E9.97.AE.E6.8E.88.E6.9D.83.E9.99.90.E5.88.B6">访问授权限制</span></h2>
+<p>访问级别：<span style="text-transform:lowercase;font-weight:600">普通接口</span><br />
+频次限制：<span style="text-transform:lowercase;font-weight:600">是</span><br />
+关于频次限制，参见 <a href="/wiki/Rate-limiting" title="Rate-limiting">接口访问权限说明</a>
+</p>
+<h2 class="wiki_title"> <span class="mw-headline" id=".E8.AF.B7.E6.B1.82.E5.8F.82.E6.95.B0">请求参数</span></h2>
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="parameters" style="border-color: #CCCCCC;">
+
+<tr>
+<th width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc">&#160;
+</th>
+<th width="5%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc">必选
+</th>
+<th width="10%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc">类型及范围
+</th>
+<th width="75%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc">说明
+</th></tr>
+<tr>
+<td style="text-align:center;font-weight:bolder;border:1px solid #cccccc">source
+</td>
+<td style="text-align:center;text-transform:lowercase;border:1px solid #cccccc">false
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">采用OAuth授权方式不需要此参数，其他授权方式为必填参数，数值为应用的AppKey。
+</td></tr>
+<tr>
+<td style="text-align:center;font-weight:bolder;border:1px solid #cccccc">access_token
+</td>
+<td style="text-align:center;text-transform:lowercase;border:1px solid #cccccc">false
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">采用OAuth授权方式为必填参数，其他授权方式不需要此参数，OAuth授权后获得。
+</td></tr>
+<tr>
+<td style="text-align:center;font-weight:bolder;border:1px solid #cccccc">count
+</td>
+<td style="text-align:center;text-transform:lowercase;border:1px solid #cccccc">false
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">int
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">单页返回的记录条数，默认为50。
+</td></tr>
+<tr>
+<td style="text-align:center;font-weight:bolder;border:1px solid #cccccc">page
+</td>
+<td style="text-align:center;text-transform:lowercase;border:1px solid #cccccc">false
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">int
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">返回结果的页码，默认为1。
+</td></tr>
+<tr>
+<td style="text-align:center;font-weight:bolder;border:1px solid #cccccc">base_app
+</td>
+<td style="text-align:center;text-transform:lowercase;border:1px solid #cccccc">false
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">int
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
+</td></tr></table>
+<h2 class="wiki_title"> <span class="mw-headline" id=".E6.B3.A8.E6.84.8F.E4.BA.8B.E9.A1.B9">注意事项</span></h2>
+<p>无
+</p>
+<h2 class="wiki_title"> <span class="mw-headline" id=".E8.B0.83.E7.94.A8.E6.A0.B7.E4.BE.8B.E5.8F.8A.E8.B0.83.E8.AF.95.E5.B7.A5.E5.85.B7">调用样例及调试工具</span></h2>
+<p><a rel="nofollow" class="external text" href="http://open.weibo.com/tools/console?uri=statuses/public_timeline&amp;httpmethod=GET&amp;{{{apiToolPara}}}">API测试工具</a>
+</p>
+<h2 class="wiki_title"> <span class="mw-headline" id=".E8.BF.94.E5.9B.9E.E7.BB.93.E6.9E.9C">返回结果 </span></h2>
+<div class="code_type" style="text-transform:uppercase;margin-bottom:5px;">JSON示例</div><br />
+<pre class="brush:js">
+{
+    &quot;statuses&quot;: [
+        {
+            &quot;created_at&quot;: &quot;Tue May 31 17:46:55 +0800 2011&quot;,
+            &quot;id&quot;: 11488058246,
+            &quot;text&quot;: &quot;求关注。&quot;，
+            &quot;source&quot;: &quot;&lt;a href=&quot;http://weibo.com&quot; rel=&quot;nofollow&quot;&gt;新浪微博&lt;/a&gt;&quot;,
+            &quot;favorited&quot;: false,
+            &quot;truncated&quot;: false,
+            &quot;in_reply_to_status_id&quot;: &quot;&quot;,
+            &quot;in_reply_to_user_id&quot;: &quot;&quot;,
+            &quot;in_reply_to_screen_name&quot;: &quot;&quot;,
+            &quot;geo&quot;: null,
+            &quot;mid&quot;: &quot;5612814510546515491&quot;,
+            &quot;reposts_count&quot;: 8,
+            &quot;comments_count&quot;: 9,
+            &quot;annotations&quot;: [],
+            &quot;user&quot;: {
+                &quot;id&quot;: 1404376560,
+                &quot;screen_name&quot;: &quot;zaku&quot;,
+                &quot;name&quot;: &quot;zaku&quot;,
+                &quot;province&quot;: &quot;11&quot;,
+                &quot;city&quot;: &quot;5&quot;,
+                &quot;location&quot;: &quot;北京 朝阳区&quot;,
+                &quot;description&quot;: &quot;人生五十年，乃如梦如幻；有生斯有死，壮士复何憾。&quot;,
+                &quot;url&quot;: &quot;http://blog.sina.com.cn/zaku&quot;,
+                &quot;profile_image_url&quot;: &quot;http://tp1.sinaimg.cn/1404376560/50/0/1&quot;,
+                &quot;domain&quot;: &quot;zaku&quot;,
+                &quot;gender&quot;: &quot;m&quot;,
+                &quot;followers_count&quot;: 1204,
+                &quot;friends_count&quot;: 447,
+                &quot;statuses_count&quot;: 2908,
+                &quot;favourites_count&quot;: 0,
+                &quot;created_at&quot;: &quot;Fri Aug 28 00:00:00 +0800 2009&quot;,
+                &quot;following&quot;: false,
+                &quot;allow_all_act_msg&quot;: false,
+                &quot;remark&quot;: &quot;&quot;,
+                &quot;geo_enabled&quot;: true,
+                &quot;verified&quot;: false,
+                &quot;allow_all_comment&quot;: true,
+                &quot;avatar_large&quot;: &quot;http://tp1.sinaimg.cn/1404376560/180/0/1&quot;,
+                &quot;verified_reason&quot;: &quot;&quot;,
+                &quot;follow_me&quot;: false,
+                &quot;online_status&quot;: 0,
+                &quot;bi_followers_count&quot;: 215
+            }
+        },
+        ..
+    ],
+    &quot;previous_cursor&quot;: 0,
+    &quot;next_cursor&quot;: 11488013766,
+    &quot;total_number&quot;: 81655
+}
+</pre><br />
+<p>关于错误返回值与错误代码，参见 <a href="/wiki/Error_code" title="Error code">错误代码说明</a>
+</p>
+<h2 class="wiki_title"> <span class="mw-headline" id=".E8.BF.94.E5.9B.9E.E5.AD.97.E6.AE.B5.E8.AF.B4.E6.98.8E">返回字段说明</span></h2>
+<table border="1" cellspacing="0" cellpadding="0" width="100%" class="parameters" style="border-color: #CCCCCC;">
+
+<tr>
+<th width="25%" style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">返回值字段
+</th>
+<th width="15%" style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">字段类型
+</th>
+<th width="60%" style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">字段说明
+</th></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">created_at
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">微博创建时间
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">id
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">int64
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">微博ID
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">mid
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">int64
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">微博MID
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">idstr
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">字符串型的微博ID
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">text
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">微博信息内容
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">source
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">微博来源
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">favorited
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">boolean
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">是否已收藏，true：是，false：否
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">truncated
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">boolean
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">是否被截断，true：是，false：否
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">in_reply_to_status_id
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">（暂未支持）回复ID
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">in_reply_to_user_id
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">（暂未支持）回复人UID
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">in_reply_to_screen_name
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">（暂未支持）回复人昵称
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">thumbnail_pic
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">缩略图片地址，没有时不返回此字段
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">bmiddle_pic
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">中等尺寸图片地址，没有时不返回此字段
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">original_pic
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">string
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">原始图片地址，没有时不返回此字段
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">geo
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">object
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">地理信息字段 <a rel="nofollow" class="external text" href="http://open.weibo.com/wiki/%E5%B8%B8%E8%A7%81%E8%BF%94%E5%9B%9E%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84#.E5.9C.B0.E7.90.86.E4.BF.A1.E6.81.AF.EF.BC.88geo.EF.BC.89">详细</a>
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">user
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">object
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">微博作者的用户信息字段 <a rel="nofollow" class="external text" href="http://open.weibo.com/wiki/%E5%B8%B8%E8%A7%81%E8%BF%94%E5%9B%9E%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84#.E7.94.A8.E6.88.B7.EF.BC.88user.EF.BC.89">详细</a>
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">retweeted_status
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">object
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">被转发的原微博信息字段，当该微博为转发微博时返回 <a rel="nofollow" class="external text" href="http://open.weibo.com/wiki/%E5%B8%B8%E8%A7%81%E8%BF%94%E5%9B%9E%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84#.E5.BE.AE.E5.8D.9A.EF.BC.88status.EF.BC.89">详细</a>
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">reposts_count
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">int
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">转发数
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">comments_count
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">int
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">评论数
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">attitudes_count
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">int
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">表态数
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">mlevel
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">int
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">暂未支持
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">visible
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">object
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">微博的可见性及指定可见分组信息。该object中type取值，0：普通微博，1：私密微博，3：指定分组微博，4：密友微博；list_id为分组的组号
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">pic_ids
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">object
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">微博配图ID。多图时返回多图ID，用来拼接图片url。用返回字段thumbnail_pic的地址配上该返回字段的图片ID，即可得到多个图片url。
+</td></tr>
+<tr>
+<td style="text-align:left;padding-left:5px;font-weight:bolder;border:1px solid #cccccc">ad
+</td>
+<td style="text-align:left;padding-left:5px;text-transform:lowercase;border:1px solid #cccccc">object array
+</td>
+<td style="text-align:left;padding-left:5px;border:1px solid #cccccc">微博流内的推广微博ID
+</td></tr></table>
+<h2 class="wiki_title"> <span class="mw-headline" id=".E5.85.B6.E4.BB.96">其他</span></h2>
+<p>无
+</p>
+<h2 class="wiki_title"> <span class="mw-headline" id=".E7.9B.B8.E5.85.B3.E9.97.AE.E9.A2.98">相关问题</span></h2>
+<p>{{{relat_qa}}}
+</p><p><br />
+
+</p><p><br />
+</p>
+<span style="display:none;"><div class="wiki_plus_area"><span class="tit">Language:</span> [[{{{2/uri}}}|中文]]</div></span>
+<p><br />
+<!--@SHOWGRADE-->
+</p><p><br />
+<!--@NOBTNS--><!--@NOHEADING-->
+</p><p><br />
+<!--@SHOWGRADE-->
+</p>
+<!-- 
+NewPP limit report
+Preprocessor node count: 564/1000000
+Post-expand include size: 31179/2097152 bytes
+Template argument size: 12020/2097152 bytes
+Expensive parser function count: 0/100
+-->
+
+<!-- Saved in parser cache with key wiki:pcache:idhash:823-0!*!0!!*!*!* and timestamp 20150528014043 -->
+</div><div class="printfooter">
+							<div id='catlinks' class='catlinks catlinks-allhidden'></div>														<div class="wiki_plus_area_bottom"> 文档更新时间: 2015-03-30</div>						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/主内容开始-->
+
+<!--统一底导结构-->
+<div class="op_footer">
+
+</div>
+<!--/统一底导结构-->
+
+
+<script type="text/javascript" src="http://js.t.sinajs.cn/STK/js/gaea_1_19.js?version=1.1.2.396" ></script>
+<script type="text/javascript" src="http://js.t.sinajs.cn/open/site/js/web/wikiApi.js?version=1.1.2.396" ></script>
+<script>if(window.mw){
+	mw.loader.load(["mediawiki.user", "mediawiki.util", "mediawiki.page.ready", "mediawiki.legacy.wikibits", "mediawiki.legacy.ajax"]);
+}
+</script>
+<script>if(window.mw){
+	mw.user.options.set({"ccmeonemails":0,"cols":80,"date":"default","diffonly":0,"disablemail":0,"disablesuggest":0,"editfont":"default","editondblclick":0,"editsection":1,"editsectiononrightclick":0,"enotifminoredits":0,"enotifrevealaddr":0,"enotifusertalkpages":1,"enotifwatchlistpages":0,"extendwatchlist":0,"externaldiff":0,"externaleditor":0,"fancysig":0,"forceeditsummary":0,"gender":"unknown","hideminor":0,"hidepatrolled":0,"highlightbroken":1,"imagesize":2,"justify":0,"math":1,"minordefault":0,"newpageshidepatrolled":0,"nocache":0,"noconvertlink":0,"norollbackdiff":0,"numberheadings":0,"previewonfirst":0,"previewontop":1,"quickbar":5,"rcdays":7,"rclimit":50,"rememberpassword":0,"rows":25,"searchlimit":20,"showhiddencats":0,"showjumplinks":1,"shownumberswatching":1,"showtoc":1,"showtoolbar":1,"skin":"monobook","stubthreshold":0,"thumbsize":2,"underline":2,"uselivepreview":0,"usenewrc":0,"watchcreations":0,"watchdefault":0,"watchdeletion":0,"watchlistdays":3,"watchlisthideanons":0,
+	"watchlisthidebots":0,"watchlisthideliu":0,"watchlisthideminor":0,"watchlisthideown":0,"watchlisthidepatrolled":0,"watchmoves":0,"wllimit":250,"variant":"zh-cn","language":"zh-cn","searchNs0":true,"searchNs1":false,"searchNs2":false,"searchNs3":false,"searchNs4":false,"searchNs5":false,"searchNs6":false,"searchNs7":false,"searchNs8":false,"searchNs9":false,"searchNs10":false,"searchNs11":false,"searchNs12":false,"searchNs13":false,"searchNs14":false,"searchNs15":false});;mw.user.tokens.set({"editToken":"+\\","watchToken":false});;mw.loader.state({"user.options":"ready","user.tokens":"ready"});
+	
+	/* cache key: wiki:resourceloader:filter:minify-js:4:42c4e9caefe8ca663d220ee0c286ac74 */
+}
+</script><!-- Served in 0.361 secs. --><noscript>
+<img width="0" height="0" src="http://beacon.sina.com.cn/a.gif?noScript" border="0" alt="" />
+</noscript>
+<script type='text/javascript' charset="utf-8">
+(function() {
+    var doc = document,
+    wa = doc.createElement('script'),
+    s = doc.getElementsByTagName('script')[0];
+    wa.type = 'text/javascript';
+    wa.charset = 'utf-8';
+    wa.async = true;
+    wa.src = 'http://js.t.sinajs.cn/open/analytics/js/suda.js?version=1.1.2.396';
+    s.parentNode.insertBefore(wa, s);
+})();
+</script></body></html>

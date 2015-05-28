@@ -48,7 +48,7 @@ class goodscontroller extends Controller{
 	 * Input:
 	 * goods_id : goods id
 	 * user_id  : user id
-	 * fd     : feedback "like" or "nope"
+	 * fd       : feedback "like" or "nope"
 	 * @author: daniel
 	 * 2015-05-27
 	 */
