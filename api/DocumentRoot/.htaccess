@@ -1,5 +1,5 @@
 RewriteEngine On
 #RewriteRule ^api/payment/(.*)  /index.php?_c=payment&_a=$1 [QSA]
-RewriteRule ^api/([a-z]*)/(.*)  /index.php?_c=$1&_a=$2 [QSA]
+RewriteRule ^([a-z]*)/(.*)  /index.php?_c=$1&_a=$2 [QSA]
 #RewriteCond %{QUERY_STRING} ^out_trade_no=(.+)$
 #RewriteRule ^api/payment/webcallback$ index.php?_c=payment&_a=webcallback&out_trade_no=%1 [L]  
