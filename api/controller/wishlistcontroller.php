@@ -3,7 +3,7 @@ namespace api\controller;
 
 use sprite\mvc\controller;
 
-class wishlist extends Controller{
+class wishlistcontroller extends Controller{
 	
 	
 	/**
@@ -13,6 +13,9 @@ class wishlist extends Controller{
 	 * @param unknown_type $response
 	 */
 	public function get_wishlists($request,$response){
+		$user_id = $request->user_id;
+		if($user_id)
+		{
 		$this->renderJson(array(
 			'amount' => 4,
 			'utime' => '1432728088',
@@ -47,5 +50,10 @@ class wishlist extends Controller{
 				
 				)
 		));
+		}
+		else
+		{
+			$this->renderJson(array('error'=>'No user_id given'));
+		}
 	}
 }
