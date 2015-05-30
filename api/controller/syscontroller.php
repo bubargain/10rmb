@@ -16,7 +16,7 @@ class syscontroller extends Controller{
 		$this->renderJson(array(
 			'amount'=>'6',
 			'utime' => '1432545706',
-			'brands' => array(
+			'list' => array(
 				'1' => array('name'=>'zara','pic_link'=>'http://120.26.107.42/img/logo1.jpg','event_id'=>12) ,
 				'2' => array('name'=>'h&m','pic_link'=>'http://120.26.107.42/img/logo2.jpg','event_id'=>13),
 				'3' => array('name'=>'LV','pic_link'=>'http://120.26.107.42/img/logo3.jpg','event_id'=>14),
@@ -38,7 +38,7 @@ class syscontroller extends Controller{
 		$this->renderJson(array(
 			'amount'=>'7',
 			'utime' => '1432545706',
-			'brands' => array(
+			'list' => array(
 				'1' => array('name'=>'CASUAL','pic_link'=>'http://120.26.107.42/img/logo7.jpg','event_id'=>12,'amount'=>200) ,
 				'2' => array('name'=>'OFFICIAL','pic_link'=>'http://120.26.107.42/img/logo6.jpg','event_id'=>13,'amount'=>22),
 				'3' => array('name'=>'PARTY','pic_link'=>'http://120.26.107.42/img/logo5.jpg','event_id'=>14,'amount'=>11),
@@ -61,7 +61,7 @@ class syscontroller extends Controller{
 		$this->renderJson(array(
 			'amount'=>'7',
 			'utime' => '1432545706',	
-			'brands' => array(
+			'list' => array(
 				'1' => array('name'=>'CUTE','pic_link'=>'http://120.26.107.42/img/logo7.jpg','event_id'=>12,'amount'=>200) ,
 				'2' => array('name'=>'BRIEF','pic_link'=>'http://120.26.107.42/img/logo5.jpg','event_id'=>13,'amount'=>22),
 				'3' => array('name'=>'STREET','pic_link'=>'http://120.26.107.42/img/logo2.jpg','event_id'=>14,'amount'=>11),

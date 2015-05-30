@@ -225,4 +225,16 @@ class wishlistcontroller extends Controller{
 			$this->renderJson(array('error'=>'Parameters not given'));
 		}
 	}
+
+
+	/**
+	 * add_goods
+	 * 测试接口： 向特定wishlist中添加商品
+	 * @auther： daniel ma
+	 */
+	public function add_goods ($request,$response){
+		 
+	}
+
+
 }

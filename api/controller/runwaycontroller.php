@@ -23,7 +23,9 @@ class runwaycontroller extends Controller{
 		$this->renderJson(array(
 			'amount'=> 12,
 			'gtime'=> '1432728088', //generate time
-			'user_id' => 1, //generate for whom
+			'user_id' => 1, //generate for whom,
+			'intro_title'   => "This is the runway into Manhatun's elite life" ,
+			'intro_desc'    => "We choose the fresh launch products for you, choose the ones you like then you may find suprise waiting",
 			'items'=> array(
 						'1'=> array(
 								'goods_id' => 1213,

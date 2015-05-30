@@ -53,13 +53,13 @@
 						<div id="mw-js-message" class="js-messagebox" style="display:none"></div>
 			
 							<div lang="zh-cn" dir="ltr" class="mw-content-ltr"><h1 class="wiki_title">
-							<span class="mw-headline" id="statuses.2Fpublic_timeline">runway/get_new </span></h1>
-							<p>新建一组秀场
+							<span class="mw-headline" id="statuses.2Fpublic_timeline">sys/occasion_list </span></h1>
+							<p>场景列表
 							</p>
 <h2 class="wiki_title"> <span class="mw-headline" id="URL">URL</span></h2>
 <p><span style="text-transform:lowercase;font-weight:600">
 <a rel="nofollow" class="external free" >
-服务器URL  /runway/get_new</a>
+服务器URL/api/sys/occasion_list</a>
 </span>
 </p>
 <h2 class="wiki_title"> <span class="mw-headline" id=".E6.94.AF.E6.8C.81.E6.A0.BC.E5.BC.8F">支持格式</span></h2>
@@ -88,25 +88,7 @@
 	<th width="75%" style="text-align:center;font-weight:bolder;border:1px solid #cccccc">说明
 	</th>
 </tr>
-<tr>
-	<td>user_id</td>
-	<td>true</td>
-	<td>int</td>
-	<td>user id</td>
-</tr>
-<tr>
-	<td>mode</td>
-	<td>true</td>
-	<td>string</td>
-	<td>模式类型，从品牌，场景还是风格页进行的选择。对应值为‘brand’，‘occasion','style'</td>
-</tr>
 
-<tr>
-	<td>mode_val</td>
-	<td>true</td>
-	<td>string</td>
-	<td>用户具体点击的图标ID</td>
-</tr>
 
 
 </table>
@@ -128,56 +110,32 @@
 <tr>
 	<td>amount</td>
 	<td>int</td>
-	<td>返回商品总数</td>
+	<td>返回品牌总数</td>
 </tr>
 <tr>
-	<td>gtime</td>
-	<td>int</td>
-	<td>本组测试的生成时间，时间戳格式</td>
+	<td>utime</td>
+	<td>string</td>
+	<td>最后一次更新时间，时间戳格式</td>
 </tr>
 <tr>
-	<td>user_id</td>
-	<td>int</td>
-	<td>登录用户的ID</td>
-</tr>
-<tr>
-	<td>intro_title</td>
-	<td>int</td>
-	<td>弹出提示层标题</td>
-</tr>
-<tr>
-	<td>intro_desc</td>
-	<td>int</td>
-	<td>弹出提示层内容</td>
-</tr>
-<tr>
-	<td colspan=3>items</td>
+	<td colspan=3>list</td>
 	
 </tr>
 <tr>
-	<td>goods_id</td>
-	<td>int</td>
-	<td>商品ID</td>
-</tr>
-<tr>
-	<td>img_link</td>
-	<td>int</td>
-	<td>商品图片链接</td>
-</tr>
-<tr>
-	<td>has_coupon</td>
-	<td>int</td>
-	<td>是否有优惠券</td>
-</tr>
-<tr>
-	<td>brand_name</td>
-	<td>int</td>
+	<td>list/name</td>
+	<td>string</td>
 	<td>品牌名称</td>
 </tr>
 <tr>
-	<td>brand_img_link</td>
-	<td>int</td>
+	<td>list/pic_link</td>
+	<td>string</td>
 	<td>品牌图标链接</td>
+</tr>
+
+<tr>
+	<td>list/event_id</td>
+	<td>int</td>
+	<td>品牌id</td>
 </tr>
 
 
@@ -206,10 +164,7 @@
 
 </p><p><br />
 
-</p><p><br />
-</p>
-<span style="display:none;"><div class="wiki_plus_area"><span class="tit">Language:</span> [[{{{2/uri}}}|中文]]</div></span>
-<p><br />
+
 <!--@SHOWGRADE-->
 </p><p><br />
 <!--@NOBTNS--><!--@NOHEADING-->
