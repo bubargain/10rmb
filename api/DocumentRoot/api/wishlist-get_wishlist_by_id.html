@@ -53,13 +53,13 @@
 						<div id="mw-js-message" class="js-messagebox" style="display:none"></div>
 			
 							<div lang="zh-cn" dir="ltr" class="mw-content-ltr"><h1 class="wiki_title">
-							<span class="mw-headline" id="statuses.2Fpublic_timeline">goods/get_goods </span></h1>
-							<p>获取商品的基本信息
+							<span class="mw-headline" id="statuses.2Fpublic_timeline">wishlist/get_wishlist_by_id </span></h1>
+							<p>按ID查询某一心愿单的商品信息
 							</p>
 <h2 class="wiki_title"> <span class="mw-headline" id="URL">URL</span></h2>
 <p><span style="text-transform:lowercase;font-weight:600">
 <a rel="nofollow" class="external free" >
-服务器URL/api/goods/get_goods</a>
+服务器URL/api/wishlist/get_wishlist_by_id</a>
 </span>
 </p>
 <h2 class="wiki_title"> <span class="mw-headline" id=".E6.94.AF.E6.8C.81.E6.A0.BC.E5.BC.8F">支持格式</span></h2>
@@ -69,7 +69,7 @@
 <p><span style="text-transform:uppercase;font-weight:600">GET / POST</span>
 </p>
 <h2 class="wiki_title"> <span class="mw-headline" id=".E6.98.AF.E5.90.A6.E9.9C.80.E8.A6.81.E7.99.BB.E5.BD.95">是否需要登录</span></h2>
-<p><span style="text-transform:lowercase;font-weight:600">YES</span><br />
+<p><span style="text-transform:lowercase;font-weight:600">yes</span><br />
 </p>
 <h2 class="wiki_title"> <span class="mw-headline" id=".E8.AE.BF.E9.97.AE.E6.8E.88.E6.9D.83.E9.99.90.E5.88.B6">访问授权限制</span></h2>
 <p>访问级别：<span style="text-transform:lowercase;font-weight:600">普通接口</span><br />
@@ -92,7 +92,13 @@
 	<td>user_id</td>
 	<td>true</td>
 	<td>int</td>
-	<td>注册用户的ID</td>
+	<td>当前用户ID</td>
+</tr>
+<tr>
+	<td>wishlist_id</td>
+	<td>true</td>
+	<td>int</td>
+	<td>被查询的wishlist ID</td>
 </tr>
 
 </table>
@@ -113,43 +119,50 @@
 </th></tr>
 <tr>
 	<td>amount</td>
-	
 	<td>int</td>
-	<td>用户的wishlist总数</td>
+	<td>返回商品总数</td>
 </tr>
 <tr>
-	<td>utime</td>
-	
-	<td>string</td>
-	<td>用户的wishlist最后一次更新时间</td>
-</tr>
-<tr>
-	<td colspan=4>lists</td>
-</tr>
-<tr>
-	<td>lists/wishlist_id</td>
-	
+	<td>gtime</td>
 	<td>int</td>
-	<td>wishlist id</td>
+	<td>本组wishlist的生成时间，时间戳格式</td>
 </tr>
 <tr>
-	<td>lists/comments</td>
-	
-	<td>string</td>
-	<td>用户针对某一wishlist的评价</td>
+	<td>user_id</td>
+	<td>int</td>
+	<td>登录用户的ID</td>
 </tr>
 <tr>
-	<td>lists/img_link</td>
+	<td colspan=3>items</td>
 	
-	<td>string</td>
-	<td>wishlist九宫格图片</td>
 </tr>
 <tr>
-	<td>lists/ctime</td>
-	
-	<td>string</td>
-	<td>wishlist创建时间</td>
+	<td>goods_id</td>
+	<td>int</td>
+	<td>商品ID</td>
 </tr>
+<tr>
+	<td>img_link</td>
+	<td>int</td>
+	<td>商品图片链接</td>
+</tr>
+<tr>
+	<td>has_coupon</td>
+	<td>int</td>
+	<td>是否有优惠券</td>
+</tr>
+<tr>
+	<td>brand_name</td>
+	<td>int</td>
+	<td>品牌名称</td>
+</tr>
+<tr>
+	<td>brand_img_link</td>
+	<td>int</td>
+	<td>品牌图标链接</td>
+</tr>
+
+
 </table>
 <h2 class="wiki_title"> <span class="mw-headline" id=".E5.85.B6.E4.BB.96">错误提示</span></h2>
 
