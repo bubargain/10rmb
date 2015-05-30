@@ -28,7 +28,7 @@ class goodscontroller extends Controller{
 				'img_detail_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
 				'price' => '21.5',
 				'color' => '#3e4f5e,#000,#9f3e4d',
-				'size'  => 'S,M,L,XL'
+				'size'  => 'S,M,L,XL',
 				'has_coupon' => 'Y',
 				'coupon' => array(
 							'coupon'=>'10.0',
