@@ -24,8 +24,11 @@ class goodscontroller extends Controller{
 			$this->renderJson(array(
 				'goods_id'=> $goods_id,
 				'goods_title' => "Fancy Sexy Dress for Young",
-				'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
+				'img_link' => "http://img0.bdstatic.com/img/image/70dddc10daaeab1ab987cedb1511d2621426747009.jpg",
+				'img_detail_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
 				'price' => '21.5',
+				'color' => '#3e4f5e,#000,#9f3e4d',
+				'size'  => 'S,M,L,XL'
 				'has_coupon' => 'Y',
 				'coupon' => array(
 							'coupon'=>'10.0',
