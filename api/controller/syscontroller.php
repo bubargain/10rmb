@@ -17,12 +17,12 @@ class syscontroller extends Controller{
 			'amount'=>'6',
 			'utime' => '1432545706',
 			'list' => array(
-				'1' => array('name'=>'zara','pic_link'=>'http://120.26.107.42/img/logo1.jpg','event_id'=>12) ,
-				'2' => array('name'=>'h&m','pic_link'=>'http://120.26.107.42/img/logo2.jpg','event_id'=>13),
-				'3' => array('name'=>'LV','pic_link'=>'http://120.26.107.42/img/logo3.jpg','event_id'=>14),
-				'4' => array('name'=>'GUESS','pic_link'=>'http://120.26.107.42/img/logo4.jpg','event_id'=>15),
-				'5' => array('name'=>'LAFLOARIN','pic_link'=>'http://120.26.107.42/img/logo5.jpg','event_id'=>17),
-				'6'=> array('name'=>'DNANIEL&KATE','pic_link'=>'http://120.26.107.42/img/logo6.jpg','event_id'=>18),
+				'1' => array('name'=>'American Apparel','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/american_apparel.jpg','event_id'=>12) ,
+				'2' => array('name'=>'Forever21','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/forever21.png','event_id'=>13),
+				'3' => array('name'=>'Gap','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/gap.jpg','event_id'=>14),
+				'4' => array('name'=>'H&M','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/h_and_m.gif','event_id'=>15),
+				'5' => array('name'=>'Hollister','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/hollister.jpg','event_id'=>17),
+				'6'=> array('name'=>'New Look','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/newlook.jpg','event_id'=>18),
 			)
 		));
 	}
