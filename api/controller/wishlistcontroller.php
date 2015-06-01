@@ -28,21 +28,21 @@ class wishlistcontroller extends Controller{
 						),
 						
 					'2' =>array(
-							'wishlist_id' => 121211,
+							'wishlist_id' => 121212,
 							'comments' => 'i like all of them ,which should i choose',
 							'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
 							'ctime' => '1432728087',
 						),
 				
 					'3' =>array(
-							'wishlist_id' => 121211,
+							'wishlist_id' => 121213,
 							'comments' => 'i like all of them ,which should i choose',
 							'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
 							'ctime' => '1432728078',
 						),
 				
 					'4' =>array(
-							'wishlist_id' => 121211,
+							'wishlist_id' => 121214,
 							'comments' => 'i like all of them ,which should i choose',
 							'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
 							'ctime' => '1432728068',

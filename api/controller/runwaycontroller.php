@@ -56,56 +56,56 @@ class runwaycontroller extends Controller{
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'5'=> array(
-								'goods_id' => 1213,
+								'goods_id' => 1215,
 								'img_link' => "http://ecx.images-amazon.com/images/I/71MTLdirNML._UX522_.jpg",
 								'brand_name' => 'louts voution',
 								'has_coupon' => 'true',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'6'=> array(
-								'goods_id' => 1213,
+								'goods_id' => 1216,
 								'img_link' => "http://ecx.images-amazon.com/images/I/71w1V28oOZL._UX522_.jpg",
 								'brand_name' => 'louts voution',
 								'has_coupon' => 'true',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'7'=> array(
-								'goods_id' => 1213,
+								'goods_id' => 1217,
 								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
 								'brand_name' => 'louts voution',
 								'has_coupon' => 'true',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'8'=> array(
-								'goods_id' => 1213,
+								'goods_id' => 1218,
 								'img_link' => "http://ecx.images-amazon.com/images/I/81l42-ZL5ZL._UX522_.jpg",
 								'brand_name' => 'louts voution',
 								'has_coupon' => 'true',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'9'=> array(
-								'goods_id' => 1213,
+								'goods_id' => 1219,
 								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
 								'brand_name' => 'louts voution',
 								'has_coupon' => 'true',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'10'=> array(
-								'goods_id' => 1213,
+								'goods_id' => 1220,
 								'img_link' => "http://ecx.images-amazon.com/images/I/81GxAX44DUL._UX522_.jpg",
 								'brand_name' => 'louts voution',
 								'has_coupon' => 'true',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'11'=> array(
-								'goods_id' => 1213,
+								'goods_id' => 1221,
 								'img_link' => "http://g01.a.alicdn.com/kf/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu/222109129/HTB1.Ob_GFXXXXcXXVXXq6xXFXXXu.jpg",
 								'brand_name' => 'louts voution',
 								'has_coupon' => 'true',
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'12'=> array(
-								'goods_id' => 1213,
+								'goods_id' => 1222,
 								'img_link' => "http://ecx.images-amazon.com/images/I/912OKw7dZvL._UY679_.jpg",
 								'brand_name' => 'louts voution',
 								'has_coupon' => 'false',
