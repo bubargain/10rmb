@@ -42,7 +42,7 @@ class runwaycontroller extends Controller{
 								'brand_img_link' => 'http://120.26.107.42/img/logo7.jpg' 
 								),
 						'3'=> array(
-								'goods_id' => 1215,
+								'goods_id' => 1235,
 								'img_link' => "http://ecx.images-amazon.com/images/I/81GxAX44DUL._UX522_.jpg",
 								'brand_name' => 'flora',
 								'has_coupon' => 'false',
