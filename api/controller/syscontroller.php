@@ -15,7 +15,7 @@ class syscontroller extends Controller{
 	public function brand_list($request,$response){
 		$this->renderJson(array(
 			'amount'=>'6',
-			'utime' => '1432545706',
+			'utime' => '1433545706',
 			'list' => array(
 				'1' => array('name'=>'American Apparel','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/american_apparel.jpg','event_id'=>12) ,
 				'2' => array('name'=>'Forever21','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/forever21.png','event_id'=>13),
