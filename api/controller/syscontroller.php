@@ -37,14 +37,14 @@ class syscontroller extends Controller{
 	public function occasion_list($request,$response){
 		$this->renderJson(array(
 			'amount'=>'7',
-			'utime' => '1432545806',
+			'utime' => '1432545226',
 			'list' => array(
 				'1' => array('name'=>'beach','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/beach.jpg','event_id'=>12,'amount'=>200) ,
-				'2' => array('name'=>'casual','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/casual.jpg','event_id'=>13,'amount'=>22),
-				'3' => array('name'=>'office','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/office.jpg','event_id'=>14,'amount'=>11),
+				'2' => array('name'=>'casual','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/casual1.jpg','event_id'=>13,'amount'=>22),
+				'3' => array('name'=>'office','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/office1.jpg','event_id'=>14,'amount'=>11),
 				'4' => array('name'=>'OUTDOOR','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/outdoor.jpg','event_id'=>15,'amount'=>9),
 				'5' => array('name'=>'party','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/party.jpg','event_id'=>17,'amount'=>200),
-				'6'=> array('name'=>'prom','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/prom.jpg','event_id'=>18,'amount'=>232),
+				'6'=> array('name'=>'prom','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/prom1.jpg','event_id'=>18,'amount'=>232),
 				'7'=> array('name'=>'school','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/school.jpg','event_id'=>18,'amount'=>203),		
 		)
 		));
@@ -60,10 +60,10 @@ class syscontroller extends Controller{
 	public function style_list($request,$response){
 		$this->renderJson(array(
 			'amount'=>'7',
-			'utime' => '1432545806',	
+			'utime' => '1432543336',	
 			'list' => array(
 				'1' => array('name'=>'bohemian','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/bohemian.jpg','event_id'=>12,'amount'=>200) ,
-				'2' => array('name'=>'BRIEF','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/brief.jpg','event_id'=>13,'amount'=>22),
+				'2' => array('name'=>'BRIEF','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/brief1.jpg','event_id'=>13,'amount'=>22),
 				'3' => array('name'=>'CUTE','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/cute.jpg','event_id'=>14,'amount'=>11),
 				'4' => array('name'=>'preppy','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/preppy.jpg','event_id'=>15,'amount'=>9),
 				'5' => array('name'=>'SEXY','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/sexy.jpg','event_id'=>17,'amount'=>200),
