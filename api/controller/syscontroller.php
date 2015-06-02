@@ -39,13 +39,13 @@ class syscontroller extends Controller{
 			'amount'=>'7',
 			'utime' => '1432545706',
 			'list' => array(
-				'1' => array('name'=>'CASUAL','pic_link'=>'http://120.26.107.42/img/logo7.jpg','event_id'=>12,'amount'=>200) ,
-				'2' => array('name'=>'OFFICIAL','pic_link'=>'http://120.26.107.42/img/logo6.jpg','event_id'=>13,'amount'=>22),
-				'3' => array('name'=>'PARTY','pic_link'=>'http://120.26.107.42/img/logo5.jpg','event_id'=>14,'amount'=>11),
-				'4' => array('name'=>'OUTDOOR','pic_link'=>'http://120.26.107.42/img/logo4.jpg','event_id'=>15,'amount'=>9),
-				'5' => array('name'=>'SCHOOOL','pic_link'=>'http://120.26.107.42/img/logo3.jpg','event_id'=>17,'amount'=>200),
-				'6'=> array('name'=>'BEACH','pic_link'=>'http://120.26.107.42/img/logo2.jpg','event_id'=>18,'amount'=>232),
-				'7'=> array('name'=>'PROM','pic_link'=>'http://120.26.107.42/img/logo2.jpg','event_id'=>18,'amount'=>203),		
+				'1' => array('name'=>'beach','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/beach.jpg','event_id'=>12,'amount'=>200) ,
+				'2' => array('name'=>'casual','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/casual.jpg','event_id'=>13,'amount'=>22),
+				'3' => array('name'=>'office','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/office.jpg','event_id'=>14,'amount'=>11),
+				'4' => array('name'=>'OUTDOOR','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/outdoor.jpg','event_id'=>15,'amount'=>9),
+				'5' => array('name'=>'party','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/party.jpg','event_id'=>17,'amount'=>200),
+				'6'=> array('name'=>'prom','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/prom.jpg','event_id'=>18,'amount'=>232),
+				'7'=> array('name'=>'school','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/school.jpg','event_id'=>18,'amount'=>203),		
 		)
 		));
 	}
@@ -62,13 +62,16 @@ class syscontroller extends Controller{
 			'amount'=>'7',
 			'utime' => '1432545706',	
 			'list' => array(
-				'1' => array('name'=>'CUTE','pic_link'=>'http://120.26.107.42/img/logo7.jpg','event_id'=>12,'amount'=>200) ,
-				'2' => array('name'=>'BRIEF','pic_link'=>'http://120.26.107.42/img/logo5.jpg','event_id'=>13,'amount'=>22),
-				'3' => array('name'=>'STREET','pic_link'=>'http://120.26.107.42/img/logo2.jpg','event_id'=>14,'amount'=>11),
-				'4' => array('name'=>'SPORTY','pic_link'=>'http://120.26.107.42/img/logo4.jpg','event_id'=>15,'amount'=>9),
-				'5' => array('name'=>'SEXY','pic_link'=>'http://120.26.107.42/img/logo3.jpg','event_id'=>17,'amount'=>200),
-				'6'=> array('name'=>'PREPPY','pic_link'=>'http://120.26.107.42/img/logo3.jpg','event_id'=>18,'amount'=>232),
-				'7'=> array('name'=>'WORK','pic_link'=>'http://120.26.107.42/img/logo1.jpg','event_id'=>18,'amount'=>203),		
+				'1' => array('name'=>'bohemian','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/bohemian.jpg','event_id'=>12,'amount'=>200) ,
+				'2' => array('name'=>'BRIEF','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/brief.jpg','event_id'=>13,'amount'=>22),
+				'3' => array('name'=>'CUTE','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/cute.jpg','event_id'=>14,'amount'=>11),
+				'4' => array('name'=>'preppy','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/preppy.jpg','event_id'=>15,'amount'=>9),
+				'5' => array('name'=>'SEXY','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/sexy.jpg','event_id'=>17,'amount'=>200),
+				'6'=> array('name'=>'sporty','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/sporty.jpg','event_id'=>18,'amount'=>232),
+				'7'=> array('name'=>'street','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/street.jpg','event_id'=>19,'amount'=>203),		
+				'8'=> array('name'=>'vintage','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/vintage.jpg','event_id'=>20,'amount'=>203),		
+				'9'=> array('name'=>'work','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/work.jpg','event_id'=>21,'amount'=>203),		
+				
 		)
 		));
 	}
