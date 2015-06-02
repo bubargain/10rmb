@@ -15,7 +15,7 @@ class syscontroller extends Controller{
 	public function brand_list($request,$response){
 		$this->renderJson(array(
 			'amount'=>'6',
-			'utime' => '1433545706',
+			'utime' => '1433545806',
 			'list' => array(
 				'1' => array('name'=>'American Apparel','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/american_apparel.jpg','event_id'=>12) ,
 				'2' => array('name'=>'Forever21','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/forever21.png','event_id'=>13),
@@ -37,7 +37,7 @@ class syscontroller extends Controller{
 	public function occasion_list($request,$response){
 		$this->renderJson(array(
 			'amount'=>'7',
-			'utime' => '1432545706',
+			'utime' => '1432545806',
 			'list' => array(
 				'1' => array('name'=>'beach','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/beach.jpg','event_id'=>12,'amount'=>200) ,
 				'2' => array('name'=>'casual','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/casual.jpg','event_id'=>13,'amount'=>22),
@@ -60,7 +60,7 @@ class syscontroller extends Controller{
 	public function style_list($request,$response){
 		$this->renderJson(array(
 			'amount'=>'7',
-			'utime' => '1432545706',	
+			'utime' => '1432545806',	
 			'list' => array(
 				'1' => array('name'=>'bohemian','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/bohemian.jpg','event_id'=>12,'amount'=>200) ,
 				'2' => array('name'=>'BRIEF','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/brief.jpg','event_id'=>13,'amount'=>22),
