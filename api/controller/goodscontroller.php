@@ -20,7 +20,7 @@ class goodscontroller extends Controller{
 				'error'=>"goods_id can't be null or goods is not exist"
 			));
 		}
-		else{
+		else if($goods_id == 1213){
 			$this->renderJson(array(
 				'goods_id'=> $goods_id,
 				'goods_title' => "Fancy Sexy Dress for Young",
@@ -42,6 +42,31 @@ class goodscontroller extends Controller{
 				'brand_id' => '234',
 				'brand_name' => 'Luies Voution',
 			));
+		}
+		else{
+	
+			$this->renderJson(array(
+				'goods_id'=> $goods_id,
+				'goods_title' => "Fancy Sexy Dress for Young",
+				'img_link' => "http://h.hiphotos.baidu.com/image/pic/item/1ad5ad6eddc451da161b06eab4fd5266d11632c5.jpg",
+				'img_detail_link' => "http://h.hiphotos.baidu.com/image/pic/item/1ad5ad6eddc451da161b06eab4fd5266d11632c5.jpg",
+				'price' => '1222.5',
+				'color' => '#3e3f4e,#fff',
+				'size'  => 'Only XL',
+				'has_coupon' => 'Y',
+				'coupon' => array(
+							'coupon'=>'8.0',
+							'amount'=>'40',
+							'left_amount'=>'2',
+							'coupon_id'=>'12330',
+							'expired_time'=>'1442728088'
+							),
+				'ctime' => '1432728088',
+				'last_time' => '7776000', //商品持续时间，默认90天
+				'brand_id' => '122',
+				'brand_name' => 'American Apperal',
+			));
+		
 		}
 	}
 
