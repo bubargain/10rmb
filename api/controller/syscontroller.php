@@ -45,7 +45,7 @@ class syscontroller extends Controller{
 				'4' => array('name'=>'OUTDOOR','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/outdoor.jpg','event_id'=>15,'amount'=>9),
 				'5' => array('name'=>'party','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/party.jpg','event_id'=>17,'amount'=>200),
 				'6'=> array('name'=>'prom','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/prom1.jpg','event_id'=>18,'amount'=>232),
-				'7'=> array('name'=>'school','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/school.jpg','event_id'=>18,'amount'=>203),		
+				'7'=> array('name'=>'school','pic_link'=>'http://7s1rnv.com1.z0.glb.clouddn.com/school.jpg','event_id'=>19,'amount'=>203),		
 		)
 		));
 	}
