@@ -1,0 +1,83 @@
+ <div class="span9">
+ 
+ 	 <ul class="breadcrumb">
+                <li><a href="#">首页</a> <span class="divider">/</span></li>
+                <li><a href="#">活动管理</a> <span class="divider">/</span></li>
+                
+     </ul>
+ 	<table width="100%" border="0" cellspacing="0" cellpadding="5" id="content">
+  	<tr>
+  	  
+      <th align="center" width="7%" class="pushItem">id</th>
+      <th width="30%" class="pushItem">商品名称</th>
+ 	  <th width="10%" class="pushItem">产品链接</th>
+      <th align="center" width="8%" class="pushItem">价格</th>
+      <th align="center" width="8%" class="pushItem">状态</th>
+      <th align="center" class="pushItem">更新时间</th>
+         <th align="center"  class="pushItem">审核备注</th>
+  	</tr>
+    
+     {{foreach from=$events item=event}}
+    	<tr>  
+     	  <td align="center" class="pushItem">
+          <a href="index.php?_c=history&sevent={{$event.event_id}}" target="new">BUCK{{$event.goods_id}} </a>    
+          </td>
+          <td align="center" class="pushItem">
+		  <img src="{{$event.default_image}}" style="max-width:150px" />
+		  {{$event.goods_name}}
+		  
+		  </td>
+          <td align="center" class="pushItem"> <a href="{{$event.product_link}}" target="new">查看</a></td>
+          <td align="center" class="pushItem">${{$event.price}}</td>
+     
+      
+          <td align="center" class="pushItem">
+           <div class="btnOperate">
+            {{if $event.status == 1 }}
+            	等待审核
+            {{/if}}
+            </div>
+            </td>
+          <td align="center" class="pushItem">{{$event.ctime|date_format:"%Y/%m/%d"}}</td>
+               <td align="center" class="pushItem">{{$event.comment}}</td>
+      </tr>
+    
+    {{/foreach}}
+    </table>
+    
+     <!--分页类-->
+                	<style type="text/css">
+						.carInfo {width:800px;height:56px;border-top:1px #e1e1e1 solid;overflow:hidden;margin:0 auto;}
+						.carInfo dt {float:left;padding:16px 0 0 3px;color:#323232;}
+						.carInfo i {padding-right:30px;}
+						.carInfo dd {float:right;padding-top:13px;}
+						</style>
+						<table>
+						<tr>
+							<td align="center" colspan="8">{{$page}}</td>
+						</tr>
+						</table>
+ </div>
+ <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+ <!-- ajax : modify event staus -->
+ <script>
+ 	(function(){
+		$("#content").delegate("div,a", "click", function(){
+			_this = $(this);	
+			switch(_this.attr("y-action")) {		
+				case 'batchUpStatus': 
+					batchUpStatus(_this);
+					break;
+				default:
+				;
+			}
+		});
+		function batchUpStatus(_this) {
+			var url = "index.php?_c=event&_a=status&" + _this.attr("y-data");
+			$.getJSON(url, function(data) {			
+				window.location.reload();
+			});
+		}
+	})();
+ </script>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>10BUCK 商家注册</title>
+<link href="/css/bootstrap.docs.css" rel="stylesheet">
+<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<LINK href="/css/style.css" rel="stylesheet">
+<script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="application/javascript" src="/js/main.js"></script>
+<script type="text/javascript">
+//导航栏效果
+$(function(){
+	var nav = $('#nav').children();
+	for (var i=0;i<nav.length;i++){
+		if (nav[i].className=="menu"){
+			nav[i].onmouseover = function(){fnNav(this,"block")};
+			nav[i].onmouseout = function(){fnNav(this,"none")};
+		}
+	}
+	function fnNav(obj,flag){
+		$(obj).find("dl")[0].style.display = flag;
+	}
+});
+</script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" >
+	<div class="navbar-inner">
+        <div class="container">
+          
+          <div class="nav-collapse collapse">
+           
+          </div>
+        </div>
+        </div>
+</div>
+<header id="overview" class="jumbotron subhead">
+  <div class="container">
+    <h1>10BUCK&nbsp;海外返利网</h1>
+    <p class="lead"> 百万海外个人用户，帮助您拓展跨境电商业务</p>
+  </div>
+</header>
+
+<div class="container">
+   <section>
+   	<div class="page-header">
+            <h1>注册申请</h1>
+            <div class="alert">
+            	为了保障消费者权益，我们会审核每个商家的资质。审核一般1-2日内完成，在此期间请保证您的手机畅通。
+            </div>
+    </div>
+	<form class="form-horizontal" method="post" action="?_c=login&_a=reg">
+	<tr>
+  
+    <td>
+    <div class="control-group">
+		<label class="control-label" for="inputPhone">手机</label>
+        <div class="controls">
+        <input type="text" id="inputPhone" name="inputPhone" placeholder="手机号码">
+        </div>
+    </div>
+    <div class="control-group">
+		<label class="control-label" for="inputEmail">Email</label>
+        <div class="controls">
+        <input type="email" id="inputEmail" name="inputEmail" placeholder="Email">
+        </div>
+    </div>
+
+	<div class="control-group">
+		<label class="control-label" for="inputPassword">密码</label>
+		<div class="controls form-inline">
+			<input type="password" id="inputPassword" onChange="verfyPass();" name="inputPassword" placeholder="Password">
+            <div id="passNotSame" hidden="true">密码不一致</div>
+		</div>
+ 	</div>
+    <div class="control-group">
+		<label class="control-label" for="inputPassword2">再次输入密码</label>
+		<div class="controls">
+			<input type="password" id="inputPassword2" name="inputPassword2" onChange="verfyPass();" placeholder="Password">
+		</div>	
+ 	</div>
+    
+    
+        <div class="control-group">
+            <label class="control-label" for="inputName">姓名</label>
+            <div class="controls">
+            <input type="text" id="inputName" name="inputName" placeholder="真实姓名">
+            </div>
+        </div>
+      
+         <div class="control-group">
+            <label class="control-label" for="inputInvite"></label>
+            <div class="controls">
+            <input type="text" id="inputInvite" value="{{$invite_code}}" name="inputInvite" placeholder="输入邀请码,目前只接受邀请注册"/>
+			<p style="display:inline"> * 添加公众号“叶道”并输入“邀请码”即可获取<img src="/img/qrcode.jpg" /><p>
+            </div>
+        </div>
+         <!--<div class="control-group">
+            <label class="control-label" for="inputDoc">上传证件</label>
+            <div class="controls">
+            <input type="file" id="inputDoc" name="inputDoc">
+            	<p>身份证照片或公司营业执照扫描件，支持jpg,gif,png等</p>
+            </div>
+        </div>
+        -->
+		<br/>
+        <div class="control-group">
+      		 <div class="controls form-inline">
+              
+            
+                    同意10BUCK服务使用协议
+                    
+                
+            <a target="_blank" href="?_c=login&_a=agreement">用户注册协议</a>
+        	</div>
+        </div>
+    
+        <div class="control-group">
+        </div>
+       
+            <div class="controls">
+            <button id='regSub' type="submit"  class="btn btn-large">注册</button>
+            </div>
+        </div>
+    </td>
+    </tr>
+	</form>
+    </section>
+   <script>
+   
+   
+   		function verfyPass()
+		{
+			
+			if($("#inputPassword").val() !=  $("#inputPassword2").val())
+			{
+				
+				$("#passNotSame").show();
+			}
+			else
+			{
+				$("#passNotSame").hide();
+			}
+		}
+   </script>
+{{include file="../footer.html"}}

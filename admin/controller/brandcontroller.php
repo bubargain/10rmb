@@ -31,26 +31,31 @@ class BrandController extends BaseController {
 	// 添加品牌
 	public function add($request, $response) {
 		$response->title = '添加品牌';
+		$user_id = $this->checkLogin();
 		// 保存新增
 		if ($request->type == 'saveBrand') {
 			$brand_id = intval ( $request->brand_id );
-			$brand_logo_isDel = intval ( $request->brand_logo_isDel );
-			$brand_logo = trim ( $request->brand_logo );
+			//$brand_logo_isDel = intval ( $request->brand_logo_isDel );
+			$brand_logo = trim ( $request->brand_logoss );
+			
 			if ($request->brand_name) {
-				if ($_FILES ['brand_logo'] ['name']) {
-					if (! $brand_logo_isDel) {
-						$this->showError ( '请先删除原有logo' );
-					}
-					$brand_logo = self::uploadBrandLogo ();
-				}
+				
+//				if ($_FILES ['brand_logo'] ['name']) {
+//					/*if (! $brand_logo_isDel) {
+//						$this->showError ( '请先删除原有logo' );
+//					}*/
+//					$brand_logo = self::uploadBrandLogo ();
+//				}
 				// 获取表单变量
 				$params = array (
 						'brand_name' => trim ( $request->brand_name ),
 						'brand_cname' => trim ( $request->brand_cname ),
+						'mer_id' => $user_id,
 						'brand_ename' => trim ( $request->brand_ename ),
-						'brand_logo' => $brand_logo,
-						'sort_order' => intval ( $request->sort_order ),
-						'if_show' => intval ( $request->if_show ) 
+						'brand_logo' =>$brand_logo,
+						//'sort_order' => intval ( $request->sort_order ),
+						//'if_show' => intval ( $request->if_show ) 
+						'if_show' => 0
 				);
 				// 保存
 				$result = \app\dao\BrandDao::getMasterInstance ()->save ( $brand_id, $params, $request->isEdit );
@@ -85,7 +90,7 @@ class BrandController extends BaseController {
 		$brand_id = intval ( $request->brand_id );
 		// 获取品牌图片的地址
 		$info = \app\dao\BrandDao::getSlaveInstance ()->find ( $brand_id );
-		$brand_logo = CDN_YMALL_PATH . $info ['brand_logo'];
+		$brand_logo = CDN_MODE . $info ['brand_logo'];
 		$result = \app\dao\BrandDao::getMasterInstance ()->delete ( $brand_id );
 		if ($result) {
 			// 删除图片
@@ -99,7 +104,7 @@ class BrandController extends BaseController {
 	}
 	// 仅删除品牌图片
 	public function deleteBrandLogo($request, $response) {
-		$brand_logo = CDN_YMALL_PATH . $request->brand_logo;
+		$brand_logo = CDN_MODE . $request->brand_logo;
 		$brand_id = intval ( $request->brand_id );
 		// 修改图片字段值为空
 		$result = \app\dao\BrandDao::getMasterInstance ()->edit ( $brand_id, array (

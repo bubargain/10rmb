@@ -10,6 +10,13 @@ class GoodsDao extends YmallDao {
 	const BUY_STATUS = 12; // 0b11111 : 1：待审( 11000、0 ) - 1：商家上架( 1、0 ) - 1：审核通过( 1、0 ) - 1: 禁售( 1、0 ) - 1: 删除( 1、0 )
 	protected static $_master;
 	protected static $_slave;
+	
+	
+	const waitingjudge = 88;
+	const underjudge =   87;
+	const launch = 2;
+	const cancel = 99;
+	
 	public function getTableName() {
 		return 'ym_goods';
 	}
@@ -28,6 +35,44 @@ class GoodsDao extends YmallDao {
 		$sql = "SELECT COUNT(*) FROM " . self::getTableName () . " WHERE " . self::makeSql ( $params );
 		return $this->_pdo->getOne ( $sql );
 	}
+	
+	//将等待评审的商品安排给评审员，并锁定该商品
+	public function getJudgeProduct() {
+		try{
+		$this->_pdo->beginTransaction();
+		//解锁超时未完成审核的产品
+		$sql3 = "update {$this->getTableName()} set status=".self::waitingjudge." where status=" .self::underjudge ." and utime+900<" .time();
+		$this->_pdo->exec($sql3);
+		
+		//查找目前待审核的产品
+		$sql = "select * from {$this->getTableName()} where status=".self::waitingjudge." limit 1";
+		$info= $this->_pdo->getRow ( $sql );
+		
+		if($info)
+		{
+			//锁定当前产品
+			$sql2 = "update {$this->getTableName()} set `status`=".self::underjudge ." , utime=".time()." where goods_id= ".$info['goods_id'];
+			$this->_pdo->exec($sql2);
+			$this->_pdo->commit();
+			return $info;
+		}
+		else{
+			$this->_pdo->commit();
+			return false;
+		}
+		
+		}catch(\Exception $e){
+			var_dump($e->getMessage());die();
+			$this->_pdo->rollBack();
+			return false;
+		}
+	}
+	
+	public function productLaunch($goods_id){
+		$sql = "update ". self::getTableName () ." set status=" . self::launch ." , utime =".time()." where goods_id = $goods_id and status =". self::underjudge;
+		return $this->_pdo->exec($sql);
+	}
+	
 	public function stock($id, $num, $type) {
 		if (! in_array ( $type, array (
 				'+',

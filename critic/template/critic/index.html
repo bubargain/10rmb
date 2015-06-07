@@ -1,0 +1,504 @@
+﻿<link href="css/magicsuggest-min.css" rel="stylesheet">
+      <div class=" form-inline">
+      			   <div class="page-header" align="center">
+						<h1> MISSION ON GOING </h1>
+				   <div>
+				   <div class="row">
+						<div class="span4">
+							
+							<img style="max-width:300px" src="{{$img1}}"></img>
+							<br/>1st PIC<br/>
+							<img style="max-width:300px" src="{{$img2}}"></img>
+							<br/>2nd  PIC<br/>
+						</div>
+						<form class="form-horizontal" method="post" action="?_c=critic&_a=addres">
+						<div class="span8">
+						
+							
+						<div class="alert alert-success"> Basic Tags : choose basic attributions for this products </div>
+						<!-- basic attributions -->
+							 <div class="control-group">
+									<label class="control-label" for="sale_price">trending style：</label>
+									<div class="controls">	
+										<div class="col-sm-9">
+										<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="dresses" />dresses
+											</label> 
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]" id="cb_bs"" onclick="javascript:showornot('bs');"  value="blouses_shirts" /> blouses & shirts
+											</label> 
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]" id="cb_tt"" onclick="javascript:showornot('tt');"  value="tops_tees" /> tops & tees
+											</label> 
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]" id="cb_bot"" onclick="javascript:showornot('bot');"  value="bottoms" /> bottoms
+											</label> 
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]" id="cb_jc"" onclick="javascript:showornot('jc');"  value="jackets_coats" /> jackets & coats
+											</label>
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="sweaters" /> sweaters
+											</label>
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]" id="cb_sw"" onclick="javascript:showornot('sw');"  value="swimwear" /> swimwear
+											</label>
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]" id="cb_int"" onclick="javascript:showornot('int');"  value="intimates" /> intimates
+											</label>
+										</div>
+										</div>
+									</div>
+								</div>
+							
+							
+							
+							 <div class="control-group" id="group_bs" style="display:none">
+									<label class="control-label" for="sale_price">blouses & shirts：</label>
+									<div class="controls">	
+										<div class="col-sm-9">
+										<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="o-neck" />o-neck
+											</label> 
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="hooded" />hooded
+											</label> 
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="square_collar" />square collar
+											</label> 
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="turn-down_collar" />turn-down collar
+											</label>
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="peter_pan_collar" />peter pan collar
+											</label>
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="sailor_collar" />sailor collar
+											</label>
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="slash_neck" />slash neck
+											</label>
+										</div>
+										</div>
+									</div>
+							</div>
+							
+							<div class="control-group" id="group_tt" style="display:none">
+									<label class="control-label" >tops & tees：</label>
+									<div class="controls">	
+										<div class="col-sm-9">
+										<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="T-shirt" />T-shirt
+											</label> 
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="camis" />camis
+											</label> 
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="tank_tops" />tank tops
+											</label> 
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="polo_shirts" />polo shirts
+											</label> 
+										</div>
+										</div>
+									</div>
+							</div>
+							
+							<div class="control-group" id="group_bot" style="display:none">
+									<label class="control-label" >bottoms：</label>
+									<div class="controls">	
+										<div class="col-sm-9">
+										<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="skirts" />skirts
+											</label> 
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="pants_capris" />pants & capris
+											</label> 
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="leggings" />leggings
+											</label> 
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="jeans" />jeans
+											</label> 
+												<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="shorts" />shorts
+											</label> 
+											
+										</div>
+										</div>
+									</div>
+							</div>
+							<div class="control-group" id="group_jc" style="display:none">
+									<label class="control-label" >jackets & coats</label>
+									<div class="controls">	
+										<div class="col-sm-9">
+										<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="basic_jackets" />basic jackets
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="down_parkas" />down & parkas
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="fur_faux-fur" />fur & faux fur
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="leather_suede" />leather & suede
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="trench" />trench
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="vests_wool_blends" />vests & wool & blends
+											</label>
+										</div>
+										</div>
+									</div>
+							</div>
+							
+							
+				 		<div class="control-group" id="group_sw" style="display:none">
+									<label class="control-label" >swimwear</label>
+									<div class="controls">	
+										<div class="col-sm-9">
+										<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="bikinis_set" />bikinis set
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="one_pieces" />one pieces
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="two_pieces_separates" />two pieces separates
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="tankinis_set" />tankinis set
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="cover-ups" />cover ups
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="board-shorts" />board shorts
+											</label>
+										</div>
+										</div>
+									</div>
+						</div>
+						
+						
+							<div class="control-group" id="group_int" style="display:none">
+									<label class="control-label" >intimates</label>
+									<div class="controls">	
+										<div class="col-sm-9">
+										<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="bras" />bras
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="bra_brief_corsets" />bra&brief&corsets
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="camisoles_tanks" />camisoles & tanks
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="slips" />slips
+											</label>
+										</div>
+										</div>
+									</div>
+						</div>
+						
+						<div class="control-group">
+									<label class="control-label" >accessories (if it is)</label>
+									<div class="controls">	
+										<div class="col-sm-9 btn-toolbar">
+										
+										<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="sunglasses" />sunglasses
+											</label>	
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="eyewear_frames" />eyewear frames
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="scarves" />scarves
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="belts_cummerbunds" />belts & cummerbunds
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="baseball_caps" />baseball caps
+											</label>
+											</div>
+											<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="skullies_beanies" />skullies & beanies
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="eyewear_accessories" />eyewear & accessories
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="hat_caps" />hat & caps
+											</label>
+										</div>
+										</div>
+									</div>
+						</div>
+						
+						
+						<div class="control-group">
+									<label class="control-label" >sleeve length</label>
+									<div class="controls">	
+										<div class="col-sm-9 btn-toolbar">
+										
+										<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="sleeve_short" />short
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="sleeve_long" />long
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="sleeve_half" />half
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="sleeve_None" />None
+											</label>
+										</div>
+										</div>
+									</div>
+						</div>
+					<div class="alert"> Open Tags : choose from exist tags or create new ones </div>
+					
+							<!--控件 -->
+							 <div class="control-group">
+								<label class="control-label" for="color">
+									 
+									Occasion 
+								</label>
+								<div class="controls">
+										<div class="form-group">
+											<label></label>
+											<div class="ms-ctn form-control  ms-ctn-focus" style="" id="ms-occasion" name="ms-occasion">
+												<span class="ms-helper " style="display: none;"></span>
+													<div class="ms-sel-ctn"><input type="text" class="" >
+														<div style="display: none;"></div>
+													</div>
+												<div class="ms-trigger">
+													<div class="ms-trigger-ico">
+														</div>
+												</div>
+											</div>
+										</div>
+										
+							   
+								</div>
+								
+							</div>
+							
+							<!--控件 -->
+							 <div class="control-group">
+								<label class="control-label" for="color" >
+								silhouette:
+								</label>
+								<div class="controls">
+										<div class="form-group">
+											<label></label>
+											<div class="ms-ctn form-control  ms-ctn-focus" style="" id="ms-silhouette" name="ms-pattern[]">
+												<span class="ms-helper " style="display: none;"></span>
+													<div class="ms-sel-ctn"><input type="text" class="" >
+														<div style="display: none;"></div>
+													</div>
+												<div class="ms-trigger">
+													<div class="ms-trigger-ico">
+														</div>
+												</div>
+											</div>
+										</div>
+							   
+								</div>
+								
+							</div>
+							
+							
+							<!--控件 -->
+							 <div class="control-group">
+								<label class="control-label" for="color" >
+								style:
+								</label>
+								<div class="controls">
+										<div class="form-group">
+											<label></label>
+											<div class="ms-ctn form-control  ms-ctn-focus" style="" id="ms-style" name="ms-style">
+												<span class="ms-helper " style="display: none;"></span>
+													<div class="ms-sel-ctn"><input type="text" class="" >
+														<div style="display: none;"></div>
+													</div>
+												<div class="ms-trigger">
+													<div class="ms-trigger-ico">
+														</div>
+												</div>
+											</div>
+										</div>
+							   
+								</div>
+								
+							</div>
+							
+							<!--控件 -->
+							 <div class="control-group">
+								<label class="control-label" for="color" >
+									pattern type
+								</label>
+								<div class="controls">
+										<div class="form-group">
+											<label></label>
+											<div class="ms-ctn form-control  ms-ctn-focus" style="" id="ms-pattern" name="ms-pattern[]">
+												<span class="ms-helper " style="display: none;"></span>
+													<div class="ms-sel-ctn"><input type="text" class="" >
+														<div style="display: none;"></div>
+													</div>
+												<div class="ms-trigger">
+													<div class="ms-trigger-ico">
+														</div>
+												</div>
+											</div>
+										</div>
+							   
+								</div>
+								
+							</div>
+							
+							
+							<!--控件 -->
+							 <div class="control-group">
+								<label class="control-label" for="color" >
+									decoration
+								</label>
+								<div class="controls">
+										<div class="form-group">
+											<label></label>
+											<div class="ms-ctn form-control  ms-ctn-focus" style="" id="ms-decoration" name="ms-pattern[]">
+												<span class="ms-helper " style="display: none;"></span>
+													<div class="ms-sel-ctn"><input type="text" class="" >
+														<div style="display: none;"></div>
+													</div>
+												<div class="ms-trigger">
+													<div class="ms-trigger-ico">
+														</div>
+												</div>
+											</div>
+										</div>
+							   
+								</div>
+								
+							</div>
+							
+							
+							<!--控件 -->
+							 <div class="control-group">
+								<label class="control-label" for="color" >
+									Other 
+								</label>
+								<div class="controls">
+										<div class="form-group">
+											<label></label>
+											<div class="ms-ctn form-control  ms-ctn-focus" style="" id="ms-other" name="ms-pattern[]">
+												<span class="ms-helper " style="display: none;"></span>
+													<div class="ms-sel-ctn"><input type="text" class="" >
+														<div style="display: none;"></div>
+													</div>
+												<div class="ms-trigger">
+													<div class="ms-trigger-ico">
+														</div>
+												</div>
+											</div>
+										</div>
+							   
+								</div>
+								
+							</div>
+							
+							
+						</div>
+						 
+				   </div>
+						
+                  
+                   
+				   <div class="clear" ></div>
+                
+                
+                   <div align="center" class="span12" style="padding-top:25px">
+				   <input type="hidden" id="goods_id" name="goods_id" value="{{$goods_id}}" />
+                    <input type="submit" class="btn btn-info btn-large" value="Submit"/>
+                     <a href="#" class="btn btn-large" > Cancel</a>
+      			   </div>
+				  </form>
+      
+     	 </div>
+
+      <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	  <script src="js/magicsuggest-min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+      <script type="text/javascript">
+	  function showornot(name)
+	  {
+	  
+		
+		if( document.getElementById("cb_"+name).checked){
+			
+			$('#group_'+name).css('display','block'); 
+		}
+			
+		else{
+			
+			$('#group_'+name).css('display','none'); 
+		}
+			
+	  }
+	  
+	  
+	//magicSuggest
+	//doc: http://nicolasbize.com/magicsuggest/doc.html
+	 $('#ms-occasion').magicSuggest({
+        placeholder: 'In which occasion this product suits?',
+        data: ['casual','office','party','outdoor','school','beach','prom'],
+		allowFreeEntries : true
+    });
+	
+	 $('#ms-style').magicSuggest({
+        placeholder: 'Which style this product belongs to?',
+        data: ['casual','office','party','outdoor','school','beach','prom'],
+		allowFreeEntries : true
+    });
+	
+	 $('#ms-silhouette').magicSuggest({
+        placeholder: 'Which shape it looks like?',
+        data: ['A-line','symmetrical','ball gown','beach','bud','pleated','sheath','straight','trumpet','mermaid'],
+		allowFreeEntries : true
+    });
+	
+	 $('#ms-pattern').magicSuggest({
+        placeholder: 'pattern type on this product',
+        data: ['plain coloured','striped','checks','animal','character','dot','floral','geometric','leopard','letter','paisley','patchwork','print','solid','plaid'],
+		allowFreeEntries : true
+    });
+	
+	 $('#ms-decoration').magicSuggest({
+        placeholder: 'is there any decoration on this product?',
+        data: ['applique','beading','bow','button','cascading','draped','embroider','embroider','feathers','hole','hollow','lace','pockets','ruffles'],
+		allowFreeEntries : true
+    });
+	 $('#ms-other').magicSuggest({
+        placeholder: 'any other tag you think is useful?',
+        data: [],
+		allowFreeEntries : true
+    });
+
+	
+	  </script>
+      

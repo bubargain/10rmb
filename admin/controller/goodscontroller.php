@@ -6,6 +6,7 @@ use app\dao\GoodsDao;
 use app\dao\OrderGoodsDao;
 use app\dao\OrderDao;
 use app\service\OrderSrv;
+use app\service\GoodsSrv;
 use \stdClass;
 use app\common\util\subpages;
 
@@ -109,6 +110,10 @@ class GoodsController extends BaseController {
 		$this->layoutSmarty ( 'detail' );
 	}
 	// 修改商品状态
+	/*
+	 * status : 修改后的商品状态
+	 * goods_id : 商品ID
+	 */
 	public function status($request, $response) {
 		switch ($request->status) {
 			// 通过审核
@@ -423,4 +428,72 @@ class GoodsController extends BaseController {
         curl_exec($ch);
         curl_close($ch);
     }
+    
+    
+    
+    /**
+     * MODE2.0  商家发布新商品
+     * @author：daniel
+     * @since: 2015/06/03
+     */
+    public function addNew($request,$response){
+ 		$user_id=$this->checkLogin();
+ 		$goods['goods_name'] =$request->event_name;
+ 		$goods['product_link'] =$request->product_link;
+ 		
+ 		$goods['price'] =$request->sale_price;
+ 		$goods['mer_id'] =$user_id;
+ 		$goods['brand_id'] =$request->sbrand;
+ 		$goods['color'] =$request->color != ''?implode(',',$request->color):'null';
+    	$goods['size']= implode(',',$request->size);
+    	$goods['ctime'] = strtotime( $request->launchtime);     //商品发布时间
+    	$goods['period'] = ((int)$request->duringtime)*86400;   //持续时间 
+    	$goods['default_image'] = $request->pic_link;
+    	$goods['default_thumb'] = $request->pic_link2;
+    	
+    	$srv = new \app\service\GoodsSrv();
+    	try{
+    	 $srv->add($goods,array());
+    	  header("Location: index.php?_c=goods&_a=mer_goods_list");
+    	}catch(\Exception $e)
+    	{
+    		$this->showError( $e->getMessage(),'index.php');
+    	}
+    }
+    
+    /**
+     * merchant get goods list upload in his store
+     * 
+     */
+	public function mer_goods_list($request,$response)
+	{
+		$user_id=$this->checkLogin();
+		
+		$response->storeTitle ="商品列表";
+		$response->storeIntro ="管理你的新品";
+		
+		
+		//翻页类
+		$sql="select count(*) as no from ym_goods where mer_id=$user_id";
+        $ret= \app\dao\EventDao::getSlaveInstance()->getPdo()->getRow($sql);
+        $total=$ret['no'];
+
+        $page_size = 15;
+		// 当前页数
+		$curPageNum = $request->page ? intval ( $request->page ) : 1;
+		// url
+		$url = preg_replace ( '/([?|&]page=\d+)/', '', $_SERVER ['REQUEST_URI'] );
+		// 分页对象
+
+		$page = new SubPages( $url, $page_size, $total, $curPageNum );
+		$limit = $page->GetLimit() ;
+		$response->page = $page->GetPageHtml();
+		
+		
+		$sql = "select * from ym_goods where mer_id=$user_id order by ctime desc limit ".$limit;
+		$info = \app\dao\EventDao::getSlaveInstance()->getPdo()->getRows($sql);
+		$response->events =$info;
+		
+		$this->layoutSmarty('mergoodslist');
+	}
 }

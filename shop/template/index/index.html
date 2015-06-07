@@ -2,3 +2,54 @@
 <!--contents begin-->
 <p>current user is: {{$current_user.user_name}}&nbsp;&nbsp;<a href="index.php?_c=login&_a=logout">退出</a></p>
 <!--contents end-->
+
+
+<div name="maindiv" class="span8">
+
+	
+		<div class="span10 text-center text-info"><h3>品牌申请列表</h3></div>
+	
+		
+		<table id='content' align="center" class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>品牌名称</th>
+					<th>品牌图标</th>
+					<th>申请人</th>
+                    <th>状态</th>		
+					<th>操作</th>
+				</tr>
+			</thead>
+				{{foreach from=$brands item=brand }}
+					<tr {{if $oneRow.status =='1'}}class="success"{{/if}}>
+						
+						<td>{{$brand.brand_name}}</td>
+						<td><img src="{{$brand.brand_logo}}" style="max-width:150px"/></td>
+						<td>{{$brand.mer_id}}</td>
+						<td>待审</td>
+						<td>
+                     
+                        	
+                        	<a  href="index.php?_c=brand&_a=verify&id={{$brand.brand_id}}&pass=tongguo"  class="btn btn-warning btn-small" >通过</a>
+                          
+                            <a  href="index.php?_c=brand&_a=verify&id={{$brand.brand_id}}"  class="btn  btn-small" >驳回</a>
+							
+	                    
+						</td>
+					</tr>
+				{{/foreach}}
+		
+		</table> 
+		<style type="text/css">
+		.carInfo {width:800px;height:56px;border-top:1px #e1e1e1 solid;overflow:hidden;margin:0 auto;}
+		.carInfo dt {float:left;padding:16px 0 0 3px;color:#323232;}
+		.carInfo i {padding-right:30px;}
+		.carInfo dd {float:right;padding-top:13px;}
+		</style>
+		<table>
+		<tr>
+      		<td align="center" colspan="8">{{$page}}</td>
+  		</tr>
+		</table>
+		
+</div>

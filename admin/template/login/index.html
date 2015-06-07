@@ -75,7 +75,12 @@ $(function(){
                             <input type="password" id="inputPassword" name="pwd" placeholder="Password">
                         </div>
                     </div>
-                
+					<div class="control-group">
+						<input type="name" id="verifycode" name="verifycode" style="width:60px;height:25px" /> 
+						<img  title="点击刷新" src="index.php?_c=login&_a=genVerifyCode" align="absbottom" onclick="this.src='index.php?_c=login&_a=genVerifyCode&'+Math.random();"></img>
+					</div>
+					
+					
                     <div class="control-group">
                     </div>    
                         <div class="controls">
@@ -83,7 +88,9 @@ $(function(){
                         <a href="index.php?_c=login&_a=reg" class="btn btn-info btn-large">注册</a>
                         </div>
                     </div>
+				
                     </td>
+				
                     </tr>
                     </form>
                     </table>

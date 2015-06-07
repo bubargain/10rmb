@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{{$title}}</title>
+<link href="/css/bootstrap.docs.css" rel="stylesheet">
+ <link href="http://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+<link href="http://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+<LINK href="/css/style.css" rel="stylesheet">
+
+<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script type="application/javascript" src="/js/main.js"></script>
+<script type="text/javascript">
+//导航栏效果
+$(function(){
+	var nav = $('#nav').children();
+	for (var i=0;i<nav.length;i++){
+		if (nav[i].className=="menu"){
+			nav[i].onmouseover = function(){fnNav(this,"block")};
+			nav[i].onmouseout = function(){fnNav(this,"none")};
+		}
+	}
+	function fnNav(obj,flag){
+		$(obj).find("dl")[0].style.display = flag;
+	}
+});
+</script>
+</head>
+<body data-spy="scroll" data-target=".bs-docs-sidebar" >
+
+<div class="navbar navbar-inverse navbar-fixed-top" >
+      <div class="navbar-inner">
+        <div class="container">
+          
+          <div class="nav-collapse collapse">
+           		<ul class="nav">
+                	<li><a href="/index.php" >Index</a></li>
+                    <li><a href="#" >Statistic</a></li>
+                    <li><a href="#" >&nbsp;</a></li>
+                    <li class="span8"><a href="#" >&nbsp;</a></li>
+                	<li align="right"><a href="?_c=login&_a=logout" >Logout</a></li>
+                </ul>
+          </div>
+        </div>
+       
+      </div>
+        
+</div>
+<header id="overview" class="jumbotron subhead">
+  <div class="container">
+    <h1>{{$storeTitle}}</h1>
+    <p class="lead">{{$storeIntro}}</p>
+  </div>
+</header>
+
+<div class="container" style="min-height:650px">
+    <div class="row">

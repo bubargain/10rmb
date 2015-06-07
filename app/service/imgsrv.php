@@ -88,7 +88,7 @@ class ImgSrv extends BaseSrv {
 	public function uploadFile($fdata) {
 		/* 创建目录（以年月日命名） */
 		$folderName = date ( 'Y/m/d' );
-		$dir = CDN_YMALL_PATH . '/' . $this->base_path . '/' . $folderName . '/';
+		$dir = CDN_MODE . '/' . $this->base_path . '/' . $folderName . '/';
 		/* 如果目标目录不存在，则创建它 */
 		$this->create_folders ( $dir );
 		// 命名
@@ -103,7 +103,7 @@ class ImgSrv extends BaseSrv {
 			$imgInfo ['file_type'] = substr ( $fdata ['type'], strpos ( $fdata ['type'], '/' ) + 1 );
 			$imgInfo ['file_size'] = $fdata ['size'];
 			$imgInfo ['file_name'] = $unique_name;
-			$imgInfo ['file_path'] = str_replace ( CDN_YMALL_PATH, '', $file_name );
+			$imgInfo ['file_path'] = str_replace ( CDN_MODE, '', $file_name );
 			$imgInfo ['add_time'] = time ();
 			//
 			return $imgInfo;
@@ -138,7 +138,7 @@ class ImgSrv extends BaseSrv {
 	public function make_thumb($img) {
 		/* 创建年月日目录 */
 		$folderName = date ( 'Y/m/d' );
-		$dir = CDN_YMALL_PATH . '/' . $this->base_path . '/' . $folderName . '/';
+		$dir = CDN_MODE . '/' . $this->base_path . '/' . $folderName . '/';
 		/* 如果目标目录不存在，则创建它 */
 		$this->create_folders ( $dir );
 		

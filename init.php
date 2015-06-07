@@ -26,12 +26,7 @@ if (strpos($path.PATH_SEPARATOR, $autoPath.PATH_SEPARATOR) === false){
 }
 spl_autoload_register('spl_autoload');
 
-/*
-$_REQUEST['debug'] = 'yoka-inc2';
-$_REQUEST['debug'] = 'yoka-inc3';
-$_REQUEST['debug'] = 'yoka-inc4';
-*/
-$_REQUEST['debug'] = 'yoka-inc4';
+
 
 if((defined('YEPF_IS_DEBUG') && YEPF_IS_DEBUG) || (isset($_REQUEST['debug']) && strpos($_REQUEST['debug'], YEPF_DEBUG_PASS) !== false))
 {

@@ -1,0 +1,277 @@
+<link href="css/magicsuggest-min.css" rel="stylesheet">
+ <link href="css/datepicker.css" rel="stylesheet">
+
+</style>
+
+      <div class="span9">
+      		    <ul class="breadcrumb">
+                <li><a href="#">首页</a> <span class="divider">/</span></li>
+                <li><a href="#">发布商品</a> <span class="divider">/</span></li>
+                
+                </ul>
+      		
+           
+            
+      		<form class="form-horizontal" method="post" action="?_c=goods&_a=addnew">
+           
+            <div class="control-group">
+                <label class="control-label" for="inputUsername">产品名称：</label>
+                <div class="controls">
+                    <input type="text" style="min-width:350px" id="event_name" name="event_name"   required="required" />
+                </div>
+                
+            </div>
+         
+            <div class="clear"/>
+             <div class="control-group">
+                <label class="control-label" for="product_link">产品链接：</label>
+                <div class="controls">
+                    <input type="text"  style="min-width:350px" id="product_link" name="product_link" placeholder="Http://" required="required"/>
+                </div>
+                
+            </div>
+             <div class="control-group">
+                <label class="control-label" for="sale_price">产品单价：</label>
+                <div class="controls">
+                	<div class="input-append">
+                    <input type="text" id="sale_price" name="sale_price" placeholder="必须与用户实际付款价一致" required="required" />
+                    <span class="add-on">美元</span>
+                    </div>
+                </div>
+                
+            </div>
+			 <div class="control-group">
+                <label class="control-label" for="sale_price">品牌：</label>
+                <div class="controls">
+						<select id="sbrand" name="sbrand">
+						{{foreach from=$brands item=brand}}
+							<option value="{{$brand.brand_id}}">{{$brand.brand_name}}</option>
+						{{/foreach}}
+							
+						</select>
+						
+						<a href="#">如何增加品牌</a>
+                </div>
+                
+            </div>
+			
+			 <div class="control-group">
+                <label class="control-label" for="color">颜色：</label>
+                <div class="controls">
+						<div class="form-group">
+							<label></label>
+							<div class="ms-ctn form-control  ms-ctn-focus" style="" id="ms-scrabble" name="color">
+								<span class="ms-helper " style="display: none;"></span>
+									<div class="ms-sel-ctn"><input type="text" class="" >
+										<div style="display: none;"></div>
+									</div>
+								<div class="ms-trigger">
+									<div class="ms-trigger-ico">
+										</div>
+								</div>
+							</div>
+						</div>
+               
+                </div>
+                
+            </div>
+			
+		 <div class="control-group">
+                <label class="control-label" for="sale_price">大小：</label>
+                <div class="controls">	
+					<div class="col-sm-9">
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-default">
+							<input type="checkbox"  name="size[]" checked="checked" value="0" />XS
+						</label> 
+						<label class="btn btn-default">
+							<input type="checkbox"  name="size[]" checked="checked" value="1" />S
+						</label> 
+						<label class="btn btn-default">
+							<input type="checkbox"  name="size[]" checked="checked" value="2" /> M
+						</label> 
+						<label class="btn btn-default">
+							<input type="checkbox"  name="size[]" checked="checked" value="3" /> L
+						</label> 
+						<label class="btn btn-default">
+							<input type="checkbox"  name="size[]" checked="checked" value="4" /> XL
+						</label> 
+						<label class="btn btn-default">
+							<input type="checkbox"  name="size[]" checked="checked" value="5" /> XXL
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+			<div class="control-group">
+                <label class="control-label" for="amount">产品发布时间：</label>
+                <div class="controls">
+               		<input type="text" class="span2" value="2015-06-03" id="dp1" name="launchtime" >                  
+                </div>
+                
+            </div>	
+			
+             <div class="control-group">
+                <label class="control-label" for="amount">产品持续时间：</label>
+                <div class="controls">
+               		<div class="input-append">
+                   		<select name="duringtime" id="duringtime">
+                        	
+                            <option value="10">10</option>
+                            <option value="30"  >30</option>
+                            <option value="60">60</option>
+                            <option value="90"selected="selected">90</option>
+                            <option value="180">180</option>
+                        </select>
+                     <span class="add-on">天</span>
+                    </div>
+                   
+                </div>
+                
+            </div>
+             <div >
+                <label class="control-label" for="product_link" title="要求：含模特，长宽比1:1，不超过200k">主图链接：<br/></label>
+                <div class="controls">
+                    <input type="text" style="min-width:350px" id="pic_link" onchange="updateimg()" name="pic_link" placeholder="Http://"/>
+                    <!--  -->
+					<!--
+					<img src="" id="pic_img"/>
+                    <br/>或者
+               		
+                        <input id="file1" name="file1" onchange="validateImage(this)" type="file" />
+                        <a class="btn" href="#" onclick="submitimg()" >上传</a>
+						 <img id="loading" src="img/loading.gif" style="width:100px;display:none;">
+						 
+					-->
+                </div>
+                
+            </div>
+			<br/>
+			 <div >
+                <label class="control-label" for="product_link" title="要求：不含模特，仅物品，长宽比1:1，不超过200k">次图链接：<br/></label>
+                <div class="controls">
+                    <input type="text" style="min-width:350px" id="pic_link2" name="pic_link2" placeholder="Http://"/>
+                  
+                </div>
+                
+            </div>
+	
+            
+            <br/><br/>
+			 <div class="control-group">
+             			<div class="controls">
+                         <input type="submit" class="btn btn-primary btn-large" value="下一步" />
+                         </div>
+             </div>
+                
+      </div>
+      
+      		</form>
+      		<!-- Modal ,explain what is 免邮返利 -->
+          
+      </div>
+      <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+     <!--   <script src="js/ajaxfileupload.js" type="text/javascript"> </script>  -->
+	  <script src="js/magicsuggest-min.js"></script>
+	 <script src="js/bootstrap-datepicker.js"></script>
+      <script type="text/javascript">
+	  	function updateimg(){
+	
+			var url = $('#pic_link').val();
+			$('#pic_img').attr('src',url);
+		
+		}
+		function submitimg(obj){
+			$("#loading")
+				.ajaxStart(function(){
+				$(this).show();
+				})
+				.ajaxComplete(function(){
+				$(this).hide();
+			});
+			
+			
+			if($('#file1').val()){
+				
+				$.ajaxFileUpload({
+							url             : "index.php?_c=api&_a=uploadfile", //需要链接到服务器地址
+							type : 'post',
+							secureuri       : false,
+							fileElementId   : 'file1', //文件选择框的id属性
+							dataType        : 'json', //服务器返回的格式
+							success     : function(data,status) //相当于java中try语句块的用法
+							{              
+								
+								$('#pic_link').val('http://askkite.qiniudn.com/'+data['name']);
+								$('#pic_img').attr('src','http://askkite.qiniudn.com/'+data['name']);
+							},
+							error : function(data, status, e) //相当于java中catch语句块的用法
+							{
+								$('#pic_link').val('图片上传失败');
+							}
+						}	);	
+			}
+			else{
+				$('#pic_link').val('图片大小不能超过200k，请重新上传');
+			}
+		}
+		    
+    //校验图片格式及大小 Add Date 2012-6-14 LIUYI 
+    function validateImage(obj) {
+        var file = obj;
+        var tmpFileValue = file.value;
+         
+        //校验图片格式
+        if(/^.*?\.(gif|png|jpg|jpeg|bmp)$/.test(tmpFileValue.toLowerCase())){
+            return true;
+        } else {
+            alert("只能上传jpg、jpeg、png、bmp或gif格式的图片！");
+			$("#file1").val(0);
+            return false;
+        }
+         
+        //校验图片大小,这段代码需调整浏览器安全级别(调到底级)和添加可信站点(将服务器站点添加到可信站点中)
+       // var imgSize = 1024 * 200; //最大200K
+       // var img = new Image();
+        if(file.value != ""){
+             
+       //     img.onreadystatechange = function(){
+       //         if(img.readyState == "complete"){
+       //             if(img.fileSize <=0 || img.fileSize > imgSize){
+       //                 alert("当前文件大小" + img.fileSize / 1024 + "KB, 超出最大限制 " + imgSize / 1024 + "KB");
+		//				$("#file1").val(0);
+        //                return false;
+        //            }else{
+                      
+         //               return true;
+        //            }
+         //       }
+         //   }
+             
+            //img.src = file.value;
+            return true;
+        }else{
+            alert("请选择上传的文件!");
+            return false;
+        }
+    }
+	
+	//magicSuggest选择框,用于填充内容
+	//doc: http://nicolasbize.com/magicsuggest/doc.html
+	 $('#ms-scrabble').magicSuggest({
+        placeholder: '英文输入商品支持的颜色',
+        data: ['red', 'black', 'orange', 'blue','pink','yellow','gray'],
+		allowFreeEntries : true
+    });
+	
+
+	
+	
+	$('#dp1').datepicker({
+				format: 'yyyy-mm-dd'
+				
+	});
+
+	  </script>
+
+      

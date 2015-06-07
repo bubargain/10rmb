@@ -12,6 +12,11 @@ use \app\common\util\MobileMessage;
 
 class VerifySrv extends BaseSrv {
     const USER_SEND_TIMES = 150;
+    
+    
+  
+    
+    
     /**
      * @param $phone
      * @param $type : login, reg, pwd

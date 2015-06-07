@@ -8,6 +8,8 @@ window.onload = function(){
 	}
 }
 </script>
+<div class="span9">
+<div align='center'><h1>添加品牌</h1></div>
 <form id="sForm" name="sForm" enctype="multipart/form-data" action="index.php?_c=brand&_a=add" method="post" class="form-search">
 <table width="100%" border="1" cellspacing="0" cellpadding="5">
   <tr>
@@ -23,15 +25,20 @@ window.onload = function(){
     <td><input type="text" id="brand_ename" name="brand_ename" size="40" value="{{$info.brand_ename}}" /></td>
   </tr>
   <tr>
-    <td align="right" width="20%">品牌logo：</td>
+    <td align="right" width="20%">logo链接(必须为100*100px)：</td>
     <td>
+		<input type="text" id="brand_logoss" name="brand_logoss" onchange="document.getElementById('brand_img_tmp').src=this.value;" size="60" value="{{$info.brand_logo}}" /></td>
+		<img id="brand_img_tmp"  style=“max-width:200px"/>
+   <!--
     <div id="file"><input type="text" value="未选择文件" readonly="readonly" /><input type="button" value="浏览" class="btn" /><input type="file" id="brand_logo" name="brand_logo" /></div>
     {{if $info.brand_logo neq ''}}
     <br />
     <img src="{{$cdn_ymall}}{{$info.brand_logo}}" alt="暂无图片" width="100px"/>&nbsp;&nbsp;<a href="index.php?_c=brand&_a=deleteBrandLogo&brand_logo={{$info.brand_logo}}&brand_id={{$info.brand_id}}" onclick="return window.confirm('确定删除?')" style="color:#F00;">(删除图片)</a>
     {{/if}}
+	-->
     </td>
   </tr>
+  <!--
   <tr>
     <td align="right" width="20%">排序：</td>
     <td><input type="text" id="sort_order" name="sort_order" size="10" value="{{$info.sort_order}}" style="width:5%;" /></td>
@@ -45,14 +52,19 @@ window.onload = function(){
     </select>
     </td>
   </tr>
+  -->
   <tr>
     <td align="center" colspan="2">
     <input type="hidden" id="type" name="type" value="saveBrand" />
     <input type="hidden" id="brand_id" name="brand_id" value="{{$info.brand_id}}" />
-    <input type="hidden" id="brand_logo" name="brand_logo" value="{{$info.brand_logo}}" />
-    <input type="hidden" id="brand_logo_isDel" name="brand_logo_isDel" value="{{$brand_logo_isDel}}" />
-    <input type="hidden" id="isEdit" name="isEdit" value="{{$isEdit}}" />
-    <input type="submit" value="提&nbsp;交" class="btn" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="javascript:history.back();" value="返回" class="btn" /></td>
+  
+	<input type="hidden" id="brand_logo_isDel" name="brand_logo_isDel" value="{{$brand_logo_isDel}}" />
+    <!--
+		<input type="hidden" id="isEdit" name="isEdit" value="{{$isEdit}}" />
+    -->
+	
+	<input type="submit" value="提&nbsp;交" class="btn" />&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" onclick="javascript:history.back();" value="返回" class="btn" /></td>
   </tr>
 </table>
 </form>
+</div>

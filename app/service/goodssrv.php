@@ -32,8 +32,8 @@ class GoodsSrv extends BaseSrv {
             GoodsDao::getMasterInstance()->beginTransaction();
             $goods_id = GoodsDao::getMasterInstance()->add($info);
 
-            $extm = array('goods_id'=>$goods_id);
-            GoodsStatisticsDao::getMasterInstance()->add($extm);
+           // $extm = array('goods_id'=>$goods_id);
+           // GoodsStatisticsDao::getMasterInstance()->add($extm);
 
             if($file_ids) {
                 $where = 'image_id in (' . implode(',', $file_ids) . ')';
@@ -49,6 +49,49 @@ class GoodsSrv extends BaseSrv {
         }
     }
 
+    
+    /**
+     * set tag for goods
+     */
+    public function setTag($goods_id,$tags,$user_id=0)
+    {
+  
+    	try{
+    		$dbins= \app\dao\GoodsDao::getMasterInstance();
+	    	$dbins->beginTransaction();
+	    	foreach($tags as $tag)
+	    	{
+	    		
+	    		$sql ="select tag_id from ym_tags where tag_name='".$tag."'";
+	    		$id=$dbins->getpdo()->getRow($sql);
+	    		
+	    		if(!$id)//新建tag
+	    		{
+	    			$sql2 = "insert into ym_tags (tag_name) value('".$tag."')";
+	    			$dbins->getpdo()->exec($sql2);
+	    			$id=$dbins->getpdo()->getRow($sql);
+	    			
+	    		}
+	    		$sql4="select * from ym_goods_tag where goods_id = $goods_id and tag_id=".$id['tag_id'];
+	    		$res=$dbins->getpdo()->getRow($sql4);
+	    		if(!$res) //如果该tag未打过
+	    		{
+	    			
+	    			$sql3= "insert into ym_goods_tag (goods_id,tag_id,critic_id) value($goods_id,".$id['tag_id'].",$user_id)";
+	    			$dbins->getpdo()->exec($sql3);
+	    		}
+	    	}
+	    	$dbins->commit();
+	    	}catch(\Exception $e)
+    	{
+    		$dbins->rollBack();
+    		throw $e;
+    	}
+    }
+    
+    
+  
+    
     /**
      * @param $id
      * @param $info

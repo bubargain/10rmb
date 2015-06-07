@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>10BUCK 商家注册</title>
+<link href="/css/bootstrap.docs.css" rel="stylesheet">
+<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<LINK href="/css/style.css" rel="stylesheet">
+<script src="/js/jquery.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="application/javascript" src="/js/main.js"></script>
+<script type="text/javascript" src="/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+//导航栏效果
+$(function(){
+	var nav = $('#nav').children();
+	for (var i=0;i<nav.length;i++){
+		if (nav[i].className=="menu"){
+			nav[i].onmouseover = function(){fnNav(this,"block")};
+			nav[i].onmouseout = function(){fnNav(this,"none")};
+		}
+	}
+	function fnNav(obj,flag){
+		$(obj).find("dl")[0].style.display = flag;
+	}
+});
+</script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top" >
+	<div class="navbar-inner">
+        <div class="container">
+          
+          <div class="nav-collapse collapse">
+           
+          </div>
+        </div>
+        </div>
+</div>
+<header id="overview" class="jumbotron subhead">
+  <div class="container">
+    <h1>10BUCK&nbsp;海外返利网</h1>
+    <p class="lead"> 百万海外个人用户，帮助您拓展跨境电商业务</p>
+  </div>
+</header>
+
+<div class="container">
+   <section>
+   	<div class="page-header">
+            <h1>忘记密码</h1>
+           
+    </div>
+	<form class="form-horizontal" method="post" action="?_c=login&_a=reset">
+	<tr>
+  
+    <td>
+    <div class="control-group">
+		<label class="control-label" for="inputPhone">注册邮箱</label>
+        <div class="controls">
+        <input type="text" id="inputPhone" name="inputEmail" placeholder="输入您的邮箱">
+        </div>
+    </div>
+    <div class="control-group">
+		<label class="control-label" for="inputPhone">注册手机号</label>
+        <div class="controls">
+        <input type="text" id="inputPhone" name="inputPhone" placeholder="输入您的注册手机号">
+        </div>
+    </div>
+    
+    
+        <div class="control-group">
+        </div>
+       
+            <div class="controls">
+            <button id='regSub' type="submit"  class="btn btn-large">发送邮件</button>
+            </div>
+        </div>
+    </td>
+    </tr>
+	</form>
+    </section>
+   <script>
+   
+   
+   		function verfyPass()
+		{
+			
+			if($("#inputPassword").val() !=  $("#inputPassword2").val())
+			{
+				
+				$("#passNotSame").show();
+			}
+			else
+			{
+				$("#passNotSame").hide();
+			}
+		}
+   </script>
+{{include file="../footer.html"}}

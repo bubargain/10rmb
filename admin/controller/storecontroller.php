@@ -74,14 +74,34 @@ class StoreController extends BaseController {
 		$this->layoutSmarty('newevent');
 	}
 	
+	/**
+	 * mode2.0
+	 * 商家发布新品
+	 */
+	public function newproduct($request,$response)
+	{
+		$user_id =$this->checkLogin();
+		$info = \app\dao\UserInfoDao::getSlaveInstance()->find(array('user_id'=>$user_id));
+		if(intval($user_id)>0)
+		{
+			$sql = "select brand_name,brand_id from ym_brand where mer_id=$user_id and if_show=1";
+			$brands = \app\dao\UserInfoDao::getSlaveInstance()->getPdo()->getRows($sql);
+		}
+		$response->isvip = $info['isvip']>0?1:0;
+		$response->storeTitle ="发布新商品";
+		$response->brands = $brands;
+		$response->storeIntro ="我们会甄选潮流新款商品，在目标市场进行检验，帮您确定爆款，打造品牌";
+		$this->layoutSmarty('newproduct');
+	}
+	
+	
+	
 	//锁定活动金额
 	public function lock($request,$response)
 	{
 		if($this->isPost())
 		{
-			try{
-				
-				
+			try{			
 					$event['event_name'] = $request->event_name;
 					$event['product_link'] = $request->product_link;
 					$event['price'] = floatval($request-> sale_price);
