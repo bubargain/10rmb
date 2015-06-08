@@ -34,7 +34,11 @@
           <td align="center" class="pushItem">
            <div class="btnOperate">
             {{if $event.status == 1 }}
-            	等待审核
+            	审核中
+			{{else if $event.status==99}}
+				已关闭
+			{{else if $event.status ==2}}
+				已上架
             {{/if}}
             </div>
             </td>

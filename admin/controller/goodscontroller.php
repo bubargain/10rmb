@@ -444,7 +444,7 @@ class GoodsController extends BaseController {
  		$goods['price'] =$request->sale_price;
  		$goods['mer_id'] =$user_id;
  		$goods['brand_id'] =$request->sbrand;
- 		$goods['color'] =$request->color != ''?implode(',',$request->color):'null';
+ 		$goods['color'] =$request->color != ''?implode(',',$request->color):array();
     	$goods['size']= implode(',',$request->size);
     	$goods['ctime'] = strtotime( $request->launchtime);     //商品发布时间
     	$goods['period'] = ((int)$request->duringtime)*86400;   //持续时间 

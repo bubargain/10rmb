@@ -13,7 +13,7 @@
 				<tr>
 					<th>商品</th>
 					<th>商品次图</th>
-					
+					<th>brand_id</th>
 					<th>价格</th>
 					<th>颜色</th>
 					<th>型号</th>
@@ -24,10 +24,10 @@
 			</thead>
 				{{foreach from=$tableCon item=good }}
 					<tr {{if $good.status !='1'}}class="success"{{/if}}>
-						<td>{{$good.goods_name}}<br/><img src="{{$good.default_image}}" style="max-width:300px"/></td>
+						<td><a href="{{$goods.product_link}}">{{$good.goods_name}}</a><br/><img src="{{$good.default_image}}" style="max-width:300px"/></td>
 						<td><img src="{{$good.default_thumb}}" style="max-width:300px"/></td>
 						
-						
+						<td>{{$goods.brand_id}}</td>
 						<td>{{$good.price}}</td>
 						<td>{{$good.color}}</td>
 						<td>{{$good.size}}</td>
