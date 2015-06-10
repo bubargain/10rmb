@@ -64,7 +64,57 @@ class GoodsController extends BaseController {
    		header('location:index.php?_c=goods');
    		
    }
-//    
+
+   
+   /**
+   * 复查评审员提交产品
+   */
+	public function critic($request, $response) {
+		
+         $goodsDao = \app\dao\GoodsDao::getSlaveInstance();
+		$sql="select count(*) as no from ym_goods where `status` =2";
+        $ret= $goodsDao->getPdo()->getRow($sql);
+        $total=$ret['no'];
+	    //var_dump($total);die();
+        $page_size = 20;
+		// 当前页数
+		$curPageNum = $request->page ? intval ( $request->page ) : 1;
+		// url
+		$url = preg_replace ( '/([?|&]page=\d+)/', '', $_SERVER ['REQUEST_URI'] );
+		// 分页对象
+
+		$page = new SubPages( $url, $page_size, $total, $curPageNum );
+		$limit = $page->GetLimit() ;
+	
+		
+		$response->page = $page->GetPageHtml();
+
+		$sql = "select * from ym_goods  where status =2 order by utime desc limit ".$limit;
+		$ret = $goodsDao->getPdo()->getRows($sql);
+		
+		if($ret)
+		{
+			for ($i=0;$i<count($ret);$i++){
+				$tmpsql = "select A.critic_id,B.tag_name from ym_goods_tag as A left join ym_tags as B on A.tag_id = B.tag_id where A.goods_id =".$ret[$i]["goods_id"];
+				$tmpret = $goodsDao->getPdo()->getRows($tmpsql);
+				
+				if($tmpret)
+				{
+					//var_dump(json_encode($tmpret));die();
+					$ret[$i]["tags"] =json_encode($tmpret);
+				
+				}
+			
+			} 
+		}
+		
+		$response->tableCon = $ret;
+		$response->_tag = $request->status;
+		
+        $this->layoutSmarty('critic');
+	}
+   
+   //    
 //	public function index($request, $response) {
 //        $params = array();
 //        $params['store_id'] = 'store_id ='.$this->_store_id;

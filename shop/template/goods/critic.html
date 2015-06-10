@@ -1,0 +1,51 @@
+
+
+
+
+<div name="maindiv" class="span12">
+
+	
+		<div class="span12 text-center text-info"><h3>发布商品列表</h3></div>
+	
+		
+		<table id='content' align="center" class="table table-hover table-bordered">
+			<thead>
+				<tr>
+					<th>商品ID</th>
+					<th>商品</th>
+					<th>商品次图</th>
+					<th class="span4">Tags</th>
+					
+				
+                     
+				
+				</tr>
+			</thead>
+				{{foreach from=$tableCon item=good }}
+					<tr {{if $good.status !='1'}}class="success"{{/if}}>
+						<td>{{$good.goods_id}}</td>
+						<td><a href="{{$goods.product_link}}">{{$good.goods_name}}</a><br/><img src="{{$good.default_image}}" style="max-width:300px"/></td>
+						<td><img src="{{$good.default_thumb}}" style="max-width:300px"/></td>
+						
+						<td>{{$good.tags}}</td>
+				
+						
+						
+					
+					</tr>
+				{{/foreach}}
+		
+		</table> 
+		<style type="text/css">
+		.carInfo {width:800px;height:56px;border-top:1px #e1e1e1 solid;overflow:hidden;margin:0 auto;}
+		.carInfo dt {float:left;padding:16px 0 0 3px;color:#323232;}
+		.carInfo i {padding-right:30px;}
+		.carInfo dd {float:right;padding-top:13px;}
+		</style>
+		<table>
+		<tr>
+      		<td align="center" colspan="8">{{$page}}</td>
+  		</tr>
+		</table>
+		
+</div>

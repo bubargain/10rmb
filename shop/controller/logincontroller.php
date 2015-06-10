@@ -6,7 +6,9 @@ use \app\service\member;
 
 class LoginController extends BaseController {
 	public function index($request, $response) {
+		
         $refer = $this->referer($request);
+	
         if($this->has_login)
             header("Location: $refer");
 
@@ -17,6 +19,7 @@ class LoginController extends BaseController {
         }
         else {
             //登陆处理
+		
             try{
                 //var_dump($request->user_name,$request->pwd );
                 $info = \app\dao\UserDao::getSlaveInstance()->find(array('user_name'=>$request->user_name));

@@ -5,11 +5,20 @@
 		<title>10buck管理员后台	</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<!-- Bootstrap -->
+		
 		<link href="/css/bootstrap.docs.css" rel="stylesheet">
 		<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
 		<link href="/css/bootstrap.css" rel="stylesheet">
 		<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
+	<style>
+		h1 {font-size:40px;line-height:1.5;padding:0;margin:30px 0;}
+		.navbar-nav > li > a:hover {background:#555 !important;color:#fff !important;}
+		.navbar-nav > li:last-of-type > a {border:0;}
+		@media ( min-width: 768px) {
+			.navbar-nav > li > a {text-align:center;border-right:1px solid rgba(0,0,0,0.1)}
+		}
+    </style>
 	<body>
 	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
@@ -21,7 +30,7 @@
           </button>
           <a href="/" class="brand">ymall.com</a>
           <div class="nav-collapse collapse">
-            <ul class="nav">
+            <ul class="nav navbar-nav">
               <li class="">
                 <a href="/">首页</a>   
               </li>
@@ -29,9 +38,17 @@
               <li{{if $_action eq 'orders'}} class="active"{{/if}}>
                 <a data-bootstro-step="1" data-bootstro-placement="bottom" data-bootstro-title="订单管理页面。" class="bootstro" href="index.php?_c=orders&status=warning">订单管理</a>
               </li>
-              <li{{if $_action eq 'store'}} class="help"{{/if}}>
-                <a data-bootstro-step="6" data-bootstro-placement="bottom" class="bootstro" href="index.php?_c=goods">商品初审</a>
-              </li>
+			 <li><a href="#" class="dropdown-toggle" data-toggle="dropdown">商品 <b class="caret"></b></a>
+				    <ul class="dropdown-menu depth_3">
+						 <li{{if $_action eq 'store'}} class="help"{{/if}}>
+							<a data-bootstro-step="6" data-bootstro-placement="bottom" class="bootstro" href="index.php?_c=goods">商品初审</a>
+						</li>
+						<li{{if $_action eq 'store'}} class="help"{{/if}}>
+							<a data-bootstro-step="6" data-bootstro-placement="bottom" class="bootstro" href="index.php?_c=goods&_a=critic">审核结果</a>
+						</li>
+					</ul>
+			 </li>
+             
               <li{{if $_action eq 'event'}} class="active"{{/if}}>
                 <a data-bootstro-step="2" data-bootstro-placement="bottom" class="bootstro" href="index.php?_c=event">活动审核</a>
               </li>
