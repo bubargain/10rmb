@@ -26,7 +26,7 @@
 												<input type="checkbox"  name="size[]"  value="dresses" />dresses
 											</label> 
 											<label class="btn btn-default">
-												<input type="checkbox"  name="size[]" id="cb_bs"" onclick="javascript:showornot('bs');"  value="blouses_shirts" /> blouses & shirts
+												<input type="checkbox"  name="size[]" id="cb_bs""  value="blouses_shirts" /> blouses & shirts
 											</label> 
 											<label class="btn btn-default">
 												<input type="checkbox"  name="size[]" id="cb_tt"" onclick="javascript:showornot('tt');"  value="tops_tees" /> tops & tees
@@ -61,8 +61,8 @@
 							
 							
 							
-							 <div class="control-group" id="group_bs" style="display:none">
-									<label class="control-label" for="sale_price">blouses & shirts：</label>
+							 <div class="control-group" id="group_bs" >
+									<label class="control-label" for="sale_price">NECK style：</label>
 									<div class="controls">	
 										<div class="col-sm-9">
 										<div class="btn-group" data-toggle="buttons">
@@ -86,6 +86,12 @@
 											</label>
 											<label class="btn btn-default">
 												<input type="checkbox"  name="size[]"  value="slash_neck" />slash neck
+											</label>
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="V_neck" />V neck
+											</label>
+											<label class="btn btn-default">
+												<input type="checkbox"  name="size[]"  value="Strapless" />Strapless
 											</label>
 										</div>
 										</div>
@@ -161,6 +167,9 @@
 											</label>
 											<label class="btn btn-default">
 												<input  type="checkbox"  name="size[]"  value="vests_wool_blends" />vests & wool & blends
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="suits" />suits
 											</label>
 										</div>
 										</div>
@@ -250,6 +259,9 @@
 											</label>
 											<label class="btn btn-default">
 												<input  type="checkbox"  name="size[]"  value="hat_caps" />hat & caps
+											</label>
+											<label class="btn btn-default">
+												<input  type="checkbox"  name="size[]"  value="bags" />bag
 											</label>
 										</div>
 										</div>
@@ -480,7 +492,7 @@
 	
 	 $('#ms-style').magicSuggest({
         placeholder: 'Which style this product belongs to?',
-        data: ['cute','brief','street','punk','hip-top','sporty','sexy','preppy','work','bohemian','vintage','lolita','hippie','glamour','modest'],
+        data: ['cute','brief','street','punk','jeans','hip-top','sporty','sexy','preppy','work','bohemian','vintage','lolita','hippie','glamour','modest'],
 		allowFreeEntries : true
     });
 	
@@ -498,7 +510,7 @@
 	
 	 $('#ms-decoration').magicSuggest({
         placeholder: 'is there any decoration on this product?',
-        data: ['applique','beading','bow','button','cascading','draped','embroider','feathers','hole','hollow','lace','pockets','ruffles'],
+        data: ['applique','beading','bow','button','cascading','draped','embroider','feathers','hole','hollow','lace','pockets','ruffles','strappy','fringe'],
 		allowFreeEntries : true
     });
 	 $('#ms-other').magicSuggest({
