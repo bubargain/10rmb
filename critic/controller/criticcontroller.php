@@ -15,6 +15,7 @@ class criticController extends BaseController{
 		{
 			
 			$response->goods_id =$info['goods_id'];
+			$response->goods_name =$info['goods_name'];
 			$response->img1= $info['default_image'];
 			$response->img2 = $info['default_thumb'];
 			$this->layoutSmarty('index');
